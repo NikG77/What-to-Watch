@@ -9,6 +9,7 @@ it(`Should Main render correctly`, () => {
       genreFilm={`Drama`}
       titleFilm={`The Grand Budapest Hotel`}
       releaseDate={2014}
+      onSmallMovieCardClick={() => {}}
     />)
     .toJSON();
 

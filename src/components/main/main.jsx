@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Main = (props) => {
   // eslint-disable-next-line react/prop-types
-  const {filmsTitles, genreFilm, titleFilm, releaseDate} = props;
+  const {filmsTitles, genreFilm, titleFilm, releaseDate, onSmallMovieCardClick} = props;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -105,7 +105,7 @@ const Main = (props) => {
                   <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={title} width="280" height="175" />
                 </div>
                 <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+                  <a onClick={onSmallMovieCardClick} className="small-movie-card__link" href="movie-page.html">{title}</a>
                 </h3>
               </article>
             )}
@@ -138,7 +138,8 @@ Main.propTypes = {
   filmsTitles: PropTypes.array.isRequired,
   genreFilm: PropTypes.string.isRequired,
   titleFilm: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired
+  releaseDate: PropTypes.number.isRequired,
+  onSmallMovieCardClick: PropTypes.func.isRequired
 };
 
 export default Main;
