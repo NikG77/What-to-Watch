@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Main = (props) => {
   // eslint-disable-next-line react/prop-types
-  const {titleFilms, genreFilm, titleFilm, releaseDate} = props;
+  const {filmsTitles, genreFilm, titleFilm, releaseDate} = props;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -99,7 +99,7 @@ const Main = (props) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {titleFilms.map((title, i) =>
+            {filmsTitles.map((title, i) =>
               <article key={title + i} className="small-movie-card catalog__movies-card">
                 <div className="small-movie-card__image">
                   <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={title} width="280" height="175" />
@@ -135,7 +135,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  titleFilms: PropTypes.array.isRequired,
+  filmsTitles: PropTypes.array.isRequired,
   genreFilm: PropTypes.string.isRequired,
   titleFilm: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired

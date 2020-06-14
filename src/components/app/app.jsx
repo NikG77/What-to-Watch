@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 const App = (props) => {
 
-  const {titleFilms, genreFilm, titleFilm, releaseDate} = props;
+  const {filmsTitles, genreFilm, titleFilm, releaseDate} = props;
   return (
     <Main
-      titleFilms={titleFilms}
+      filmsTitles={filmsTitles}
       genreFilm={genreFilm}
       titleFilm={titleFilm}
       releaseDate={releaseDate}
@@ -16,7 +16,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  titleFilms: PropTypes.array.isRequired,
+  filmsTitles: PropTypes.array.isRequired,
   genreFilm: PropTypes.string.isRequired,
   titleFilm: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired
