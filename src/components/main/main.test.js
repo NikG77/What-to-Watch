@@ -2,13 +2,18 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main";
 
+const filmsTitles = [`The Crimes of Grindelwald`, `Predators `, `Aviator`];
+const genreFilm = `Fantasy`;
+const titleFilm = `One Flew Over the Cuckoo's Nest`;
+const releaseDate = 1975;
+
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(<Main
-      filmsTitles={[`Fantastic Beasts: The Crimes of Grindelwald`, `Bohemian Rhapsody`, `Macbeth Aviator`, `We need to talk about Kevin`, `What We Do in the Shadows Revenant`, `Johnny English`, `Shutter Island`, `Pulp Fiction`, `No Country for Old Men`, `Snatch`, `Moonrise Kingdom`, `Seven Years in Tibet`, `Midnight Special`, `War of the Worlds`, `Dardjeeling Limited`, `Orlando, Mindhunter`, `Midnight Special`]}
-      genreFilm={`Drama`}
-      titleFilm={`The Grand Budapest Hotel`}
-      releaseDate={2014}
+      filmsTitles={filmsTitles}
+      genreFilm={genreFilm}
+      titleFilm={titleFilm}
+      releaseDate={releaseDate}
       onSmallMovieCardClick={() => {}}
     />)
     .toJSON();
