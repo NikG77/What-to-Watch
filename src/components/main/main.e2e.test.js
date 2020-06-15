@@ -1,12 +1,12 @@
 import React from "react";
-import Enzyme, {mount} from "enzyme";
+import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
 
-const filmsTitles = [`Fantastic Beasts: The Crimes of Grindelwald`, `Bohemian Rhapsody`, `Macbeth Aviator`, `We need to talk about Kevin`, `What We Do in the Shadows Revenant`, `Johnny English`, `Shutter Island`, `Pulp Fiction`, `No Country for Old Men`, `Snatch`, `Moonrise Kingdom`, `Seven Years in Tibet`, `Midnight Special`, `War of the Worlds`, `Dardjeeling Limited`, `Orlando, Mindhunter`, `Midnight Special`];
-const genreFilm = `Drama`;
-const titleFilm = `The Grand Budapest Hotel`;
-const releaseDate = 2014;
+const filmsTitles = [`Predators`];
+const genreFilm = `Fantasy`;
+const titleFilm = `One Flew Over the Cuckoo's Nest`;
+const releaseDate = 1975;
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -16,7 +16,7 @@ describe(`MainComponent`, () => {
   it(`Should small movie card link be pressed`, () => {
     const onSmallMovieCardClick = jest.fn();
 
-    const main = mount(
+    const main = shallow(
         <Main
           filmsTitles={filmsTitles}
           genreFilm={genreFilm}
@@ -26,11 +26,11 @@ describe(`MainComponent`, () => {
         />
     );
 
-    const movieCardLinks = main.find(`a.small-movie-card__link`);
-    // movieCardLink.props().onClick();
-    movieCardLinks.forEach((movieCardLink) => movieCardLink.simulate(`click`, {preventDefault() {}}));
+    const movieCardLinks = main.find(`.small-movie-card__title`);
 
-    expect(onSmallMovieCardClick.mock.calls.length).toBe(filmsTitles.length);
+    movieCardLinks.simulate(`click`);
+
+    expect(onSmallMovieCardClick.mock.calls.length).toBe(1);
   });
 
 });

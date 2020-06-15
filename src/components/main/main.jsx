@@ -104,8 +104,8 @@ const Main = (props) => {
                 <div className="small-movie-card__image">
                   <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={title} width="280" height="175" />
                 </div>
-                <h3 className="small-movie-card__title">
-                  <a onClick={onSmallMovieCardClick} className="small-movie-card__link" href="movie-page.html">{title}</a>
+                <h3 onClick={onSmallMovieCardClick} className="small-movie-card__title">
+                  <a className="small-movie-card__link" href="movie-page.html">{title}</a>
                 </h3>
               </article>
             )}
