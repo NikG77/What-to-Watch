@@ -2,26 +2,29 @@ import Main from "../main/main.jsx";
 import React from "react";
 import PropTypes from "prop-types";
 
+const smallMovieCardHandler = () => {};
+
 const App = (props) => {
 
-  const {titleFilms, genreFilm, titleFilm, releaseDate} = props;
+  const {filmsTitles, genreFilm, titleFilm, releaseDate} = props;
   return (
     <Main
-      titleFilms={titleFilms}
+      filmsTitles={filmsTitles}
       genreFilm={genreFilm}
       titleFilm={titleFilm}
       releaseDate={releaseDate}
+      onSmallMovieCardClick={smallMovieCardHandler}
     />
   );
 };
 
 App.propTypes = {
-  titleFilms: PropTypes.array.isRequired,
+  filmsTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
   genreFilm: PropTypes.string.isRequired,
   titleFilm: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired
+  releaseDate: PropTypes.number.isRequired,
+  onSmallMovieCardClick: PropTypes.func.isRequired
 };
 
 export default App;
-
 
