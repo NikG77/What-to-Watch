@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const smallMovieCardHandler = () => {};
 
 const App = (props) => {
-  // eslint-disable-next-line react/prop-types
+
   const {filmsTitles, genreFilm, titleFilm, releaseDate} = props;
   return (
     <Main
