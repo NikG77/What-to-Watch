@@ -4,7 +4,7 @@ import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
 
-  const {filmsTitles, genreFilm, titleFilm, releaseDate, onSmallMovieCardClick} = props;
+  const {films, genreFilm, titleFilm, releaseDate, onSmallMovieCardClick} = props;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -100,7 +100,7 @@ const Main = (props) => {
           </ul>
 
           <MoviesList
-            filmsTitles={filmsTitles}
+            films={films}
             onSmallMovieCardClick={onSmallMovieCardClick}
           />
 
@@ -128,7 +128,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  filmsTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  films: PropTypes.array.isRequired,
   genreFilm: PropTypes.string.isRequired,
   titleFilm: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired,

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import App from "./components/app/app.jsx";
-import {filmsTitles} from "./mock/films.js";
+import {films} from "./mock/films.js";
 
 const Settings = {
   GENRE_FILM: `Drama`,
@@ -11,7 +11,7 @@ const Settings = {
 
 ReactDom.render(
     <App
-      filmsTitles={filmsTitles}
+      films={films}
       genreFilm={Settings.GENRE_FILM}
       titleFilm={Settings.TITLE_FILM}
       releaseDate={Settings.RELEASE_DATE}

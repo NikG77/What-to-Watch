@@ -264,9 +264,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="The Crimes of Grindelwald"
+              alt="Fantastic Beasts: The Crimes of Grindelwald"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="img/bohemian-rhapsody.jpg"
               width="280"
             />
           </div>
@@ -279,7 +279,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              The Crimes of Grindelwald
+              Fantastic Beasts: The Crimes of Grindelwald
             </a>
           </h3>
         </article>
@@ -290,9 +290,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt=" "
+              alt="Bohemian Rhapsody"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="img/bohemian-rhapsody.jpg"
               width="280"
             />
           </div>
@@ -305,7 +305,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-               
+              Bohemian Rhapsody
             </a>
           </h3>
         </article>
@@ -316,9 +316,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Aviator"
+              alt="Macbeth Aviator"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="img/bohemian-rhapsody.jpg"
               width="280"
             />
           </div>
@@ -331,7 +331,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Aviator
+              Macbeth Aviator
             </a>
           </h3>
         </article>

@@ -2,12 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const SmallMovieCard = (props) => {
-  const {title, onSmallMovieCardClick, onSmallMovieCardHover} = props;
+  const {film, onSmallMovieCardClick, onSmallMovieCardHover} = props;
+  const {title, src: srcFilm} = film;
 
   return (
     <article className="small-movie-card catalog__movies-card">
       <div className="small-movie-card__image">
-        <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={title} width="280" height="175" />
+        <img src={srcFilm} alt={title} width="280" height="175" />
       </div>
       <h3 onClick={onSmallMovieCardClick}
         onMouseEnter={() => {
@@ -22,8 +23,10 @@ const SmallMovieCard = (props) => {
 };
 
 SmallMovieCard.propTypes = {
-  title: PropTypes.string.isRequired,
-
+  film: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+  }).isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   onSmallMovieCardHover: PropTypes.func.isRequired,
 };

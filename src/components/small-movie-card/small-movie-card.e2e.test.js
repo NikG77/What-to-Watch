@@ -4,7 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
 
-const title = `One Flew Over the Cuckoo's Nest`;
+const film = {title: `One Flew Over the Cuckoo's Nest`, src: ``};
 
 
 Enzyme.configure({
@@ -18,7 +18,7 @@ it(`Should small movie card link be pressed`, () => {
 
   const smallMovieCard = shallow(
       <SmallMovieCard
-        title={title}
+        film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
       />
