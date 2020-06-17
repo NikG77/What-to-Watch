@@ -23,7 +23,7 @@ App.propTypes = {
   genreFilm: PropTypes.string.isRequired,
   titleFilm: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired
+  onSmallMovieCardClick: PropTypes.func
 };
 
 export default App;
