@@ -9,3 +9,4 @@ export const films = [{title: `Fantastic Beasts: The Crimes of Grindelwald`, src
   {title: `Pulp Fiction`, src: `img/bohemian-rhapsody.jpg`},
   {title: `No Country for Old Men`, src: `img/bohemian-rhapsody.jpg`}];
 
+
