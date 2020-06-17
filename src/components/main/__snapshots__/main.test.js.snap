@@ -273,6 +273,7 @@ Array [
           <h3
             className="small-movie-card__title"
             onClick={[Function]}
+            onMouseEnter={[Function]}
           >
             <a
               className="small-movie-card__link"
@@ -298,6 +299,7 @@ Array [
           <h3
             className="small-movie-card__title"
             onClick={[Function]}
+            onMouseEnter={[Function]}
           >
             <a
               className="small-movie-card__link"
@@ -323,6 +325,7 @@ Array [
           <h3
             className="small-movie-card__title"
             onClick={[Function]}
+            onMouseEnter={[Function]}
           >
             <a
               className="small-movie-card__link"
