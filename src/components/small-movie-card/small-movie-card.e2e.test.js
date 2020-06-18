@@ -48,6 +48,26 @@ it(`Should small movie card be hovered`, () => {
   movieCard.simulate(`mouseenter`);
 
   expect(onSmallMovieCardHover.mock.calls.length).toBe(1);
+  expect(onSmallMovieCardHover).toHaveBeenLastCalledWith(film);
 });
 
 
+it(`Should small movie card be out`, () => {
+  const onSmallMovieCardClick = jest.fn();
+  const onSmallMovieCardHover = jest.fn();
+
+  const smallMovieCard = shallow(
+      <SmallMovieCard
+        film={film}
+        onSmallMovieCardHover={onSmallMovieCardHover}
+        onSmallMovieCardClick={onSmallMovieCardClick}
+      />
+  );
+
+  const movieCard = smallMovieCard.find(`.small-movie-card`);
+
+  movieCard.simulate(`mouseenter`);
+  movieCard.simulate(`mouseleave`);
+
+  expect(onSmallMovieCardHover).toHaveBeenLastCalledWith(null);
+});
