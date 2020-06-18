@@ -1,15 +1,17 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 
-const MoviePage = () => {
-
+const MoviePage = (props) => {
+  const {film} = props;
+  const {title, ratingScore, ratingCount, director, starring, genre, releaseDate, poster, pictureBackground} = film;
+  // const {genre, releaseDate, poster, pictureBackground} = mainFilm;
 
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={pictureBackground} alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -32,10 +34,10 @@ const MoviePage = () => {
 
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="movie-card__title">{title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">Drama</span>
-              <span className="movie-card__year">2014</span>
+              <span className="movie-card__genre">{genre}</span>
+              <span className="movie-card__year">{releaseDate}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -60,7 +62,7 @@ const MoviePage = () => {
       <div className="movie-card__wrap movie-card__translate-top">
         <div className="movie-card__info">
           <div className="movie-card__poster movie-card__poster--big">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={poster} alt={title} width="218" height="327" />
           </div>
 
           <div className="movie-card__desc">
@@ -79,10 +81,10 @@ const MoviePage = () => {
             </nav>
 
             <div className="movie-rating">
-              <div className="movie-rating__score">8,9</div>
+              <div className="movie-rating__score">{ratingScore}</div>
               <p className="movie-rating__meta">
                 <span className="movie-rating__level">Very good</span>
-                <span className="movie-rating__count">240 ratings</span>
+                <span className="movie-rating__count">{ratingCount} ratings</span>
               </p>
             </div>
 
@@ -91,9 +93,9 @@ const MoviePage = () => {
 
               <p>Gustave prides himself on providing first-class service to the hotel&apos s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&lsquo s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
 
-              <p className="movie-card__director"><strong>Director: Wes Andreson</strong></p>
+              <p className="movie-card__director"><strong>Director: {director}</strong></p>
 
-              <p className="movie-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+              <p className="movie-card__starring"><strong>Starring: {starring} and other</strong></p>
             </div>
           </div>
         </div>
@@ -101,6 +103,20 @@ const MoviePage = () => {
     </section>
 
   );
+};
+
+MoviePage.propTypes = {
+  film: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    ratingScore: PropTypes.number.isRequired,
+    ratingCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+    pictureBackground: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 

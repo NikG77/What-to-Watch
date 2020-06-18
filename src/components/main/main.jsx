@@ -4,12 +4,14 @@ import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
 
-  const {films, genreFilm, titleFilm, releaseDate, onSmallMovieCardClick} = props;
+  const {films, mainFilm, onSmallMovieCardClick} = props;
+  const {genre, title, releaseDate, poster, pictureBackground} = mainFilm;
+
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={pictureBackground} alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -33,13 +35,13 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={poster} alt={title}width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{titleFilm}</h2>
+              <h2 className="movie-card__title">{title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genreFilm}</span>
+                <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{releaseDate}</span>
               </p>
 
@@ -131,10 +133,21 @@ Main.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    ratingScore: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+    pictureBackground: PropTypes.string.isRequired,
   })).isRequired,
-  genreFilm: PropTypes.string.isRequired,
-  titleFilm: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  mainFilm: PropTypes.shape({
+    genre: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    releaseDate: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    pictureBackground: PropTypes.string.isRequired,
+  }).isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired
 };
 
