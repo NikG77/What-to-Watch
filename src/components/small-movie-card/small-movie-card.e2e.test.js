@@ -45,7 +45,7 @@ it(`Should small movie card be hovered`, () => {
 
   const movieCard = smallMovieCard.find(`.small-movie-card`);
 
-  movieCard.simulate(`mouseover`);
+  movieCard.simulate(`mouseenter`);
 
   expect(onSmallMovieCardHover.mock.calls.length).toBe(1);
 });
