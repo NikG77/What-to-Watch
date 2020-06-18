@@ -12,7 +12,7 @@ const SmallMovieCard = (props) => {
       </div>
       <h3 onClick={onSmallMovieCardClick}
         onMouseEnter={() => {
-          onSmallMovieCardHover(title);
+          onSmallMovieCardHover(film);
         }}
         className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">{title}</a>

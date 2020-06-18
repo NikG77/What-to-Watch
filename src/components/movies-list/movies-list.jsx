@@ -1,23 +1,36 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
-const MoviesList = (props) => {
-  const {films, onSmallMovieCardClick} = props;
+class MoviesList extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = null;
 
-  return (
-    <div className="catalog__movies-list">
-      {films.map((film, i) =>
-        <SmallMovieCard
-          key={film + i}
-          film={film}
-          onSmallMovieCardClick={onSmallMovieCardClick}
-          onSmallMovieCardHover={() => {}}
-        />
-      )}
-    </div>
-  );
-};
+    this.handleSmallMovieCardHover = this.handleSmallMovieCardHover.bind(this);
+  }
+
+  handleSmallMovieCardHover(film) {
+    this.setState = film;
+  }
+
+  render() {
+    const {films, onSmallMovieCardClick} = this.props;
+
+    return (
+      <div className="catalog__movies-list">
+        {films.map((film, i) =>
+          <SmallMovieCard
+            key={film + i}
+            film={film}
+            onSmallMovieCardClick={onSmallMovieCardClick}
+            onSmallMovieCardHover={this.handleSmallMovieCardHover}
+          />
+        )}
+      </div>
+    );
+  }
+}
 
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
