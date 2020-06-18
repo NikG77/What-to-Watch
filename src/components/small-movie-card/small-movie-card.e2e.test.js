@@ -24,9 +24,9 @@ it(`Should small movie card be pressed`, () => {
       />
   );
 
-  const movieCardLinks = smallMovieCard.find(`.small-movie-card__title`);
+  const movieCardTitle = smallMovieCard.find(`.small-movie-card__title`);
 
-  movieCardLinks.simulate(`click`);
+  movieCardTitle.simulate(`click`);
 
   expect(onSmallMovieCardClick.mock.calls.length).toBe(1);
 });
@@ -43,11 +43,11 @@ it(`Should small movie card be hovered`, () => {
       />
   );
 
-  const movieCardLinks = smallMovieCard.find(`.small-movie-card__title`);
+  const movieCard = smallMovieCard.find(`.small-movie-card`);
 
-  movieCardLinks.simulate(`mouseover`);
+  movieCard.simulate(`mouseover`);
 
-  expect(onSmallMovieCardClick.mock.calls.length).toBe(1);
+  expect(onSmallMovieCardHover.mock.calls.length).toBe(1);
 });
 
 
