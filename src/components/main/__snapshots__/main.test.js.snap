@@ -259,14 +259,16 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="The Crimes of Grindelwald"
+              alt="Fantastic Beasts: The Crimes of Grindelwald"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src=" "
               width="280"
             />
           </div>
@@ -278,20 +280,22 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              The Crimes of Grindelwald
+              Fantastic Beasts: The Crimes of Grindelwald
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Predators "
+              alt="Bohemian Rhapsody"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src=" "
               width="280"
             />
           </div>
@@ -303,20 +307,22 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Predators 
+              Bohemian Rhapsody
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Aviator"
+              alt="Macbeth Aviator"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src=" "
               width="280"
             />
           </div>
@@ -328,7 +334,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Aviator
+              Macbeth Aviator
             </a>
           </h3>
         </article>

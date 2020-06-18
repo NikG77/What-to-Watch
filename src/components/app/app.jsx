@@ -6,10 +6,10 @@ const smallMovieCardHandler = () => {};
 
 const App = (props) => {
 
-  const {filmsTitles, genreFilm, titleFilm, releaseDate} = props;
+  const {films, genreFilm, titleFilm, releaseDate} = props;
   return (
     <Main
-      filmsTitles={filmsTitles}
+      films={films}
       genreFilm={genreFilm}
       titleFilm={titleFilm}
       releaseDate={releaseDate}
@@ -19,11 +19,14 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  filmsTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+  })).isRequired,
   genreFilm: PropTypes.string.isRequired,
   titleFilm: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired
+  onSmallMovieCardClick: PropTypes.func
 };
 
 export default App;
