@@ -19,7 +19,10 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+  })).isRequired,
   genreFilm: PropTypes.string.isRequired,
   titleFilm: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired,
