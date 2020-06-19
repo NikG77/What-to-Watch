@@ -9,8 +9,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="One Flew Over the Cuckoo's Nest"
+        src=""
       />
     </div>
     <h1
@@ -69,9 +69,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="One Flew Over the Cuckoo's Nest"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src=""
             width="218"
           />
         </div>
@@ -89,12 +89,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Fantasy
+              
             </span>
             <span
               className="movie-card__year"
             >
-              1975
+              2014
             </span>
           </p>
           <div
@@ -264,11 +264,12 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="Fantastic Beasts: The Crimes of Grindelwald"
               height="175"
-              src=" "
+              src="img/bohemian-rhapsody.jpg"
               width="280"
             />
           </div>
@@ -291,11 +292,12 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="Bohemian Rhapsody"
               height="175"
-              src=" "
+              src="img/bohemian-rhapsody.jpg"
               width="280"
             />
           </div>
@@ -308,33 +310,6 @@ Array [
               href="movie-page.html"
             >
               Bohemian Rhapsody
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Macbeth Aviator"
-              height="175"
-              src=" "
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            onClick={[Function]}
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Macbeth Aviator
             </a>
           </h3>
         </article>

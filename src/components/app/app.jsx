@@ -82,7 +82,7 @@ App.propTypes = {
     poster: PropTypes.string.isRequired,
     pictureBackground: PropTypes.string.isRequired,
   }).isRequired,
-  onSmallMovieCardClick: PropTypes.func
+  onSmallMovieCardClick: PropTypes.func.isRequired
 };
 
 export default App;

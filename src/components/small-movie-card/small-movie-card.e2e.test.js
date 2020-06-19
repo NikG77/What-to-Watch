@@ -4,13 +4,15 @@ import Adapter from "enzyme-adapter-react-16";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
 
-const film = {title: `One Flew Over the Cuckoo's Nest`, src: ``};
-
-
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
+const film = {title: `One Flew Over the Cuckoo's Nest`, src: ``};
+
+const mockEvent = {
+  preventDefault() {}
+};
 
 it(`Should small movie card be pressed`, () => {
   const onSmallMovieCardClick = jest.fn();
@@ -26,7 +28,7 @@ it(`Should small movie card be pressed`, () => {
 
   const movieCardTitle = smallMovieCard.find(`.small-movie-card__title`);
 
-  movieCardTitle.simulate(`click`);
+  movieCardTitle.simulate(`click`, mockEvent);
 
   expect(onSmallMovieCardClick.mock.calls.length).toBe(1);
 });

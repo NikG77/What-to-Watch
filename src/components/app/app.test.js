@@ -2,20 +2,44 @@ import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
 
-const films = [{title: `Fantastic Beasts: The Crimes of Grindelwald`, src: `img/bohemian-rhapsody.jpg`},
-  {title: `Bohemian Rhapsody`, src: `img/bohemian-rhapsody.jpg`},
-  {title: `Macbeth Aviator`, src: `img/bohemian-rhapsody.jpg`}];
-const genreFilm = `Fantasy`;
-const titleFilm = `One Flew Over the Cuckoo's Nest`;
-const releaseDate = 1975;
+const films = [
+  {title: `Fantastic Beasts: The Crimes of Grindelwald`,
+    src: `img/bohemian-rhapsody.jpg`,
+    poster: ``,
+    ratingScore: 6.7,
+    ratingCount: 200,
+    director: ``,
+    starring: [`Robert De Niro`, `Matt Damon`, `Tom Hanks`],
+    genre: ``,
+    releaseDate: 2000,
+    pictureBackground: ``,
+  },
+  {title: `Bohemian Rhapsody`,
+    src: `img/bohemian-rhapsody.jpg`,
+    poster: ``,
+    ratingScore: 6.7,
+    ratingCount: 200,
+    director: ``,
+    starring: [`Robert De Niro`, `Matt Damon`, `Tom Hanks`],
+    genre: ``,
+    releaseDate: 2000,
+    pictureBackground: ``,
+  }];
+
+const mainFilm = {
+  genre: ``,
+  title: `One Flew Over the Cuckoo's Nest`,
+  releaseDate: 2014,
+  poster: ``,
+  pictureBackground: ``
+};
+
 
 it(`Render App`, () => {
   const tree = renderer
     .create(<App
       films={films}
-      genreFilm={genreFilm}
-      titleFilm={titleFilm}
-      releaseDate={releaseDate}
+      mainFilm={mainFilm}
     />)
     .toJSON();
 
