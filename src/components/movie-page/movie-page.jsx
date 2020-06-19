@@ -12,16 +12,16 @@ const MoviePage = (props) => {
     let ratingLevel = ``;
 
     switch (true) {
-      case score < RatingLevel.BAD_MAX && score >= RatingLevel.BAD_MIN:
+      case score < RatingLevel.NORMAL_MIN && score >= RatingLevel.BAD_MIN:
         ratingLevel = `Bad`;
         break;
-      case score < RatingLevel.NORMAL_MAX && score >= RatingLevel.NORMAL_MIN:
+      case score < RatingLevel.GOOD_MIN && score >= RatingLevel.NORMAL_MIN:
         ratingLevel = `Normal`;
         break;
-      case score < RatingLevel.COOD_MAX && score >= RatingLevel.COOD_MIN:
+      case score < RatingLevel.VERY_GOOD_MIN && score >= RatingLevel.GOOD_MIN:
         ratingLevel = `Good`;
         break;
-      case score < RatingLevel.VERY_GOOD_MAX && score >= RatingLevel.VERY_GOOD_MIN:
+      case score < RatingLevel.AWESOME && score >= RatingLevel.VERY_GOOD_MIN:
         ratingLevel = `Very good`;
         break;
       case score === RatingLevel.AWESOME:

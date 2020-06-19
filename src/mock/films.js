@@ -1,4 +1,4 @@
-const STARRING_FILM = {
+const StarringFilm = {
   MIN: 3,
   MAX: 6,
 };
@@ -15,18 +15,18 @@ const getRandomRating = () => {
   return Math.floor(Math.random() * (100 + 1)) / 10;
 };
 
-const getRandomArray = function (arr, min, max) {
+const getRandomArray = function (array, min, max) {
   const numberRandom = getRandomIntegerNumber(min, max);
-  const arrClon = arr.slice();
-  const arrNew = [];
-  let numberArrRandom;
+  const arrayClon = array.slice();
+  const arrayNew = [];
+  let numberArrayRandom;
 
   for (let i = 0; i < numberRandom; i++) {
-    numberArrRandom = getRandomIntegerNumber(0, arrClon.length - 1);
-    arrNew.push(arrClon[numberArrRandom]);
-    arrClon.splice(numberArrRandom, 1);
+    numberArrayRandom = getRandomIntegerNumber(0, arrayClon.length - 1);
+    arrayNew.push(arrayClon[numberArrayRandom]);
+    arrayClon.splice(numberArrayRandom, 1);
   }
-  return arrNew;
+  return arrayNew;
 };
 
 const getRandomArrayItem = (array) => {
@@ -50,7 +50,7 @@ export const films = [
     ratingScore: getRandomRating(),
     ratingCount: getRandomIntegerNumber(50, 300),
     director: getRandomArrayItem(DirectorItems),
-    starring: getRandomArray(StarringItems, STARRING_FILM.MIN, STARRING_FILM.MAX),
+    starring: getRandomArray(StarringItems, StarringFilm.MIN, StarringFilm.MAX),
     genre: `Drama`,
     releaseDate: getRandomIntegerNumber(1990, 2020),
     pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -61,7 +61,7 @@ export const films = [
     ratingScore: getRandomRating(),
     ratingCount: getRandomIntegerNumber(50, 300),
     director: getRandomArrayItem(DirectorItems),
-    starring: getRandomArray(StarringItems, STARRING_FILM.MIN, STARRING_FILM.MAX),
+    starring: getRandomArray(StarringItems, StarringFilm.MIN, StarringFilm.MAX),
     genre: `Drama`,
     releaseDate: getRandomIntegerNumber(1990, 2020),
     pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -72,7 +72,7 @@ export const films = [
     ratingScore: getRandomRating(),
     ratingCount: getRandomIntegerNumber(50, 300),
     director: getRandomArrayItem(DirectorItems),
-    starring: getRandomArray(StarringItems, STARRING_FILM.MIN, STARRING_FILM.MAX),
+    starring: getRandomArray(StarringItems, StarringFilm.MIN, StarringFilm.MAX),
     genre: `Drama`,
     releaseDate: getRandomIntegerNumber(1990, 2020),
     pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -83,7 +83,7 @@ export const films = [
     ratingScore: getRandomRating(),
     ratingCount: getRandomIntegerNumber(50, 300),
     director: getRandomArrayItem(DirectorItems),
-    starring: getRandomArray(StarringItems, STARRING_FILM.MIN, STARRING_FILM.MAX),
+    starring: getRandomArray(StarringItems, StarringFilm.MIN, StarringFilm.MAX),
     genre: `Drama`,
     releaseDate: getRandomIntegerNumber(1990, 2020),
     pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -94,7 +94,7 @@ export const films = [
     ratingScore: getRandomRating(),
     ratingCount: getRandomIntegerNumber(50, 300),
     director: getRandomArrayItem(DirectorItems),
-    starring: getRandomArray(StarringItems, STARRING_FILM.MIN, STARRING_FILM.MAX),
+    starring: getRandomArray(StarringItems, StarringFilm.MIN, StarringFilm.MAX),
     genre: `Drama`,
     releaseDate: getRandomIntegerNumber(1990, 2020),
     pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -105,7 +105,7 @@ export const films = [
     ratingScore: getRandomRating(),
     ratingCount: getRandomIntegerNumber(50, 300),
     director: getRandomArrayItem(DirectorItems),
-    starring: getRandomArray(StarringItems, STARRING_FILM.MIN, STARRING_FILM.MAX),
+    starring: getRandomArray(StarringItems, StarringFilm.MIN, StarringFilm.MAX),
     genre: `Drama`,
     releaseDate: getRandomIntegerNumber(1990, 2020),
     pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -116,7 +116,7 @@ export const films = [
     ratingScore: getRandomRating(),
     ratingCount: getRandomIntegerNumber(50, 300),
     director: getRandomArrayItem(DirectorItems),
-    starring: getRandomArray(StarringItems, STARRING_FILM.MIN, STARRING_FILM.MAX),
+    starring: getRandomArray(StarringItems, StarringFilm.MIN, StarringFilm.MAX),
     genre: `Drama`,
     releaseDate: getRandomIntegerNumber(1990, 2020),
     pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -127,7 +127,7 @@ export const films = [
     ratingScore: getRandomRating(),
     ratingCount: getRandomIntegerNumber(50, 300),
     director: getRandomArrayItem(DirectorItems),
-    starring: getRandomArray(StarringItems, STARRING_FILM.MIN, STARRING_FILM.MAX),
+    starring: getRandomArray(StarringItems, StarringFilm.MIN, StarringFilm.MAX),
     genre: `Drama`,
     releaseDate: getRandomIntegerNumber(1990, 2020),
     pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
