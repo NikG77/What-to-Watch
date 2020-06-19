@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {filmType} from "../../types";
 
 const SmallMovieCard = (props) => {
   const {film, onSmallMovieCardClick, onSmallMovieCardHover} = props;
-  const {title, src: srcFilm} = film;
+  const {title, src} = film;
 
   return (
     <article
@@ -11,7 +12,7 @@ const SmallMovieCard = (props) => {
       onMouseLeave={() => onSmallMovieCardHover(null)}
       className="small-movie-card catalog__movies-card">
       <div onClick={() => onSmallMovieCardClick(film)} className="small-movie-card__image">
-        <img src={srcFilm} alt={title} width="280" height="175" />
+        <img src={src} alt={title} width="280" height="175" />
       </div>
       <h3 onClick={(evt) => {
         evt.preventDefault();
@@ -26,10 +27,7 @@ const SmallMovieCard = (props) => {
 };
 
 SmallMovieCard.propTypes = {
-  film: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-  }).isRequired,
+  film: filmType.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   onSmallMovieCardHover: PropTypes.func.isRequired,
 };

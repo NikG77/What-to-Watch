@@ -1,8 +1,8 @@
 import Main from "../main/main.jsx";
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
+import {filmsType, mainFilmType} from "../../types";
 
 class App extends PureComponent {
   constructor(props) {
@@ -62,27 +62,9 @@ class App extends PureComponent {
   }
 }
 
-
 App.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    ratingScore: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-    pictureBackground: PropTypes.string.isRequired,
-  })).isRequired,
-  mainFilm: PropTypes.shape({
-    genre: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    pictureBackground: PropTypes.string.isRequired,
-  }).isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired
+  films: filmsType.isRequired,
+  mainFilm: mainFilmType.isRequired,
 };
 
 export default App;

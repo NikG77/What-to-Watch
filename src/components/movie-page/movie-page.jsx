@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {RatingLevel} from "../../const.js";
+import {filmType} from "../../types";
 
 
 const MoviePage = (props) => {
@@ -132,17 +132,7 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
-  film: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    ratingScore: PropTypes.number.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-    pictureBackground: PropTypes.string.isRequired,
-  }).isRequired,
+  film: filmType.isRequired,
 };
 
 
