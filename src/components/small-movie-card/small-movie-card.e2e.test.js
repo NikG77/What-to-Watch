@@ -14,7 +14,7 @@ const mockEvent = {
   preventDefault() {}
 };
 
-it(`Should small movie card be pressed`, () => {
+it(`Should small movie card be pressed to title`, () => {
   const onSmallMovieCardClick = jest.fn();
   const onSmallMovieCardHover = jest.fn();
 
@@ -31,7 +31,28 @@ it(`Should small movie card be pressed`, () => {
   movieCardTitle.simulate(`click`, mockEvent);
 
   expect(onSmallMovieCardClick.mock.calls.length).toBe(1);
+  expect(onSmallMovieCardClick).toHaveBeenLastCalledWith(film);
 });
+
+it(`Should small movie card be pressed to image`, () => {
+  const onSmallMovieCardClick = jest.fn();
+  const onSmallMovieCardHover = jest.fn();
+
+  const smallMovieCard = shallow(
+      <SmallMovieCard
+        film={film}
+        onSmallMovieCardHover={onSmallMovieCardHover}
+        onSmallMovieCardClick={onSmallMovieCardClick}
+      />
+  );
+
+  const movieCardImage = smallMovieCard.find(`.small-movie-card__image`);
+
+  movieCardImage.simulate(`click`);
+
+  expect(onSmallMovieCardClick).toHaveBeenLastCalledWith(film);
+});
+
 
 it(`Should small movie card be hovered`, () => {
   const onSmallMovieCardClick = jest.fn();
@@ -49,7 +70,6 @@ it(`Should small movie card be hovered`, () => {
 
   movieCard.simulate(`mouseenter`);
 
-  expect(onSmallMovieCardHover.mock.calls.length).toBe(1);
   expect(onSmallMovieCardHover).toHaveBeenLastCalledWith(film);
 });
 
