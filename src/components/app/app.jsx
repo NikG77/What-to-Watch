@@ -7,18 +7,40 @@ import MoviePage from "../movie-page/movie-page.jsx";
 class App extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.state = {
+      film: null,
+    };
+
+    this.handleSmallMovieCardClic = this.handleSmallMovieCardClic.bind(this);
+  }
+
+  handleSmallMovieCardClic(film) {
+    this.setState({film});
   }
 
   _renderApp() {
-    const smallMovieCardHandler = () => {};
     const {films, mainFilm} = this.props;
-    return (
-      <Main
-        films={films}
-        mainFilm={mainFilm}
-        onSmallMovieCardClick={smallMovieCardHandler}
-      />
-    );
+    const {film} = this.state;
+
+    if (film === null) {
+      return (
+        <Main
+          films={films}
+          mainFilm={mainFilm}
+          onSmallMovieCardClick={this.handleSmallMovieCardClic}
+        />
+      );
+    }
+    if (film) {
+      return (
+        <MoviePage
+          film={film}
+        />
+      );
+    }
+
+    return null;
   }
 
   render() {
@@ -32,7 +54,6 @@ class App extends PureComponent {
           <Route exact path="/dev">
             <MoviePage
               film={films[0]}
-              // mainFilm={mainFilm}
             />
           </Route>
         </Switch>
