@@ -8,6 +8,7 @@ exports[`Should SmallMovieCard render correctly 1`] = `
 >
   <div
     className="small-movie-card__image"
+    onClick={[Function]}
   >
     <img
       alt="Bohemian Rhapsody"

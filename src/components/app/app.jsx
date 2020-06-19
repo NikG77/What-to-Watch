@@ -1,32 +1,70 @@
 import Main from "../main/main.jsx";
-import React from "react";
-import PropTypes from "prop-types";
+import React, {PureComponent} from "react";
+import {Switch, Route, BrowserRouter} from "react-router-dom";
+import MoviePage from "../movie-page/movie-page.jsx";
+import {filmsType, mainFilmType} from "../../types";
 
-const smallMovieCardHandler = () => {};
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
 
-const App = (props) => {
+    this.state = {
+      film: null,
+    };
 
-  const {films, genreFilm, titleFilm, releaseDate} = props;
-  return (
-    <Main
-      films={films}
-      genreFilm={genreFilm}
-      titleFilm={titleFilm}
-      releaseDate={releaseDate}
-      onSmallMovieCardClick={smallMovieCardHandler}
-    />
-  );
-};
+    this.handleSmallMovieCardClic = this.handleSmallMovieCardClic.bind(this);
+  }
+
+  handleSmallMovieCardClic(film) {
+    this.setState({film});
+  }
+
+  _renderApp() {
+    const {films, mainFilm} = this.props;
+    const {film} = this.state;
+
+    if (film === null) {
+      return (
+        <Main
+          films={films}
+          mainFilm={mainFilm}
+          onSmallMovieCardClick={this.handleSmallMovieCardClic}
+        />
+      );
+    }
+    if (film) {
+      return (
+        <MoviePage
+          film={film}
+        />
+      );
+    }
+
+    return null;
+  }
+
+  render() {
+    const {films} = this.props;
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderApp()}
+          </Route>
+          <Route exact path="/dev">
+            <MoviePage
+              film={films[0]}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+}
 
 App.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-  })).isRequired,
-  genreFilm: PropTypes.string.isRequired,
-  titleFilm: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
-  onSmallMovieCardClick: PropTypes.func
+  films: filmsType.isRequired,
+  mainFilm: mainFilmType.isRequired,
 };
 
 export default App;
