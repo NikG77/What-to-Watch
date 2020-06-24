@@ -33,6 +33,12 @@ const MoviePage = (props) => {
 
   const ratingLevel = getRatingLevel(ratingScore);
 
+  // const ratingLevel2 = [0, 3, 5, 8, 10].find((i) => i > ratingScore);
+  // function getKeyByValue(object, value) {
+  //   return Object.keys(object).find((key) => object[key] === value);
+  // }
+  // getKeyByValue(RatingLevel, ratingLevel2);
+
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">
