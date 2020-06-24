@@ -59,8 +59,8 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/video">
             <VideoPlayer
-              src={films[0].src}
-              preview={films[0].preview}
+              src={films[0].preview}
+              poster={films[0].src}
               isPlaying={true}
             />
           </Route>

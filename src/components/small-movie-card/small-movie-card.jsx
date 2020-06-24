@@ -25,13 +25,11 @@ class SmallMovieCard extends PureComponent {
 
         <div onClick={() => onSmallMovieCardClick(film)} className="small-movie-card__image">
           <VideoPlayer
-            src={src}
-            preview={preview}
+            src={preview}
+            poster={src}
             isPlaying={false}
 
           />
-          <video src={preview} muted poster={src} width="280" height="175" />
-
         </div>
         <h3 onClick={(evt) => {
           evt.preventDefault();

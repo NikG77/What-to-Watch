@@ -13,13 +13,55 @@ export default class VideoPlayer extends PureComponent {
 
   }
 
+  componentDidMount() {
+    const {poster, src} = this.props;
+    const video = this._videoRef.current;
+
+    video.src = src;
+    video.poster = poster;
+
+
+    video.onplay = () => {
+      this.setState({
+        isPlaying: true,
+      });
+    };
+
+    video.onpause = () => {
+      this.setState({
+        isPlaying: false,
+      });
+    };
+  }
+
+  componentWillUnmount() {
+    const video = this._videoRef.current;
+
+    video.onplay = null;
+    video.onpause = null;
+
+    video.src = ``;
+    video.poster = ``;
+
+  }
+
+  componentDidUpdate() {
+    const video = this._videoRef.current;
+
+    if (this.props.isPlaying) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  }
+
+
   render() {
-    const {preview, src} = this.props;
-    // const {preview, src, title} = film;
+    const {poster, src} = this.props;
 
     return (
       <Fragment>
-        <video src={preview} muted poster={src} width="280" height="175" />
+        <video src={src} muted poster={poster} width="280" height="175" />
       </Fragment>
     );
   }
@@ -29,6 +71,6 @@ export default class VideoPlayer extends PureComponent {
 
 VideoPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  preview: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
 };
