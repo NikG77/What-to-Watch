@@ -3,7 +3,6 @@ import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {filmsType, mainFilmType} from "../../types";
-import VideoPlayer from "../video-player/video-player.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -55,13 +54,6 @@ class App extends PureComponent {
           <Route exact path="/dev">
             <MoviePage
               film={films[0]}
-            />
-          </Route>
-          <Route exact path="/video">
-            <VideoPlayer
-              src={films[0].preview}
-              poster={films[0].src}
-              isPlaying={true}
             />
           </Route>
         </Switch>

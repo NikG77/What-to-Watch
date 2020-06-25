@@ -60,6 +60,7 @@ it(`Should small movie card be pressed to image`, () => {
 
 
 it(`Should small movie card be hovered`, () => {
+  jest.useFakeTimers();
   const onSmallMovieCardClick = jest.fn();
   const onSmallMovieCardHover = jest.fn();
 
@@ -74,6 +75,7 @@ it(`Should small movie card be hovered`, () => {
   const movieCard = smallMovieCard.find(`.small-movie-card`);
 
   movieCard.simulate(`mouseenter`);
+  jest.runAllTimers();
 
   expect(onSmallMovieCardHover).toHaveBeenLastCalledWith(film);
 });

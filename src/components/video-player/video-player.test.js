@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import VideoPlayer from "./video-player.jsx";
 
 const film = {
-  poster: ``,
+  preview: ``,
   src: ` `
 };
 
