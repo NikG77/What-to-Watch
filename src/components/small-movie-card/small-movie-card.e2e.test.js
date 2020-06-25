@@ -8,7 +8,11 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const film = {title: `One Flew Over the Cuckoo's Nest`, src: ``};
+const film = {
+  title: `One Flew Over the Cuckoo's Nest`,
+  src: ``,
+  preview: ``,
+};
 
 const mockEvent = {
   preventDefault() {}
@@ -23,6 +27,7 @@ it(`Should small movie card be pressed to title`, () => {
         film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
+        isPlaying={false}
       />
   );
 

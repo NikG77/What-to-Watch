@@ -1,23 +1,26 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SmallMovieCard from "./small-movie-card.jsx";
+import VideoPlayer from "./video-player.jsx";
 
 const film = {
-  title: `One Flew Over the Cuckoo's Nest`,
-  src: ``,
-  preview: ``,
   poster: ``,
+  src: ` `
 };
 
-it(`Should SmallMovieCard render correctly`, () => {
+
+it(`Should VideoPlayer render correctly`, () => {
   const tree = renderer
-    .create(<SmallMovieCard
+    .create(<VideoPlayer
       film={film}
       onSmallMovieCardClick={() => {}}
       onSmallMovieCardHover={() => {}}
       isPlaying={false}
-    />)
-    .toJSON();
+    />,
+    {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -205,7 +205,7 @@ exports[`Should MoviePage render correctly 1`] = `
             <span
               className="movie-rating__level"
             >
-              
+              Good
             </span>
             <span
               className="movie-rating__count"
