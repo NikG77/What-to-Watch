@@ -5,3 +5,5 @@ export const RatingLevel = {
   VERY_GOOD_MIN: 8,
   AWESOME: 10,
 };
+
+export const TIME_DELAY = 1000;
