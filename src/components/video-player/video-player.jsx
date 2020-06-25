@@ -19,7 +19,7 @@ export default class VideoPlayer extends PureComponent {
 
     video.src = src;
     video.poster = poster;
-
+    // video.autoplay = true;
 
     video.onplay = () => {
       this.setState({
@@ -31,6 +31,7 @@ export default class VideoPlayer extends PureComponent {
       this.setState({
         isPlaying: false,
       });
+
     };
   }
 
@@ -57,11 +58,10 @@ export default class VideoPlayer extends PureComponent {
 
 
   render() {
-    const {poster, src} = this.props;
 
     return (
       <Fragment>
-        <video src={src} muted poster={poster} width="280" height="175" />
+        <video ref={this._videoRef} muted width="280" height="175" />
       </Fragment>
     );
   }
