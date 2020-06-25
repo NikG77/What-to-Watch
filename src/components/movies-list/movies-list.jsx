@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import {filmsType} from "../../types";
-import {TIME_DELAY} from "../../const.js";
+
 
 class MoviesList extends PureComponent {
   constructor(props) {
@@ -11,26 +11,14 @@ class MoviesList extends PureComponent {
       film: null,
       isPlaying: false,
     };
-    this.isHovered = false;
 
-    this._handleSmallMovieCardHover = this._handleSmallMovieCardHover.bind(this);
+    this.handleSmallMovieCardHover = this.handleSmallMovieCardHover.bind(this);
   }
 
-  _checkTimeHover(film) {
-    if (this.isHovered) {
-      this.setState({film, isPlaying: true});
-    }
-  }
-
-  _handleSmallMovieCardHover(film) {
+  handleSmallMovieCardHover(film) {
     if (film) {
-      this.isHovered = true;
-      setTimeout(() => {
-        this._checkTimeHover(film);
-      }, TIME_DELAY);
-
+      this.setState({film, isPlaying: true});
     } else {
-      this.isHovered = false;
       this.setState({film, isPlaying: false});
     }
   }
@@ -47,7 +35,7 @@ class MoviesList extends PureComponent {
             key={movie + i}
             film={movie}
             onSmallMovieCardClick={onSmallMovieCardClick}
-            onSmallMovieCardHover={this._handleSmallMovieCardHover}
+            onSmallMovieCardHover={this.handleSmallMovieCardHover}
             isPlaying={isPlaying && film === movie}
           />
         )}
