@@ -11,9 +11,8 @@ const film = {
 it(`Should VideoPlayer render correctly`, () => {
   const tree = renderer
     .create(<VideoPlayer
-      film={film}
-      onSmallMovieCardClick={() => {}}
-      onSmallMovieCardHover={() => {}}
+      src={film.preview}
+      poster={film.src}
       isPlaying={false}
     />,
     {
