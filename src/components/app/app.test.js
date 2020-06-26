@@ -13,6 +13,7 @@ const films = [
     genre: ``,
     releaseDate: 2000,
     pictureBackground: ``,
+    previewVideo: ``,
   },
   {title: `Bohemian Rhapsody`,
     src: `img/bohemian-rhapsody.jpg`,
@@ -24,6 +25,7 @@ const films = [
     genre: ``,
     releaseDate: 2000,
     pictureBackground: ``,
+    previewVideo: ``,
   }];
 
 const mainFilm = {
@@ -40,8 +42,13 @@ it(`Render App`, () => {
     .create(<App
       films={films}
       mainFilm={mainFilm}
-    />)
-    .toJSON();
+    />,
+    {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
+
 
   expect(tree).toMatchSnapshot();
 });

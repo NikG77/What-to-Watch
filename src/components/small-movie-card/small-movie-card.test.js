@@ -3,8 +3,17 @@ import renderer from "react-test-renderer";
 import SmallMovieCard from "./small-movie-card.jsx";
 
 const film = {
-  title: `Bohemian Rhapsody`,
-  src: ` `
+  title: `One Flew Over the Cuckoo's Nest`,
+  src: ``,
+  poster: ``,
+  ratingScore: 8,
+  ratingCount: 200,
+  director: ``,
+  starring: [``, ``],
+  genre: `Drama`,
+  releaseDate: 2020,
+  pictureBackground: ``,
+  previewVideo: ``,
 };
 
 it(`Should SmallMovieCard render correctly`, () => {
@@ -13,8 +22,13 @@ it(`Should SmallMovieCard render correctly`, () => {
       film={film}
       onSmallMovieCardClick={() => {}}
       onSmallMovieCardHover={() => {}}
-    />)
-    .toJSON();
+      isPlaying={false}
+    />,
+    {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

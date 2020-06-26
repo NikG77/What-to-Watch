@@ -13,6 +13,7 @@ const film = {
   genre: ``,
   releaseDate: 2000,
   pictureBackground: ``,
+  previewVideo: ``,
 };
 
 
@@ -20,6 +21,7 @@ it(`Should MoviePage render correctly`, () => {
   const tree = renderer
     .create(<MoviePage
       film={film}
+      onSmallMovieCardClick={() => {}}
     />)
     .toJSON();
 

@@ -13,6 +13,7 @@ const films = [
     genre: ``,
     releaseDate: 2000,
     pictureBackground: ``,
+    previewVideo: ``,
   },
   {title: `Bohemian Rhapsody`,
     src: ``,
@@ -24,6 +25,7 @@ const films = [
     genre: ``,
     releaseDate: 2000,
     pictureBackground: ``,
+    previewVideo: ``,
   }];
 
 it(`Should MoviesList render correctly`, () => {
@@ -31,8 +33,12 @@ it(`Should MoviesList render correctly`, () => {
     .create(<MoviesList
       films={films}
       onSmallMovieCardClick={() => {}}
-    />)
-    .toJSON();
+    />,
+    {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -3,30 +3,40 @@ import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import {filmsType} from "../../types";
 
+
 class MoviesList extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {film: null};
+    this.state = {
+      film: null,
+      isPlaying: false,
+    };
 
     this.handleSmallMovieCardHover = this.handleSmallMovieCardHover.bind(this);
   }
 
   handleSmallMovieCardHover(film) {
-    this.setState({film});
+    if (film) {
+      this.setState({film, isPlaying: true});
+    } else {
+      this.setState({film: null, isPlaying: false});
+    }
   }
 
   render() {
     const {films, onSmallMovieCardClick} = this.props;
+    const {isPlaying, film} = this.state;
 
 
     return (
       <div className="catalog__movies-list">
-        {films.map((film, i) =>
+        {films.map((movie, i) =>
           <SmallMovieCard
-            key={film + i}
-            film={film}
+            key={movie + i}
+            film={movie}
             onSmallMovieCardClick={onSmallMovieCardClick}
             onSmallMovieCardHover={this.handleSmallMovieCardHover}
+            isPlaying={isPlaying && film === movie}
           />
         )}
       </div>

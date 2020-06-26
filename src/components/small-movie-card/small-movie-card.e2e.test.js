@@ -8,7 +8,19 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const film = {title: `One Flew Over the Cuckoo's Nest`, src: ``};
+const film = {
+  title: `One Flew Over the Cuckoo's Nest`,
+  src: ``,
+  poster: ``,
+  ratingScore: 8,
+  ratingCount: 200,
+  director: ``,
+  starring: [``, ``],
+  genre: `Drama`,
+  releaseDate: 2020,
+  pictureBackground: ``,
+  previewVideo: ``,
+};
 
 const mockEvent = {
   preventDefault() {}
@@ -23,6 +35,7 @@ it(`Should small movie card be pressed to title`, () => {
         film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
+        isPlaying={false}
       />
   );
 
@@ -43,6 +56,7 @@ it(`Should small movie card be pressed to image`, () => {
         film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
+        isPlaying={false}
       />
   );
 
@@ -55,6 +69,7 @@ it(`Should small movie card be pressed to image`, () => {
 
 
 it(`Should small movie card be hovered`, () => {
+  jest.useFakeTimers();
   const onSmallMovieCardClick = jest.fn();
   const onSmallMovieCardHover = jest.fn();
 
@@ -63,12 +78,14 @@ it(`Should small movie card be hovered`, () => {
         film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
+        isPlaying={false}
       />
   );
 
   const movieCard = smallMovieCard.find(`.small-movie-card`);
 
   movieCard.simulate(`mouseenter`);
+  jest.runAllTimers();
 
   expect(onSmallMovieCardHover).toHaveBeenLastCalledWith(film);
 });
@@ -83,6 +100,7 @@ it(`Should small movie card be out`, () => {
         film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
+        isPlaying={false}
       />
   );
 

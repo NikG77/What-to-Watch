@@ -10,10 +10,9 @@ exports[`Should SmallMovieCard render correctly 1`] = `
     className="small-movie-card__image"
     onClick={[Function]}
   >
-    <img
-      alt="Bohemian Rhapsody"
+    <video
       height="175"
-      src=" "
+      muted={true}
       width="280"
     />
   </div>
@@ -25,7 +24,7 @@ exports[`Should SmallMovieCard render correctly 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
     >
-      Bohemian Rhapsody
+      One Flew Over the Cuckoo's Nest
     </a>
   </h3>
 </article>
