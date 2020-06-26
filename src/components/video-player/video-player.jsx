@@ -19,7 +19,6 @@ export default class VideoPlayer extends PureComponent {
 
     video.src = src;
     video.poster = poster;
-    // video.autoplay = true;
 
     video.onplay = () => {
       this.setState({

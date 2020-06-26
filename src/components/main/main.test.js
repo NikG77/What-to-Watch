@@ -13,6 +13,7 @@ const films = [
     genre: ``,
     releaseDate: 2000,
     pictureBackground: ``,
+    previewVideo: ``,
   },
   {title: `Bohemian Rhapsody`,
     src: `img/bohemian-rhapsody.jpg`,
@@ -24,6 +25,7 @@ const films = [
     genre: ``,
     releaseDate: 2000,
     pictureBackground: ``,
+    previewVideo: ``,
   }];
 
 const mainFilm = {

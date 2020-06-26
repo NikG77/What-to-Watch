@@ -13,7 +13,7 @@ const film = {
   genre: ``,
   releaseDate: 2000,
   pictureBackground: ``,
-  preview: ``,
+  previewVideo: ``,
 };
 
 

@@ -5,7 +5,7 @@ import SmallMovieCard from "./small-movie-card.jsx";
 const film = {
   title: `One Flew Over the Cuckoo's Nest`,
   src: ``,
-  preview: ``,
+  previewVideo: ``,
   poster: ``,
 };
 

@@ -19,7 +19,7 @@ class MoviesList extends PureComponent {
     if (film) {
       this.setState({film, isPlaying: true});
     } else {
-      this.setState({film, isPlaying: false});
+      this.setState({film: null, isPlaying: false});
     }
   }
 

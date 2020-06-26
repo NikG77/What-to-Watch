@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import VideoPlayer from "./video-player.jsx";
 
 const film = {
-  preview: ``,
+  previewVideo: ``,
   src: ` `
 };
 
@@ -11,7 +11,7 @@ const film = {
 it(`Should VideoPlayer render correctly`, () => {
   const tree = renderer
     .create(<VideoPlayer
-      src={film.preview}
+      src={film.previewVideo}
       poster={film.src}
       isPlaying={false}
     />,

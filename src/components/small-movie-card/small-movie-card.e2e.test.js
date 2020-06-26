@@ -11,7 +11,8 @@ Enzyme.configure({
 const film = {
   title: `One Flew Over the Cuckoo's Nest`,
   src: ``,
-  preview: ``,
+  previewVideo: ``,
+  poster: ``,
 };
 
 const mockEvent = {
@@ -48,6 +49,7 @@ it(`Should small movie card be pressed to image`, () => {
         film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
+        isPlaying={false}
       />
   );
 
@@ -69,6 +71,7 @@ it(`Should small movie card be hovered`, () => {
         film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
+        isPlaying={false}
       />
   );
 
@@ -90,6 +93,7 @@ it(`Should small movie card be out`, () => {
         film={film}
         onSmallMovieCardHover={onSmallMovieCardHover}
         onSmallMovieCardClick={onSmallMovieCardClick}
+        isPlaying={false}
       />
   );
 

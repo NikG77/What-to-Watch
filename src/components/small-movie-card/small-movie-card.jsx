@@ -17,7 +17,7 @@ const clearTimer = (cb) => {
 
 const SmallMovieCard = (props) => {
   const {film, onSmallMovieCardClick, onSmallMovieCardHover, isPlaying} = props;
-  const {title, preview, src} = film;
+  const {title, previewVideo, src} = film;
 
   return (
     <article
@@ -27,7 +27,7 @@ const SmallMovieCard = (props) => {
 
       <div onClick={() => onSmallMovieCardClick(film)} className="small-movie-card__image">
         <VideoPlayer
-          src={preview}
+          src={previewVideo}
           poster={src}
           isPlaying={isPlaying}
 
