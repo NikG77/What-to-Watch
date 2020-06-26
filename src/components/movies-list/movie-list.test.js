@@ -33,8 +33,12 @@ it(`Should MoviesList render correctly`, () => {
     .create(<MoviesList
       films={films}
       onSmallMovieCardClick={() => {}}
-    />)
-    .toJSON();
+    />,
+    {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

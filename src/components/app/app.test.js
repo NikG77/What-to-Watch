@@ -42,8 +42,13 @@ it(`Render App`, () => {
     .create(<App
       films={films}
       mainFilm={mainFilm}
-    />)
-    .toJSON();
+    />,
+    {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
+
 
   expect(tree).toMatchSnapshot();
 });

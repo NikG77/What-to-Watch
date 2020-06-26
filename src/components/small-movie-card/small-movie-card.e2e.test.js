@@ -11,8 +11,15 @@ Enzyme.configure({
 const film = {
   title: `One Flew Over the Cuckoo's Nest`,
   src: ``,
-  previewVideo: ``,
   poster: ``,
+  ratingScore: 8,
+  ratingCount: 200,
+  director: ``,
+  starring: [``, ``],
+  genre: `Drama`,
+  releaseDate: 2020,
+  pictureBackground: ``,
+  previewVideo: ``,
 };
 
 const mockEvent = {
