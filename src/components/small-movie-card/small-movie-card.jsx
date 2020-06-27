@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {filmType} from "../../types";
 import VideoPlayer from "../video-player/video-player.jsx";
-import TIME_DELAY from "../../const.js";
+import {TIME_DELAY} from "../../const.js";
 
 
 let timerId;
