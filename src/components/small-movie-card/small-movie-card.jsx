@@ -2,17 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import {filmType} from "../../types";
 import VideoPlayer from "../video-player/video-player.jsx";
+import TIME_DELAY from "../../const.js";
 
-const DELAY = 1000;
+
 let timerId;
 
 const setTimer = (film, cb) => {
-  timerId = setTimeout(() => cb(film), DELAY);
+  timerId = setTimeout(() => cb(film), TIME_DELAY);
 };
 
-const clearTimer = (cb) => {
+const clearTimer = (film, cb) => {
   clearTimeout(timerId);
-  cb(null);
+  cb(film);
 };
 
 const SmallMovieCard = (props) => {
@@ -22,10 +23,10 @@ const SmallMovieCard = (props) => {
   return (
     <article
       onMouseEnter={() => setTimer(film, onSmallMovieCardHover)}
-      onMouseLeave={() => clearTimer(onSmallMovieCardHover)}
+      onMouseLeave={() => clearTimer(null, onSmallMovieCardHover)}
       className="small-movie-card catalog__movies-card">
 
-      <div onClick={() => onSmallMovieCardClick(film)} className="small-movie-card__image">
+      <div onClick={() => clearTimer(film, onSmallMovieCardClick)} className="small-movie-card__image">
         <VideoPlayer
           src={previewVideo}
           poster={src}
