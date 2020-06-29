@@ -1,14 +1,37 @@
 import {extend} from "./utils.js";
 import {films} from "./mock/films.js";
 
+const ALL_GENRES = `All genres`;
+
 const initialState = {
-  genre: `All genres`,
+  allMovies: films,
   movies: films,
+  movie: null,
+  genre: ALL_GENRES,
 };
 
 const ActionType = {
   SET_GENRE: `SET_GENRE`,
+  SET_FILM: `SET_FILM`,
   GET_FILMS: `GET_FILMS`,
+  GET_FILM: `GET_FILM`,
+};
+
+const ActionCreator = {
+  setGenre: (genre) => ({
+    type: ActionType.SET_GENRE,
+    payload: genre,
+  }),
+
+  getFilms: () => ({
+    type: ActionType.GET_FILMS,
+  }),
+
+  setFilm: (film) => ({
+    type: ActionType.SET_FILM,
+    payload: film,
+  }),
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,7 +42,7 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.GET_FILMS:
-      const filterMovies = initialState.movies;
+      let filterMovies = initialState.movies;
       if (state.genre !== initialState.genre) {
         filterMovies = initialState.movies.filter((movie) => movie.genre === state.genre);
       }
@@ -27,12 +50,15 @@ const reducer = (state = initialState, action) => {
         movies: filterMovies,
       });
 
-
+    case ActionType.SET_FILM:
+      return extend(state, {
+        movie: action.payload,
+      });
   }
 
   return state;
 };
 
 
-export {reducer, ActionType};
+export {reducer, ActionType, ActionCreator};
 

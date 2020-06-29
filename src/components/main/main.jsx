@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 
 const Main = (props) => {
 
-  const {films, mainFilm, onSmallMovieCardClick, activeGenre} = props;
+  const {films, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, allFilms} = props;
   const {genre, title, releaseDate, poster, pictureBackground} = mainFilm;
 
   return (
@@ -72,8 +72,9 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList
-            films={films}
+            allFilms={allFilms}
             activeGenre={activeGenre}
+            onGenreItemClick={onGenreItemClick}
           />
 
           <MoviesList
@@ -109,12 +110,14 @@ Main.propTypes = {
   mainFilm: mainFilmType.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,
-
+  onGenreItemClick: PropTypes.func.isRequired,
+  allFilms: filmsType.isRequired,
 };
 
 const mapStateToProps = (state) => (
   {
     activeGenre: state.genre,
+    allFilms: state.allMovies,
   }
 );
 
