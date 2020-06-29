@@ -14,7 +14,6 @@ const ActionType = {
   SET_GENRE: `SET_GENRE`,
   SET_FILM: `SET_FILM`,
   GET_FILMS: `GET_FILMS`,
-  GET_FILM: `GET_FILM`,
 };
 
 const ActionCreator = {
