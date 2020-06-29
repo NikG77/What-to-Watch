@@ -116,6 +116,8 @@ it(`Should Main render correctly`, () => {
       mainFilm={mainFilm}
       onSmallMovieCardClick={() => {}}
       onGenreItemClick={() => {}}
+      activeGenre={``}
+      allFilms={[]}
     />,
     {
       createNodeMock: () => {
