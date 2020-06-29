@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import {filmsType, mainFilmType} from "../../types";
+import {connect} from "react-redux";
 
 const Main = (props) => {
 
-  const {films, mainFilm, onSmallMovieCardClick} = props;
+  const {films, mainFilm, onSmallMovieCardClick, activeGenre} = props;
   const {genre, title, releaseDate, poster, pictureBackground} = mainFilm;
 
   return (
@@ -72,6 +73,7 @@ const Main = (props) => {
 
           <GenresList
             films={films}
+            activeGenre={activeGenre}
           />
 
           <MoviesList
@@ -105,8 +107,17 @@ const Main = (props) => {
 Main.propTypes = {
   films: filmsType.isRequired,
   mainFilm: mainFilmType.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired
+  onSmallMovieCardClick: PropTypes.func.isRequired,
+  activeGenre: PropTypes.string.isRequired,
+
 };
 
-export default Main;
+const mapStateToProps = (state) => (
+  {
+    activeGenre: state.genre,
+  }
+);
+
+export {Main};
+export default connect(mapStateToProps)(Main);
 
