@@ -21,7 +21,6 @@ it(`Should MoviePage render correctly`, () => {
   const tree = renderer
     .create(<MoviePage
       film={film}
-      onSmallMovieCardClick={() => {}}
     />)
     .toJSON();
 
