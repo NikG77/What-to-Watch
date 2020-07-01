@@ -9,7 +9,6 @@ class MoviesList extends PureComponent {
     super(props);
     this.state = {
       film: null,
-      isPlaying: false,
     };
 
     this.handleSmallMovieCardHover = this.handleSmallMovieCardHover.bind(this);
@@ -17,16 +16,15 @@ class MoviesList extends PureComponent {
 
   handleSmallMovieCardHover(film) {
     if (film) {
-      this.setState({film, isPlaying: true});
+      this.setState({film});
     } else {
-      this.setState({film: null, isPlaying: false});
+      this.setState({film: null});
     }
   }
 
   render() {
     const {films, onSmallMovieCardClick} = this.props;
-    const {isPlaying, film} = this.state;
-
+    const {film} = this.state;
 
     return (
       <div className="catalog__movies-list">
@@ -36,7 +34,7 @@ class MoviesList extends PureComponent {
             film={movie}
             onSmallMovieCardClick={onSmallMovieCardClick}
             onSmallMovieCardHover={this.handleSmallMovieCardHover}
-            isPlaying={isPlaying && film === movie}
+            isPlaying={film === movie}
           />
         )}
       </div>

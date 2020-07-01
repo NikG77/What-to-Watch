@@ -1,6 +1,7 @@
 import React from "react";
 import {RatingLevel} from "../../const.js";
 import {filmType} from "../../types";
+import PropTypes from "prop-types";
 
 
 const MoviePage = (props) => {
@@ -138,7 +139,10 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
-  film: filmType.isRequired,
+  film: PropTypes.oneOfType([
+    filmType.isRequired,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
 };
 
 
