@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {App} from "./app.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 
 const films = [
   {title: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -10,7 +14,7 @@ const films = [
     ratingCount: 200,
     director: ``,
     starring: [`Robert De Niro`, `Matt Damon`, `Tom Hanks`],
-    genre: ``,
+    genre: `Drama`,
     releaseDate: 2000,
     pictureBackground: ``,
     previewVideo: ``,
@@ -22,7 +26,7 @@ const films = [
     ratingCount: 200,
     director: ``,
     starring: [`Robert De Niro`, `Matt Damon`, `Tom Hanks`],
-    genre: ``,
+    genre: `Romance`,
     releaseDate: 2000,
     pictureBackground: ``,
     previewVideo: ``,
@@ -38,16 +42,27 @@ const mainFilm = {
 
 
 it(`Render App`, () => {
+  const store = mockStore({
+    allMovies: films,
+    genre: `All genres`,
+  });
+
   const tree = renderer
-    .create(<App
-      films={films}
-      mainFilm={mainFilm}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Provider store={store}>
+          <App
+            mainFilm={mainFilm}
+            onGenreItemClick={() => {}}
+            onSmallMovieCardClick={() => {}}
+            films={films}
+            film={films[0]}
+          />
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
 
   expect(tree).toMatchSnapshot();

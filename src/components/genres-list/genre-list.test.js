@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Main} from "./main";
+import GenresList from "./genres-list";
 
 const films = [
   {title: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -101,30 +101,17 @@ const films = [
 ];
 
 
-const mainFilm = {
-  genre: ``,
-  title: `One Flew Over the Cuckoo's Nest`,
-  releaseDate: 2014,
-  poster: ``,
-  pictureBackground: ``
-};
+const activeGenre = `All genre`;
 
-it(`Should Main render correctly`, () => {
+
+it(`Should GenresList render correctly`, () => {
   const tree = renderer
-    .create(<Main
-      films={films}
-      mainFilm={mainFilm}
-      onSmallMovieCardClick={() => {}}
+    .create(<GenresList
+      allFilms={films}
+      activeGenre={activeGenre}
       onGenreItemClick={() => {}}
-      activeGenre={``}
-      allFilms={[]}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    />
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
-
