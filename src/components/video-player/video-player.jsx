@@ -21,6 +21,7 @@ export default class VideoPlayer extends PureComponent {
 
     video.src = ``;
     video.poster = ``;
+    video.muted = true;
   }
 
   componentDidUpdate() {
@@ -34,16 +35,13 @@ export default class VideoPlayer extends PureComponent {
     }
   }
 
-
   render() {
-
     return (
       <Fragment>
-        <video ref={this._videoRef} muted width="280" height="175" />
+        <video ref={this._videoRef} width="280" height="175" />
       </Fragment>
     );
   }
-
 }
 
 
