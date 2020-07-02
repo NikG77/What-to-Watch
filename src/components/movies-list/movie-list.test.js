@@ -28,11 +28,27 @@ const films = [
     previewVideo: ``,
   }];
 
+const film = {
+  title: `Fantastic Beasts: The Crimes of Grindelwald`,
+  src: `img/bohemian-rhapsody.jpg`,
+  poster: ``,
+  ratingScore: 6.7,
+  ratingCount: 200,
+  director: ``,
+  starring: [`Robert De Niro`, `Matt Damon`, `Tom Hanks`],
+  genre: ``,
+  releaseDate: 2000,
+  pictureBackground: ``,
+  previewVideo: ``,
+};
+
 it(`Should MoviesList render correctly`, () => {
   const tree = renderer
     .create(<MoviesList
       films={films}
       onSmallMovieCardClick={() => {}}
+      film={film}
+      onSmallMovieCardHover={() => {}}
     />,
     {
       createNodeMock: () => {

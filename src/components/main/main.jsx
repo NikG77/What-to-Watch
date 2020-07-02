@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
+import withHoverItem from "../../hocs/with-hover-item/with-hover-item.js";
 import GenresList from "../genres-list/genres-list.jsx";
 import {filmsType, mainFilmType} from "../../types";
 import {connect} from "react-redux";
+
+
+const MoviesListWrapped = withHoverItem(MoviesList);
 
 const Main = (props) => {
 
@@ -77,7 +81,7 @@ const Main = (props) => {
             onGenreItemClick={onGenreItemClick}
           />
 
-          <MoviesList
+          <MoviesListWrapped
             films={films}
             onSmallMovieCardClick={onSmallMovieCardClick}
           />
