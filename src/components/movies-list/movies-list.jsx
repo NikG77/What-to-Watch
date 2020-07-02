@@ -7,9 +7,7 @@ import {filmsType, filmType} from "../../types";
 class MoviesList extends PureComponent {
 
   render() {
-    const {films, onSmallMovieCardClick} = this.props;
-    // const {film} = this.state;
-    const {film, onSmallMovieCardHover} = this.props;
+    const {films, onSmallMovieCardClick, activeItem, onItemClick} = this.props;
 
     return (
       <div className="catalog__movies-list">
@@ -18,9 +16,8 @@ class MoviesList extends PureComponent {
             key={movie + i}
             film={movie}
             onSmallMovieCardClick={onSmallMovieCardClick}
-            //
-            onSmallMovieCardHover={onSmallMovieCardHover}
-            isPlaying={film === movie}
+            onSmallMovieCardHover={onItemClick}
+            isPlaying={activeItem === movie}
           />
         )}
       </div>
@@ -31,8 +28,8 @@ class MoviesList extends PureComponent {
 MoviesList.propTypes = {
   films: filmsType.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
-  onSmallMovieCardHover: PropTypes.func.isRequired,
-  film: PropTypes.oneOfType([
+  onItemClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.oneOfType([
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),

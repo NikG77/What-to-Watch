@@ -1,12 +1,12 @@
 import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import withHoverItem from "./with-hover-item.js";
+import withActiveItem from "./with-active-item.js";
 
 configure({adapter: new Adapter()});
 
 const MockComponent = () => <div />;
-const MockComponentWrapped = withHoverItem(MockComponent);
+const MockComponentWrapped = withActiveItem(MockComponent);
 
 const films = [
   {title: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -35,18 +35,18 @@ const films = [
   }];
 
 
-it(`Should change answers`, () => {
+it(`Should change the item after the action`, () => {
   const wrapper = shallow(<MockComponentWrapped
-    films={films}
-    onSmallMovieCardClickr={() => {}}
+    activeItem={{}}
+    onItemClick={() => {}}
   />);
 
-  expect(wrapper.props().film).toEqual(null);
+  expect(wrapper.props().activeItem).toEqual(null);
 
-  wrapper.props().onSmallMovieCardHover(films[0]);
-  expect(wrapper.props().film).toEqual(films[0]);
+  wrapper.props().onItemClick(films[0]);
+  expect(wrapper.props().activeItem).toEqual(films[0]);
 
-  wrapper.props().onSmallMovieCardHover(null);
-  expect(wrapper.props().film).toEqual(null);
+  wrapper.props().onItemClick(null);
+  expect(wrapper.props().activeItem).toEqual(null);
 });
 

@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
-import withHoverItem from "../../hocs/with-hover-item/with-hover-item.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import GenresList from "../genres-list/genres-list.jsx";
 import {filmsType, mainFilmType} from "../../types";
 import {connect} from "react-redux";
 
 
-const MoviesListWrapped = withHoverItem(MoviesList);
+const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
 

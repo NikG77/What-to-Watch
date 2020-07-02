@@ -1,4 +1,3 @@
-// import {reducer, ActionType} from "./reducer.js";
 import {reducer, ActionCreator, ActionType} from "./reducer.js";
 import {films} from "./mock/films.js";
 

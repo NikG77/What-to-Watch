@@ -48,7 +48,7 @@ it(`Should MoviesList render correctly`, () => {
       films={films}
       onSmallMovieCardClick={() => {}}
       film={film}
-      onSmallMovieCardHover={() => {}}
+      onItemClick={() => {}}
     />,
     {
       createNodeMock: () => {
