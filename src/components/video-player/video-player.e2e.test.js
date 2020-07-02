@@ -23,8 +23,7 @@ const film = {
 };
 
 
-it(`Checks that a video isPlaying: true`, () => {
-
+it(`Check video play`, () => {
   const videoPlayer = mount(
       <VideoPlayer
         src={film.previewVideo}
@@ -33,12 +32,15 @@ it(`Checks that a video isPlaying: true`, () => {
       />
   );
 
-  expect(videoPlayer.state(`isPlaying`)).toEqual(true);
+  window.HTMLMediaElement.prototype.play = () => {};
+  const {_videoRef} = videoPlayer.instance();
+  jest.spyOn(_videoRef.current, `play`);
+  videoPlayer.instance().componentDidUpdate();
+
+  expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
 });
 
-
-it(`Checks that a video isPlaying: false`, () => {
-
+it(`Check video load`, () => {
   const videoPlayer = mount(
       <VideoPlayer
         src={film.previewVideo}
@@ -47,6 +49,11 @@ it(`Checks that a video isPlaying: false`, () => {
       />
   );
 
-  expect(videoPlayer.state(`isPlaying`)).toEqual(false);
+  window.HTMLMediaElement.prototype.load = () => {};
+  const {_videoRef} = videoPlayer.instance();
+  jest.spyOn(_videoRef.current, `load`);
+  videoPlayer.instance().componentDidUpdate();
+
+  expect(_videoRef.current.load).toHaveBeenCalledTimes(1);
 });
 
