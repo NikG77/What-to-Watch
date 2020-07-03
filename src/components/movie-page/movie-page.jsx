@@ -1,44 +1,15 @@
 import React from "react";
-import {RatingLevel} from "../../const.js";
+// import {RatingLevel} from "../../const.js";
 import {filmType} from "../../types";
 import PropTypes from "prop-types";
+import Tabs from "../tabs/tabs.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 
+const TabsWrapped = withActiveItem(Tabs);
 
 const MoviePage = (props) => {
   const {film} = props;
-  const {title, ratingScore, ratingCount, director, starring, genre, releaseDate, poster, pictureBackground} = film;
-  const starringDetails = starring.join(`, `);
-
-  const getRatingLevel = (score) => {
-    let ratingLevel = ``;
-
-    switch (true) {
-      case score < RatingLevel.NORMAL_MIN && score >= RatingLevel.BAD_MIN:
-        ratingLevel = `Bad`;
-        break;
-      case score < RatingLevel.GOOD_MIN && score >= RatingLevel.NORMAL_MIN:
-        ratingLevel = `Normal`;
-        break;
-      case score < RatingLevel.VERY_GOOD_MIN && score >= RatingLevel.GOOD_MIN:
-        ratingLevel = `Good`;
-        break;
-      case score < RatingLevel.AWESOME && score >= RatingLevel.VERY_GOOD_MIN:
-        ratingLevel = `Very good`;
-        break;
-      case score === RatingLevel.AWESOME:
-        ratingLevel = `Awesome`;
-        break;
-    }
-    return ratingLevel;
-  };
-
-  const ratingLevel = getRatingLevel(ratingScore);
-
-  // const ratingLevel2 = [0, 3, 5, 8, 10].find((i) => i > ratingScore);
-  // function getKeyByValue(object, value) {
-  //   return Object.keys(object).find((key) => object[key] === value);
-  // }
-  // getKeyByValue(RatingLevel, ratingLevel2);
+  const {title, genre, releaseDate, poster, pictureBackground} = film;
 
   return (
     <section className="movie-card movie-card--full">
@@ -99,37 +70,11 @@ const MoviePage = (props) => {
           </div>
 
           <div className="movie-card__desc">
-            <nav className="movie-nav movie-card__nav">
-              <ul className="movie-nav__list">
-                <li className="movie-nav__item movie-nav__item--active">
-                  <a href="#" className="movie-nav__link">Overview</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Details</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Reviews</a>
-                </li>
-              </ul>
-            </nav>
 
-            <div className="movie-rating">
-              <div className="movie-rating__score">{ratingScore}</div>
-              <p className="movie-rating__meta">
-                <span className="movie-rating__level">{ratingLevel}</span>
-                <span className="movie-rating__count">{ratingCount} ratings</span>
-              </p>
-            </div>
+            <TabsWrapped
+              film={film}
+            />
 
-            <div className="movie-card__text">
-              <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&lsquo;s friend and protege.</p>
-
-              <p>Gustave prides himself on providing first-class service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&lsquo;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-
-              <p className="movie-card__director"><strong>Director: {director}</strong></p>
-
-              <p className="movie-card__starring"><strong>Starring: {starringDetails} and other</strong></p>
-            </div>
           </div>
         </div>
       </div>

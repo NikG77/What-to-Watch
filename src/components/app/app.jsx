@@ -34,7 +34,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {film} = this.props;
+    const {films} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -43,7 +43,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev">
             <MoviePage
-              film={film}
+              film={films[0]}
             />
           </Route>
         </Switch>
