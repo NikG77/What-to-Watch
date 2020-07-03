@@ -12,7 +12,6 @@ exports[`Should SmallMovieCard render correctly 1`] = `
   >
     <video
       height="175"
-      muted={true}
       width="280"
     />
   </div>

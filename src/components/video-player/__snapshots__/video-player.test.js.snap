@@ -3,7 +3,6 @@
 exports[`Should VideoPlayer render correctly 1`] = `
 <video
   height="175"
-  muted={true}
   width="280"
 />
 `;
