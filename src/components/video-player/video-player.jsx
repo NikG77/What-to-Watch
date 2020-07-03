@@ -14,6 +14,7 @@ export default class VideoPlayer extends PureComponent {
 
     video.src = src;
     video.poster = poster;
+    video.muted = true;
   }
 
   componentWillUnmount() {
@@ -21,7 +22,6 @@ export default class VideoPlayer extends PureComponent {
 
     video.src = ``;
     video.poster = ``;
-    video.muted = true;
   }
 
   componentDidUpdate() {
