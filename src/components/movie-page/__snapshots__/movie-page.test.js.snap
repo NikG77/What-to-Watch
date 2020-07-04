@@ -261,9 +261,7 @@ Array [
       >
         More like this
       </h2>
-      <div
-        className="catalog__movies-list"
-      />
+      
     </section>
     <footer
       className="page-footer"
