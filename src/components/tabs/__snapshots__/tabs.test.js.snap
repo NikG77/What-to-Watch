@@ -9,7 +9,7 @@ Array [
       className="movie-nav__list"
     >
       <li
-        className="movie-nav__item "
+        className="movie-nav__item movie-nav__item--active"
         onClick={[Function]}
       >
         <a
@@ -31,7 +31,7 @@ Array [
         </a>
       </li>
       <li
-        className="movie-nav__item movie-nav__item--active"
+        className="movie-nav__item "
         onClick={[Function]}
       >
         <a
@@ -44,214 +44,55 @@ Array [
     </ul>
   </nav>,
   <div
-    className="movie-card__reviews movie-card__row"
+    className="movie-rating"
   >
     <div
-      className="movie-card__reviews-col"
+      className="movie-rating__score"
     >
-      <div
-        className="review"
-      >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              Quentin Tarantino
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2014-10-05"
-            >
-              October 5, 2014
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          8
-        </div>
-      </div>
-      <div
-        className="review"
-      >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              Akira Kurosawa
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2014-10-20"
-            >
-              October 20, 2014
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          8
-        </div>
-      </div>
-      <div
-        className="review"
-      >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              Clint Eastwood
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2019-09-05"
-            >
-              September 5, 2019
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          6.7
-        </div>
-      </div>
+      8
     </div>
-    <div
-      className="movie-card__reviews-col"
+    <p
+      className="movie-rating__meta"
     >
-      <div
-        className="review"
+      <span
+        className="movie-rating__level"
       >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            I didn't find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              Alejandro Gonsales Inarritu
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2014-11-05"
-            >
-              November 5, 2014
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          7
-        </div>
-      </div>
-      <div
-        className="review"
+        Very good
+      </span>
+      <span
+        className="movie-rating__count"
       >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              James Cameron
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2018-01-05"
-            >
-              January 5, 2018
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          8
-        </div>
-      </div>
-      <div
-        className="review"
-      >
-        <blockquote
-          className="review__quote"
-        >
-          <p
-            className="review__text"
-          >
-            Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
-          </p>
-          <footer
-            className="review__details"
-          >
-            <cite
-              className="review__author"
-            >
-              Tom Ford
-            </cite>
-            <time
-              className="review__date"
-              dateTime="2020-01-01"
-            >
-              January 1, 2020
-            </time>
-          </footer>
-        </blockquote>
-        <div
-          className="review__rating"
-        >
-          1.9
-        </div>
-      </div>
-    </div>
+        200
+         ratings
+      </span>
+    </p>
+  </div>,
+  <div
+    className="movie-card__text"
+  >
+    <p>
+      In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave‘s friend and protege.
+    </p>
+    <p>
+      Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave‘s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.
+    </p>
+    <p
+      className="movie-card__director"
+    >
+      <strong>
+        Director: 
+        
+      </strong>
+    </p>
+    <p
+      className="movie-card__starring"
+    >
+      <strong>
+        Starring: 
+        , 
+         and other
+      </strong>
+    </p>
   </div>,
 ]
 `;
