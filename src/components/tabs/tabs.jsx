@@ -5,23 +5,19 @@ import Details from "../details/details.jsx";
 import Reviews from "../reviews/reviews.jsx";
 import {filmType} from "../../types";
 import {reviews} from "../../mock/films.js";
+import {TabName} from "../../const.js";
 
-
-const tabs = [`Overview`, `Details`, `Reviews`];
 
 const Tabs = (props) => {
-
   const {film, activeItem, onItemClick: onTabClick} = props;
-
-  const activeTab = activeItem || tabs[2];
-
+  const activeTab = activeItem || TabName.OVERVIEW;
 
   return (
     <React.Fragment>
 
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
-          {tabs.map((tab) => (
+          {Object.values(TabName).map((tab) => (
             <li
               key={tab}
               onClick={(evt) => {
@@ -35,14 +31,14 @@ const Tabs = (props) => {
         </ul>
       </nav>
 
-      {activeTab === tabs[0] && <Overview film={film}/>}
-      {activeTab === tabs[1] && <Details film={film}/>}
-      {activeTab === tabs[2] && <Reviews reviews={reviews}/>}
+      {activeTab === TabName.OVERVIEW && <Overview film={film}/>}
+      {activeTab === TabName.DETAILS && <Details film={film}/>}
+      {activeTab === TabName.REVIEWS && <Reviews reviews={reviews}/>}
 
     </React.Fragment>
   );
-
 };
+
 
 Tabs.propTypes = {
   onItemClick: PropTypes.func.isRequired,
@@ -58,5 +54,4 @@ Tabs.propTypes = {
 };
 
 export default Tabs;
-
 

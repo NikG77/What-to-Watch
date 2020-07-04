@@ -7,3 +7,10 @@ export const RatingLevel = {
 };
 
 export const TIME_DELAY = 1000;
+
+export const TabName = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`,
+};
+
