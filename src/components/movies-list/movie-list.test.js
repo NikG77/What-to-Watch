@@ -14,6 +14,7 @@ const films = [
     releaseDate: 2000,
     pictureBackground: ``,
     previewVideo: ``,
+    duration: 100,
   },
   {title: `Bohemian Rhapsody`,
     src: ``,
@@ -26,6 +27,7 @@ const films = [
     releaseDate: 2000,
     pictureBackground: ``,
     previewVideo: ``,
+    duration: 100,
   }];
 
 const film = {
@@ -40,6 +42,7 @@ const film = {
   releaseDate: 2000,
   pictureBackground: ``,
   previewVideo: ``,
+  duration: 100,
 };
 
 it(`Should MoviesList render correctly`, () => {

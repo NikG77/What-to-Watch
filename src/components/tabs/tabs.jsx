@@ -4,6 +4,7 @@ import Overview from "../overview/overview.jsx";
 import Details from "../details/details.jsx";
 import Reviews from "../reviews/reviews.jsx";
 import {filmType} from "../../types";
+import {reviews} from "../../mock/films.js";
 
 
 const tabs = [`Overview`, `Details`, `Reviews`];
@@ -36,7 +37,7 @@ const Tabs = (props) => {
 
       {activeTab === tabs[0] && <Overview film={film}/>}
       {activeTab === tabs[1] && <Details film={film}/>}
-      {activeTab === tabs[2] && <Reviews />}
+      {activeTab === tabs[2] && <Reviews reviews={reviews}/>}
 
     </React.Fragment>
   );

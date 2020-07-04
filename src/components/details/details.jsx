@@ -1,7 +1,7 @@
 import React from "react";
 import {filmType} from "../../types";
 
-const getTime = (num) => `${Math.trunc(num / 60)}h ${num % 60}m`;
+const getTime = (number) => `${Math.trunc(number / 60)}h ${number % 60}m`;
 
 const Details = (props) => {
   const {film} = props;

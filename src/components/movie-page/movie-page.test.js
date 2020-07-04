@@ -14,6 +14,7 @@ const film = {
   releaseDate: 2000,
   pictureBackground: ``,
   previewVideo: ``,
+  duration: 100,
 };
 
 

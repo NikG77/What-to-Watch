@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import VideoPlayer from "./video-player.jsx";
+import Details from "./details.jsx";
 
 const film = {
   title: `One Flew Over the Cuckoo's Nest`,
@@ -17,19 +17,11 @@ const film = {
   duration: 100,
 };
 
-
-it(`Should VideoPlayer render correctly`, () => {
+it(`Should Details render correctly`, () => {
   const tree = renderer
-    .create(<VideoPlayer
-      src={film.previewVideo}
-      poster={film.src}
-      isPlaying={false}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(<Details
+      film={film}
+    />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
