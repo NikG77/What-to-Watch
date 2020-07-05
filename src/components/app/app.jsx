@@ -26,6 +26,8 @@ class App extends PureComponent {
       return (
         <MoviePage
           film={film}
+          films={films}
+          onSmallMovieCardClick={onSmallMovieCardClick}
         />
       );
     }
@@ -34,7 +36,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {film} = this.props;
+    const {films, onSmallMovieCardClick} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -43,7 +45,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev">
             <MoviePage
-              film={film}
+              film={films[0]}
+              films={films}
+              onSmallMovieCardClick={onSmallMovieCardClick}
             />
           </Route>
         </Switch>
@@ -66,7 +70,6 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   films: state.movies,
   film: state.movie,
-
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -76,6 +79,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSmallMovieCardClick(film) {
     dispatch(ActionCreator.setFilm(film));
+    dispatch(ActionCreator.setGenre(film.genre));
+    dispatch(ActionCreator.getFilms());
   }
 });
 

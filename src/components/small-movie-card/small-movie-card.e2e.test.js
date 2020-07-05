@@ -20,6 +20,7 @@ const film = {
   releaseDate: 2020,
   pictureBackground: ``,
   previewVideo: ``,
+  duration: 100,
 };
 
 const mockEvent = {

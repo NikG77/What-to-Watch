@@ -1,4 +1,4 @@
-import {extend} from "./utils.js";
+import {extend} from "./utils/common.js";
 import {films} from "./mock/films.js";
 
 const ALL_GENRES = `All genres`;

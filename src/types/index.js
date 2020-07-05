@@ -11,6 +11,7 @@ export const filmsType = PropTypes.arrayOf(PropTypes.shape({
   releaseDate: PropTypes.number.isRequired,
   pictureBackground: PropTypes.string.isRequired,
   previewVideo: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
 }));
 
 export const mainFilmType = PropTypes.shape({
@@ -32,6 +33,7 @@ export const filmType = PropTypes.shape({
   releaseDate: PropTypes.number.isRequired,
   pictureBackground: PropTypes.string.isRequired,
   previewVideo: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
 });
 
 

@@ -14,6 +14,7 @@ const film = {
   releaseDate: 2020,
   pictureBackground: ``,
   previewVideo: ``,
+  duration: 100,
 };
 
 it(`Should SmallMovieCard render correctly`, () => {
