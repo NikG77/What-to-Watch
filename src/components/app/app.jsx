@@ -68,7 +68,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  films: state.movies,
+  films: state.genreMovies,
   film: state.movie,
 });
 

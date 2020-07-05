@@ -6,7 +6,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {
   })).toEqual({
     allMovies: films,
-    movies: films,
+    genreMovies: films,
     movie: null,
     genre: `All genres`,
   });
@@ -15,7 +15,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
 it(`Action creator set genre correct`, () => {
   expect(reducer({
     allMovies: films,
-    movies: films,
+    genreMovies: films,
     movie: null,
     genre: `All genres`,
   }, {
@@ -23,7 +23,7 @@ it(`Action creator set genre correct`, () => {
     payload: `Drama`,
   })).toEqual({
     allMovies: films,
-    movies: films,
+    genreMovies: films,
     movie: null,
     genre: `Drama`,
   });
@@ -32,7 +32,7 @@ it(`Action creator set genre correct`, () => {
 it(`Action creator set film correct`, () => {
   expect(reducer({
     allMovies: films,
-    movies: films,
+    genreMovies: films,
     movie: null,
     genre: `Drama`,
   }, {
@@ -40,7 +40,7 @@ it(`Action creator set film correct`, () => {
     payload: films[0],
   })).toEqual({
     allMovies: films,
-    movies: films,
+    genreMovies: films,
     movie: films[0],
     genre: `Drama`,
   });
@@ -49,14 +49,14 @@ it(`Action creator set film correct`, () => {
 it(`Action creator get films correct`, () => {
   expect(reducer({
     allMovies: films,
-    movies: films,
+    genreMovies: films,
     movie: films[1],
     genre: `Comedy`,
   }, {
     type: ActionType.GET_FILM,
   })).toEqual({
     allMovies: films,
-    movies: films,
+    genreMovies: films,
     movie: films[1],
     genre: `Comedy`,
   });

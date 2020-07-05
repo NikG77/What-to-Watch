@@ -4,10 +4,12 @@ import {formatForDateTime, reformatDate} from "../../utils/common.js";
 
 const Reviews = (props) => {
   const {reviews} = props;
+  reviews.splice(5);
 
-  const reviewsCol1 = reviews.filter((review, i) => !(i % 2));
-
-  const reviewsCol2 = reviews.filter((review, i) => i % 2);
+  // const reviewsCol1 = reviews.filter((review, i) => !(i % 2));
+  // const reviewsCol2 = reviews.filter((review, i) => i % 2);
+  const reviewsCol1 = reviews.slice(0, Math.ceil(reviews.length / 2));
+  const reviewsCol2 = reviews.slice(Math.ceil(reviews.length / 2));
 
   return (
     <React.Fragment>

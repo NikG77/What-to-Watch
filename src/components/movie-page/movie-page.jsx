@@ -5,6 +5,7 @@ import Tabs from "../tabs/tabs.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 
+const COUNT_LIKE_FILMS = 4;
 
 const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
@@ -15,7 +16,7 @@ const MoviePage = (props) => {
   const likeFilms = films.filter((movie) => {
     return movie !== film;
   });
-  likeFilms.splice(4);
+  likeFilms.splice(COUNT_LIKE_FILMS);
 
   return (
     <React.Fragment>

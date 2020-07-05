@@ -5,7 +5,7 @@ const ALL_GENRES = `All genres`;
 
 const initialState = {
   allMovies: films,
-  movies: films,
+  genreMovies: films,
   movie: null,
   genre: ALL_GENRES,
 };
@@ -41,12 +41,12 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.GET_FILMS:
-      let filterMovies = initialState.movies;
+      let genreMovies = initialState.allMovies;
       if (state.genre !== initialState.genre) {
-        filterMovies = initialState.movies.filter((movie) => movie.genre === state.genre);
+        genreMovies = genreMovies.filter((movie) => movie.genre === state.genre);
       }
       return extend(state, {
-        movies: filterMovies,
+        genreMovies,
       });
 
     case ActionType.SET_FILM:
