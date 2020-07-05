@@ -9,6 +9,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     genreMovies: films,
     movie: null,
     genre: `All genres`,
+    movieCount: 4,
   });
 });
 
@@ -18,6 +19,7 @@ it(`Action creator set genre correct`, () => {
     genreMovies: films,
     movie: null,
     genre: `All genres`,
+    movieCount: 4,
   }, {
     type: ActionType.SET_GENRE,
     payload: `Drama`,
@@ -26,6 +28,7 @@ it(`Action creator set genre correct`, () => {
     genreMovies: films,
     movie: null,
     genre: `Drama`,
+    movieCount: 4,
   });
 });
 
@@ -35,6 +38,7 @@ it(`Action creator set film correct`, () => {
     genreMovies: films,
     movie: null,
     genre: `Drama`,
+    movieCount: 4,
   }, {
     type: ActionType.SET_FILM,
     payload: films[0],
@@ -43,6 +47,7 @@ it(`Action creator set film correct`, () => {
     genreMovies: films,
     movie: films[0],
     genre: `Drama`,
+    movieCount: 4,
   });
 });
 
@@ -52,6 +57,7 @@ it(`Action creator get films correct`, () => {
     genreMovies: films,
     movie: films[1],
     genre: `Comedy`,
+    movieCount: 4,
   }, {
     type: ActionType.GET_FILM,
   })).toEqual({
@@ -59,6 +65,7 @@ it(`Action creator get films correct`, () => {
     genreMovies: films,
     movie: films[1],
     genre: `Comedy`,
+    movieCount: 4,
   });
 });
 

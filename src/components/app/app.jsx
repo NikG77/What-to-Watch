@@ -75,6 +75,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
     dispatch(ActionCreator.setGenre(genre));
+    dispatch(ActionCreator.resetFilmsCount());
     dispatch(ActionCreator.getFilms());
   },
   onSmallMovieCardClick(film) {

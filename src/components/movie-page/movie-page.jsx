@@ -93,10 +93,7 @@ const MoviePage = (props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           {likeFilms.length > 0 ? <MoviesListWrapped genreFilms={likeFilms} onSmallMovieCardClick={onSmallMovieCardClick} /> : ``}
-
-
         </section>
-
 
         <footer className="page-footer">
           <div className="logo">
