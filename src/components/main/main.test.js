@@ -120,7 +120,7 @@ const mainFilm = {
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(<Main
-      films={films}
+      genreFilms={films}
       mainFilm={mainFilm}
       onSmallMovieCardClick={() => {}}
       onGenreItemClick={() => {}}

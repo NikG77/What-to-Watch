@@ -48,7 +48,7 @@ const film = {
 it(`Should MoviesList render correctly`, () => {
   const tree = renderer
     .create(<MoviesList
-      films={films}
+      genreFilms={films}
       onSmallMovieCardClick={() => {}}
       film={film}
       onItemClick={() => {}}

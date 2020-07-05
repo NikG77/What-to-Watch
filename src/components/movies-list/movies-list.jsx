@@ -6,11 +6,11 @@ import {filmsType, filmType} from "../../types";
 
 const MoviesList = (props) => {
 
-  const {films, onSmallMovieCardClick, activeItem, onItemClick} = props;
+  const {genreFilms, onSmallMovieCardClick, activeItem, onItemClick} = props;
 
   return (
     <div className="catalog__movies-list">
-      {films.map((movie, i) =>
+      {genreFilms.map((movie, i) =>
         <SmallMovieCard
           key={movie + i}
           film={movie}
@@ -25,7 +25,7 @@ const MoviesList = (props) => {
 };
 
 MoviesList.propTypes = {
-  films: filmsType.isRequired,
+  genreFilms: filmsType.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.oneOfType([

@@ -56,7 +56,7 @@ it(`Render App`, () => {
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
             onSmallMovieCardClick={() => {}}
-            films={films}
+            genreFilms={films}
             film={films[0]}
           />
         </Provider>,
