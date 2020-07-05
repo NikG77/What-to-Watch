@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import {filmsType, filmType} from "../../types";
-import ShoeMore from "../shoe-more/shoe-more.jsx";
+import ShowMore from "../show-more/show-more.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
@@ -25,7 +25,7 @@ const MoviesList = (props) => {
         )}
       </div>
 
-      {genreFilms.length > filmCount ? <ShoeMore onShowMoreButtonClick={onShowMoreButtonClick} /> : null}
+      {genreFilms.length > filmCount ? <ShowMore onShowMoreButtonClick={onShowMoreButtonClick} /> : null}
 
     </React.Fragment>
   );

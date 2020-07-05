@@ -9,7 +9,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     genreMovies: films,
     movie: null,
     genre: `All genres`,
-    movieCount: 4,
+    movieCount: 8,
   });
 });
 
@@ -19,7 +19,7 @@ it(`Action creator set genre correct`, () => {
     genreMovies: films,
     movie: null,
     genre: `All genres`,
-    movieCount: 4,
+    movieCount: 8,
   }, {
     type: ActionType.SET_GENRE,
     payload: `Drama`,
@@ -28,7 +28,7 @@ it(`Action creator set genre correct`, () => {
     genreMovies: films,
     movie: null,
     genre: `Drama`,
-    movieCount: 4,
+    movieCount: 8,
   });
 });
 
@@ -38,7 +38,7 @@ it(`Action creator set film correct`, () => {
     genreMovies: films,
     movie: null,
     genre: `Drama`,
-    movieCount: 4,
+    movieCount: 8,
   }, {
     type: ActionType.SET_FILM,
     payload: films[0],
@@ -47,7 +47,7 @@ it(`Action creator set film correct`, () => {
     genreMovies: films,
     movie: films[0],
     genre: `Drama`,
-    movieCount: 4,
+    movieCount: 8,
   });
 });
 
@@ -57,7 +57,7 @@ it(`Action creator get films correct`, () => {
     genreMovies: films,
     movie: films[1],
     genre: `Comedy`,
-    movieCount: 4,
+    movieCount: 8,
   }, {
     type: ActionType.GET_FILM,
   })).toEqual({
@@ -65,7 +65,45 @@ it(`Action creator get films correct`, () => {
     genreMovies: films,
     movie: films[1],
     genre: `Comedy`,
-    movieCount: 4,
+    movieCount: 8,
+  });
+});
+
+it(`Action creator set filmsCount correct`, () => {
+  expect(reducer({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `All genres`,
+    movieCount: 8,
+  }, {
+    type: ActionType.SET_FILMS_COUNT,
+    payload: 8,
+  })).toEqual({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `All genres`,
+    movieCount: 16,
+  });
+});
+
+
+it(`Action creator reset filmsCount correct`, () => {
+  expect(reducer({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `Drama`,
+    movieCount: 24,
+  }, {
+    type: ActionType.RESET_FILMS_COUNT,
+  })).toEqual({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `Drama`,
+    movieCount: 8,
   });
 });
 
@@ -113,6 +151,22 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.getFilms()).toEqual({
       type: ActionType.GET_FILMS,
     });
+  });
+
+
+  it(`Action creator set film count correctly`, () => {
+    expect(ActionCreator.setFilmsCount())
+      .toEqual({
+        type: ActionType.SET_FILMS_COUNT,
+        payload: 8,
+      });
+  });
+
+  it(`Action creator reset film count correctly`, () => {
+    expect(ActionCreator.resetFilmsCount())
+      .toEqual({
+        type: ActionType.RESET_FILMS_COUNT,
+      });
   });
 
 });

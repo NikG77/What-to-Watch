@@ -2,7 +2,7 @@ import {extend} from "./utils/common.js";
 import {films} from "./mock/films.js";
 
 const ALL_GENRES = `All genres`;
-const COUNT_FILM_SHOW = 4;
+const COUNT_FILM_SHOW = 8;
 
 const initialState = {
   allMovies: films,

@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Main} from "./main";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 
 const films = [
   {title: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -118,20 +122,32 @@ const mainFilm = {
 };
 
 it(`Should Main render correctly`, () => {
+
+  const store = mockStore({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `All genres`,
+    movieCount: 4,
+  });
+
   const tree = renderer
-    .create(<Main
-      genreFilms={films}
-      mainFilm={mainFilm}
-      onSmallMovieCardClick={() => {}}
-      onGenreItemClick={() => {}}
-      activeGenre={``}
-      allFilms={[]}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Provider store={store}>
+          <Main
+            genreFilms={films}
+            mainFilm={mainFilm}
+            onSmallMovieCardClick={() => {}}
+            onGenreItemClick={() => {}}
+            activeGenre={``}
+            allFilms={[]}
+          />
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
