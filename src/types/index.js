@@ -20,6 +20,8 @@ export const mainFilmType = PropTypes.shape({
   releaseDate: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired,
   pictureBackground: PropTypes.string.isRequired,
+  previewVideo: PropTypes.string.isRequired,
+
 });
 
 export const filmType = PropTypes.shape({

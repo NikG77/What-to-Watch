@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should ReviewsCol render correctly 1`] = `
+exports[`Should ReviewsCols render correctly 1`] = `
 <div
   className="movie-card__reviews-col"
 >

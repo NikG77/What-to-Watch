@@ -10,6 +10,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     movie: null,
     genre: `All genres`,
     movieCount: 8,
+    isPlayerActive: false,
   });
 });
 
@@ -20,6 +21,7 @@ it(`Action creator set genre correct`, () => {
     movie: null,
     genre: `All genres`,
     movieCount: 8,
+    isPlayerActive: false,
   }, {
     type: ActionType.SET_GENRE,
     payload: `Drama`,
@@ -29,6 +31,7 @@ it(`Action creator set genre correct`, () => {
     movie: null,
     genre: `Drama`,
     movieCount: 8,
+    isPlayerActive: false,
   });
 });
 
@@ -39,6 +42,7 @@ it(`Action creator set film correct`, () => {
     movie: null,
     genre: `Drama`,
     movieCount: 8,
+    isPlayerActive: false,
   }, {
     type: ActionType.SET_FILM,
     payload: films[0],
@@ -48,6 +52,7 @@ it(`Action creator set film correct`, () => {
     movie: films[0],
     genre: `Drama`,
     movieCount: 8,
+    isPlayerActive: false,
   });
 });
 
@@ -58,6 +63,7 @@ it(`Action creator get films correct`, () => {
     movie: films[1],
     genre: `Comedy`,
     movieCount: 8,
+    isPlayerActive: false,
   }, {
     type: ActionType.GET_FILM,
   })).toEqual({
@@ -66,6 +72,7 @@ it(`Action creator get films correct`, () => {
     movie: films[1],
     genre: `Comedy`,
     movieCount: 8,
+    isPlayerActive: false,
   });
 });
 
@@ -76,6 +83,7 @@ it(`Action creator set filmsCount correct`, () => {
     movie: null,
     genre: `All genres`,
     movieCount: 8,
+    isPlayerActive: false,
   }, {
     type: ActionType.SET_FILMS_COUNT,
     payload: 8,
@@ -85,6 +93,7 @@ it(`Action creator set filmsCount correct`, () => {
     movie: null,
     genre: `All genres`,
     movieCount: 16,
+    isPlayerActive: false,
   });
 });
 
@@ -96,6 +105,7 @@ it(`Action creator reset filmsCount correct`, () => {
     movie: null,
     genre: `Drama`,
     movieCount: 24,
+    isPlayerActive: false,
   }, {
     type: ActionType.RESET_FILMS_COUNT,
   })).toEqual({
@@ -104,6 +114,7 @@ it(`Action creator reset filmsCount correct`, () => {
     movie: null,
     genre: `Drama`,
     movieCount: 8,
+    isPlayerActive: false,
   });
 });
 
