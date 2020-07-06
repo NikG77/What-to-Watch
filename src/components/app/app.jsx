@@ -6,28 +6,42 @@ import {filmsType, mainFilmType, filmType} from "../../types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 import PropTypes from "prop-types";
+import Player from "../player/player.jsx";
+// import VideoPlayer from "../video-player/video-player.jsx";
 
 class App extends PureComponent {
 
   _renderApp() {
-    const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film} = this.props;
+    const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive} = this.props;
 
-    if (film === null) {
+    if (film === null && !isPlayerActive) {
       return (
         <Main
           genreFilms={genreFilms}
           mainFilm={mainFilm}
           onSmallMovieCardClick={onSmallMovieCardClick}
           onGenreItemClick={onGenreItemClick}
+          onPlayButtonClick={onPlayButtonClick}
         />
       );
     }
+    if (film === null && isPlayerActive) {
+      return (
+        <Player
+          poster={mainFilm.poster}
+          src={mainFilm.previewVideo}
+          isPlaying={isPlayerActive}
+        />
+      );
+    }
+
     if (film) {
       return (
         <MoviePage
           film={film}
           genreFilms={genreFilms}
           onSmallMovieCardClick={onSmallMovieCardClick}
+          onPlayButtonClick={onPlayButtonClick}
         />
       );
     }
@@ -36,7 +50,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {genreFilms, onSmallMovieCardClick} = this.props;
+    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, mainFilm} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -48,8 +62,17 @@ class App extends PureComponent {
               film={genreFilms[0]}
               genreFilms={genreFilms}
               onSmallMovieCardClick={onSmallMovieCardClick}
+              onPlayButtonClick={onPlayButtonClick}
             />
           </Route>
+          <Route exact path="/play">
+            <Player
+              poster={mainFilm.poster}
+              src={mainFilm.previewVideo}
+              isPlaying={true}
+            />
+          </Route>
+
         </Switch>
       </BrowserRouter>
     );
@@ -65,11 +88,14 @@ App.propTypes = {
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
+  onPlayButtonClick: PropTypes.func.isRequired,
+  isPlayerActive: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   genreFilms: state.genreMovies,
   film: state.movie,
+  isPlayerActive: state.isPlayerActive,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -82,7 +108,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setFilm(film));
     dispatch(ActionCreator.setGenre(film.genre));
     dispatch(ActionCreator.getFilms());
-  }
+  },
+  onPlayButtonClick() {
+    dispatch(ActionCreator.setPlayer());
+  },
+  onExitPlayButtonClick() {
+    dispatch(ActionCreator.resetPlayer());
+  },
 });
 
 

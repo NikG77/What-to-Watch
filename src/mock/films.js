@@ -40,7 +40,9 @@ export const mainFilm = {
   title: `The Grand Budapest Hotel`,
   releaseDate: 2014,
   poster: `img/the-grand-budapest-hotel-poster.jpg`,
-  pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`
+  pictureBackground: `img/bg-the-grand-budapest-hotel.jpg`,
+  previewVideo: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  src: ``,
 };
 
 export const films = [

@@ -12,7 +12,7 @@ const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
-  const {film, genreFilms, onSmallMovieCardClick} = props;
+  const {film, genreFilms, onSmallMovieCardClick, onPlayButtonClick} = props;
   const {title, genre, releaseDate, poster, pictureBackground} = film;
   const likeFilms = genreFilms.filter((movie) => {
     return movie !== film;
@@ -54,7 +54,7 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <MovieCardButtons />
+                <MovieCardButtons onPlayButtonClick={onPlayButtonClick} />
                 <a href="add-review.html" className="btn movie-card__button">Add review</a>
               </div>
             </div>
@@ -111,6 +111,7 @@ MoviePage.propTypes = {
     PropTypes.oneOf([null]).isRequired,
   ]),
   onSmallMovieCardClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 export default MoviePage;

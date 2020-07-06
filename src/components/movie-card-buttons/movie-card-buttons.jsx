@@ -1,11 +1,12 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-const MovieCardButtons = () => {
+const MovieCardButtons = (props) => {
+  const {onPlayButtonClick} = props;
 
   return (
     <React.Fragment>
-      <button className="btn btn--play movie-card__button" type="button">
+      <button onClick={onPlayButtonClick} className="btn btn--play movie-card__button" type="button">
         <svg viewBox="0 0 19 19" width="19" height="19">
           <use xlinkHref="#play-s"></use>
         </svg>
@@ -21,5 +22,9 @@ const MovieCardButtons = () => {
   );
 };
 
+MovieCardButtons.propTypes = {onPlayButtonClick: PropTypes.func.isRequired,
+
+
+};
 
 export default MovieCardButtons;
