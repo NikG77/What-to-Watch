@@ -1,17 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReviewCol from "../reviews-col/reviews-col.jsx";
+import ReviewsCols from "../reviews-col/reviews-col.jsx";
 
 const Reviews = (props) => {
   const {reviews} = props;
 
-  const reviewsCol1 = reviews.slice(0, Math.ceil(reviews.length / 2));
-  const reviewsCol2 = reviews.slice(Math.ceil(reviews.length / 2));
+  const reviewsCols1 = reviews.slice(0, Math.ceil(reviews.length / 2));
+  const reviewsCols2 = reviews.slice(Math.ceil(reviews.length / 2));
 
   return (
     <div className="movie-card__reviews movie-card__row">
-      <ReviewCol reviewsCol={reviewsCol1} />
-      <ReviewCol reviewsCol={reviewsCol2} />
+      {reviewsCols1.length > 0 ? <ReviewsCols reviewsCols={reviewsCols1} /> : ``}
+      {reviewsCols1.length > 0 ? <ReviewsCols reviewsCols={reviewsCols2} /> : ``}
     </div>
   );
 };

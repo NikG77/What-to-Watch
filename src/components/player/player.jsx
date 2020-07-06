@@ -9,12 +9,12 @@ export default class Player extends PureComponent {
   }
 
   componentDidMount() {
-    const {poster, src} = this.props;
+    const {src, isPlaying} = this.props;
     const video = this._videoRef.current;
 
     video.src = src;
-    video.poster = poster;
-    video.autoplay = true;
+
+    video.autoplay = isPlaying;
 
   }
 
@@ -22,7 +22,7 @@ export default class Player extends PureComponent {
     const video = this._videoRef.current;
 
     video.src = ``;
-    video.poster = ``;
+
   }
 
   componentDidUpdate() {
@@ -42,13 +42,13 @@ export default class Player extends PureComponent {
         <div className="player">
           <video ref={this._videoRef} className="player__video" />
 
-          {/* <button type="button" className="player__exit">Exit</button>
+          <button type="button" className="player__exit">Exit</button>
 
           <div className="player__controls">
             <div className="player__controls-row">
               <div className="player__time">
                 <progress className="player__progress" value="30" max="100"></progress>
-                <div className="player__toggler" style="left: 30%;">Toggler</div>
+                <div className="player__toggler" style={{left: `30%`}}>Toggler</div>
               </div>
               <div className="player__time-value">1:30:29</div>
             </div>
@@ -69,7 +69,7 @@ export default class Player extends PureComponent {
                 <span>Full screen</span>
               </button>
             </div>
-          </div> */}
+          </div>
         </div>
       </React.Fragment>
     );
@@ -79,6 +79,5 @@ export default class Player extends PureComponent {
 
 Player.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  poster: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
 };

@@ -28,7 +28,6 @@ class App extends PureComponent {
     if (film === null && isPlayerActive) {
       return (
         <Player
-          poster={mainFilm.poster}
           src={mainFilm.previewVideo}
           isPlaying={isPlayerActive}
         />
@@ -67,7 +66,6 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/play">
             <Player
-              poster={mainFilm.poster}
               src={mainFilm.previewVideo}
               isPlaying={true}
             />
