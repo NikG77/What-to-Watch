@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment, createRef} from "react";
+import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 
 export default class VideoPlayer extends PureComponent {
@@ -37,9 +37,7 @@ export default class VideoPlayer extends PureComponent {
 
   render() {
     return (
-      <Fragment>
-        <video ref={this._videoRef} width="280" height="175" />
-      </Fragment>
+      <video ref={this._videoRef} width="280" height="175" />
     );
   }
 }
