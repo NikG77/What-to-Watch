@@ -11,7 +11,7 @@ const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
 
-  const {films, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, allFilms} = props;
+  const {genreFilms, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, allFilms} = props;
   const {genre, title, releaseDate, poster, pictureBackground} = mainFilm;
 
   return (
@@ -82,13 +82,10 @@ const Main = (props) => {
           />
 
           <MoviesListWrapped
-            films={films}
+            genreFilms={genreFilms}
             onSmallMovieCardClick={onSmallMovieCardClick}
           />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <footer className="page-footer">
@@ -110,7 +107,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  films: filmsType.isRequired,
+  genreFilms: filmsType.isRequired,
   mainFilm: mainFilmType.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,

@@ -5,17 +5,18 @@ import Tabs from "../tabs/tabs.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 
+const COUNT_LIKE_FILMS = 4;
 
 const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
-  const {film, films, onSmallMovieCardClick} = props;
+  const {film, genreFilms, onSmallMovieCardClick} = props;
   const {title, genre, releaseDate, poster, pictureBackground} = film;
-  const likeFilms = films.filter((movie) => {
+  const likeFilms = genreFilms.filter((movie) => {
     return movie !== film;
   });
-  likeFilms.splice(4);
+  likeFilms.splice(COUNT_LIKE_FILMS);
 
   return (
     <React.Fragment>
@@ -91,11 +92,8 @@ const MoviePage = (props) => {
 
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          {likeFilms.length > 0 ? <MoviesListWrapped films={likeFilms} onSmallMovieCardClick={onSmallMovieCardClick} /> : ``}
-
-
+          {likeFilms.length > 0 ? <MoviesListWrapped genreFilms={likeFilms} onSmallMovieCardClick={onSmallMovieCardClick} /> : ``}
         </section>
-
 
         <footer className="page-footer">
           <div className="logo">
@@ -117,7 +115,7 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
-  films: filmsType.isRequired,
+  genreFilms: filmsType.isRequired,
   film: PropTypes.oneOfType([
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,

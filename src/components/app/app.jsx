@@ -10,12 +10,12 @@ import PropTypes from "prop-types";
 class App extends PureComponent {
 
   _renderApp() {
-    const {films, mainFilm, onGenreItemClick, onSmallMovieCardClick, film} = this.props;
+    const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film} = this.props;
 
     if (film === null) {
       return (
         <Main
-          films={films}
+          genreFilms={genreFilms}
           mainFilm={mainFilm}
           onSmallMovieCardClick={onSmallMovieCardClick}
           onGenreItemClick={onGenreItemClick}
@@ -26,7 +26,7 @@ class App extends PureComponent {
       return (
         <MoviePage
           film={film}
-          films={films}
+          genreFilms={genreFilms}
           onSmallMovieCardClick={onSmallMovieCardClick}
         />
       );
@@ -36,7 +36,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {films, onSmallMovieCardClick} = this.props;
+    const {genreFilms, onSmallMovieCardClick} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -45,8 +45,8 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev">
             <MoviePage
-              film={films[0]}
-              films={films}
+              film={genreFilms[0]}
+              genreFilms={genreFilms}
               onSmallMovieCardClick={onSmallMovieCardClick}
             />
           </Route>
@@ -57,7 +57,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  films: filmsType.isRequired,
+  genreFilms: filmsType.isRequired,
   mainFilm: mainFilmType.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
@@ -68,13 +68,14 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  films: state.movies,
+  genreFilms: state.genreMovies,
   film: state.movie,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
     dispatch(ActionCreator.setGenre(genre));
+    dispatch(ActionCreator.resetFilmsCount());
     dispatch(ActionCreator.getFilms());
   },
   onSmallMovieCardClick(film) {

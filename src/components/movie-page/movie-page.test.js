@@ -24,7 +24,7 @@ it(`Should MoviePage render correctly`, () => {
   const tree = renderer
     .create(<MoviePage
       film={films[0]}
-      films={films}
+      genreFilms={films}
       onSmallMovieCardClick={() => {}}
     />)
     .toJSON();

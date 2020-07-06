@@ -46,7 +46,10 @@ const mainFilm = {
 it(`Render App`, () => {
   const store = mockStore({
     allMovies: films,
+    genreMovies: films,
+    movie: null,
     genre: `All genres`,
+    movieCount: 8,
   });
 
   const tree = renderer
@@ -56,8 +59,68 @@ it(`Render App`, () => {
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
             onSmallMovieCardClick={() => {}}
-            films={films}
+            genreFilms={films}
             film={films[0]}
+          />
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
+
+
+  expect(tree).toMatchSnapshot();
+});
+
+
+it(`Render MoviePage in App`, () => {
+  const store = mockStore({
+    allMovies: films,
+    genreMovies: films,
+    movie: films[0],
+    genre: `Drama`,
+    movieCount: 8,
+  });
+
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <App
+            mainFilm={mainFilm}
+            onGenreItemClick={() => {}}
+            onSmallMovieCardClick={() => {}}
+            genreFilms={[films[0]]}
+            film={films[0]}
+          />
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render Main in App`, () => {
+  const store = mockStore({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `Drama`,
+    movieCount: 8,
+  });
+
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <App
+            mainFilm={mainFilm}
+            onGenreItemClick={() => {}}
+            onSmallMovieCardClick={() => {}}
+            genreFilms={films}
+            film={null}
           />
         </Provider>,
         {
