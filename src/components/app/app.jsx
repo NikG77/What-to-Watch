@@ -7,7 +7,10 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 import PropTypes from "prop-types";
 import Player from "../player/player.jsx";
-// import VideoPlayer from "../video-player/video-player.jsx";
+import withVideo from "../../hocs/with-video/with-video.js";
+
+
+const PlayerWrapped = withVideo(Player);
 
 class App extends PureComponent {
 
@@ -27,9 +30,8 @@ class App extends PureComponent {
     }
     if (film === null && isPlayerActive) {
       return (
-        <Player
+        <PlayerWrapped
           src={mainFilm.previewVideo}
-          isPlayerActive={isPlayerActive}
           onExitPlayButtonClick={onExitPlayButtonClick}
         />
       );
@@ -47,9 +49,8 @@ class App extends PureComponent {
     }
     if (film && isPlayerActive) {
       return (
-        <Player
+        <PlayerWrapped
           src={film.previewVideo}
-          isPlayerActive={isPlayerActive}
           onExitPlayButtonClick={onExitPlayButtonClick}
         />
       );
@@ -75,9 +76,8 @@ class App extends PureComponent {
             />
           </Route>
           <Route exact path="/play">
-            <Player
+            <PlayerWrapped
               src={mainFilm.previewVideo}
-              isPlayerActive={true}
               onExitPlayButtonClick={onExitPlayButtonClick}
             />
           </Route>
