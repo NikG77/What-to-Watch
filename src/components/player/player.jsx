@@ -49,6 +49,7 @@ export default class Player extends PureComponent {
     const video = this._videoRef.current;
 
     video.src = src;
+    video.autoplay = true;
 
     video.onplay = () => {
       this.setState({
@@ -75,16 +76,21 @@ export default class Player extends PureComponent {
     video.onplay = null;
   }
 
-  componentDidUpdate() {
+
+  componentDidUpdate(prevProps, prevState) {
     const video = this._videoRef.current;
     const {isPlay} = this.state;
 
-    if (isPlay) {
-      video.play();
-    } else {
-      video.pause();
+    if (this.state.isPlay !== prevState.isPlay) {
+      if (isPlay) {
+        video.play();
+      } else {
+        video.pause();
+      }
     }
+
   }
+
 
   render() {
     const {isPlay, duration, progress} = this.state;
