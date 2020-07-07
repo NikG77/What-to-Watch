@@ -48,3 +48,4 @@ VideoPlayer.propTypes = {
   poster: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
 };
+

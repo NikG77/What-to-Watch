@@ -12,7 +12,7 @@ import Player from "../player/player.jsx";
 class App extends PureComponent {
 
   _renderApp() {
-    const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive} = this.props;
+    const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive, onExitPlayButtonClick} = this.props;
 
     if (film === null && !isPlayerActive) {
       return (
@@ -29,12 +29,13 @@ class App extends PureComponent {
       return (
         <Player
           src={mainFilm.previewVideo}
-          isPlaying={isPlayerActive}
+          isPlayerActive={isPlayerActive}
+          onExitPlayButtonClick={onExitPlayButtonClick}
         />
       );
     }
 
-    if (film) {
+    if (film && !isPlayerActive) {
       return (
         <MoviePage
           film={film}
@@ -44,12 +45,21 @@ class App extends PureComponent {
         />
       );
     }
+    if (film && isPlayerActive) {
+      return (
+        <Player
+          src={film.previewVideo}
+          isPlayerActive={isPlayerActive}
+          onExitPlayButtonClick={onExitPlayButtonClick}
+        />
+      );
+    }
 
     return null;
   }
 
   render() {
-    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, mainFilm} = this.props;
+    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, mainFilm, onExitPlayButtonClick} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -67,7 +77,8 @@ class App extends PureComponent {
           <Route exact path="/play">
             <Player
               src={mainFilm.previewVideo}
-              isPlaying={true}
+              isPlayerActive={true}
+              onExitPlayButtonClick={onExitPlayButtonClick}
             />
           </Route>
 
@@ -87,6 +98,7 @@ App.propTypes = {
     PropTypes.oneOf([null]).isRequired,
   ]),
   onPlayButtonClick: PropTypes.func.isRequired,
+  onExitPlayButtonClick: PropTypes.func.isRequired,
   isPlayerActive: PropTypes.bool.isRequired,
 };
 
