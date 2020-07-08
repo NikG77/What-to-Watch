@@ -7,10 +7,11 @@ import withVideo from "./with-video.js";
 configure({adapter: new Adapter()});
 
 const Player = (props) => {
-  const {onPlayClick} = props;
+  const {onPlayClick, onFullScreenClick} = props;
   return (
     <div {...props}>
       <button onClick={onPlayClick} className="player__play"></button>
+      <button onClick={onFullScreenClick} className="player__full-screen"></button>
     </div>
   );
 };
@@ -95,24 +96,11 @@ it(`Checks that HOC's state.isPlay changing to "true" on two onPlayClick`, () =>
 
 it(`Checks that HOC's callback turn on video (pause)`, () => {
   const wrapper = shallow(<PlayerWrapped
-    isPlay={true}
     src={films[0].previewVideo}
     onExitPlayButtonClick={() => {}}
   />, {disableLifecycleMethods: true});
 
-  // const prevProps = {
-  //   src: films[0].previewVideo,
-  //   onExitPlayButtonClick: () => {},
-  // };
-
-  // const prevState = {
-  //   isPlay: true,
-  //   duration: 33,
-  //   progress: 8,
-  // };
-
-  wrapper.instance()._videoRef.current = {pause() {}};
-  wrapper.instance()._videoRef.current = {play() {}};
+  wrapper.instance()._videoRef.current = {play() {}, pause() {}};
   wrapper.instance().componentDidMount();
 
   window.HTMLMediaElement.prototype.pause = () => {};
@@ -121,12 +109,58 @@ it(`Checks that HOC's callback turn on video (pause)`, () => {
 
   const spy = jest.spyOn(_videoRef.current, `pause`);
 
-
   wrapper.find(Player).dive().find(`.player__play`).simulate(`click`);
+  wrapper.instance().componentDidUpdate(null, {});
 
   expect(wrapper.state().isPlay).toBeFalsy();
   expect(spy).toHaveBeenCalledTimes(1);
+});
 
+it(`Checks that HOC's callback turn on video (play)`, () => {
+  const wrapper = shallow(<PlayerWrapped
+    src={films[0].previewVideo}
+    onExitPlayButtonClick={() => {}}
+  />, {disableLifecycleMethods: true});
+
+  wrapper.instance()._videoRef.current = {play() {}, pause() {}};
+  wrapper.instance().componentDidMount();
+
+  window.HTMLMediaElement.prototype.play = () => {};
+  const {_videoRef} = wrapper.instance();
+  wrapper.instance().componentDidUpdate(null, {});
+
+  const spy = jest.spyOn(_videoRef.current, `play`);
+
+  wrapper.find(Player).dive().find(`.player__play`).simulate(`click`);
+  wrapper.find(Player).dive().find(`.player__play`).simulate(`click`);
+  wrapper.instance().componentDidUpdate(null, {});
+
+  expect(wrapper.state().isPlay).toBeTruthy();
+  expect(spy).toHaveBeenCalledTimes(1);
+});
+
+
+it(`Checks that HOC's callback onFullScreenClick`, () => {
+  const wrapper = shallow(<PlayerWrapped
+    src={films[0].previewVideo}
+    onExitPlayButtonClick={() => {}}
+  />, {disableLifecycleMethods: true});
+
+  wrapper.instance()._videoRef.current = {play() {}, pause() {},
+    requestFullscreen() {}};
+  wrapper.instance().componentDidMount();
+
+  window.HTMLMediaElement.prototype.requestFullscreen = () => {};
+
+  const {_videoRef} = wrapper.instance();
+  wrapper.instance().componentDidUpdate(null, {});
+
+  const spy = jest.spyOn(_videoRef.current, `requestFullscreen`);
+
+  wrapper.find(Player).dive().find(`.player__full-screen`).simulate(`click`);
+  wrapper.instance().componentDidUpdate(null, {});
+
+  expect(spy).toHaveBeenCalledTimes(1);
 });
 
 
