@@ -64,6 +64,7 @@ it(`Render App`, () => {
             genreFilms={films}
             film={films[0]}
             onPlayButtonClick={() => {}}
+            onExitPlayButtonClick={() => {}}
             isPlayerActive={false}
           />
         </Provider>,
@@ -98,6 +99,7 @@ it(`Render MoviePage in App`, () => {
             genreFilms={[films[0]]}
             film={films[0]}
             onPlayButtonClick={() => {}}
+            onExitPlayButtonClick={() => {}}
             isPlayerActive={false}
           />
         </Provider>,
@@ -130,6 +132,7 @@ it(`Render Main in App`, () => {
             genreFilms={films}
             film={null}
             onPlayButtonClick={() => {}}
+            onExitPlayButtonClick={() => {}}
             isPlayerActive={false}
           />
         </Provider>,
