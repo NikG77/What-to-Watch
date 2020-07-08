@@ -1,26 +1,26 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {configure, mount} from "enzyme";
+// import PropTypes from "prop-types";
+import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withVideo from "./with-video.js";
 
 configure({adapter: new Adapter()});
 
-// const Player = () => <div />;
-const Player = (props) => {
-  const {onExitPlayButtonClick, src} = props;
-  return (
-    <div>
-      <video src={src} />
-      <button onClick={onExitPlayButtonClick} />
-    </div>
-  );
-};
+const Player = () => <div />;
+// const Player = (props) => {
+//   const {onExitPlayButtonClick, src} = props;
+//   return (
+//     <div>
+//       <video src={src} />
+//       <button onClick={onExitPlayButtonClick} />
+//     </div>
+//   );
+// };
 
-Player.propTypes = {
-  onExitPlayButtonClick: PropTypes.func.isRequired,
-  src: PropTypes.string.isRequired,
-};
+// Player.propTypes = {
+//   onExitPlayButtonClick: PropTypes.func.isRequired,
+//   src: PropTypes.string.isRequired,
+// };
 
 const PlayerWrapped = withVideo(Player);
 
@@ -52,7 +52,7 @@ const films = [
 
 
 it(`Checks that HOC's callback turn on video (play)`, () => {
-  const wrapper = mount(<PlayerWrapped
+  const wrapper = shallow(<PlayerWrapped
 
     // ref={}
     isPlay={false}
@@ -66,13 +66,13 @@ it(`Checks that HOC's callback turn on video (play)`, () => {
   />);
 
   window.HTMLMediaElement.prototype.play = () => {};
-  const {_videoRef} = wrapper.instance();
+  // const {_videoRef} = wrapper.instance();
 
-  jest.spyOn(_videoRef.current, `play`);
+  // jest.spyOn(_videoRef.current, `play`);
 
-  wrapper.instance().componentDidMount();
+  // wrapper.instance().componentDidMount();
   wrapper.find(`button.player__play`).simulate(`click`);
 
-  expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
+  expect(wrapper.state().isPlay).toBeTruthy();
 
 });

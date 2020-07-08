@@ -74,4 +74,4 @@ Player.propTypes = {
 const PlayerWrap = React.forwardRef((props, ref) => <Player {...props} forwardedRef={ref} />);
 
 export {Player};
-export default React.memo(PlayerWrap);
+export default PlayerWrap;
