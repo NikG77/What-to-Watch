@@ -95,17 +95,32 @@ it(`Checks that HOC's state.isPlay changing to "true" on two onPlayClick`, () =>
 
 it(`Checks that HOC's callback turn on video (pause)`, () => {
   const wrapper = shallow(<PlayerWrapped
+    isPlay={true}
     src={films[0].previewVideo}
     onExitPlayButtonClick={() => {}}
   />, {disableLifecycleMethods: true});
 
+  // const prevProps = {
+  //   src: films[0].previewVideo,
+  //   onExitPlayButtonClick: () => {},
+  // };
+
+  // const prevState = {
+  //   isPlay: true,
+  //   duration: 33,
+  //   progress: 8,
+  // };
+
   wrapper.instance()._videoRef.current = {pause() {}};
+  wrapper.instance()._videoRef.current = {play() {}};
   wrapper.instance().componentDidMount();
 
   window.HTMLMediaElement.prototype.pause = () => {};
   const {_videoRef} = wrapper.instance();
+  wrapper.instance().componentDidUpdate(null, {});
 
   const spy = jest.spyOn(_videoRef.current, `pause`);
+
 
   wrapper.find(Player).dive().find(`.player__play`).simulate(`click`);
 
