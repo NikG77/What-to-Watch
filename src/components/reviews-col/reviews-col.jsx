@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import {formatForDateTime, reformatDate} from "../../utils/common.js";
 
 const ReviewsCols = (props) => {
-  const {reviewsCols} = props;
+  const {reviewsColumn} = props;
 
   return (
     <div className="movie-card__reviews-col">
-      {reviewsCols.map((review) => (
+      {reviewsColumn.map((review) => (
         <div key={review.id} className="review">
           <blockquote className="review__quote">
             <p className="review__text">{review.text}</p>
@@ -25,7 +25,7 @@ const ReviewsCols = (props) => {
 
 
 ReviewsCols.propTypes = {
-  reviewsCols: PropTypes.oneOfType([
+  reviewsColumn: PropTypes.oneOfType([
     PropTypes.oneOf([null]).isRequired,
     PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,

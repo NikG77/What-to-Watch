@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import ReviewsCols from "./reviews-col.jsx";
+import ReviewsColumn from "./reviews-col.jsx";
 
-const reviewsCols = [
+const reviewsColumn = [
   {
     text: `Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
     author: `Quentin Tarantino`,
@@ -12,10 +12,10 @@ const reviewsCols = [
   },
 ];
 
-it(`Should ReviewsCols render correctly`, () => {
+it(`Should ReviewsColumn render correctly`, () => {
   const tree = renderer
-    .create(<ReviewsCols
-      reviewsCols={reviewsCols}
+    .create(<ReviewsColumn
+      reviewsColumn={reviewsColumn}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();

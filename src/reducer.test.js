@@ -56,25 +56,6 @@ it(`Action creator set film correct`, () => {
   });
 });
 
-it(`Action creator get films correct`, () => {
-  expect(reducer({
-    allMovies: films,
-    genreMovies: films,
-    movie: films[1],
-    genre: `Comedy`,
-    movieCount: 8,
-    isPlayerActive: false,
-  }, {
-    type: ActionType.GET_FILM,
-  })).toEqual({
-    allMovies: films,
-    genreMovies: films,
-    movie: films[1],
-    genre: `Comedy`,
-    movieCount: 8,
-    isPlayerActive: false,
-  });
-});
 
 it(`Action creator set filmsCount correct`, () => {
   expect(reducer({
@@ -118,6 +99,48 @@ it(`Action creator reset filmsCount correct`, () => {
   });
 });
 
+it(`Action creator setPlayer true correct`, () => {
+  expect(reducer({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `Drama`,
+    movieCount: 24,
+    isPlayerActive: false,
+  }, {
+    type: ActionType.SET_PLAYER,
+    payload: true,
+  })).toEqual({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `Drama`,
+    movieCount: 24,
+    isPlayerActive: true,
+  });
+});
+
+
+it(`Action creator reset Player correct`, () => {
+  expect(reducer({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `Drama`,
+    movieCount: 8,
+    isPlayerActive: true,
+  }, {
+    type: ActionType.RESET_PLAYER,
+    payload: false,
+  })).toEqual({
+    allMovies: films,
+    genreMovies: films,
+    movie: null,
+    genre: `Drama`,
+    movieCount: 8,
+    isPlayerActive: false,
+  });
+});
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator set genre correctly`, () => {
@@ -177,6 +200,22 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.resetFilmsCount())
       .toEqual({
         type: ActionType.RESET_FILMS_COUNT,
+      });
+  });
+
+  it(`Action creator set player correctly`, () => {
+    expect(ActionCreator.setPlayer())
+      .toEqual({
+        type: ActionType.SET_PLAYER,
+        payload: true,
+      });
+  });
+
+  it(`Action creator reset player correctly`, () => {
+    expect(ActionCreator.resetPlayer())
+      .toEqual({
+        type: ActionType.RESET_PLAYER,
+        payload: false,
       });
   });
 

@@ -46,7 +46,6 @@ const ActionCreator = {
   resetFilmsCount: () => {
     return {
       type: ActionType.RESET_FILMS_COUNT,
-      // payload: null,
     };
   },
   setPlayer: () => ({
