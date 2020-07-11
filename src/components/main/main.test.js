@@ -118,7 +118,9 @@ const mainFilm = {
   title: `One Flew Over the Cuckoo's Nest`,
   releaseDate: 2014,
   poster: ``,
-  pictureBackground: ``
+  pictureBackground: ``,
+  previewVideo: ``,
+
 };
 
 it(`Should Main render correctly`, () => {
@@ -139,6 +141,7 @@ it(`Should Main render correctly`, () => {
             mainFilm={mainFilm}
             onSmallMovieCardClick={() => {}}
             onGenreItemClick={() => {}}
+            onPlayButtonClick={() => {}}
             activeGenre={``}
             allFilms={[]}
           />

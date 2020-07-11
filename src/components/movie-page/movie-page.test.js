@@ -26,6 +26,7 @@ it(`Should MoviePage render correctly`, () => {
       film={films[0]}
       genreFilms={films}
       onSmallMovieCardClick={() => {}}
+      onPlayButtonClick={() => {}}
     />)
     .toJSON();
 

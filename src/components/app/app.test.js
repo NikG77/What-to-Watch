@@ -39,7 +39,8 @@ const mainFilm = {
   title: `One Flew Over the Cuckoo's Nest`,
   releaseDate: 2014,
   poster: ``,
-  pictureBackground: ``
+  pictureBackground: ``,
+  previewVideo: ``,
 };
 
 
@@ -50,6 +51,7 @@ it(`Render App`, () => {
     movie: null,
     genre: `All genres`,
     movieCount: 8,
+    isPlayerActive: false,
   });
 
   const tree = renderer
@@ -61,6 +63,9 @@ it(`Render App`, () => {
             onSmallMovieCardClick={() => {}}
             genreFilms={films}
             film={films[0]}
+            onPlayButtonClick={() => {}}
+            onExitPlayButtonClick={() => {}}
+            isPlayerActive={false}
           />
         </Provider>,
         {
@@ -81,6 +86,7 @@ it(`Render MoviePage in App`, () => {
     movie: films[0],
     genre: `Drama`,
     movieCount: 8,
+    isPlayerActive: false,
   });
 
   const tree = renderer
@@ -92,6 +98,9 @@ it(`Render MoviePage in App`, () => {
             onSmallMovieCardClick={() => {}}
             genreFilms={[films[0]]}
             film={films[0]}
+            onPlayButtonClick={() => {}}
+            onExitPlayButtonClick={() => {}}
+            isPlayerActive={false}
           />
         </Provider>,
         {
@@ -110,6 +119,7 @@ it(`Render Main in App`, () => {
     movie: null,
     genre: `Drama`,
     movieCount: 8,
+    isPlayerActive: false,
   });
 
   const tree = renderer
@@ -121,6 +131,9 @@ it(`Render Main in App`, () => {
             onSmallMovieCardClick={() => {}}
             genreFilms={films}
             film={null}
+            onPlayButtonClick={() => {}}
+            onExitPlayButtonClick={() => {}}
+            isPlayerActive={false}
           />
         </Provider>,
         {

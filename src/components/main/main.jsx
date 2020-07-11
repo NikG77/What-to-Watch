@@ -5,13 +5,14 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import GenresList from "../genres-list/genres-list.jsx";
 import {filmsType, mainFilmType} from "../../types";
 import {connect} from "react-redux";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
 
-  const {genreFilms, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, allFilms} = props;
+  const {genreFilms, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, allFilms, onPlayButtonClick} = props;
   const {genre, title, releaseDate, poster, pictureBackground} = mainFilm;
 
   return (
@@ -53,18 +54,7 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <MovieCardButtons onPlayButtonClick={onPlayButtonClick} />
               </div>
             </div>
           </div>
@@ -113,6 +103,7 @@ Main.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   allFilms: filmsType.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import MoviesList from "../movies-list/movies-list.jsx";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 
 const COUNT_LIKE_FILMS = 4;
 
@@ -11,7 +12,7 @@ const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
-  const {film, genreFilms, onSmallMovieCardClick} = props;
+  const {film, genreFilms, onSmallMovieCardClick, onPlayButtonClick} = props;
   const {title, genre, releaseDate, poster, pictureBackground} = film;
   const likeFilms = genreFilms.filter((movie) => {
     return movie !== film;
@@ -53,18 +54,7 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <MovieCardButtons onPlayButtonClick={onPlayButtonClick} />
                 <a href="add-review.html" className="btn movie-card__button">Add review</a>
               </div>
             </div>
@@ -121,6 +111,7 @@ MoviePage.propTypes = {
     PropTypes.oneOf([null]).isRequired,
   ]),
   onSmallMovieCardClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 export default MoviePage;
