@@ -2,7 +2,7 @@ import Main from "../main/main.jsx";
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
-import {filmsType, mainFilmType, filmType} from "../../types";
+import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 import PropTypes from "prop-types";
@@ -31,7 +31,7 @@ class App extends PureComponent {
     if (film === null && isPlayerActive) {
       return (
         <PlayerWrapped
-          src={mainFilm.previewVideo}
+          src={mainFilm.videoLink}
           onExitPlayButtonClick={onExitPlayButtonClick}
         />
       );
@@ -50,7 +50,7 @@ class App extends PureComponent {
     if (film && isPlayerActive) {
       return (
         <PlayerWrapped
-          src={film.previewVideo}
+          src={film.videoLink}
           onExitPlayButtonClick={onExitPlayButtonClick}
         />
       );
@@ -90,7 +90,7 @@ class App extends PureComponent {
 
 App.propTypes = {
   genreFilms: filmsType.isRequired,
-  mainFilm: mainFilmType.isRequired,
+  mainFilm: filmType.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   film: PropTypes.oneOfType([

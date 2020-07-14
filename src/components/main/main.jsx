@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import GenresList from "../genres-list/genres-list.jsx";
-import {filmsType, mainFilmType} from "../../types";
+import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 
@@ -98,7 +98,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   genreFilms: filmsType.isRequired,
-  mainFilm: mainFilmType.isRequired,
+  mainFilm: filmType.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
