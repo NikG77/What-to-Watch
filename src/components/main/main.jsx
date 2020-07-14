@@ -6,6 +6,8 @@ import GenresList from "../genres-list/genres-list.jsx";
 import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
+import {getAllMovies} from "../../reducer/data/selectors.js";
+import {getGenre} from "../../reducer/watch/selectors.js";
 
 
 const MoviesListWrapped = withActiveItem(MoviesList);
@@ -108,8 +110,8 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    activeGenre: state.genre,
-    allFilms: state.allMovies,
+    activeGenre: getGenre(state),
+    allFilms: getAllMovies(state),
   }
 );
 
