@@ -1,22 +1,43 @@
 import {extend} from "../../utils/common.js";
-// import {films} from "./mock/films.js";
 
-// const ALL_GENRES = `All genres`;
-// const COUNT_FILM_SHOW = 8;
 
 const initialState = {
   allMovies: [],
+  promoMovie: [],
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
+  LOAD_PROMO_FILM: `LOAD_PROMO_FILM`
 };
 
 const ActionCreator = {
-  loadFilms: () => {
+  loadFilms: (films) => {
     return {
       type: ActionType.LOAD_FILMS,
+      payload: films,
     };
+  },
+  loadPromoFilm: (film) => {
+    return {
+      type: ActionType.LOAD_PROMO_FILM,
+      payload: film,
+    };
+  },
+};
+
+const Operation = {
+  loadFilms: () => (dispatch, getState, api) => {
+    return api.get(`/films`)
+      .then((response) => {
+        dispatch(ActionCreator.loadQuestions(response.data));
+      });
+  },
+  loadPromoFilm: () => (dispatch, getState, api) => {
+    return api.get(`/films`)
+      .then((response) => {
+        dispatch(ActionCreator.loadPromoFilm(response.data));
+      });
   },
 };
 
@@ -27,11 +48,15 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         allMovies: action.payload,
       });
+    case ActionType.LOAD_PROMO_FILM:
+      return extend(state, {
+        allMovies: action.payload,
+      });
   }
 
   return state;
 };
 
 
-export {reducer, ActionType, ActionCreator};
+export {reducer, Operation, ActionType, ActionCreator};
 

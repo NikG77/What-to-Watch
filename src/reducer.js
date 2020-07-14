@@ -1,11 +1,13 @@
 import {extend} from "./utils/common.js";
 import {films} from "./mock/films.js";
+import {mainFilm} from "./mock/films.js";
 
 const ALL_GENRES = `All genres`;
 const COUNT_FILM_SHOW = 8;
 
 const initialState = {
   allMovies: films,
+  promoMovie: mainFilm,
   genreMovies: films,
   movie: null,
   genre: ALL_GENRES,
