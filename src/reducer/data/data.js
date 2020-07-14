@@ -1,4 +1,5 @@
 import {extend} from "../../utils/common.js";
+import {adapterFilms, adapterFilm} from "../../adapters/films.js";
 
 
 const initialState = {
@@ -29,14 +30,16 @@ const ActionCreator = {
 const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
-      .then((response) => {
-        dispatch(ActionCreator.loadQuestions(response.data));
+      .then(({data}) => {
+        const films = adapterFilms(data);
+        dispatch(ActionCreator.loadFilms(films));
       });
   },
   loadPromoFilm: () => (dispatch, getState, api) => {
-    return api.get(`/films`)
-      .then((response) => {
-        dispatch(ActionCreator.loadPromoFilm(response.data));
+    return api.get(`/films/promo`)
+      .then(({data}) => {
+        const promoFilm = adapterFilm(data);
+        dispatch(ActionCreator.loadPromoFilm(promoFilm));
       });
   },
 };
