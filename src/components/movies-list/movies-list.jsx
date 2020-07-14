@@ -5,6 +5,7 @@ import {filmsType, filmType} from "../../types";
 import ShowMore from "../show-more/show-more.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
+import {getMovieCount} from "../../reducer/watch/selectors.js";
 
 
 const MoviesList = (props) => {
@@ -45,7 +46,7 @@ MoviesList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filmCount: state.movieCount,
+  filmCount: getMovieCount(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
