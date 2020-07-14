@@ -81,8 +81,6 @@ it(`Checks that HOC's callback turn on video (pause)`, () => {
   wrapper.instance().componentDidMount();
 
   const {_videoRef} = wrapper.instance();
-  wrapper.instance().componentDidUpdate(null, {});
-
   const spy = jest.spyOn(_videoRef.current, `pause`);
 
   wrapper.find(Player).dive().props().onPlayClick();
@@ -168,30 +166,4 @@ it(`Checks that HOC's state.duration change `, () => {
   wrapper.props().setDuration();
   expect(wrapper.state().duration).toEqual(11);
 });
-
-
-// it(`Checks that HOC's state.progress change `, () => {
-//   const wrapper = shallow(<PlayerWrapped
-//     src={films[0].previewVideo}
-//     onExitPlayButtonClick={() => {}}
-//   />, {disableLifecycleMethods: true});
-
-//   wrapper.instance()._videoRef.current = {duration: 10, currentTime: 2,
-//     timeupdate() {}};
-
-//   wrapper.instance().componentDidMount();
-
-//   expect(wrapper.state().progress).toEqual(0);
-//   expect(wrapper.state().duration).toEqual(0);
-
-//   wrapper.props().setDuration();
-//   const {_videoRef} = wrapper.instance();
-//   const spy = jest.spyOn(_videoRef.current, `timeupdate`);
-
-//   expect(wrapper.state().duration).toEqual(10);
-
-//   expect(spy).toHaveBeenCalledTimes(1);
-//   expect(wrapper.state().progress).toEqual(20);
-
-// });
 
