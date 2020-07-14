@@ -7,6 +7,6 @@ import NameSpace from "./name-space.js";
 
 export default combineReducers({
   [NameSpace.DATA]: data,
-  [NameSpace.GAME]: watch,
+  [NameSpace.WATCH]: watch,
   [NameSpace.USER]: user,
 });

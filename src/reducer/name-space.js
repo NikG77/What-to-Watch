@@ -1,6 +1,6 @@
 const NameSpace = {
   DATA: `DATA`,
-  WHATCH: `WHATCH`,
+  WATCH: `WATCH`,
   USER: `USER`,
 };
 

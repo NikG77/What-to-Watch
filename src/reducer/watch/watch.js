@@ -1,5 +1,5 @@
 import {extend} from "../../utils/common.js";
-// import {films} from "./mock/films.js";
+
 
 const ALL_GENRES = `All genres`;
 const COUNT_FILM_SHOW = 8;
@@ -13,6 +13,7 @@ const initialState = {
 };
 
 const ActionType = {
+  SET_GENRE_MOVIES: `SET_GENRE_MOVIES`,
   SET_GENRE: `SET_GENRE`,
   SET_FILM: `SET_FILM`,
   GET_FILMS: `GET_FILMS`,
@@ -23,6 +24,11 @@ const ActionType = {
 };
 
 const ActionCreator = {
+  setGenreMovies: (films) => ({
+    type: ActionType.SET_GENRE_MOVIES,
+    payload: films,
+  }),
+
   setGenre: (genre) => ({
     type: ActionType.SET_GENRE,
     payload: genre,
@@ -61,6 +67,11 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.SET_GENRE_MOVIES:
+      return extend(state, {
+        genreMovies: action.payload,
+      });
+
     case ActionType.SET_GENRE:
       return extend(state, {
         genre: action.payload,

@@ -4,10 +4,15 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/watch/watch.js";
+// import {AuthorizationStatus} from "../../reducer/user/user.js";
 import PropTypes from "prop-types";
 import Player from "../player/player.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
+import {getGenreMovies, getMovie, getIsPlayerActive} from "../../reducer/watch/selectors.js";
+import {getPromoMovie} from "../../reducer/data/selectors.js";
+// import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+// import {Operation as UserOperation} from "../../reducer/user/user.js";
 
 
 const PlayerWrapped = withVideo(Player);
@@ -15,6 +20,8 @@ const PlayerWrapped = withVideo(Player);
 class App extends PureComponent {
 
   _renderApp() {
+
+    // const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive, onExitPlayButtonClick, authorizationStatus, login} = this.props;
     const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive, onExitPlayButtonClick} = this.props;
 
     if (film === null && !isPlayerActive) {
@@ -89,6 +96,8 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  // authorizationStatus: PropTypes.string.isRequired,
+  // login: PropTypes.func.isRequired,
   genreFilms: filmsType.isRequired,
   mainFilm: filmType.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
@@ -103,13 +112,17 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  genreFilms: state.genreMovies,
-  film: state.movie,
-  isPlayerActive: state.isPlayerActive,
-  mainFilm: state.promoMovie,
+  genreFilms: getGenreMovies(state),
+  film: getMovie(state),
+  isPlayerActive: getIsPlayerActive(state),
+  mainFilm: getPromoMovie(state),
+  // authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  // login(authData) {
+  //   dispatch(UserOperation.login(authData));
+  // },
   onGenreItemClick(genre) {
     dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetFilmsCount());

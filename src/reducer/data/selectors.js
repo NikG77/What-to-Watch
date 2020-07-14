@@ -1,7 +1,7 @@
 import NameSpace from "../name-space.js";
 
 
-const NAME_SPACE = NameSpace.WHATCH;
+const NAME_SPACE = NameSpace.WATCH;
 
 
 export const getAllMovies = (state) => {
@@ -9,6 +9,6 @@ export const getAllMovies = (state) => {
 };
 
 export const getPromoMovie = (state) => {
-  return state[NAME_SPACE].getPromoMovie;
+  return state[NAME_SPACE].promoMovie;
 };
 
