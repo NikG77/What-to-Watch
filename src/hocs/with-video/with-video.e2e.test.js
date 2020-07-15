@@ -21,6 +21,12 @@ const films = [
     releaseDate: 2000,
     pictureBackground: ``,
     previewVideo: ``,
+    duration: 100,
+    backgroundColor: ``,
+    videoLink: ``,
+    description: ` `,
+    isFavorite: false,
+    id: 1,
   },
   {title: ``,
     src: ``,
@@ -33,6 +39,12 @@ const films = [
     releaseDate: 2000,
     pictureBackground: ``,
     previewVideo: ``,
+    duration: 100,
+    backgroundColor: ``,
+    videoLink: ``,
+    description: ` `,
+    isFavorite: false,
+    id: 1,
   }];
 
 

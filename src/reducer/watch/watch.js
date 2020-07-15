@@ -1,4 +1,5 @@
 import {extend} from "../../utils/common.js";
+// import {ActionCreator as ActionCreatorData} from "../data/data.js";
 
 
 const ALL_GENRES = `All genres`;
@@ -78,12 +79,12 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.GET_FILMS:
-      let genreMovies = initialState.allMovies;
-      if (state.genre !== initialState.genre) {
-        genreMovies = genreMovies.filter((movie) => movie.genre === state.genre);
-      }
+      // let genreMovies = initialState.allMovies;
+      // if (state.genre !== initialState.genre) {
+      //   genreMovies = genreMovies.filter((movie) => movie.genre === state.genre);
+      // }
       return extend(state, {
-        genreMovies,
+        genreMovies: action.payload,
       });
 
     case ActionType.SET_FILM:

@@ -1,21 +1,23 @@
 import {extend} from "../../utils/common.js";
 import {adapterFilms, adapterFilm} from "../../adapters/films.js";
+import {ActionCreator as ActionCreatorWatch} from "../watch/watch.js";
 
 
 const initialState = {
   allMovies: [],
-  promoMovie: [],
+  promoMovie: {},
 };
 
 const ActionType = {
-  LOAD_FILMS: `LOAD_FILMS`,
-  LOAD_PROMO_FILM: `LOAD_PROMO_FILM`
+  LOAD_ALL_FILMS: `LOAD_ALL_FILMS`,
+  LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
+  GET_ALL_FILMS: `GET_ALL_FILMS`,
 };
 
 const ActionCreator = {
-  loadFilms: (films) => {
+  loadAllFilms: (films) => {
     return {
-      type: ActionType.LOAD_FILMS,
+      type: ActionType.LOAD_ALL_FILMS,
       payload: films,
     };
   },
@@ -25,14 +27,20 @@ const ActionCreator = {
       payload: film,
     };
   },
+  getAllFilms: () => {
+    return {
+      type: ActionType.GET_ALL_FILMS,
+    };
+  },
 };
 
 const Operation = {
-  loadFilms: () => (dispatch, getState, api) => {
+  loadAllFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then(({data}) => {
         const films = adapterFilms(data);
-        dispatch(ActionCreator.loadFilms(films));
+        dispatch(ActionCreator.loadAllFilms(films));
+        dispatch(ActionCreatorWatch.setGenreMovies(films));
       });
   },
   loadPromoFilm: () => (dispatch, getState, api) => {
@@ -47,11 +55,15 @@ const Operation = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_FILMS:
+    case ActionType.LOAD_ALL_FILMS:
       return extend(state, {
         allMovies: action.payload,
       });
     case ActionType.LOAD_PROMO_FILM:
+      return extend(state, {
+        promoMovie: action.payload,
+      });
+    case ActionType.GET_ALL_FILMS:
       return extend(state, {
         allMovies: action.payload,
       });

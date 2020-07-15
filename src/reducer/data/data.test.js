@@ -83,19 +83,18 @@ const films = [{
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     allMovies: [],
-    promoMovie: [],
+    promoMovie: {},
   });
 });
 
 it(`Reducer should update all movies by load `, () => {
   expect(reducer({
     allMovies: [],
-    promoMovie: [],
   }, {
-    type: ActionType.LOAD_FILMS,
+    type: ActionType.LOAD_ALL_FILMS,
     payload: films,
   })).toEqual({
-    films,
+    allMovies: films,
   });
 });
 
@@ -103,10 +102,10 @@ it(`Reducer should update all movies by load `, () => {
 // Доптсать тесты на загрузку промо фильмв
 
 describe(`Operation work correctly`, () => {
-  it(`Should make a correct API call to /questions`, function () {
+  it(`Should make a correct API call to /films`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const filmsLoader = Operation.loadFilms();
+    const filmsLoader = Operation.loadAllFilms();
 
     apiMock
       .onGet(`/films`)
@@ -116,13 +115,13 @@ describe(`Operation work correctly`, () => {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_FilMS,
+          type: ActionType.LOAD_ALL_FilMS,
           payload: [{fake: true}],
         });
       });
   });
 
   // TODO
-  // Доптсать тесты на загрузку промо фильмв
+  // Дописать тесты на загрузку промо фильмв
 
 });

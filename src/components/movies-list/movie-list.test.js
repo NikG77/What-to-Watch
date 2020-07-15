@@ -15,6 +15,11 @@ const films = [
     pictureBackground: ``,
     previewVideo: ``,
     duration: 100,
+    backgroundColor: ``,
+    videoLink: ``,
+    description: ` `,
+    isFavorite: false,
+    id: 1,
   },
   {title: `Bohemian Rhapsody`,
     src: ``,
@@ -28,6 +33,11 @@ const films = [
     pictureBackground: ``,
     previewVideo: ``,
     duration: 100,
+    backgroundColor: ``,
+    videoLink: ``,
+    description: ` `,
+    isFavorite: false,
+    id: 11,
   }];
 
 it(`Should MoviesList render correctly`, () => {

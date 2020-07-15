@@ -19,6 +19,11 @@ const films = [
     pictureBackground: ``,
     previewVideo: ``,
     duration: 100,
+    backgroundColor: ``,
+    videoLink: ``,
+    description: ` `,
+    isFavorite: false,
+    id: 0,
   },
   {title: `Bohemian Rhapsody`,
     src: `img/bohemian-rhapsody.jpg`,
@@ -32,6 +37,11 @@ const films = [
     pictureBackground: ``,
     previewVideo: ``,
     duration: 100,
+    backgroundColor: ``,
+    videoLink: ``,
+    description: ` `,
+    isFavorite: false,
+    id: 1,
   }];
 
 const mainFilm = {
@@ -41,6 +51,17 @@ const mainFilm = {
   poster: ``,
   pictureBackground: ``,
   previewVideo: ``,
+  src: ``,
+  ratingScore: 5,
+  ratingCount: 100,
+  director: ` `,
+  starring: [``, ``],
+  duration: 100,
+  backgroundColor: ``,
+  videoLink: ``,
+  description: ` `,
+  isFavorite: false,
+  id: 1,
 };
 
 

@@ -20,6 +20,12 @@ const films = [
     releaseDate: 2000,
     pictureBackground: ``,
     previewVideo: ``,
+    duration: 100,
+    backgroundColor: ``,
+    videoLink: ``,
+    description: ` `,
+    isFavorite: false,
+    id: 1,
   },
   {title: `Bohemian Rhapsody`,
     src: `img/bohemian-rhapsody.jpg`,
@@ -32,6 +38,12 @@ const films = [
     releaseDate: 2000,
     pictureBackground: ``,
     previewVideo: ``,
+    duration: 100,
+    backgroundColor: ``,
+    videoLink: ``,
+    description: ` `,
+    isFavorite: false,
+    id: 1,
   }];
 
 

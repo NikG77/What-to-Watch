@@ -20,6 +20,11 @@ const film = {
   releaseDate: 2020,
   pictureBackground: ``,
   previewVideo: ``,
+  backgroundColor: ``,
+  videoLink: ``,
+  description: ` `,
+  isFavorite: false,
+  id: 1,
 };
 
 
