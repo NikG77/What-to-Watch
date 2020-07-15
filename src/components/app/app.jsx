@@ -67,7 +67,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, mainFilm, onExitPlayButtonClick} = this.props;
+    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -82,12 +82,12 @@ class App extends PureComponent {
               onPlayButtonClick={onPlayButtonClick}
             />
           </Route>
-          <Route exact path="/play">
+          {/* <Route exact path="/play">
             <PlayerWrapped
               src={mainFilm.previewVideo}
               onExitPlayButtonClick={onExitPlayButtonClick}
             />
-          </Route>
+          </Route> */}
 
         </Switch>
       </BrowserRouter>
@@ -99,7 +99,10 @@ App.propTypes = {
   // authorizationStatus: PropTypes.string.isRequired,
   // login: PropTypes.func.isRequired,
   genreFilms: filmsType.isRequired,
-  mainFilm: filmType.isRequired,
+  mainFilm: PropTypes.oneOfType([
+    filmType.isRequired,
+    PropTypes.object.isRequired,
+  ]),
   onGenreItemClick: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   film: PropTypes.oneOfType([

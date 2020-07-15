@@ -1,6 +1,6 @@
 import {extend} from "../../utils/common.js";
 import {adapterFilms, adapterFilm} from "../../adapters/films.js";
-import {ActionCreator as ActionCreatorWatch} from "../watch/watch.js";
+// import {ActionCreator as ActionCreatorWatch} from "../watch/watch.js";
 
 
 const initialState = {
@@ -35,7 +35,7 @@ const Operation = {
       .then(({data}) => {
         const films = adapterFilms(data);
         dispatch(ActionCreator.loadAllFilms(films));
-        dispatch(ActionCreatorWatch.setGenreMovies(films));
+        // dispatch(ActionCreatorWatch.setGenreMovies(films));
       });
   },
   loadPromoFilm: () => (dispatch, getState, api) => {

@@ -1,6 +1,7 @@
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+  ERROR: `ERROR`,
 };
 
 const initialState = {
@@ -38,6 +39,7 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
+        dispatch(ActionCreator.authorizationError(err));
         throw err;
       });
   },

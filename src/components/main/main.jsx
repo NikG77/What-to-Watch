@@ -100,7 +100,10 @@ const Main = (props) => {
 
 Main.propTypes = {
   genreFilms: filmsType.isRequired,
-  mainFilm: filmType.isRequired,
+  mainFilm: PropTypes.oneOfType([
+    filmType.isRequired,
+    PropTypes.object.isRequired,
+  ]),
   onSmallMovieCardClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
