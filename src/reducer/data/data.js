@@ -27,11 +27,6 @@ const ActionCreator = {
       payload: film,
     };
   },
-  getAllFilms: () => {
-    return {
-      type: ActionType.GET_ALL_FILMS,
-    };
-  },
 };
 
 const Operation = {
@@ -63,10 +58,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         promoMovie: action.payload,
       });
-    case ActionType.GET_ALL_FILMS:
-      return extend(state, {
-        allMovies: action.payload,
-      });
+
   }
 
   return state;

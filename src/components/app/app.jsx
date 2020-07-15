@@ -126,12 +126,12 @@ const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
     dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetFilmsCount());
-    dispatch(ActionCreator.getFilms());
+    // dispatch(ActionCreator.getFilms());
   },
   onSmallMovieCardClick(film) {
     dispatch(ActionCreator.setFilm(film));
     dispatch(ActionCreator.setGenre(film.genre));
-    dispatch(ActionCreator.getFilms());
+    // dispatch(ActionCreator.getFilms());
   },
   onPlayButtonClick() {
     dispatch(ActionCreator.setPlayer());

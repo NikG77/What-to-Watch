@@ -1,7 +1,6 @@
 import {extend} from "../../utils/common.js";
 // import {ActionCreator as ActionCreatorData} from "../data/data.js";
 
-
 const ALL_GENRES = `All genres`;
 const COUNT_FILM_SHOW = 8;
 
@@ -17,7 +16,7 @@ const ActionType = {
   SET_GENRE_MOVIES: `SET_GENRE_MOVIES`,
   SET_GENRE: `SET_GENRE`,
   SET_FILM: `SET_FILM`,
-  GET_FILMS: `GET_FILMS`,
+  // GET_FILMS: `GET_FILMS`,
   SET_FILMS_COUNT: `SET_FILMS_COUNT`,
   RESET_FILMS_COUNT: `RESET_FILMS_COUNT`,
   SET_PLAYER: `SET_PLAYER`,
@@ -35,9 +34,9 @@ const ActionCreator = {
     payload: genre,
   }),
 
-  getFilms: () => ({
-    type: ActionType.GET_FILMS,
-  }),
+  // getFilms: () => ({
+  //   type: ActionType.GET_FILMS,
+  // }),
 
   setFilm: (film) => ({
     type: ActionType.SET_FILM,
@@ -78,14 +77,14 @@ const reducer = (state = initialState, action) => {
         genre: action.payload,
       });
 
-    case ActionType.GET_FILMS:
-      // let genreMovies = initialState.allMovies;
-      // if (state.genre !== initialState.genre) {
-      //   genreMovies = genreMovies.filter((movie) => movie.genre === state.genre);
-      // }
-      return extend(state, {
-        genreMovies: action.payload,
-      });
+      // case ActionType.GET_FILMS:
+      //   // let genreMovies = getAllMovies(state);
+      //   // if (state.genre !== initialState.genre) {
+      //   //   genreMovies = genreMovies.filter((movie) => movie.genre === state.genre);
+      //   // }
+      //   return extend(state, {
+      //     genreMovies: action.payload,
+      //   });
 
     case ActionType.SET_FILM:
       return extend(state, {
