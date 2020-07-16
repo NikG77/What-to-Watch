@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
@@ -64,16 +65,34 @@ const mainFilm = {
   id: 1,
 };
 
+// const store = mockStore({
+//   allMovies: films,
+//
+//   movie: null,
+//   genre: `All genres`,
+//   movieCount: 8,
+//   isPlayerActive: false,
+// });
+
 
 it(`Render App`, () => {
   const store = mockStore({
-    allMovies: films,
-    genreMovies: films,
-    movie: null,
-    genre: `All genres`,
-    movieCount: 8,
-    isPlayerActive: false,
+    [NameSpace.WATCH]: {
+
+      movie: null,
+      genre: `All genres`,
+      movieCount: 8,
+      isPlayerActive: false,
+    }
   });
+
+  // allMovies: films,
+
+  // movie: null,
+  // genre: `All genres`,
+  // movieCount: 8,
+  // isPlayerActive: false,
+
 
   const tree = renderer
     .create(
@@ -101,14 +120,24 @@ it(`Render App`, () => {
 
 
 it(`Render MoviePage in App`, () => {
+
   const store = mockStore({
-    allMovies: films,
-    genreMovies: films,
-    movie: films[0],
-    genre: `Drama`,
-    movieCount: 8,
-    isPlayerActive: false,
+    [NameSpace.WATCH]: {
+
+      movie: null,
+      genre: `All genres`,
+      movieCount: 8,
+      isPlayerActive: false,
+    }
   });
+  // const store = mockStore({
+  //   allMovies: films,
+  //
+  //   movie: films[0],
+  //   genre: `Drama`,
+  //   movieCount: 8,
+  //   isPlayerActive: false,
+  // });
 
   const tree = renderer
     .create(
@@ -135,13 +164,26 @@ it(`Render MoviePage in App`, () => {
 
 it(`Render Main in App`, () => {
   const store = mockStore({
-    allMovies: films,
-    genreMovies: films,
-    movie: null,
-    genre: `Drama`,
-    movieCount: 8,
-    isPlayerActive: false,
+    [NameSpace.WATCH]: {
+      movie: null,
+      genre: `All genres`,
+      movieCount: 8,
+      isPlayerActive: false,
+    },
+    [NameSpace.DATA]: {
+      allMovies: films,
+    }
+
   });
+
+  // const store = mockStore({
+  //   allMovies: films,
+  //
+  //   movie: null,
+  //   genre: `Drama`,
+  //   movieCount: 8,
+  //   isPlayerActive: false,
+  // });
 
   const tree = renderer
     .create(

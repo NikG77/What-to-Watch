@@ -6,17 +6,16 @@ import GenresList from "../genres-list/genres-list.jsx";
 import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
-import {getAllMovies} from "../../reducer/data/selectors.js";
-import {getGenre} from "../../reducer/watch/selectors.js";
+// import {getAllMovies} from "../../reducer/data/selectors.js";
+import {getGenre, getGenresList} from "../../reducer/watch/selectors.js";
 
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
 
-  const {genreFilms, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, allFilms, onPlayButtonClick} = props;
+  const {genreFilms, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, onPlayButtonClick, genresList} = props;
   const {genre, title, releaseDate, poster, pictureBackground} = mainFilm;
-
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -68,7 +67,7 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList
-            allFilms={allFilms}
+            genresList={genresList }
             activeGenre={activeGenre}
             onGenreItemClick={onGenreItemClick}
           />
@@ -99,6 +98,10 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  genresList: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string).isRequired,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
   genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
     filmType.isRequired,
@@ -107,14 +110,15 @@ Main.propTypes = {
   onSmallMovieCardClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
-  allFilms: filmsType.isRequired,
+  // allFilms: filmsType.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (
   {
     activeGenre: getGenre(state),
-    allFilms: getAllMovies(state),
+    // allFilms: getAllMovies(state),
+    genresList: getGenresList(state),
   }
 );
 

@@ -5,7 +5,6 @@ const ALL_GENRES = `All genres`;
 const COUNT_FILM_SHOW = 8;
 
 const initialState = {
-  genreMovies: [],
   movie: null,
   genre: ALL_GENRES,
   movieCount: COUNT_FILM_SHOW,
@@ -13,10 +12,8 @@ const initialState = {
 };
 
 const ActionType = {
-  SET_GENRE_MOVIES: `SET_GENRE_MOVIES`,
   SET_GENRE: `SET_GENRE`,
   SET_FILM: `SET_FILM`,
-  // GET_FILMS: `GET_FILMS`,
   SET_FILMS_COUNT: `SET_FILMS_COUNT`,
   RESET_FILMS_COUNT: `RESET_FILMS_COUNT`,
   SET_PLAYER: `SET_PLAYER`,
@@ -24,19 +21,10 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  setGenreMovies: (films) => ({
-    type: ActionType.SET_GENRE_MOVIES,
-    payload: films,
-  }),
-
   setGenre: (genre) => ({
     type: ActionType.SET_GENRE,
     payload: genre,
   }),
-
-  // getFilms: () => ({
-  //   type: ActionType.GET_FILMS,
-  // }),
 
   setFilm: (film) => ({
     type: ActionType.SET_FILM,
@@ -67,24 +55,11 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.SET_GENRE_MOVIES:
-      return extend(state, {
-        genreMovies: action.payload,
-      });
 
     case ActionType.SET_GENRE:
       return extend(state, {
         genre: action.payload,
       });
-
-      // case ActionType.GET_FILMS:
-      //   // let genreMovies = getAllMovies(state);
-      //   // if (state.genre !== initialState.genre) {
-      //   //   genreMovies = genreMovies.filter((movie) => movie.genre === state.genre);
-      //   // }
-      //   return extend(state, {
-      //     genreMovies: action.payload,
-      //   });
 
     case ActionType.SET_FILM:
       return extend(state, {
@@ -110,7 +85,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isPlayerActive: action.payload,
       });
-
   }
 
   return state;

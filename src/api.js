@@ -21,10 +21,11 @@ export const createAPI = (onUnauthorized) => {
     if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
       // eslint-disable-next-line no-console
-      console.log(`401 первая ошибка`);
+      // console.log(`401 первая ошибка`);
 
       // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
       // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.
+
       // throw err;
     } else {
       throw err;

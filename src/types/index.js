@@ -19,16 +19,6 @@ export const filmsType = PropTypes.arrayOf(PropTypes.shape({
   id: PropTypes.number.isRequired,
 }));
 
-// export const mainFilmType = PropTypes.shape({
-//   genre: PropTypes.string.isRequired,
-//   title: PropTypes.string.isRequired,
-//   releaseDate: PropTypes.number.isRequired,
-//   poster: PropTypes.string.isRequired,
-//   pictureBackground: PropTypes.string.isRequired,
-//   previewVideo: PropTypes.string.isRequired,
-
-// });
-
 export const filmType = PropTypes.shape({
   title: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
