@@ -83,8 +83,8 @@ class App extends PureComponent {
             />
           </Route>
           <Route exact path="/sign">
-            {authorizationStatus === AuthorizationStatus.NO_AUTH ?
-              <SignIn onSubmit={login} /> : this._renderApp()}
+            {authorizationStatus === AuthorizationStatus.AUTH ?
+              this._renderApp() : <SignIn onSubmit={login} />}
           </Route>
         </Switch>
       </BrowserRouter>
