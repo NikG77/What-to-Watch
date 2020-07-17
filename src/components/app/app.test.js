@@ -4,6 +4,7 @@ import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const mockStore = configureStore([]);
 
@@ -65,39 +66,25 @@ const mainFilm = {
   id: 1,
 };
 
-// const store = mockStore({
-//   allMovies: films,
-//
-//   movie: null,
-//   genre: `All genres`,
-//   movieCount: 8,
-//   isPlayerActive: false,
-// });
-
-
 it(`Render App`, () => {
   const store = mockStore({
     [NameSpace.WATCH]: {
-
       movie: null,
       genre: `All genres`,
       movieCount: 8,
       isPlayerActive: false,
-    }
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
   });
-
-  // allMovies: films,
-
-  // movie: null,
-  // genre: `All genres`,
-  // movieCount: 8,
-  // isPlayerActive: false,
-
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <App
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            login={() => {}}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
             onSmallMovieCardClick={() => {}}
@@ -114,7 +101,6 @@ it(`Render App`, () => {
           }
         }).toJSON();
 
-
   expect(tree).toMatchSnapshot();
 });
 
@@ -123,26 +109,23 @@ it(`Render MoviePage in App`, () => {
 
   const store = mockStore({
     [NameSpace.WATCH]: {
-
       movie: null,
       genre: `All genres`,
       movieCount: 8,
       isPlayerActive: false,
-    }
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
   });
-  // const store = mockStore({
-  //   allMovies: films,
-  //
-  //   movie: films[0],
-  //   genre: `Drama`,
-  //   movieCount: 8,
-  //   isPlayerActive: false,
-  // });
+
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <App
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            login={() => {}}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
             onSmallMovieCardClick={() => {}}
@@ -172,23 +155,18 @@ it(`Render Main in App`, () => {
     },
     [NameSpace.DATA]: {
       allMovies: films,
-    }
-
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
   });
-
-  // const store = mockStore({
-  //   allMovies: films,
-  //
-  //   movie: null,
-  //   genre: `Drama`,
-  //   movieCount: 8,
-  //   isPlayerActive: false,
-  // });
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <App
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            login={() => {}}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
             onSmallMovieCardClick={() => {}}
@@ -204,7 +182,6 @@ it(`Render Main in App`, () => {
             return {};
           }
         }).toJSON();
-
 
   expect(tree).toMatchSnapshot();
 });

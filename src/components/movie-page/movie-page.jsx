@@ -5,6 +5,7 @@ import Tabs from "../tabs/tabs.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
+import Header from "../header/header.jsx";
 
 const COUNT_LIKE_FILMS = 4;
 
@@ -29,21 +30,9 @@ const MoviePage = (props) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </div>
-          </header>
+          <Header
+            isMain={false}
+          />
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -95,7 +84,7 @@ const MoviePage = (props) => {
           </div>
 
           <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
+            <p>© 2020 What to watch Ltd.</p>
           </div>
         </footer>
       </div>

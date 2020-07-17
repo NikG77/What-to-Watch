@@ -5,14 +5,15 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/watch/watch.js";
-// import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 import PropTypes from "prop-types";
 import Player from "../player/player.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
 import {getGenreMovies, getMovie, getIsPlayerActive} from "../../reducer/watch/selectors.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
-// import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-// import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
+import SignIn from "../sign-in/sign-in.jsx";
 
 
 const PlayerWrapped = withVideo(Player);
@@ -21,7 +22,6 @@ class App extends PureComponent {
 
   _renderApp() {
 
-    // const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive, onExitPlayButtonClick, authorizationStatus, login} = this.props;
     const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive, onExitPlayButtonClick} = this.props;
 
     if (film === null && !isPlayerActive) {
@@ -67,7 +67,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick} = this.props;
+    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, login, authorizationStatus} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -82,6 +82,10 @@ class App extends PureComponent {
               onPlayButtonClick={onPlayButtonClick}
             />
           </Route>
+          <Route exact path="/sign">
+            {authorizationStatus === AuthorizationStatus.NO_AUTH ?
+              <SignIn onSubmit={login} /> : this._renderApp()}
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -89,8 +93,8 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  // authorizationStatus: PropTypes.string.isRequired,
-  // login: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
   genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
     filmType.isRequired,
@@ -112,13 +116,13 @@ const mapStateToProps = (state) => ({
   film: getMovie(state),
   isPlayerActive: getIsPlayerActive(state),
   mainFilm: getPromoMovie(state),
-  // authorizationStatus: getAuthorizationStatus(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // login(authData) {
-  //   dispatch(UserOperation.login(authData));
-  // },
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
   onGenreItemClick(genre) {
     dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetFilmsCount());

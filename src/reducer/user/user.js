@@ -1,21 +1,26 @@
-const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-  ERROR: `ERROR`,
-};
+import {AuthorizationStatus} from "../../const.js";
+import {adapterAuthInfo} from "../../adapters/films.js";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  userInfo: {},
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  SET_USER_INFO: `SET_USER_INFO`,
 };
 
 const ActionCreator = {
   requireAuthorization: (status) => {
     return {
       type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: status,
+    };
+  },
+  setUserInfo: (status) => {
+    return {
+      type: ActionType.SET_USER_INFO,
       payload: status,
     };
   },
@@ -27,6 +32,10 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         authorizationStatus: action.payload,
       });
+    case ActionType.SET_USER_INFO:
+      return Object.assign({}, state, {
+        userInfo: action.payload,
+      });
   }
 
   return state;
@@ -35,11 +44,14 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then(({data}) => {
+        const authInfo = adapterAuthInfo(data);
+        dispatch(ActionCreator.setUserInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
-        dispatch(ActionCreator.authorizationError(err));
+        // Решить нужно ли в статус бросать значение ошибки
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.ERROR));
         throw err;
       });
   },
@@ -49,7 +61,9 @@ const Operation = {
       email: authData.login,
       password: authData.password,
     })
-      .then(() => {
+      .then(({data}) => {
+        const authInfo = adapterAuthInfo(data);
+        dispatch(ActionCreator.setUserInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       });
   },

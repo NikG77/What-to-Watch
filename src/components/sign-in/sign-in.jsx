@@ -1,5 +1,9 @@
 import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+// import {AuthorizationStatus} from "../../const.js";
+// import App from "../app/app.jsx";
 
 
 class SignIn extends PureComponent {
@@ -24,8 +28,11 @@ class SignIn extends PureComponent {
   }
 
   render() {
+    // const {authorizationStatus} = this.props;
+    // const isAuthorization = authorizationStatus === AuthorizationStatus.AUTH;
 
     return (
+      // isAuthorization ? <App /> :
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
@@ -84,8 +91,15 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 
-export default SignIn;
+});
+
+export {SignIn};
+
+export default connect(mapStateToProps)(SignIn);
 

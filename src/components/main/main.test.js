@@ -4,6 +4,7 @@ import {Main} from "./main";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const mockStore = configureStore([]);
 
@@ -186,16 +187,12 @@ it(`Should Main render correctly`, () => {
     },
     [NameSpace.DATA]: {
       allMovies: films,
-    }
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
   });
 
-  // const store = mockStore({
-  //   allMovies: films,
-  //   genreMovies: films,
-  //   movie: null,
-  //   genre: `All genres`,
-  //   movieCount: 4,
-  // });
 
   const tree = renderer
     .create(

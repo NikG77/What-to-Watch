@@ -7,8 +7,6 @@ import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import reducer from "./reducer/reducer.js";
 import {Operation as DataOperation} from "./reducer/data/data.js";
-// При автризации разкоментировать через строку а нижгуюю удалить
-// import {ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 import {createAPI} from "./api.js";
 
