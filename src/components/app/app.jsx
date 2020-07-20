@@ -13,6 +13,7 @@ import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import SignIn from "../sign-in/sign-in.jsx";
+import AddReview from "../add-review/add-review.jsx";
 
 
 const PlayerWrapped = withVideo(Player);
@@ -84,6 +85,10 @@ class App extends PureComponent {
           <Route exact path="/sign">
             {isAuthorization ? this._renderApp() : <SignIn onSubmit={login} /> }
           </Route>
+          <Route exact path="/dev-review">
+            <AddReview onSubmit={() => {}} />
+          </Route>
+
         </Switch>
       </BrowserRouter>
     );
