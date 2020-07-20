@@ -1,6 +1,5 @@
-import {extend} from "../../utils/common.js";
-import {adapterFilms, adapterFilm} from "../../adapters/films.js";
-import {errorPopup} from "../../utils/common.js";
+import {extend, errorPopup} from "../../utils/common.js";
+import {adaptFilms, adaptFilm} from "../../adapters/films.js";
 
 
 const initialState = {
@@ -11,7 +10,6 @@ const initialState = {
 const ActionType = {
   LOAD_ALL_FILMS: `LOAD_ALL_FILMS`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
-  GET_ALL_FILMS: `GET_ALL_FILMS`,
 };
 
 const ActionCreator = {
@@ -33,7 +31,7 @@ const Operation = {
   loadAllFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then(({data}) => {
-        const films = adapterFilms(data);
+        const films = adaptFilms(data);
         dispatch(ActionCreator.loadAllFilms(films));
       })
       .catch(({response}) => {
@@ -44,7 +42,7 @@ const Operation = {
   loadPromoFilm: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
       .then(({data}) => {
-        const promoFilm = adapterFilm(data);
+        const promoFilm = adaptFilm(data);
         dispatch(ActionCreator.loadPromoFilm(promoFilm));
       })
       .catch(({response}) => {

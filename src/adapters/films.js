@@ -1,6 +1,6 @@
-const baseURL = `https://4.react.pages.academy`;
+const BASE_URL = `https://4.react.pages.academy`;
 
-export const adapterFilm = (film) => {
+export const adaptFilm = (film) => {
   return {
     id: film.id,
     director: film.director,
@@ -23,14 +23,14 @@ export const adapterFilm = (film) => {
   };
 };
 
-export const adapterFilms = (films) => films.map((film) => adapterFilm(film));
+export const adaptFilms = (films) => films.map((film) => adaptFilm(film));
 
-export const adapterAuthInfo = (authInfo) => {
+export const adaptAuthInfo = (authInfo) => {
   return {
     id: authInfo.id,
     email: authInfo.email,
     name: authInfo.name,
-    avatarUrl: baseURL + authInfo.avatar_url,
+    avatarUrl: BASE_URL + authInfo.avatar_url,
   };
 };
 

@@ -2,12 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {AuthorizationStatus} from "../../const.js";
 import {getUserInfo} from "../../reducer/user/selectors.js";
 
 const Header = (props) => {
-  const {isMain, authorizationStatus, userInfo} = props;
-  const isAuthorization = authorizationStatus === AuthorizationStatus.AUTH;
+  const {isMain, isAuthorization, userInfo} = props;
   return (
     <header className="page-header movie-card__head">
       <div className="logo">
@@ -31,13 +29,20 @@ const Header = (props) => {
 Header.propTypes = {
   userInfo: PropTypes.oneOfType([
     PropTypes.object.isRequired,
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      email: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
   ]),
+
   isMain: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
+  isAuthorization: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
+  isAuthorization: getAuthorizationStatus(state),
   userInfo: getUserInfo(state),
 });
 

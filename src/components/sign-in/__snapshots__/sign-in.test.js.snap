@@ -53,7 +53,7 @@ exports[`SignIn component render correctly 1`] = `
         >
           <input
             className="sign-in__input"
-            id="user-email"
+            id="user-email required"
             name="user-email"
             placeholder="Email address"
             type="email"
@@ -70,7 +70,7 @@ exports[`SignIn component render correctly 1`] = `
         >
           <input
             className="sign-in__input"
-            id="user-password"
+            id="user-password required"
             name="user-password"
             placeholder="Password"
             type="password"

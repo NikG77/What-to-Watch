@@ -1,7 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {reducer, ActionType, Operation} from "./data.js";
-import {adapterFilms, adapterFilm} from "../../adapters/films.js";
+import {adaptFilms, adaptFilm} from "../../adapters/films.js";
 
 const api = createAPI(() => {});
 
@@ -116,7 +116,7 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_ALL_FILMS,
-          payload: adapterFilms([{fake: true}]),
+          payload: adaptFilms([{fake: true}]),
         });
       });
   });
@@ -136,7 +136,7 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO_FILM,
-          payload: adapterFilm([{fake: true}]),
+          payload: adaptFilm([{fake: true}]),
         });
       });
   });

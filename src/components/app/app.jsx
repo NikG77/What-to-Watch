@@ -5,7 +5,6 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/watch/watch.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
 import PropTypes from "prop-types";
 import Player from "../player/player.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
@@ -67,7 +66,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, login, authorizationStatus} = this.props;
+    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, login, isAuthorization} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -83,8 +82,9 @@ class App extends PureComponent {
             />
           </Route>
           <Route exact path="/sign">
-            {authorizationStatus === AuthorizationStatus.NO_AUTH ?
-              <SignIn onSubmit={login} /> : this._renderApp()}
+            {/* {isAuthorization ? this._renderApp() : <SignIn onSubmit={login} /> } */}
+            {isAuthorization ? <SignIn onSubmit={login} /> : <SignIn onSubmit={login} /> }
+
           </Route>
         </Switch>
       </BrowserRouter>
@@ -93,7 +93,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
+  isAuthorization: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
@@ -116,7 +116,7 @@ const mapStateToProps = (state) => ({
   film: getMovie(state),
   isPlayerActive: getIsPlayerActive(state),
   mainFilm: getPromoMovie(state),
-  authorizationStatus: getAuthorizationStatus(state),
+  isAuthorization: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,5 +1,7 @@
-import {AuthorizationStatus} from "../../const.js";
-import {adapterAuthInfo} from "../../adapters/films.js";
+import {AuthorizationStatus, Error} from "../../const.js";
+import {adaptAuthInfo} from "../../adapters/films.js";
+import {errorPopup} from "../../utils/common.js";
+
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -45,15 +47,11 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then(({data}) => {
-        const authInfo = adapterAuthInfo(data);
+        const authInfo = adaptAuthInfo(data);
         dispatch(ActionCreator.setUserInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      })
-      .catch((err) => {
-        // Решить нужно ли в статус бросать значение ошибки
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.ERROR));
-        throw err;
       });
+
   },
 
   login: (authData) => (dispatch, getState, api) => {
@@ -62,10 +60,17 @@ const Operation = {
       password: authData.password,
     })
       .then(({data}) => {
-        const authInfo = adapterAuthInfo(data);
+        const authInfo = adaptAuthInfo(data);
         dispatch(ActionCreator.setUserInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      });
+      })
+       .catch((err) => {
+         const {response} = err;
+         if (response.status === Error.BAD_REQUEST) {
+           dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.BAD_REQUEST));
+         }
+         return errorPopup(response);
+       });
   },
 };
 

@@ -83,7 +83,8 @@ it(`Render App`, () => {
     .create(
         <Provider store={store}>
           <App
-            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            isAuthorization={false}
+            // authorizationStatus={AuthorizationStatus.NO_AUTH}
             login={() => {}}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
@@ -124,7 +125,7 @@ it(`Render MoviePage in App`, () => {
     .create(
         <Provider store={store}>
           <App
-            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            isAuthorization={false}
             login={() => {}}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
@@ -165,7 +166,7 @@ it(`Render Main in App`, () => {
     .create(
         <Provider store={store}>
           <App
-            authorizationStatus={AuthorizationStatus.NO_AUTH}
+            isAuthorization={false}
             login={() => {}}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}

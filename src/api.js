@@ -1,9 +1,6 @@
 import axios from "axios";
-import {errorPopup} from "./utils/common.js";
+import {Error} from "./const.js";
 
-const Error = {
-  UNAUTHORIZED: 401
-};
 
 export const createAPI = (onUnauthorized) => {
   const api = axios.create({
@@ -22,16 +19,10 @@ export const createAPI = (onUnauthorized) => {
     if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
 
-      errorPopup(response);
-
       // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
       // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.
-
-      throw err;
-    } else {
-      throw err;
     }
-
+    throw err;
 
   };
 
