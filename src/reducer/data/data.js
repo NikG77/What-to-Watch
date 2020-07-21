@@ -5,11 +5,13 @@ import {adaptFilms, adaptFilm} from "../../adapters/films.js";
 const initialState = {
   allMovies: [],
   promoMovie: {},
+  comments: [],
 };
 
 const ActionType = {
   LOAD_ALL_FILMS: `LOAD_ALL_FILMS`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
 };
 
 const ActionCreator = {
@@ -25,6 +27,14 @@ const ActionCreator = {
       payload: film,
     };
   },
+  loadComments: (comments) => {
+    return {
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
+    };
+  },
+
+
 };
 
 const Operation = {
@@ -44,6 +54,31 @@ const Operation = {
       .then(({data}) => {
         const promoFilm = adaptFilm(data);
         dispatch(ActionCreator.loadPromoFilm(promoFilm));
+      })
+      .catch(({response}) => {
+        return errorPopup(response);
+      });
+  },
+
+  postComments: (id, comment) => (dispatch, getState, api) => {
+    return api.post(`/comments/${id}`, {
+      rating: comment.rating,
+      comment: comment.comment,
+    })
+      .then((data) => {
+        dispatch(ActionCreator.loadComments(data));
+
+      })
+      .catch(({response}) => {
+        return errorPopup(response);
+      });
+  },
+
+  getComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((data) => {
+        dispatch(ActionCreator.loadComments(data));
+
       })
       .catch(({response}) => {
         return errorPopup(response);

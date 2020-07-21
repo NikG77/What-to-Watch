@@ -2,129 +2,132 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../../reducer/user/selectors.js";
+// import {getMovie} from "../../reducer/watch/selectors.js";
+import {filmType} from "../../types";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
+
 
 const DEFAULT_CHECKED_NUMBER = 3;
+const NUMBER_STARS = 5;
 
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.loginRef = createRef();
-    this.passwordRef = createRef();
+    this.ratingRef = createRef();
+    this.commentRef = createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(evt) {
-    const {onSubmit} = this.props;
+    const {onReviewSubmit, film} = this.props;
 
     evt.preventDefault();
 
-    onSubmit({
-      login: this.loginRef.current.value,
-      password: this.passwordRef.current.value,
+    onReviewSubmit(film.id, {
+      rating: this.ratingRef.current.value,
+      comment: this.commentRef.current.value,
     });
   }
 
   render() {
+    const {film, userInfo} = this.props;
 
-    const {userInfo} = this.props;
-    return (
-      <section className="movie-card movie-card--full">
-        <div className="movie-card__header">
-          <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+    if (film) {
+      const {title, pictureBackground, poster} = film;
+
+      return (
+        <section className="movie-card movie-card--full">
+          <div className="movie-card__header">
+            <div className="movie-card__bg">
+              <img src={pictureBackground} alt={title} />
+            </div>
+
+            <h1 className="visually-hidden">WTW</h1>
+
+            <header className="page-header">
+              <div className="logo">
+                <a href="main.html" className="logo__link">
+                  <span className="logo__letter logo__letter--1">W</span>
+                  <span className="logo__letter logo__letter--2">T</span>
+                  <span className="logo__letter logo__letter--3">W</span>
+                </a>
+              </div>
+
+              <nav className="breadcrumbs">
+                <ul className="breadcrumbs__list">
+                  <li className="breadcrumbs__item">
+                    <a href="movie-page.html" className="breadcrumbs__link">{title}</a>
+                  </li>
+                  <li className="breadcrumbs__item">
+                    <a className="breadcrumbs__link">Add review</a>
+                  </li>
+                </ul>
+              </nav>
+
+
+              <div className="user-block">
+                <div className="user-block__avatar">
+                  <img src={userInfo.avatarUrl} alt="User avatar" width="63" height="63" />
+                </div>
+              </div>
+            </header>
+
+            <div className="movie-card__poster movie-card__poster--small">
+              <img src={poster} alt={`${title} poster`} width="218" height="327" />
+            </div>
           </div>
 
-          <h1 className="visually-hidden">WTW</h1>
+          <div className="add-review">
+            <form action="#" className="add-review__form"
+              onSubmit={this.handleSubmit}>
+              <div className="rating">
+                <div className="rating__stars">
+                  {new Array(NUMBER_STARS).fill(``).map((number, i) => {
+                    const index = i + 1;
+                    const checkedNumber = index - DEFAULT_CHECKED_NUMBER;
+                    return (
+                      <React.Fragment key={index}>
+                        <input className="rating__input"
+                          ref={this.ratingRef}
+                          id={`star-${index}`}
+                          type="radio"
+                          name="rating"
+                          defaultValue={index}
+                          defaultChecked={!checkedNumber} />
+                        <label className="rating__label" htmlFor={`star-${index}`}>Rating {index}</label>
+                      </React.Fragment>
+                    );
+                  })}
 
-          <header className="page-header">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <nav className="breadcrumbs">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
-                </li>
-                <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
-                </li>
-              </ul>
-            </nav>
-
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src={userInfo.avatarUrl} alt="User avatar" width="63" height="63" />
+                </div>
               </div>
-            </div>
-          </header>
 
-          <div className="movie-card__poster movie-card__poster--small">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <div className="add-review__text">
+                <textarea className="add-review__textarea"
+                  ref={this.commentRef}
+                  name="review-text"
+                  id="review-text"
+                  placeholder="Review text"
+                  minLength={5}
+                  maxLength={400}
+                  required />
+                <div className="add-review__submit">
+                  <button className="add-review__btn" type="submit">Post</button>
+                </div>
+
+              </div>
+            </form>
           </div>
-        </div>
 
-        <div className="add-review">
-          <form action="#" className="add-review__form"
-            onSubmit={this.handleSubmit}>
-            <div className="rating">
-              <div className="rating__stars">
-                {[1, 2, 3, 4, 5].map((number, i) => {
-                  const index = i + 1;
-                  const checkedNumber = index - DEFAULT_CHECKED_NUMBER;
-                  return (
-                    <React.Fragment key={index}>
-                      <input className="rating__input" id={`star-${index}`} type="radio" name="rating" defaultValue={index}
-                        defaultChecked={!checkedNumber} />
-                      <label className="rating__label" htmlFor={`star-${index}`}>Rating {index}</label>
-                    </React.Fragment>
-                  );
-                })}
+        </section>
+      );
+    }
+    return null;
 
-                {/* <input className="rating__input" id="star-1" type="radio" name="rating" value="1"/>
-                <label className="rating__label" htmlFor="star-1">Rating 1</label>
-
-                <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
-                <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-                <input className="rating__input" id="star-3" type="radio" name="rating" value="3" checked="true" />
-                <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-                <input className="rating__input" id="star-4" type="radio" name="rating" value="4" />
-                <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-                <input className="rating__input" id="star-5" type="radio" name="rating" value="5" />
-                <label className="rating__label" htmlFor="star-5">Rating 5</label> */}
-              </div>
-            </div>
-
-            <div className="add-review__text">
-              <textarea className="add-review__textarea"
-                name="review-text"
-                id="review-text"
-                placeholder="Review text"
-                minLength={50}
-                maxLength={400}
-                required />
-              <div className="add-review__submit">
-                <button className="add-review__btn" type="submit"
-                  onSubmit={this.handleSubmit}>Post</button>
-              </div>
-
-            </div>
-          </form>
-        </div>
-
-      </section>
-    );
   }
+
 }
 
 
@@ -132,13 +135,25 @@ AddReview.propTypes = {
   userInfo: PropTypes.oneOfType([
     PropTypes.object.isRequired,
   ]),
-  onSubmit: PropTypes.func.isRequired,
+  onReviewSubmit: PropTypes.func.isRequired,
+  film: PropTypes.oneOfType([
+    filmType.isRequired,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
 };
 
 const mapStateToProps = (state) => ({
   userInfo: getUserInfo(state),
+  // film: getMovie(state),
+});
+
+
+const mapDispatcToProps = (dispatch) => ({
+  onReviewSubmit(id, comment) {
+    dispatch(DataOperation.postComments(id, comment));
+  }
 });
 
 export {AddReview};
 
-export default connect(mapStateToProps)(AddReview);
+export default connect(mapStateToProps, mapDispatcToProps)(AddReview);

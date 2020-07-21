@@ -12,3 +12,7 @@ export const getPromoMovie = (state) => {
   return state[NAME_SPACE].promoMovie;
 };
 
+export const getComments = (state) => {
+  return state[NAME_SPACE].comments;
+};
+
