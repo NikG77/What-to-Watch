@@ -99,8 +99,6 @@ it(`Reducer should update all movies by load `, () => {
   });
 });
 
-// TODO
-// Доптсать тесты на загрузку промо фильмв
 
 describe(`Operation work correctly`, () => {
   it(`Should make a correct API call to /films`, function () {
@@ -121,8 +119,6 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  // TODO
-  // Дописать тесты на загрузку промо фильмв
   it(`Should make a correct API call to /films/promo`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();

@@ -216,13 +216,6 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
-  // it(`Action creator set genre film correctly`, () => {
-  //   expect(ActionCreator.setGenreMovies(films)).toEqual({
-  //     type: ActionType.SET_GENRE_MOVIES,
-  //     payload: films,
-  //   });
-  // });
-
 
   it(`Action creator set film count correctly`, () => {
     expect(ActionCreator.setFilmsCount())

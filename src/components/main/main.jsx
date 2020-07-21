@@ -6,7 +6,6 @@ import GenresList from "../genres-list/genres-list.jsx";
 import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
-// import {getAllMovies} from "../../reducer/data/selectors.js";
 import {getGenre, getGenresList} from "../../reducer/watch/selectors.js";
 import Header from "../header/header.jsx";
 
@@ -93,19 +92,18 @@ Main.propTypes = {
   genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
     filmType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
+    () => null,
   ]),
   onSmallMovieCardClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
-  // allFilms: filmsType.isRequired,
+
   onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (
   {
     activeGenre: getGenre(state),
-    // allFilms: getAllMovies(state),
     genresList: getGenresList(state),
   }
 );

@@ -1,5 +1,5 @@
 import {extend} from "../../utils/common.js";
-// import {ActionCreator as ActionCreatorData} from "../data/data.js";
+
 
 const ALL_GENRES = `All genres`;
 const COUNT_FILM_SHOW = 8;

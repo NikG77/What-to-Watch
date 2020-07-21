@@ -21,7 +21,6 @@ const GenresList = (props) => {
 };
 
 GenresList.propTypes = {
-  // genresList: PropTypes.arrayOf(PropTypes.string).isRequired,
   genresList: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string).isRequired,
     PropTypes.oneOf([null]).isRequired,

@@ -84,7 +84,6 @@ it(`Render App`, () => {
         <Provider store={store}>
           <App
             isAuthorization={false}
-            // authorizationStatus={AuthorizationStatus.NO_AUTH}
             login={() => {}}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}

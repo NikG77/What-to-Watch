@@ -95,8 +95,8 @@ App.propTypes = {
   login: PropTypes.func.isRequired,
   genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
+    () => null,
     filmType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
   ]),
   onGenreItemClick: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
