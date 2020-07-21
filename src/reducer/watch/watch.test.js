@@ -1,12 +1,61 @@
-import {reducer, ActionCreator, ActionType} from "./reducer.js";
-import {films} from "./mock/films.js";
+import {reducer, ActionCreator, ActionType} from "./watch.js";
 
+const films = [{
+  id: 0,
+  director: ``,
+  duration: 88,
+  genre: `Comedy`,
+  pictureBackground: ``,
+  poster: ``,
+  previewVideo: ``,
+  ratingCount: 146,
+  ratingScore: 2.7,
+  releaseDate: 2012,
+  src: ``,
+  starring: [``, ``],
+  title: ``,
+  backgroundColor: ``,
+  videoLink: ``,
+  isFavorite: false,
+}, {
+  id: 1,
+  director: ``,
+  duration: 88,
+  genre: `Drama`,
+  pictureBackground: ``,
+  poster: ``,
+  previewVideo: ``,
+  ratingCount: 146,
+  ratingScore: 2.7,
+  releaseDate: 2012,
+  src: ``,
+  starring: [``, ``],
+  title: ``,
+  backgroundColor: ``,
+  videoLink: ``,
+  isFavorite: false,
+}, {
+  id: 2,
+  director: ``,
+  duration: 88,
+  genre: `Drama`,
+  pictureBackground: ``,
+  poster: ``,
+  previewVideo: ``,
+  ratingCount: 146,
+  ratingScore: 2.7,
+  releaseDate: 2012,
+  src: ``,
+  starring: [``, ``],
+  title: ``,
+  backgroundColor: ``,
+  videoLink: ``,
+  isFavorite: false,
+}];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {
   })).toEqual({
-    allMovies: films,
-    genreMovies: films,
     movie: null,
     genre: `All genres`,
     movieCount: 8,
@@ -16,8 +65,6 @@ it(`Reducer without additional parameters should return initial state`, () => {
 
 it(`Action creator set genre correct`, () => {
   expect(reducer({
-    allMovies: films,
-    genreMovies: films,
     movie: null,
     genre: `All genres`,
     movieCount: 8,
@@ -26,8 +73,6 @@ it(`Action creator set genre correct`, () => {
     type: ActionType.SET_GENRE,
     payload: `Drama`,
   })).toEqual({
-    allMovies: films,
-    genreMovies: films,
     movie: null,
     genre: `Drama`,
     movieCount: 8,
@@ -37,7 +82,6 @@ it(`Action creator set genre correct`, () => {
 
 it(`Action creator set film correct`, () => {
   expect(reducer({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `Drama`,
@@ -47,7 +91,6 @@ it(`Action creator set film correct`, () => {
     type: ActionType.SET_FILM,
     payload: films[0],
   })).toEqual({
-    allMovies: films,
     genreMovies: films,
     movie: films[0],
     genre: `Drama`,
@@ -59,7 +102,6 @@ it(`Action creator set film correct`, () => {
 
 it(`Action creator set filmsCount correct`, () => {
   expect(reducer({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `All genres`,
@@ -69,7 +111,6 @@ it(`Action creator set filmsCount correct`, () => {
     type: ActionType.SET_FILMS_COUNT,
     payload: 8,
   })).toEqual({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `All genres`,
@@ -81,7 +122,6 @@ it(`Action creator set filmsCount correct`, () => {
 
 it(`Action creator reset filmsCount correct`, () => {
   expect(reducer({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `Drama`,
@@ -90,7 +130,6 @@ it(`Action creator reset filmsCount correct`, () => {
   }, {
     type: ActionType.RESET_FILMS_COUNT,
   })).toEqual({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `Drama`,
@@ -101,7 +140,6 @@ it(`Action creator reset filmsCount correct`, () => {
 
 it(`Action creator setPlayer true correct`, () => {
   expect(reducer({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `Drama`,
@@ -111,7 +149,6 @@ it(`Action creator setPlayer true correct`, () => {
     type: ActionType.SET_PLAYER,
     payload: true,
   })).toEqual({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `Drama`,
@@ -123,7 +160,6 @@ it(`Action creator setPlayer true correct`, () => {
 
 it(`Action creator reset Player correct`, () => {
   expect(reducer({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `Drama`,
@@ -133,7 +169,6 @@ it(`Action creator reset Player correct`, () => {
     type: ActionType.RESET_PLAYER,
     payload: false,
   })).toEqual({
-    allMovies: films,
     genreMovies: films,
     movie: null,
     genre: `Drama`,
@@ -153,7 +188,7 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator set film correctly`, () => {
     expect(ActionCreator.setFilm({
       title: `Fantastic Beasts: The Crimes of Grindelwald`,
-      src: `img/bohemian-rhapsody.jpg`,
+      src: ``,
       poster: ``,
       ratingScore: 6.7,
       ratingCount: 200,
@@ -167,7 +202,7 @@ describe(`Action creators work correctly`, () => {
       type: ActionType.SET_FILM,
       payload: {
         title: `Fantastic Beasts: The Crimes of Grindelwald`,
-        src: `img/bohemian-rhapsody.jpg`,
+        src: ``,
         poster: ``,
         ratingScore: 6.7,
         ratingCount: 200,
@@ -178,12 +213,6 @@ describe(`Action creators work correctly`, () => {
         pictureBackground: ``,
         previewVideo: ``,
       },
-    });
-  });
-
-  it(`Action creator get film correctly`, () => {
-    expect(ActionCreator.getFilms()).toEqual({
-      type: ActionType.GET_FILMS,
     });
   });
 
@@ -220,5 +249,3 @@ describe(`Action creators work correctly`, () => {
   });
 
 });
-
-

@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import {formatForDateTime, reformatDate} from "../../utils/common.js";
 
-const ReviewsCols = (props) => {
-  const {reviewsColumn} = props;
+const ReviewsColumn = (props) => {
+  const {reviewsColumns} = props;
 
   return (
     <div className="movie-card__reviews-col">
-      {reviewsColumn.map((review) => (
+      {reviewsColumns.map((review) => (
         <div key={review.id} className="review">
           <blockquote className="review__quote">
             <p className="review__text">{review.text}</p>
@@ -24,8 +24,8 @@ const ReviewsCols = (props) => {
 };
 
 
-ReviewsCols.propTypes = {
-  reviewsColumn: PropTypes.oneOfType([
+ReviewsColumn.propTypes = {
+  reviewsColumns: PropTypes.oneOfType([
     PropTypes.oneOf([null]).isRequired,
     PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -37,5 +37,5 @@ ReviewsCols.propTypes = {
   ]),
 };
 
-export default ReviewsCols;
+export default ReviewsColumn;
 

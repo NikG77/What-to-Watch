@@ -27,10 +27,16 @@ const getRatingLevel = (score) => {
 
 const Overview = (props) => {
   const {film} = props;
-  const {ratingScore, ratingCount, director, starring} = film;
+  const {ratingScore, ratingCount, director, starring, description} = film;
   const starringDetails = starring.join(`, `);
 
   const ratingLevel = getRatingLevel(ratingScore);
+
+  const createParagraf = (text) => text
+    .split(`\n`)
+    .map((paragraf) => {
+      return <p key={paragraf}>{paragraf}</p>;
+    });
 
   return (
     <React.Fragment>
@@ -43,9 +49,7 @@ const Overview = (props) => {
       </div>
 
       <div className="movie-card__text">
-        <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&lsquo;s friend and protege.</p>
-
-        <p>Gustave prides himself on providing first-class service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&lsquo;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
+        {createParagraf(description)}
 
         <p className="movie-card__director"><strong>Director: {director}</strong></p>
 

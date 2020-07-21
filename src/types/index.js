@@ -12,17 +12,12 @@ export const filmsType = PropTypes.arrayOf(PropTypes.shape({
   pictureBackground: PropTypes.string.isRequired,
   previewVideo: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
+  backgroundColor: PropTypes.string.isRequired,
+  videoLink: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
 }));
-
-export const mainFilmType = PropTypes.shape({
-  genre: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
-  poster: PropTypes.string.isRequired,
-  pictureBackground: PropTypes.string.isRequired,
-  previewVideo: PropTypes.string.isRequired,
-
-});
 
 export const filmType = PropTypes.shape({
   title: PropTypes.string.isRequired,
@@ -36,6 +31,10 @@ export const filmType = PropTypes.shape({
   pictureBackground: PropTypes.string.isRequired,
   previewVideo: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
+  videoLink: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
 });
 
 

@@ -2,12 +2,17 @@ import Main from "../main/main.jsx";
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
-import {filmsType, mainFilmType, filmType} from "../../types";
+import {filmsType, filmType} from "../../types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/watch/watch.js";
 import PropTypes from "prop-types";
 import Player from "../player/player.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
+import {getGenreMovies, getMovie, getIsPlayerActive} from "../../reducer/watch/selectors.js";
+import {getPromoMovie} from "../../reducer/data/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
+import SignIn from "../sign-in/sign-in.jsx";
 
 
 const PlayerWrapped = withVideo(Player);
@@ -15,6 +20,7 @@ const PlayerWrapped = withVideo(Player);
 class App extends PureComponent {
 
   _renderApp() {
+
     const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive, onExitPlayButtonClick} = this.props;
 
     if (film === null && !isPlayerActive) {
@@ -31,7 +37,7 @@ class App extends PureComponent {
     if (film === null && isPlayerActive) {
       return (
         <PlayerWrapped
-          src={mainFilm.previewVideo}
+          src={mainFilm.videoLink}
           onExitPlayButtonClick={onExitPlayButtonClick}
         />
       );
@@ -50,7 +56,7 @@ class App extends PureComponent {
     if (film && isPlayerActive) {
       return (
         <PlayerWrapped
-          src={film.previewVideo}
+          src={film.videoLink}
           onExitPlayButtonClick={onExitPlayButtonClick}
         />
       );
@@ -60,7 +66,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, mainFilm, onExitPlayButtonClick} = this.props;
+    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, login, isAuthorization} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -75,13 +81,9 @@ class App extends PureComponent {
               onPlayButtonClick={onPlayButtonClick}
             />
           </Route>
-          <Route exact path="/play">
-            <PlayerWrapped
-              src={mainFilm.previewVideo}
-              onExitPlayButtonClick={onExitPlayButtonClick}
-            />
+          <Route exact path="/sign">
+            {isAuthorization ? this._renderApp() : <SignIn onSubmit={login} /> }
           </Route>
-
         </Switch>
       </BrowserRouter>
     );
@@ -89,8 +91,13 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  isAuthorization: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
   genreFilms: filmsType.isRequired,
-  mainFilm: mainFilmType.isRequired,
+  mainFilm: PropTypes.oneOfType([
+    () => null,
+    filmType.isRequired,
+  ]),
   onGenreItemClick: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   film: PropTypes.oneOfType([
@@ -103,21 +110,24 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  genreFilms: state.genreMovies,
-  film: state.movie,
-  isPlayerActive: state.isPlayerActive,
+  genreFilms: getGenreMovies(state),
+  film: getMovie(state),
+  isPlayerActive: getIsPlayerActive(state),
+  mainFilm: getPromoMovie(state),
+  isAuthorization: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
   onGenreItemClick(genre) {
     dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetFilmsCount());
-    dispatch(ActionCreator.getFilms());
   },
   onSmallMovieCardClick(film) {
     dispatch(ActionCreator.setFilm(film));
     dispatch(ActionCreator.setGenre(film.genre));
-    dispatch(ActionCreator.getFilms());
   },
   onPlayButtonClick() {
     dispatch(ActionCreator.setPlayer());

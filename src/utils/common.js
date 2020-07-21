@@ -1,4 +1,5 @@
 import moment from 'moment';
+import Swal from "sweetalert2";
 
 export const formatForDateTime = (date) => moment(date).format(`YYYY-MM-DD`);
 
@@ -16,4 +17,12 @@ export const formateDuration = (time) => {
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
+};
+
+export const errorPopup = (response) => {
+  return Swal.fire({
+    icon: `error`,
+    title: `Oops... ${response.status}`,
+    text: response.data.error
+  });
 };

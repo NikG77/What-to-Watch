@@ -1,12 +1,10 @@
-import {extend} from "./utils/common.js";
-import {films} from "./mock/films.js";
+import {extend} from "../../utils/common.js";
+
 
 const ALL_GENRES = `All genres`;
 const COUNT_FILM_SHOW = 8;
 
 const initialState = {
-  allMovies: films,
-  genreMovies: films,
   movie: null,
   genre: ALL_GENRES,
   movieCount: COUNT_FILM_SHOW,
@@ -16,7 +14,6 @@ const initialState = {
 const ActionType = {
   SET_GENRE: `SET_GENRE`,
   SET_FILM: `SET_FILM`,
-  GET_FILMS: `GET_FILMS`,
   SET_FILMS_COUNT: `SET_FILMS_COUNT`,
   RESET_FILMS_COUNT: `RESET_FILMS_COUNT`,
   SET_PLAYER: `SET_PLAYER`,
@@ -27,10 +24,6 @@ const ActionCreator = {
   setGenre: (genre) => ({
     type: ActionType.SET_GENRE,
     payload: genre,
-  }),
-
-  getFilms: () => ({
-    type: ActionType.GET_FILMS,
   }),
 
   setFilm: (film) => ({
@@ -62,18 +55,10 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
     case ActionType.SET_GENRE:
       return extend(state, {
         genre: action.payload,
-      });
-
-    case ActionType.GET_FILMS:
-      let genreMovies = initialState.allMovies;
-      if (state.genre !== initialState.genre) {
-        genreMovies = genreMovies.filter((movie) => movie.genre === state.genre);
-      }
-      return extend(state, {
-        genreMovies,
       });
 
     case ActionType.SET_FILM:
@@ -100,7 +85,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isPlayerActive: action.payload,
       });
-
   }
 
   return state;

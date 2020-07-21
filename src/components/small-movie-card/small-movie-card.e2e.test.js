@@ -21,6 +21,11 @@ const film = {
   pictureBackground: ``,
   previewVideo: ``,
   duration: 100,
+  backgroundColor: ``,
+  videoLink: ``,
+  description: ` `,
+  isFavorite: false,
+  id: 1,
 };
 
 const mockEvent = {

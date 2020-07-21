@@ -6,7 +6,6 @@ it(`Should Player render correctly`, () => {
   const tree = renderer
     .create(<Player
       onExitPlayButtonClick={() => {}}
-      // ref={}
       isPlay={true}
       duration={30}
       progress={10}
