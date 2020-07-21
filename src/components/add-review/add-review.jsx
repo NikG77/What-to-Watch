@@ -150,6 +150,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatcToProps = (dispatch) => ({
   onReviewSubmit(id, comment) {
+
     dispatch(DataOperation.postComments(id, comment));
   }
 });
