@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import ReviewsColumn from "../reviews-column/reviews-column.jsx";
+import {getComments} from "../../reducer/data/selectors.js";
+
 
 const Reviews = (props) => {
   const {reviews} = props;
@@ -18,6 +21,10 @@ const Reviews = (props) => {
 
 
 Reviews.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.oneOf([null]).isRequired,
+    PropTypes.number.isRequired,
+  ]),
   reviews: PropTypes.oneOfType([
     PropTypes.oneOf([null]).isRequired,
     PropTypes.arrayOf(PropTypes.shape({
@@ -31,4 +38,10 @@ Reviews.propTypes = {
 };
 
 
-export default Reviews;
+const mapStateToProps = (state) => ({
+  reviews: getComments(state),
+});
+
+
+export {Reviews};
+export default connect(mapStateToProps)(Reviews);

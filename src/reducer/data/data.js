@@ -1,5 +1,6 @@
-import {extend, errorPopup} from "../../utils/common.js";
-import {adaptFilms, adaptFilm} from "../../adapters/films.js";
+import {extend} from "../../utils/common.js";
+import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/films.js";
+import {errorPopup} from "../../utils/common.js";
 
 
 const initialState = {
@@ -65,20 +66,20 @@ const Operation = {
       rating: comment.rating,
       comment: comment.comment,
     })
-      .then((data) => {
-        dispatch(ActionCreator.loadComments(data));
-
-      })
+    .then(({data}) => {
+      const comments = adaptComments(data);
+      dispatch(ActionCreator.loadComments(comments));
+    })
       .catch(({response}) => {
         return errorPopup(response);
       });
   },
 
-  getComments: (id) => (dispatch, getState, api) => {
+  loadComments: (id) => (dispatch, getState, api) => {
     return api.get(`/comments/${id}`)
-      .then((data) => {
-        dispatch(ActionCreator.loadComments(data));
-
+      .then(({data}) => {
+        const comments = adaptComments(data);
+        dispatch(ActionCreator.loadComments(comments));
       })
       .catch(({response}) => {
         return errorPopup(response);
@@ -96,6 +97,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_PROMO_FILM:
       return extend(state, {
         promoMovie: action.payload,
+      });
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload,
       });
 
   }
