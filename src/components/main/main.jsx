@@ -93,7 +93,7 @@ Main.propTypes = {
   genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
     filmType.isRequired,
-    PropTypes.object.isRequired,
+    PropTypes.oneOf([null]).isRequired,
   ]),
   onSmallMovieCardClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,

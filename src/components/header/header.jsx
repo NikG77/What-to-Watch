@@ -28,7 +28,7 @@ const Header = (props) => {
 
 Header.propTypes = {
   userInfo: PropTypes.oneOfType([
-    PropTypes.object.isRequired,
+    PropTypes.oneOf([null]).isRequired,
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       email: PropTypes.string.isRequired,

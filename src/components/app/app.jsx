@@ -82,9 +82,7 @@ class App extends PureComponent {
             />
           </Route>
           <Route exact path="/sign">
-            {/* {isAuthorization ? this._renderApp() : <SignIn onSubmit={login} /> } */}
-            {isAuthorization ? <SignIn onSubmit={login} /> : <SignIn onSubmit={login} /> }
-
+            {isAuthorization ? this._renderApp() : <SignIn onSubmit={login} /> }
           </Route>
         </Switch>
       </BrowserRouter>
@@ -98,7 +96,7 @@ App.propTypes = {
   genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
     filmType.isRequired,
-    PropTypes.object.isRequired,
+    PropTypes.oneOf([null]).isRequired,
   ]),
   onGenreItemClick: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,

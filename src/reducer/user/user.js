@@ -50,8 +50,11 @@ const Operation = {
         const authInfo = adaptAuthInfo(data);
         dispatch(ActionCreator.setUserInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      })
+      .catch((err) => {
+        const {response} = err;
+        return errorPopup(response);
       });
-
   },
 
   login: (authData) => (dispatch, getState, api) => {
