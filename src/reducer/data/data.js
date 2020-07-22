@@ -1,6 +1,6 @@
-import {extend} from "../../utils/common.js";
-import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/films.js";
-import {errorPopup} from "../../utils/common.js";
+import {extend} from "../../utils/utils.js";
+import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
+import {errorPopup} from "../../utils/utils.js";
 
 
 const initialState = {

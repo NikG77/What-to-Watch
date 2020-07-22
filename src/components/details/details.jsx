@@ -1,5 +1,5 @@
 import React from "react";
-import {filmType} from "../../types";
+import {filmType} from "../../types/types";
 
 const getTime = (number) => `${Math.trunc(number / 60)}h ${number % 60}m`;
 

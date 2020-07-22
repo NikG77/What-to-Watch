@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 // import {AuthorizationStatus} from "../../const.js";
-import {filmsType, filmType} from "../../types";
+import {filmsType, filmType} from "../../types/types";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import Player from "../player/player.jsx";
@@ -82,7 +82,7 @@ const App = (props) => {
             onPlayButtonClick={onPlayButtonClick}
           />
         </Route>
-        <Route exact path="/sign">
+        <Route exact path="/login">
           {isAuthorization ? renderApp() : <SignIn onSubmit={login} /> }
         </Route>
         <Route exact path="/dev-review">

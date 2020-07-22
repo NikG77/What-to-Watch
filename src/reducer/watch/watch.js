@@ -1,4 +1,4 @@
-import {extend} from "../../utils/common.js";
+import {extend} from "../../utils/utils.js";
 
 
 const ALL_GENRES = `All genres`;

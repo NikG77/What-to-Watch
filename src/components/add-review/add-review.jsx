@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../../reducer/user/selectors.js";
 // import {getMovie} from "../../reducer/watch/selectors.js";
-import {filmType} from "../../types";
+import {filmType} from "../../types/types";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 

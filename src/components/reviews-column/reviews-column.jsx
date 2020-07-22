@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {formatForDateTime, reformatDate} from "../../utils/common.js";
+import {formatForDateTime, reformatDate} from "../../utils/utils.js";
 
 const ReviewsColumn = (props) => {
   const {reviewsColumns} = props;

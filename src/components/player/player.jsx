@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {formateDuration} from "../../utils/common.js";
+import {formateDuration} from "../../utils/utils.js";
 
 const Player = (props) => {
   const {onExitPlayButtonClick, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;

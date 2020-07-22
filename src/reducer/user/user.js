@@ -1,6 +1,6 @@
 import {AuthorizationStatus, Error} from "../../const.js";
-import {adaptAuthInfo} from "../../adapters/films.js";
-import {errorPopup} from "../../utils/common.js";
+import {adaptAuthInfo} from "../../adapters/adapters.js";
+import {errorPopup} from "../../utils/utils.js";
 
 
 const initialState = {

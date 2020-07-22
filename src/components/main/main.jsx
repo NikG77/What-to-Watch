@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import GenresList from "../genres-list/genres-list.jsx";
-import {filmsType, filmType} from "../../types";
+import {filmsType, filmType} from "../../types/types";
 import {connect} from "react-redux";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import {getGenre, getGenresList} from "../../reducer/watch/selectors.js";

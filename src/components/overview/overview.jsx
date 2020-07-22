@@ -1,5 +1,5 @@
 import React from "react";
-import {filmType} from "../../types";
+import {filmType} from "../../types/types";
 import {RatingLevel} from "../../const.js";
 
 const getRatingLevel = (score) => {
