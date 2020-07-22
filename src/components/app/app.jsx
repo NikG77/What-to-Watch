@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
@@ -19,11 +19,12 @@ import {Operation as UserOperation} from "../../reducer/user/user.js";
 
 const PlayerWrapped = withVideo(Player);
 
-class App extends PureComponent {
+const App = (props) => {
 
-  _renderApp() {
+  const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, login, isAuthorization} = props;
+  const {mainFilm, onGenreItemClick, film, isPlayerActive, onExitPlayButtonClick} = props;
 
-    const {genreFilms, mainFilm, onGenreItemClick, onSmallMovieCardClick, film, onPlayButtonClick, isPlayerActive, onExitPlayButtonClick} = this.props;
+  const renderApp = () => {
 
     if (film === null && !isPlayerActive) {
       return (
@@ -65,36 +66,34 @@ class App extends PureComponent {
     }
 
     return null;
-  }
+  };
 
-  render() {
-    const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, login, isAuthorization} = this.props;
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/dev">
-            <MoviePage
-              film={genreFilms[0]}
-              genreFilms={genreFilms}
-              onSmallMovieCardClick={onSmallMovieCardClick}
-              onPlayButtonClick={onPlayButtonClick}
-            />
-          </Route>
-          <Route exact path="/sign">
-            {isAuthorization ? this._renderApp() : <SignIn onSubmit={login} /> }
-          </Route>
-          <Route exact path="/dev-review">
-            <AddReview film={genreFilms[0]} />
-          </Route>
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          {renderApp()}
+        </Route>
+        <Route exact path="/dev">
+          <MoviePage
+            film={genreFilms[0]}
+            genreFilms={genreFilms}
+            onSmallMovieCardClick={onSmallMovieCardClick}
+            onPlayButtonClick={onPlayButtonClick}
+          />
+        </Route>
+        <Route exact path="/sign">
+          {isAuthorization ? renderApp() : <SignIn onSubmit={login} /> }
+        </Route>
+        <Route exact path="/dev-review">
+          <AddReview film={genreFilms[0]} />
+        </Route>
 
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+      </Switch>
+    </BrowserRouter>
+  );
+};
+
 
 App.propTypes = {
   isAuthorization: PropTypes.bool.isRequired,
