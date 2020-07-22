@@ -133,7 +133,15 @@ class AddReview extends PureComponent {
 
 AddReview.propTypes = {
   userInfo: PropTypes.oneOfType([
-    PropTypes.object.isRequired,
+    PropTypes.oneOf([null]).isRequired,
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      date: PropTypes.number.isRequired,
+      rating: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+      author: PropTypes.string.isRequired,
+      idUser: PropTypes.number.isRequired,
+    }).isRequired,
   ]),
   onReviewSubmit: PropTypes.func.isRequired,
   film: PropTypes.oneOfType([
