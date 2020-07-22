@@ -9,6 +9,7 @@ it(`Should Header render correctly`, () => {
     .create(
         <Header
           isMain={true}
+          isAuthorization={false}
         />
     ).toJSON();
 

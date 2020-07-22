@@ -1,19 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
+// import {connect} from "react-redux";
 import Overview from "../overview/overview.jsx";
 import Details from "../details/details.jsx";
 import Reviews from "../reviews/reviews.jsx";
 import {filmType} from "../../types";
 // import {reviews} from "../../mock/films.js";
 import {TabName} from "../../const.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
+// import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 
 const Tabs = (props) => {
-  const {film, activeItem, onItemClick: onTabClick, onGetComments} = props;
+  const {film, activeItem, onItemClick: onTabClick} = props;
+  // const {film, activeItem, onItemClick: onTabClick, onGetComments} = props;
   const activeTab = activeItem || TabName.OVERVIEW;
-  onGetComments(film.id);
+  // onGetComments(film.id);
 
   return (
     <React.Fragment>
@@ -53,17 +54,17 @@ Tabs.propTypes = {
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  onGetComments: PropTypes.func.isRequired,
+  // onGetComments: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onGetComments(id) {
-    dispatch(DataOperation.loadComments(id));
-  },
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   onGetComments(id) {
+//     dispatch(DataOperation.loadComments(id));
+//   },
+// });
 
 
 export {Tabs};
 
-export default connect(null, mapDispatchToProps)(Tabs);
+// export default connect(null, mapDispatchToProps)(Tabs);
 

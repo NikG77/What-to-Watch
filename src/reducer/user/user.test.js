@@ -2,7 +2,7 @@ import {reducer, ActionCreator, ActionType, Operation} from "./user.js";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {AuthorizationStatus} from "../../const.js";
-import {adapterAuthInfo} from "../../adapters/films.js";
+import {adaptAuthInfo} from "../../adapters/films.js";
 
 const api = createAPI(() => {});
 
@@ -98,7 +98,7 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_USER_INFO,
-          payload: adapterAuthInfo({fake: true}),
+          payload: adaptAuthInfo({fake: true}),
         });
       });
   });
@@ -117,7 +117,7 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_USER_INFO,
-          payload: adapterAuthInfo({fake: true}),
+          payload: adaptAuthInfo({fake: true}),
         });
       });
   });
