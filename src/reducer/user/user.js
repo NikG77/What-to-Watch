@@ -52,8 +52,7 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
-        const {response} = err;
-        return errorPopup(response);
+        return errorPopup(err);
       });
   },
 
@@ -72,7 +71,7 @@ const Operation = {
          if (response.status === Error.BAD_REQUEST) {
            dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.BAD_REQUEST));
          }
-         return errorPopup(response);
+         return errorPopup(err);
        });
   },
 };

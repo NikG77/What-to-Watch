@@ -19,14 +19,17 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const errorPopup = (response) => {
-  if (!response) {
-    response.status = `Ошибка соединения`;
-    response.data.error = `Проверьте соедение с интернетом`;
+export const errorPopup = (err) => {
+  if (!err.response && !err.request) {
+    err.response.status = `Нет соединения`;
+    err.response.data.error = `Проверьте соедение с интернетом`;
+  } else if (!err.response && err.request) {
+    err.response.status = `Oops... ${err.request.status}`;
+    err.response.data.error = err.request.data.error;
   }
   return Swal.fire({
     icon: `error`,
-    title: `Oops... ${response.status}`,
-    text: response.data.error
+    title: `Oops... ${err.response.status}`,
+    text: err.response.data.error,
   });
 };

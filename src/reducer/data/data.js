@@ -45,8 +45,8 @@ const Operation = {
         const films = adaptFilms(data);
         dispatch(ActionCreator.loadAllFilms(films));
       })
-      .catch(({response}) => {
-        return errorPopup(response);
+      .catch((err) => {
+        return errorPopup(err);
       });
   },
 
@@ -56,8 +56,8 @@ const Operation = {
         const promoFilm = adaptFilm(data);
         dispatch(ActionCreator.loadPromoFilm(promoFilm));
       })
-      .catch(({response}) => {
-        return errorPopup(response);
+      .catch((err) => {
+        return errorPopup(err);
       });
   },
 
@@ -70,9 +70,9 @@ const Operation = {
       const comments = adaptComments(data);
       dispatch(ActionCreator.loadComments(comments));
     })
-      .catch(({response}) => {
-        return errorPopup(response);
-      });
+    .catch((err) => {
+      return errorPopup(err);
+    });
   },
 
   loadComments: (id) => (dispatch, getState, api) => {
@@ -81,8 +81,8 @@ const Operation = {
         const comments = adaptComments(data);
         dispatch(ActionCreator.loadComments(comments));
       })
-      .catch(({response}) => {
-        return errorPopup(response);
+      .catch((err) => {
+        return errorPopup(err);
       });
   },
 };
