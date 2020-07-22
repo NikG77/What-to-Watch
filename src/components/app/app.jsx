@@ -1,18 +1,20 @@
-import Main from "../main/main.jsx";
 import React, {PureComponent} from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
-import MoviePage from "../movie-page/movie-page.jsx";
-import {filmsType, filmType} from "../../types";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/watch/watch.js";
 import PropTypes from "prop-types";
+import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+// import {AuthorizationStatus} from "../../const.js";
+import {filmsType, filmType} from "../../types";
+import Main from "../main/main.jsx";
+import MoviePage from "../movie-page/movie-page.jsx";
 import Player from "../player/player.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
+import SignIn from "../sign-in/sign-in.jsx";
+import AddReview from "../add-review/add-review.jsx";
+import {ActionCreator} from "../../reducer/watch/watch.js";
 import {getGenreMovies, getMovie, getIsPlayerActive} from "../../reducer/watch/selectors.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
-import SignIn from "../sign-in/sign-in.jsx";
 
 
 const PlayerWrapped = withVideo(Player);
@@ -84,6 +86,10 @@ class App extends PureComponent {
           <Route exact path="/sign">
             {isAuthorization ? this._renderApp() : <SignIn onSubmit={login} /> }
           </Route>
+          <Route exact path="/dev-review">
+            <AddReview film={genreFilms[0]} />
+          </Route>
+
         </Switch>
       </BrowserRouter>
     );

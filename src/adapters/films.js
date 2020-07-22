@@ -34,3 +34,16 @@ export const adaptAuthInfo = (authInfo) => {
   };
 };
 
+const adaptComment = (comment) => {
+  return {
+    text: comment.comment,
+    date: comment.date,
+    rating: comment.rating,
+    id: comment.id,
+    author: comment.user.name,
+    idUser: comment.user.id,
+  };
+};
+
+export const adaptComments = (comments) => comments.map((comment) => adaptComment(comment));
+

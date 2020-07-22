@@ -1,17 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SignIn from "./sign-in.jsx";
+import {Header} from "./header.jsx";
 
-const noop = () => {};
 
-it(`SignIn component render correctly`, () => {
+it(`Should Header render correctly`, () => {
 
   const tree = renderer
     .create(
-        <SignIn
-          onSubmit={noop}
+        <Header
+          isMain={true}
+          isAuthorization={false}
         />
     ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+

@@ -81,7 +81,6 @@ const Operation = {
 export {
   ActionCreator,
   ActionType,
-  AuthorizationStatus,
   Operation,
   reducer,
 };

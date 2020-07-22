@@ -1,15 +1,18 @@
-import {extend, errorPopup} from "../../utils/common.js";
-import {adaptFilms, adaptFilm} from "../../adapters/films.js";
+import {extend} from "../../utils/common.js";
+import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/films.js";
+import {errorPopup} from "../../utils/common.js";
 
 
 const initialState = {
   allMovies: [],
   promoMovie: {},
+  comments: [],
 };
 
 const ActionType = {
   LOAD_ALL_FILMS: `LOAD_ALL_FILMS`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
 };
 
 const ActionCreator = {
@@ -25,6 +28,14 @@ const ActionCreator = {
       payload: film,
     };
   },
+  loadComments: (comments) => {
+    return {
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
+    };
+  },
+
+
 };
 
 const Operation = {
@@ -49,6 +60,31 @@ const Operation = {
         return errorPopup(response);
       });
   },
+
+  postComments: (id, comment) => (dispatch, getState, api) => {
+    return api.post(`/comments/${id}`, {
+      rating: comment.rating,
+      comment: comment.comment,
+    })
+    .then(({data}) => {
+      const comments = adaptComments(data);
+      dispatch(ActionCreator.loadComments(comments));
+    })
+      .catch(({response}) => {
+        return errorPopup(response);
+      });
+  },
+
+  loadComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then(({data}) => {
+        const comments = adaptComments(data);
+        dispatch(ActionCreator.loadComments(comments));
+      })
+      .catch(({response}) => {
+        return errorPopup(response);
+      });
+  },
 };
 
 
@@ -61,6 +97,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_PROMO_FILM:
       return extend(state, {
         promoMovie: action.payload,
+      });
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload,
       });
 
   }
