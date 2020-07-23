@@ -51,8 +51,8 @@ const Operation = {
         dispatch(ActionCreator.setUserInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
-      .catch((err) => {
-        return errorPopup(err);
+      .catch(() => {
+
       });
   },
 

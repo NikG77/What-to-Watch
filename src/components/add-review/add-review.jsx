@@ -1,10 +1,12 @@
-import React, {PureComponent, createRef} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../../reducer/user/selectors.js";
 // import {getMovie} from "../../reducer/watch/selectors.js";
 import {filmType} from "../../types/types";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {ActionCreator} from "../../reducer/watch/watch.js";
+import {getReviewFormStatus} from "../../reducer/watch/selectors.js";
 
 
 const DEFAULT_CHECKED_NUMBER = 3;
@@ -14,25 +16,37 @@ class AddReview extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.ratingRef = createRef();
-    this.commentRef = createRef();
+    this.state = {
+      rating: 3,
+      comment: null,
+
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTextareaChange = this.handleTextareaChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleTextareaChange(evt) {
+    this.setState({comment: evt.target.value});
+  }
+
+  handleInputChange(evt) {
+    this.setState({rating: evt.target.value});
   }
 
   handleSubmit(evt) {
     const {onReviewSubmit, film} = this.props;
-
     evt.preventDefault();
 
     onReviewSubmit(film.id, {
-      rating: this.ratingRef.current.value,
-      comment: this.commentRef.current.value,
+      rating: this.state.rating,
+      comment: this.state.comment,
     });
   }
 
   render() {
-    const {film, userInfo} = this.props;
+    const {film, userInfo, isFormDisabled} = this.props;
 
     if (film) {
       const {title, pictureBackground, poster} = film;
@@ -80,8 +94,10 @@ class AddReview extends PureComponent {
           </div>
 
           <div className="add-review">
-            <form action="#" className="add-review__form"
-              onSubmit={this.handleSubmit}>
+            <form action="#"
+              className="add-review__form"
+              onSubmit={this.handleSubmit}
+            >
               <div className="rating">
                 <div className="rating__stars">
                   {new Array(NUMBER_STARS).fill(``).map((number, i) => {
@@ -90,12 +106,13 @@ class AddReview extends PureComponent {
                     return (
                       <React.Fragment key={index}>
                         <input className="rating__input"
-                          ref={this.ratingRef}
+                          onChange={this.handleInputChange}
                           id={`star-${index}`}
                           type="radio"
                           name="rating"
                           defaultValue={index}
-                          defaultChecked={!checkedNumber} />
+                          defaultChecked={!checkedNumber}
+                          disabled={isFormDisabled} />
                         <label className="rating__label" htmlFor={`star-${index}`}>Rating {index}</label>
                       </React.Fragment>
                     );
@@ -106,15 +123,20 @@ class AddReview extends PureComponent {
 
               <div className="add-review__text">
                 <textarea className="add-review__textarea"
-                  ref={this.commentRef}
+                  onChange={this.handleTextareaChange}
                   name="review-text"
                   id="review-text"
                   placeholder="Review text"
-                  minLength={5}
+                  minLength={2}
                   maxLength={400}
-                  required />
+                  disabled={isFormDisabled}
+                  required
+                />
                 <div className="add-review__submit">
-                  <button className="add-review__btn" type="submit">Post</button>
+                  <button className="add-review__btn"
+                    type="submit"
+                    disabled={isFormDisabled}
+                  >Post</button>
                 </div>
 
               </div>
@@ -133,25 +155,26 @@ class AddReview extends PureComponent {
 
 AddReview.propTypes = {
   userInfo: PropTypes.oneOfType([
-    PropTypes.oneOf([null]).isRequired,
+    () => null,
     PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      date: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
       id: PropTypes.number.isRequired,
-      author: PropTypes.string.isRequired,
-      idUser: PropTypes.number.isRequired,
+      email: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
     }).isRequired,
   ]),
+
   onReviewSubmit: PropTypes.func.isRequired,
   film: PropTypes.oneOfType([
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
+  isFormDisabled: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userInfo: getUserInfo(state),
+  isFormDisabled: getReviewFormStatus(state),
   // film: getMovie(state),
 });
 
@@ -160,6 +183,7 @@ const mapDispatcToProps = (dispatch) => ({
   onReviewSubmit(id, comment) {
 
     dispatch(DataOperation.postComments(id, comment));
+    dispatch(ActionCreator.setFormDisabledStatus(true));
   }
 });
 

@@ -1,6 +1,7 @@
 import {extend} from "../../utils/utils.js";
 import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
 import {errorPopup} from "../../utils/utils.js";
+import {ActionCreator as ActionCreatorState} from "../watch/watch.js";
 
 
 const initialState = {
@@ -67,10 +68,12 @@ const Operation = {
       comment: comment.comment,
     })
     .then(({data}) => {
+      dispatch(ActionCreatorState.setFormDisabledStatus(false));
       const comments = adaptComments(data);
       dispatch(ActionCreator.loadComments(comments));
     })
     .catch((err) => {
+      dispatch(ActionCreatorState.setFormDisabledStatus(false));
       return errorPopup(err);
     });
   },
