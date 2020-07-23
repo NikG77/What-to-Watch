@@ -80,6 +80,7 @@ const films = [{
   isFavorite: false,
 }];
 
+const mockComments = [{fake: true}];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
@@ -97,6 +98,28 @@ it(`Reducer should update all movies by load `, () => {
     payload: films,
   })).toEqual({
     allMovies: films,
+  });
+});
+
+it(`Reducer should update promo film by load `, () => {
+  expect(reducer({
+    promoMovie: [],
+  }, {
+    type: ActionType.LOAD_PROMO_FILM,
+    payload: films[0],
+  })).toEqual({
+    promoMovie: films[0],
+  });
+});
+
+it(`Reducer should update comments by load `, () => {
+  expect(reducer({
+    comments: [],
+  }, {
+    type: ActionType.LOAD_COMMENTS,
+    payload: mockComments,
+  })).toEqual({
+    comments: mockComments,
   });
 });
 
@@ -137,5 +160,23 @@ describe(`Operation work correctly`, () => {
         });
       });
   });
+
+  // it(`Should make a correct API call to /comments/1`, function () {
+  //   const apiMock = new MockAdapter(api);
+  //   const dispatch = jest.fn();
+  //   const commentsLoader = Operation.loadComments();
+
+  //   apiMock
+  //     .onGet(`/comments/1`)
+  //     .reply(200, [{fake: true}]);
+  //   return commentsLoader(dispatch, () => {}, api)
+  //     .then(() => {
+  //       expect(dispatch).toHaveBeenCalledTimes(1);
+  //       expect(dispatch).toHaveBeenNthCalledWith(1, {
+  //         type: ActionType.LOAD_COMMENTS,
+  //         payload: adaptComments([{fake: true}]),
+  //       });
+  //     });
+  // });
 
 });
