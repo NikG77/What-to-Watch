@@ -53,6 +53,7 @@ const App = (props) => {
           genreFilms={genreFilms}
           onSmallMovieCardClick={onSmallMovieCardClick}
           onPlayButtonClick={onPlayButtonClick}
+          isAuthorization={isAuthorization}
         />
       );
     }
@@ -80,6 +81,7 @@ const App = (props) => {
             genreFilms={genreFilms}
             onSmallMovieCardClick={onSmallMovieCardClick}
             onPlayButtonClick={onPlayButtonClick}
+            isAuthorization={isAuthorization}
           />
         </Route>
         <Route exact path="/login">
