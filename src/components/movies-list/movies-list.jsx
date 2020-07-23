@@ -15,9 +15,9 @@ const MoviesList = (props) => {
   return (
     <React.Fragment>
       <div className="catalog__movies-list">
-        {genreFilms.slice(0, filmCount).map((movie, i) =>
+        {genreFilms.slice(0, filmCount).map((movie) =>
           <SmallMovieCard
-            key={movie + i}
+            key={movie.id}
             film={movie}
             onSmallMovieCardClick={onSmallMovieCardClick}
             onSmallMovieCardHover={onItemClick}
