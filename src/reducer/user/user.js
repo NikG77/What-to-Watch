@@ -45,14 +45,18 @@ const reducer = (state = initialState, action) => {
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
+    return api.get(`/logi`)
       .then(({data}) => {
         const authInfo = adaptAuthInfo(data);
         dispatch(ActionCreator.setUserInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
-      .catch(() => {
-
+      .catch((err) => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+        dispatch(ActionCreator.setUserInfo({}));
+        if (err.response.status !== Error.UNAUTHORIZED) {
+          errorPopup(err);
+        }
       });
   },
 

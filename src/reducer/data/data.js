@@ -1,7 +1,7 @@
 import {extend} from "../../utils/utils.js";
 import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
 import {errorPopup} from "../../utils/utils.js";
-import {ActionCreator as ActionCreatorState} from "../watch/watch.js";
+import {ActionCreator as ActionCreatorWatch} from "../watch/watch.js";
 
 
 const initialState = {
@@ -63,17 +63,18 @@ const Operation = {
   },
 
   postComments: (id, comment) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setFormDisabledStatus(true));
     return api.post(`/comments/${id}`, {
       rating: comment.rating,
       comment: comment.comment,
     })
     .then(({data}) => {
-      dispatch(ActionCreatorState.setFormDisabledStatus(false));
+      dispatch(ActionCreatorWatch.setFormDisabledStatus(false));
       const comments = adaptComments(data);
       dispatch(ActionCreator.loadComments(comments));
     })
     .catch((err) => {
-      dispatch(ActionCreatorState.setFormDisabledStatus(false));
+      dispatch(ActionCreatorWatch.setFormDisabledStatus(false));
       return errorPopup(err);
     });
   },

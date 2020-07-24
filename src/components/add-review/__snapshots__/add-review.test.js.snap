@@ -208,8 +208,8 @@ exports[`Should AddReview render correctly 1`] = `
           disabled={false}
           id="review-text"
           maxLength={400}
-          minLength={2}
-          name="review-text"
+          minLength={5}
+          name="review"
           onChange={[Function]}
           placeholder="Review text"
           required={true}
@@ -219,7 +219,7 @@ exports[`Should AddReview render correctly 1`] = `
         >
           <button
             className="add-review__btn"
-            disabled={false}
+            disabled={true}
             type="submit"
           >
             Post
