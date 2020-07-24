@@ -20,13 +20,7 @@ export const extend = (a, b) => {
 };
 
 export const errorPopup = (err) => {
-  if (!err.response && !err.request) {
-    err.response.status = `Нет соединения`;
-    err.response.data.error = `Проверьте соедение с интернетом`;
-  } else if (!err.response && err.request) {
-    err.response.status = `Oops... ${err.request.status}`;
-    err.response.data.error = err.request.data.error;
-  }
+
   return Swal.fire({
     icon: `error`,
     title: `Oops... ${err.response.status}`,
