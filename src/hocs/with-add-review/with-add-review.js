@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 
 const withAddReview = (Component) => {
@@ -42,11 +42,12 @@ const withAddReview = (Component) => {
   }
 
 
-  WithAddReview.propTypes = {
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-  };
+  // WithAddReview.propTypes = {
+  //   rating: PropTypes.number.isRequired,
+  //   comment: PropTypes.string.isRequired,
+  // };
 
+  return WithAddReview;
 
 };
 

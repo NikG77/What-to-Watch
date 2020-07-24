@@ -5,7 +5,7 @@ import {getUserInfo} from "../../reducer/user/selectors.js";
 // import {getMovie} from "../../reducer/watch/selectors.js";
 import {filmType} from "../../types/types";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
-import {ActionCreator} from "../../reducer/watch/watch.js";
+
 import {getReviewFormStatus} from "../../reducer/watch/selectors.js";
 
 
@@ -18,21 +18,17 @@ class AddReview extends PureComponent {
 
     this.state = {
       rating: 3,
-      comment: null,
+      review: ``,
 
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTextareaChange = this.handleTextareaChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleTextareaChange(evt) {
-    this.setState({comment: evt.target.value});
-  }
-
   handleInputChange(evt) {
-    this.setState({rating: evt.target.value});
+    const {name, value} = evt.target;
+    this.setState({[name]: value});
   }
 
   handleSubmit(evt) {
@@ -41,7 +37,7 @@ class AddReview extends PureComponent {
 
     onReviewSubmit(film.id, {
       rating: this.state.rating,
-      comment: this.state.comment,
+      comment: this.state.review,
     });
   }
 
@@ -123,11 +119,13 @@ class AddReview extends PureComponent {
 
               <div className="add-review__text">
                 <textarea className="add-review__textarea"
-                  onChange={this.handleTextareaChange}
-                  name="review-text"
+                  onChange={this.handleInputChange}
+                  value={this.state.review.value}
+                  name="review"
                   id="review-text"
                   placeholder="Review text"
-                  minLength={2}
+                  // заменить перед сдачей проекта на 50
+                  minLength={5}
                   maxLength={400}
                   disabled={isFormDisabled}
                   required
@@ -135,7 +133,8 @@ class AddReview extends PureComponent {
                 <div className="add-review__submit">
                   <button className="add-review__btn"
                     type="submit"
-                    disabled={isFormDisabled}
+                    // заменить перед сдачей проекта на 50
+                    disabled={isFormDisabled || this.state.review.length < 5}
                   >Post</button>
                 </div>
 
@@ -183,7 +182,7 @@ const mapDispatcToProps = (dispatch) => ({
   onReviewSubmit(id, comment) {
 
     dispatch(DataOperation.postComments(id, comment));
-    dispatch(ActionCreator.setFormDisabledStatus(true));
+    // dispatch(ActionCreator.setFormDisabledStatus(true));
   }
 });
 

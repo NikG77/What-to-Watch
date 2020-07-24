@@ -51,8 +51,12 @@ const Operation = {
         dispatch(ActionCreator.setUserInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
-      .catch(() => {
-
+      .catch((err) => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+        dispatch(ActionCreator.setUserInfo({}));
+        if (err.response.status !== Error.UNAUTHORIZED) {
+          errorPopup(err);
+        }
       });
   },
 
