@@ -28,7 +28,7 @@ const mockUserInfo = {fake: true};
 it(`Should AddReview render correctly`, () => {
   const tree = renderer
     .create(<AddReview
-      onRevieSubmit={() => {}}
+      onReviewSubmit={() => {}}
       film={film}
       userInfo={mockUserInfo}
       isFormDisabled={false}

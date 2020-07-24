@@ -174,18 +174,15 @@ AddReview.propTypes = {
 const mapStateToProps = (state) => ({
   userInfo: getUserInfo(state),
   isFormDisabled: getReviewFormStatus(state),
-  // film: getMovie(state),
 });
 
 
-const mapDispatcToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   onReviewSubmit(id, comment) {
-
     dispatch(DataOperation.postComments(id, comment));
-    // dispatch(ActionCreator.setFormDisabledStatus(true));
   }
 });
 
 export {AddReview};
 
-export default connect(mapStateToProps, mapDispatcToProps)(AddReview);
+export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
