@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => {
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
+    return api.get(`/logi`)
       .then(({data}) => {
         const authInfo = adaptAuthInfo(data);
         dispatch(ActionCreator.setUserInfo(authInfo));
