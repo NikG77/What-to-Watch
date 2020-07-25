@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
-import {filmsType, filmType} from "../../types";
+import {filmsType, filmType} from "../../types/types";
 import ShowMore from "../show-more/show-more.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/watch/watch.js";
@@ -15,9 +15,9 @@ const MoviesList = (props) => {
   return (
     <React.Fragment>
       <div className="catalog__movies-list">
-        {genreFilms.slice(0, filmCount).map((movie, i) =>
+        {genreFilms.slice(0, filmCount).map((movie) =>
           <SmallMovieCard
-            key={movie + i}
+            key={movie.id}
             film={movie}
             onSmallMovieCardClick={onSmallMovieCardClick}
             onSmallMovieCardHover={onItemClick}

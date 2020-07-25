@@ -1,6 +1,6 @@
 import {AuthorizationStatus, Error} from "../../const.js";
-import {adaptAuthInfo} from "../../adapters/films.js";
-import {errorPopup} from "../../utils/common.js";
+import {adaptAuthInfo} from "../../adapters/adapters.js";
+import {errorPopup} from "../../utils/utils.js";
 
 
 const initialState = {
@@ -52,8 +52,11 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
-        const {response} = err;
-        return errorPopup(response);
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+        dispatch(ActionCreator.setUserInfo({}));
+        if (err.response.status !== Error.UNAUTHORIZED) {
+          errorPopup(err);
+        }
       });
   },
 
@@ -72,7 +75,7 @@ const Operation = {
          if (response.status === Error.BAD_REQUEST) {
            dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.BAD_REQUEST));
          }
-         return errorPopup(response);
+         return errorPopup(err);
        });
   },
 };

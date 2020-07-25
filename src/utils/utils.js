@@ -19,10 +19,11 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const errorPopup = (response) => {
+export const errorPopup = (err) => {
+
   return Swal.fire({
     icon: `error`,
-    title: `Oops... ${response.status}`,
-    text: response.data.error
+    title: `Oops... ${err.response.status}`,
+    text: err.response.data.error,
   });
 };

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Overview from "../overview/overview.jsx";
 import Details from "../details/details.jsx";
 import Reviews from "../reviews/reviews.jsx";
-import {filmType} from "../../types";
+import {filmType} from "../../types/types";
 // import {reviews} from "../../mock/films.js";
 import {TabName} from "../../const.js";
 // import {Operation as DataOperation} from "../../reducer/data/data.js";

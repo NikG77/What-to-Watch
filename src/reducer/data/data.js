@@ -1,6 +1,7 @@
-import {extend} from "../../utils/common.js";
-import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/films.js";
-import {errorPopup} from "../../utils/common.js";
+import {extend} from "../../utils/utils.js";
+import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
+import {errorPopup} from "../../utils/utils.js";
+import {ActionCreator as ActionCreatorWatch} from "../watch/watch.js";
 
 
 const initialState = {
@@ -45,8 +46,8 @@ const Operation = {
         const films = adaptFilms(data);
         dispatch(ActionCreator.loadAllFilms(films));
       })
-      .catch(({response}) => {
-        return errorPopup(response);
+      .catch((err) => {
+        return errorPopup(err);
       });
   },
 
@@ -56,23 +57,26 @@ const Operation = {
         const promoFilm = adaptFilm(data);
         dispatch(ActionCreator.loadPromoFilm(promoFilm));
       })
-      .catch(({response}) => {
-        return errorPopup(response);
+      .catch((err) => {
+        return errorPopup(err);
       });
   },
 
   postComments: (id, comment) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setFormDisabledStatus(true));
     return api.post(`/comments/${id}`, {
       rating: comment.rating,
       comment: comment.comment,
     })
     .then(({data}) => {
+      dispatch(ActionCreatorWatch.setFormDisabledStatus(false));
       const comments = adaptComments(data);
       dispatch(ActionCreator.loadComments(comments));
     })
-      .catch(({response}) => {
-        return errorPopup(response);
-      });
+    .catch((err) => {
+      dispatch(ActionCreatorWatch.setFormDisabledStatus(false));
+      return errorPopup(err);
+    });
   },
 
   loadComments: (id) => (dispatch, getState, api) => {
@@ -81,8 +85,8 @@ const Operation = {
         const comments = adaptComments(data);
         dispatch(ActionCreator.loadComments(comments));
       })
-      .catch(({response}) => {
-        return errorPopup(response);
+      .catch((err) => {
+        return errorPopup(err);
       });
   },
 };

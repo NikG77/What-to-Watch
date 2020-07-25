@@ -2,7 +2,7 @@ import {reducer, ActionCreator, ActionType, Operation} from "./user.js";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {AuthorizationStatus} from "../../const.js";
-import {adaptAuthInfo} from "../../adapters/films.js";
+import {adaptAuthInfo} from "../../adapters/adapters.js";
 
 const api = createAPI(() => {});
 

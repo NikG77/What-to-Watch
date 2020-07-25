@@ -43,6 +43,7 @@ it(`Should MoviePage render correctly`, () => {
     .create(
         <Provider store={store}>
           <MoviePage
+            isAuthorization={true}
             film={films[0]}
             genreFilms={films}
             onSmallMovieCardClick={() => {}}

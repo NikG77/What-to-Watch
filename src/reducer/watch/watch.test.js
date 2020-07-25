@@ -60,6 +60,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     genre: `All genres`,
     movieCount: 8,
     isPlayerActive: false,
+    isFormDisabled: false,
   });
 });
 

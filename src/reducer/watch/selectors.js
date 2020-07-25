@@ -53,3 +53,7 @@ export const getIsPlayerActive = (state) => {
   return state[NAME_SPACE].isPlayerActive;
 };
 
+export const getReviewFormStatus = (state) => {
+  return state[NAME_SPACE].isFormDisabled;
+};
+
