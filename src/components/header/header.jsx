@@ -3,23 +3,20 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {getUserInfo} from "../../reducer/user/selectors.js";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
+import Logo from "../logo/logo.jsx";
 
 const Header = (props) => {
-  const {isMain, isAuthorization, userInfo} = props;
+  const {isAuthorization, userInfo} = props;
   return (
     <header className="page-header movie-card__head">
-      <div className="logo">
-        <a href={isMain ? `#` : `main.html`} className="logo__link">
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </a>
-      </div>
+      <Logo />
 
       <div className="user-block">
         <div className="user-block__avatar">
           {isAuthorization && <img src={userInfo.avatarUrl} alt="User avatar" width="63" height="63" />}
-          {isAuthorization || <a className="user-block__link" >Sign in</a>}
+          {isAuthorization || <Link to={AppRoute.LOGIN} className="user-block__link" >Sign in</Link>}
         </div>
       </div>
     </header>
@@ -36,8 +33,6 @@ Header.propTypes = {
       avatarUrl: PropTypes.string.isRequired,
     }).isRequired,
   ]),
-
-  isMain: PropTypes.bool.isRequired,
   isAuthorization: PropTypes.bool.isRequired,
 };
 

@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import {getGenre, getGenresList} from "../../reducer/watch/selectors.js";
 import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
@@ -24,9 +25,7 @@ const Main = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header
-          isMain={true}
-        />
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -66,19 +65,8 @@ const Main = (props) => {
 
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <Footer />
 
-          <div className="copyright">
-            <p>© 2020 What to watch Ltd.</p>
-          </div>
-        </footer>
       </div>
     </React.Fragment>
   );

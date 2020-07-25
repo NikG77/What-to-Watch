@@ -8,7 +8,6 @@ it(`Should Header render correctly`, () => {
   const tree = renderer
     .create(
         <Header
-          isMain={true}
           isAuthorization={false}
         />
     ).toJSON();

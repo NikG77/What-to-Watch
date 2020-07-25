@@ -6,6 +6,7 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
 
 const COUNT_LIKE_FILMS = 4;
 
@@ -30,9 +31,7 @@ const MoviePage = (props) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header
-            isMain={false}
-          />
+          <Header />
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -74,19 +73,8 @@ const MoviePage = (props) => {
           {likeFilms.length > 0 ? <MoviesListWrapped genreFilms={likeFilms} onSmallMovieCardClick={onSmallMovieCardClick} /> : ``}
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <Footer/>
 
-          <div className="copyright">
-            <p>© 2020 What to watch Ltd.</p>
-          </div>
-        </footer>
       </div>
     </React.Fragment>
 

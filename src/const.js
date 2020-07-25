@@ -28,3 +28,10 @@ export const Error = {
   BAD_REQUEST: 400
 };
 
+export const AppRoute = {
+  LOGIN: `/login`,
+  FILM: `/films/:id`,
+  ADD_REVIEW: `/films/:id/review`,
+  ROOT: `/`,
+};
+
