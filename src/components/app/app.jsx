@@ -79,6 +79,7 @@ const App = (props) => {
         <Route exact path={AppRoute.ROOT}>
           {renderApp()}
         </Route>
+
         <Route exact path="/dev">
           <MoviePage
             film={genreFilms[0]}
