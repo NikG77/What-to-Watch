@@ -40,12 +40,12 @@ const Main = (props) => {
                 <span className="movie-card__year">{releaseDate}</span>
               </p>
 
-              <div className="movie-card__buttons">
-                <MovieCardButtons
-                  onPlayButtonClick={onPlayButtonClick}
-                  isFavorite={isFavorite}
-                />
-              </div>
+              <MovieCardButtons
+                isMainPage={true}
+                onPlayButtonClick={onPlayButtonClick}
+                isFavorite={isFavorite}
+              />
+
             </div>
           </div>
         </div>
