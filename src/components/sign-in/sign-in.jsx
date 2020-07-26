@@ -60,7 +60,6 @@ class SignIn extends PureComponent {
         </div>
 
         <Footer />
-
       </div>
 
     );

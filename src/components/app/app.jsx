@@ -1,6 +1,6 @@
-import React from "react";
+import React, {Fragment} from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
 // import {AuthorizationStatus} from "../../const.js";
 import {filmsType, filmType} from "../../types/types";
@@ -15,6 +15,9 @@ import {getGenreMovies, getMovie, getIsPlayerActive} from "../../reducer/watch/s
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
+import {Link} from "react-router-dom";
 
 
 const PlayerWrapped = withVideo(Player);
@@ -70,9 +73,9 @@ const App = (props) => {
   };
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={AppRoute.ROOT}>
           {renderApp()}
         </Route>
         <Route exact path="/dev">
@@ -84,15 +87,32 @@ const App = (props) => {
             isAuthorization={isAuthorization}
           />
         </Route>
-        <Route exact path="/login">
-          {isAuthorization ? renderApp() : <SignIn onSubmit={login} /> }
+        <Route exact path="/login" render={() => {
+          return (
+            isAuthorization ? renderApp() : <SignIn onSubmit={login} />
+          );
+        }} >
         </Route>
+
         <Route exact path="/dev-review">
           <AddReview film={genreFilms[0]} />
         </Route>
 
+        <Route
+          render={() => (
+            <Fragment>
+              <h1>
+                404.
+                <br />
+                <small>Page not found</small>
+              </h1>
+              <Link to="/">Go to main page</Link>
+            </Fragment>
+          )}
+        />
+
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
