@@ -15,7 +15,7 @@ const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
   const {film, genreFilms, onSmallMovieCardClick, onPlayButtonClick, isAuthorization} = props;
-  const {title, genre, releaseDate, poster, pictureBackground} = film;
+  const {title, genre, releaseDate, poster, pictureBackground, isFavorite} = film;
   const likeFilms = genreFilms.filter((movie) => {
     return movie !== film;
   });
@@ -42,7 +42,7 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <MovieCardButtons onPlayButtonClick={onPlayButtonClick} />
+                <MovieCardButtons onPlayButtonClick={onPlayButtonClick} isFavorite={isFavorite}/>
                 {isAuthorization ? <a href="add-review.html" className="btn movie-card__button">Add review</a> : ``}
               </div>
             </div>

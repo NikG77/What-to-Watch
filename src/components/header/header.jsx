@@ -15,7 +15,7 @@ const Header = (props) => {
 
       <div className="user-block">
         <div className="user-block__avatar">
-          {isAuthorization && <Link to={AppRoute.ROOT} className="user-block__link">
+          {isAuthorization && <Link to={AppRoute.MY_LIST} className="user-block__link">
             <img src={userInfo.avatarUrl} alt="User avatar" width="63" height="63" />
           </Link>}
           {isAuthorization || <Link to={AppRoute.LOGIN} className="user-block__link" >Sign in</Link>}

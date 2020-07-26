@@ -15,7 +15,7 @@ const MoviesListWrapped = withActiveItem(MoviesList);
 const Main = (props) => {
 
   const {genreFilms, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, onPlayButtonClick, genresList} = props;
-  const {genre, title, releaseDate, poster, pictureBackground} = mainFilm;
+  const {genre, title, releaseDate, poster, pictureBackground, isFavorite} = mainFilm;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -41,7 +41,10 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <MovieCardButtons onPlayButtonClick={onPlayButtonClick} />
+                <MovieCardButtons
+                  onPlayButtonClick={onPlayButtonClick}
+                  isFavorite={isFavorite}
+                />
               </div>
             </div>
           </div>

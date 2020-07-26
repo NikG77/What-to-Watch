@@ -10,6 +10,7 @@ import Player from "../player/player.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
 import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
+import MyList from "../my-list/my-list.jsx";
 import {ActionCreator} from "../../reducer/watch/watch.js";
 import {getGenreMovies, getMovie, getIsPlayerActive} from "../../reducer/watch/selectors.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
@@ -87,7 +88,7 @@ const App = (props) => {
             isAuthorization={isAuthorization}
           />
         </Route>
-        <Route exact path="/login" render={() => {
+        <Route exact path={AppRoute.LOGIN} render={() => {
           return (
             isAuthorization ? renderApp() : <SignIn onSubmit={login} />
           );
@@ -96,6 +97,10 @@ const App = (props) => {
 
         <Route exact path="/dev-review">
           <AddReview film={genreFilms[0]} />
+        </Route>
+
+        <Route exact path={AppRoute.MY_LIST}>
+          <MyList />
         </Route>
 
         <Route
