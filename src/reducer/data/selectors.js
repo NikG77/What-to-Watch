@@ -16,3 +16,7 @@ export const getComments = (state) => {
   return state[NAME_SPACE].comments;
 };
 
+export const getFavoriteFilms = (state) => {
+  return state[NAME_SPACE].favoriteMovies;
+};
+

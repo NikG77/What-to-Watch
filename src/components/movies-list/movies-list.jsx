@@ -10,7 +10,7 @@ import {getMovieCount} from "../../reducer/watch/selectors.js";
 
 const MoviesList = (props) => {
 
-  const {genreFilms, onSmallMovieCardClick, activeItem, onItemClick, filmCount, onShowMoreButtonClick} = props;
+  const {genreFilms, activeItem, onItemClick, filmCount, onShowMoreButtonClick} = props;
 
   return (
     <React.Fragment>
@@ -19,7 +19,7 @@ const MoviesList = (props) => {
           <SmallMovieCard
             key={movie.id}
             film={movie}
-            onSmallMovieCardClick={onSmallMovieCardClick}
+            // onSmallMovieCardClick={onSmallMovieCardClick}
             onSmallMovieCardHover={onItemClick}
             isPlaying={activeItem === movie}
           />
@@ -35,7 +35,7 @@ const MoviesList = (props) => {
 
 MoviesList.propTypes = {
   genreFilms: filmsType.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired,
+  // onSmallMovieCardClick: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.oneOfType([
     filmType.isRequired,

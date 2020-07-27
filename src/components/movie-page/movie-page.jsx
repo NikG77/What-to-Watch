@@ -14,7 +14,7 @@ const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
-  const {film, genreFilms, onSmallMovieCardClick, onPlayButtonClick} = props;
+  const {film, genreFilms, onPlayButtonClick} = props;
   const {title, genre, releaseDate, poster, pictureBackground, isFavorite} = film;
   const likeFilms = genreFilms.filter((movie) => {
     return movie !== film;
@@ -71,7 +71,7 @@ const MoviePage = (props) => {
 
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          {likeFilms.length > 0 ? <MoviesListWrapped genreFilms={likeFilms} onSmallMovieCardClick={onSmallMovieCardClick} /> : ``}
+          {likeFilms.length > 0 ? <MoviesListWrapped genreFilms={likeFilms} /> : ``}
         </section>
 
         <Footer/>
@@ -88,7 +88,7 @@ MoviePage.propTypes = {
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  onSmallMovieCardClick: PropTypes.func.isRequired,
+  // onSmallMovieCardClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   // isAuthorization: PropTypes.bool.isRequired,
 };

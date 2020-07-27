@@ -25,7 +25,7 @@ const PlayerWrapped = withVideo(Player);
 
 const App = (props) => {
 
-  const {genreFilms, onSmallMovieCardClick, onPlayButtonClick, login, isAuthorization} = props;
+  const {genreFilms, onPlayButtonClick, login, isAuthorization} = props;
   const {mainFilm, onGenreItemClick, film, isPlayerActive, onExitPlayButtonClick} = props;
 
   const renderApp = () => {
@@ -35,7 +35,7 @@ const App = (props) => {
         <Main
           genreFilms={genreFilms}
           mainFilm={mainFilm}
-          onSmallMovieCardClick={onSmallMovieCardClick}
+          // onSmallMovieCardClick={onSmallMovieCardClick}
           onGenreItemClick={onGenreItemClick}
           onPlayButtonClick={onPlayButtonClick}
         />
@@ -55,7 +55,7 @@ const App = (props) => {
         <MoviePage
           film={film}
           genreFilms={genreFilms}
-          onSmallMovieCardClick={onSmallMovieCardClick}
+          // onSmallMovieCardClick={onSmallMovieCardClick}
           onPlayButtonClick={onPlayButtonClick}
           isAuthorization={isAuthorization}
         />
@@ -84,7 +84,7 @@ const App = (props) => {
           <MoviePage
             film={genreFilms[0]}
             genreFilms={genreFilms}
-            onSmallMovieCardClick={onSmallMovieCardClick}
+            // onSmallMovieCardClick={onSmallMovieCardClick}
             onPlayButtonClick={onPlayButtonClick}
             isAuthorization={isAuthorization}
           />
@@ -132,7 +132,7 @@ App.propTypes = {
     filmType.isRequired,
   ]),
   onGenreItemClick: PropTypes.func.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired,
+  // onSmallMovieCardClick: PropTypes.func.isRequired,
   film: PropTypes.oneOfType([
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
@@ -158,10 +158,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetFilmsCount());
   },
-  onSmallMovieCardClick(film) {
-    dispatch(ActionCreator.setFilm(film));
-    dispatch(ActionCreator.setGenre(film.genre));
-  },
+  // onSmallMovieCardClick(film) {
+  //   dispatch(ActionCreator.setFilm(film));
+  //   dispatch(ActionCreator.setGenre(film.genre));
+  // },
   onPlayButtonClick() {
     dispatch(ActionCreator.setPlayer());
   },

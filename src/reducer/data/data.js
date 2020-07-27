@@ -8,12 +8,17 @@ const initialState = {
   allMovies: [],
   promoMovie: {},
   comments: [],
+  favoriteMovies: [],
 };
 
 const ActionType = {
   LOAD_ALL_FILMS: `LOAD_ALL_FILMS`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
+  ADD_FAVORITE_MOVIES: `ADD_FAVORITE_MOVIES`,
+  REMOVE_FAVORITE_MOVIES: `REMOVE_FAVORITE_MOVIES`,
+
 };
 
 const ActionCreator = {
@@ -35,9 +40,28 @@ const ActionCreator = {
       payload: comments,
     };
   },
+  loadFavoriteFilms: (films) => {
+    return {
+      type: ActionType.LOAD_FAVORITE_MOVIES,
+      payload: films,
+    };
+  },
+  addFavoriteFilm: (filmId) => {
+    return {
+      type: ActionType.ADD_FAVORITE_MOVIES,
+      payload: filmId
+    };
+  },
+  removeFavoriteFilm: (filmId) => {
+    return {
+      type: ActionType.REMOVE_FAVORITE_MOVIES,
+      payload: filmId
+    };
+  },
 
 
 };
+
 
 const Operation = {
   loadAllFilms: () => (dispatch, getState, api) => {
@@ -89,6 +113,17 @@ const Operation = {
         return errorPopup(err);
       });
   },
+
+  loadFavoriteFilms: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then(({data}) => {
+        const films = adaptFilms(data);
+        dispatch(ActionCreator.loadFavoriteFilms(films));
+      })
+      .catch((err) => {
+        return errorPopup(err);
+      });
+  },
 };
 
 
@@ -105,6 +140,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS:
       return extend(state, {
         comments: action.payload,
+      });
+    case ActionType.LOAD_FAVORITE_MOVIES:
+      return extend(state, {
+        favoriteMovies: action.payload,
       });
 
   }

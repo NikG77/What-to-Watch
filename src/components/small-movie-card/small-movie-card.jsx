@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import {filmType} from "../../types/types";
 import VideoPlayer from "../video-player/video-player.jsx";
 import {TIME_DELAY} from "../../const.js";
-
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer/watch/watch.js";
 
 let timerId;
 
@@ -55,5 +56,14 @@ SmallMovieCard.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
 };
 
-export default SmallMovieCard;
 
+const mapDispatchToProps = (dispatch) => ({
+  onSmallMovieCardClick(film) {
+    dispatch(ActionCreator.setFilm(film));
+    dispatch(ActionCreator.setGenre(film.genre));
+  }
+});
+
+export {SmallMovieCard};
+
+export default connect(null, mapDispatchToProps)(SmallMovieCard);

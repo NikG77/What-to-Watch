@@ -14,7 +14,7 @@ const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
 
-  const {genreFilms, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, onPlayButtonClick, genresList} = props;
+  const {genreFilms, mainFilm, onGenreItemClick, activeGenre, onPlayButtonClick, genresList} = props;
   const {genre, title, releaseDate, poster, pictureBackground, isFavorite} = mainFilm;
   return (
     <React.Fragment>
@@ -63,7 +63,7 @@ const Main = (props) => {
 
           <MoviesListWrapped
             genreFilms={genreFilms}
-            onSmallMovieCardClick={onSmallMovieCardClick}
+            // onSmallMovieCardClick={onSmallMovieCardClick}
           />
 
         </section>
@@ -85,7 +85,7 @@ Main.propTypes = {
     filmType.isRequired,
     () => null,
   ]),
-  onSmallMovieCardClick: PropTypes.func.isRequired,
+  // onSmallMovieCardClick: PropTypes.func.isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
 
