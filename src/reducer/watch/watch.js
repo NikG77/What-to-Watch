@@ -10,6 +10,7 @@ const initialState = {
   movieCount: COUNT_FILM_SHOW,
   isPlayerActive: false,
   isFormDisabled: false,
+  id: null,
 
 };
 
@@ -21,6 +22,7 @@ const ActionType = {
   SET_PLAYER: `SET_PLAYER`,
   RESET_PLAYER: `RESET_PLAYER`,
   SET_FORM_DISABLED_STATUS: `SET_FORM_DISABLED_STATUS`,
+  SET_ID: `SET_ID`,
 };
 
 const ActionCreator = {
@@ -58,6 +60,12 @@ const ActionCreator = {
     type: ActionType.SET_FORM_DISABLED_STATUS,
     payload: bool,
   }),
+
+  setId: (id) => ({
+    type: ActionType.SET_ID,
+    payload: id,
+  }),
+
 
 };
 
@@ -97,6 +105,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FORM_DISABLED_STATUS:
       return extend(state, {
         isFormDisabled: action.payload,
+      });
+
+    case ActionType.SET_ID:
+      return extend(state, {
+        id: action.payload,
       });
 
   }

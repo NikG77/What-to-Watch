@@ -12,7 +12,7 @@ import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import MyList from "../my-list/my-list.jsx";
 import {ActionCreator} from "../../reducer/watch/watch.js";
-import {getGenreMovies, getMovie, getIsPlayerActive} from "../../reducer/watch/selectors.js";
+import {getGenreMovies, getMovie, getIsPlayerActive, getId} from "../../reducer/watch/selectors.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
@@ -25,12 +25,12 @@ const PlayerWrapped = withVideo(Player);
 
 const App = (props) => {
 
-  const {genreFilms, onPlayButtonClick, login, isAuthorization} = props;
+  const {genreFilms, onPlayButtonClick, login, isAuthorization, id} = props;
   const {mainFilm, onGenreItemClick, film, isPlayerActive, onExitPlayButtonClick} = props;
 
   const renderApp = () => {
 
-    if (film === null && !isPlayerActive) {
+    if (id === null && !isPlayerActive) {
       return (
         <Main
           genreFilms={genreFilms}
@@ -41,7 +41,7 @@ const App = (props) => {
         />
       );
     }
-    if (film === null && isPlayerActive) {
+    if (id === null && isPlayerActive) {
       return (
         <PlayerWrapped
           src={mainFilm.videoLink}
@@ -50,18 +50,17 @@ const App = (props) => {
       );
     }
 
-    if (film && !isPlayerActive) {
+    if (id && !isPlayerActive) {
       return (
         <MoviePage
-          film={film}
+
           genreFilms={genreFilms}
-          // onSmallMovieCardClick={onSmallMovieCardClick}
           onPlayButtonClick={onPlayButtonClick}
           isAuthorization={isAuthorization}
         />
       );
     }
-    if (film && isPlayerActive) {
+    if (id && isPlayerActive) {
       return (
         <PlayerWrapped
           src={film.videoLink}
@@ -82,7 +81,6 @@ const App = (props) => {
 
         <Route exact path="/dev">
           <MoviePage
-            film={genreFilms[0]}
             genreFilms={genreFilms}
             // onSmallMovieCardClick={onSmallMovieCardClick}
             onPlayButtonClick={onPlayButtonClick}
@@ -140,10 +138,15 @@ App.propTypes = {
   onPlayButtonClick: PropTypes.func.isRequired,
   onExitPlayButtonClick: PropTypes.func.isRequired,
   isPlayerActive: PropTypes.bool.isRequired,
+  id: PropTypes.oneOfType([
+    () => null,
+    PropTypes.number.isRequired,
+  ]),
 };
 
 const mapStateToProps = (state) => ({
   genreFilms: getGenreMovies(state),
+  id: getId(state),
   film: getMovie(state),
   isPlayerActive: getIsPlayerActive(state),
   mainFilm: getPromoMovie(state),

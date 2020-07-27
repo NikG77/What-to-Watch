@@ -21,7 +21,7 @@ const MoviesList = (props) => {
             film={movie}
             // onSmallMovieCardClick={onSmallMovieCardClick}
             onSmallMovieCardHover={onItemClick}
-            isPlaying={activeItem === movie}
+            isPlaying={!!activeItem && activeItem.id === movie.id}
           />
         )}
       </div>
