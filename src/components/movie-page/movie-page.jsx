@@ -42,9 +42,11 @@ const MoviePage = (props) => {
               </p>
 
               <MovieCardButtons
+                id={film.id}
                 isMainPage={false}
                 onPlayButtonClick={onPlayButtonClick}
-                isFavorite={isFavorite}/>
+                isFavorite={isFavorite}
+              />
 
             </div>
           </div>

@@ -2,6 +2,7 @@ import {extend} from "../../utils/utils.js";
 import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
 import {errorPopup} from "../../utils/utils.js";
 import {ActionCreator as ActionCreatorWatch} from "../watch/watch.js";
+import NameSpace from "../name-space";
 
 
 const initialState = {
@@ -16,8 +17,8 @@ const ActionType = {
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
-  ADD_FAVORITE_MOVIES: `ADD_FAVORITE_MOVIES`,
-  REMOVE_FAVORITE_MOVIES: `REMOVE_FAVORITE_MOVIES`,
+  MERGE_FILM: `MERGE_FILM`,
+  MERGE_PROMO_FILM: `MERGE_PROMO_FILM`,
 
 };
 
@@ -46,19 +47,14 @@ const ActionCreator = {
       payload: films,
     };
   },
-  addFavoriteFilm: (filmId) => {
-    return {
-      type: ActionType.ADD_FAVORITE_MOVIES,
-      payload: filmId
-    };
-  },
-  removeFavoriteFilm: (filmId) => {
-    return {
-      type: ActionType.REMOVE_FAVORITE_MOVIES,
-      payload: filmId
-    };
-  },
-
+  mergeFilm: (film) => ({
+    type: ActionType.MERGE_FILM,
+    payload: film,
+  }),
+  mergePromoFilm: (film) => ({
+    type: ActionType.MERGE_PROMO_FILM,
+    payload: film,
+  }),
 
 };
 
@@ -124,6 +120,21 @@ const Operation = {
         return errorPopup(err);
       });
   },
+
+  changeFavoriteFilmStatus: (id, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${id}/${status}`)
+      .then(({data}) => {
+        const film = adaptFilm(data);
+        const store = getState();
+        if (store[NameSpace.DATA].promoMovie.id === id) {
+          dispatch(ActionCreator.mergePromoFilm(film));
+        }
+        dispatch(ActionCreator.mergeFilm(film));
+      })
+      .catch((err) => {
+        return errorPopup(err);
+      });
+  },
 };
 
 
@@ -144,6 +155,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FAVORITE_MOVIES:
       return extend(state, {
         favoriteMovies: action.payload,
+      });
+    case ActionType.MERGE_FILM:
+      return extend(state, {
+        allMovies: state.allMovies.map((film) => film.id === action.payload.id ? action.payload : film)
+      });
+    case ActionType.MERGE_PROMO_FILM:
+      return extend(state, {
+        promoMovie: action.payload
       });
 
   }
