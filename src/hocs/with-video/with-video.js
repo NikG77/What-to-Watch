@@ -43,7 +43,6 @@ const withVideo = (Component) => {
     }
 
     componentDidMount() {
-      // const {src} = this.props;
       const {film} = this.props;
 
       const video = this._videoRef.current;
@@ -111,8 +110,6 @@ const withVideo = (Component) => {
 
 
   WithVideo.propTypes = {
-    // src: PropTypes.string.isRequired,
-    onExitPlayButtonClick: PropTypes.func.isRequired,
     film: PropTypes.oneOfType([
       filmType.isRequired,
       PropTypes.oneOf([null]).isRequired,

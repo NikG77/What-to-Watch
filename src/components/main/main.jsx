@@ -15,7 +15,7 @@ const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
 
-  const {genreFilms, mainFilm, onGenreItemClick, activeGenre, onPlayButtonClick, genresList, isPromoLoading} = props;
+  const {genreFilms, mainFilm, onGenreItemClick, activeGenre, genresList, isPromoLoading} = props;
   const {genre, title, releaseDate, poster, pictureBackground, isFavorite, id} = mainFilm;
 
 
@@ -47,7 +47,6 @@ const Main = (props) => {
               <MovieCardButtons
                 id={id}
                 isMainPage={true}
-                onPlayButtonClick={onPlayButtonClick}
                 isFavorite={isFavorite}
               />
 
@@ -92,8 +91,6 @@ Main.propTypes = {
   ]),
   activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
-
-  onPlayButtonClick: PropTypes.func.isRequired,
   isPromoLoading: PropTypes.oneOfType([
     PropTypes.bool.isRequired,
     PropTypes.oneOf([null]).isRequired,
@@ -109,9 +106,6 @@ const mapStateToProps = (state) => (
   }
 );
 
-// const mapDispatchToProps = (dispatch) => ({
-
-// });
 
 export {Main};
 export default connect(mapStateToProps)(Main);

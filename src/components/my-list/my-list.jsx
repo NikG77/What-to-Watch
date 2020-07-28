@@ -47,7 +47,6 @@ class MyList extends PureComponent {
 
             <MoviesListWrapped
               genreFilms={films}
-            // onSmallMovieCardClick={onSmallMovieCardClick}
             />
 
           </section>

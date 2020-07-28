@@ -49,11 +49,6 @@ export const getFilm = createSelector(
     (films, id) => films.find((film) => film.id === id)
 );
 
-// export const getFilmWithId = (id) => {
-//   const allMovie = getFilmWithId();
-//   return allMovie.find((film) => film.id === id);
-// };
-
 export const getMovieCount = (state) => {
   return state[NAME_SPACE].movieCount;
 };

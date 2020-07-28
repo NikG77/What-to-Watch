@@ -17,7 +17,7 @@ const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
-  const {genreFilms, onPlayButtonClick, film} = props;
+  const {genreFilms, film} = props;
 
   const {title, genre, releaseDate, poster, pictureBackground, isFavorite} = film;
   const likeFilms = genreFilms.filter((movie) => {
@@ -48,7 +48,6 @@ const MoviePage = (props) => {
               <MovieCardButtons
                 id={film.id}
                 isMainPage={false}
-                onPlayButtonClick={onPlayButtonClick}
                 isFavorite={isFavorite}
               />
 
@@ -94,7 +93,6 @@ MoviePage.propTypes = {
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -2,7 +2,6 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
-// import {AuthorizationStatus} from "../../const.js";
 import {filmsType, filmType} from "../../types/types";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
@@ -26,8 +25,8 @@ const PlayerWrapped = withVideo(Player);
 
 const App = (props) => {
 
-  const {genreFilms, onPlayButtonClick, login, isAuthorization, id, isFilmsLoading, onFilmIdSet} = props;
-  const {onExitPlayButtonClick, mainFilm, onGenreItemClick} = props;
+  const {genreFilms, login, isAuthorization, id, isFilmsLoading, onFilmIdSet} = props;
+  const {mainFilm, onGenreItemClick} = props;
 
   const renderMain = () => {
 
@@ -37,7 +36,6 @@ const App = (props) => {
           genreFilms={genreFilms}
           mainFilm={mainFilm}
           onGenreItemClick={onGenreItemClick}
-          onPlayButtonClick={onPlayButtonClick}
         />
       );
     }
@@ -46,8 +44,6 @@ const App = (props) => {
       return (
         <MoviePage
           genreFilms={genreFilms}
-          onPlayButtonClick={onPlayButtonClick}
-          isAuthorization={isAuthorization}
         />
       );
     }
@@ -70,17 +66,12 @@ const App = (props) => {
           return <MoviePage
             genreFilms={genreFilms}
 
-            onPlayButtonClick={onPlayButtonClick}
-            isAuthorization={isAuthorization}
           />;
         }}/>
 
         <Route path={`${AppRoute.PLAYER}/:id?`} exact render={({match}) => {
           onFilmIdSet(match.params.id);
-          return <PlayerWrapped
-            onExitPlayButtonClick={onExitPlayButtonClick}
-            id={id}
-          />;
+          return <PlayerWrapped id={+id} />;
         }}/>
 
         <Route exact path={AppRoute.LOGIN} render={() => {
@@ -126,14 +117,10 @@ App.propTypes = {
     filmType.isRequired,
   ]),
   onGenreItemClick: PropTypes.func.isRequired,
-  // onSmallMovieCardClick: PropTypes.func.isRequired,
   film: PropTypes.oneOfType([
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  onPlayButtonClick: PropTypes.func.isRequired,
-  onExitPlayButtonClick: PropTypes.func.isRequired,
-  // isPlayerActive: PropTypes.bool.isRequired,
   id: PropTypes.oneOfType([
     () => null,
     PropTypes.number.isRequired,
@@ -149,7 +136,6 @@ const mapStateToProps = (state) => ({
   genreFilms: getGenreMovies(state),
   id: getId(state),
   film: getFilm(state),
-  // isPlayerActive: getIsPlayerActive(state),
   mainFilm: getPromoMovie(state),
   isAuthorization: getAuthorizationStatus(state),
   isFilmsLoading: getFilmsLoadingStatus(state),
@@ -162,12 +148,6 @@ const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
     dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetFilmsCount());
-  },
-  onPlayButtonClick() {
-    dispatch(ActionCreator.setPlayer());
-  },
-  onExitPlayButtonClick() {
-    dispatch(ActionCreator.resetPlayer());
   },
   onFilmIdSet(id) {
     dispatch(ActionCreator.setId(+id));

@@ -19,7 +19,6 @@ const MoviesList = (props) => {
           <SmallMovieCard
             key={movie.id}
             film={movie}
-            // onSmallMovieCardClick={onSmallMovieCardClick}
             onSmallMovieCardHover={onItemClick}
             isPlaying={!!activeItem && activeItem.id === movie.id}
           />
@@ -35,7 +34,6 @@ const MoviesList = (props) => {
 
 MoviesList.propTypes = {
   genreFilms: filmsType.isRequired,
-  // onSmallMovieCardClick: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.oneOfType([
     filmType.isRequired,
