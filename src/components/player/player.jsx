@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {formateDuration} from "../../utils/utils.js";
+import history from "../../history.js";
 
 const Player = (props) => {
-  const {onExitPlayButtonClick, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;
+  const {id, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;
 
   return (
     <div className="player">
@@ -13,7 +14,8 @@ const Player = (props) => {
         onLoadedMetadata={setDuration}
         className="player__video" />
 
-      <button onClick={onExitPlayButtonClick} type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit"
+        onClick={() => history.push(`/film/${id}`)}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -58,7 +60,6 @@ const Player = (props) => {
 
 
 Player.propTypes = {
-  onExitPlayButtonClick: PropTypes.func.isRequired,
   isPlay: PropTypes.bool.isRequired,
   duration: PropTypes.number.isRequired,
   progress: PropTypes.number.isRequired,
@@ -68,6 +69,10 @@ Player.propTypes = {
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({current: PropTypes.any})
+  ]),
+  id: PropTypes.oneOfType([
+    () => null,
+    PropTypes.number.isRequired,
   ]),
 };
 

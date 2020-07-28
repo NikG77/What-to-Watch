@@ -12,65 +12,51 @@ import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import MyList from "../my-list/my-list.jsx";
 import {ActionCreator} from "../../reducer/watch/watch.js";
-import {getGenreMovies, getMovie, getIsPlayerActive, getId} from "../../reducer/watch/selectors.js";
+import {getGenreMovies, getFilm, getFilmsLoadingStatus, getId} from "../../reducer/watch/selectors.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
 import {Link} from "react-router-dom";
+import Loader from "../loader/loader.jsx";
 
 
 const PlayerWrapped = withVideo(Player);
 
 const App = (props) => {
 
-  const {genreFilms, onPlayButtonClick, login, isAuthorization, id} = props;
-  const {mainFilm, onGenreItemClick, film, isPlayerActive, onExitPlayButtonClick} = props;
+  const {genreFilms, onPlayButtonClick, login, isAuthorization, id, isFilmsLoading, onFilmIdSet} = props;
+  const {onExitPlayButtonClick, mainFilm, onGenreItemClick} = props;
 
-  const renderApp = () => {
+  const renderMain = () => {
 
-    if (id === null && !isPlayerActive) {
+    if (id === null) {
       return (
         <Main
           genreFilms={genreFilms}
           mainFilm={mainFilm}
-          // onSmallMovieCardClick={onSmallMovieCardClick}
           onGenreItemClick={onGenreItemClick}
           onPlayButtonClick={onPlayButtonClick}
         />
       );
     }
-    if (id === null && isPlayerActive) {
-      return (
-        <PlayerWrapped
-          src={mainFilm.videoLink}
-          onExitPlayButtonClick={onExitPlayButtonClick}
-        />
-      );
-    }
 
-    if (id && !isPlayerActive) {
+    if (id) {
       return (
         <MoviePage
-
           genreFilms={genreFilms}
           onPlayButtonClick={onPlayButtonClick}
           isAuthorization={isAuthorization}
         />
       );
     }
-    if (id && isPlayerActive) {
-      return (
-        <PlayerWrapped
-          src={film.videoLink}
-          onExitPlayButtonClick={onExitPlayButtonClick}
-        />
-      );
-    }
 
     return null;
   };
+
+  const renderApp = () => isFilmsLoading ? <Loader /> : renderMain();
+
 
   return (
     <Router history={history}>
@@ -79,14 +65,24 @@ const App = (props) => {
           {renderApp()}
         </Route>
 
-        <Route exact path="/dev">
-          <MoviePage
+        <Route path="/film/:id?" exact render={({match}) => {
+          onFilmIdSet(match.params.id);
+          return <MoviePage
             genreFilms={genreFilms}
-            // onSmallMovieCardClick={onSmallMovieCardClick}
+
             onPlayButtonClick={onPlayButtonClick}
             isAuthorization={isAuthorization}
-          />
-        </Route>
+          />;
+        }}/>
+
+        <Route path={`${AppRoute.PLAYER}/:id?`} exact render={({match}) => {
+          onFilmIdSet(match.params.id);
+          return <PlayerWrapped
+            onExitPlayButtonClick={onExitPlayButtonClick}
+            id={id}
+          />;
+        }}/>
+
         <Route exact path={AppRoute.LOGIN} render={() => {
           return (
             isAuthorization ? renderApp() : <SignIn onSubmit={login} />
@@ -137,20 +133,26 @@ App.propTypes = {
   ]),
   onPlayButtonClick: PropTypes.func.isRequired,
   onExitPlayButtonClick: PropTypes.func.isRequired,
-  isPlayerActive: PropTypes.bool.isRequired,
+  // isPlayerActive: PropTypes.bool.isRequired,
   id: PropTypes.oneOfType([
     () => null,
     PropTypes.number.isRequired,
   ]),
+  isFilmsLoading: PropTypes.oneOfType([
+    () => null,
+    PropTypes.bool.isRequired,
+  ]),
+  onFilmIdSet: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   genreFilms: getGenreMovies(state),
   id: getId(state),
-  film: getMovie(state),
-  isPlayerActive: getIsPlayerActive(state),
+  film: getFilm(state),
+  // isPlayerActive: getIsPlayerActive(state),
   mainFilm: getPromoMovie(state),
   isAuthorization: getAuthorizationStatus(state),
+  isFilmsLoading: getFilmsLoadingStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -161,15 +163,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetFilmsCount());
   },
-  // onSmallMovieCardClick(film) {
-  //   dispatch(ActionCreator.setFilm(film));
-  //   dispatch(ActionCreator.setGenre(film.genre));
-  // },
   onPlayButtonClick() {
     dispatch(ActionCreator.setPlayer());
   },
   onExitPlayButtonClick() {
     dispatch(ActionCreator.resetPlayer());
+  },
+  onFilmIdSet(id) {
+    dispatch(ActionCreator.setId(+id));
   },
 });
 

@@ -8,7 +8,7 @@ import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import {connect} from "react-redux";
-import {getFilm} from "../../reducer/watch/selectors";
+import {getFilm} from "../../reducer/watch/selectors.js";
 
 
 const COUNT_LIKE_FILMS = 4;
@@ -94,9 +94,7 @@ MoviePage.propTypes = {
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  // onSmallMovieCardClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
-  // isAuthorization: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

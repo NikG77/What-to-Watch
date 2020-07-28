@@ -49,9 +49,10 @@ export const getFilm = createSelector(
     (films, id) => films.find((film) => film.id === id)
 );
 
-export const getMovie = (state) => {
-  return state[NAME_SPACE].movie;
-};
+// export const getFilmWithId = (id) => {
+//   const allMovie = getFilmWithId();
+//   return allMovie.find((film) => film.id === id);
+// };
 
 export const getMovieCount = (state) => {
   return state[NAME_SPACE].movieCount;
@@ -64,4 +65,9 @@ export const getIsPlayerActive = (state) => {
 export const getReviewFormStatus = (state) => {
   return state[NAME_SPACE].isFormDisabled;
 };
+
+export const getFilmsLoadingStatus = (state) => state[NAME_SPACE].isFilmsLoading;
+
+export const getPromoFilmLoadingStatus = (state) => state[NAME_SPACE].isPromoLoading;
+
 

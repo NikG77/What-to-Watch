@@ -5,7 +5,7 @@ const ALL_GENRES = `All genres`;
 const COUNT_FILM_SHOW = 8;
 
 const initialState = {
-  movie: null,
+  // movie: null,
   genre: ALL_GENRES,
   movieCount: COUNT_FILM_SHOW,
   isPlayerActive: false,
@@ -77,10 +77,10 @@ const reducer = (state = initialState, action) => {
         genre: action.payload,
       });
 
-    case ActionType.SET_FILM:
-      return extend(state, {
-        movie: action.payload,
-      });
+      // case ActionType.SET_FILM:
+      //   return extend(state, {
+      //     movie: action.payload,
+      //   });
 
     case ActionType.SET_FILMS_COUNT:
       return extend(state, {

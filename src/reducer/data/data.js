@@ -10,6 +10,8 @@ const initialState = {
   promoMovie: {},
   comments: [],
   favoriteMovies: [],
+  isFilmsLoading: false,
+  isPromoLoading: false,
 };
 
 const ActionType = {
@@ -19,6 +21,8 @@ const ActionType = {
   LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
   MERGE_FILM: `MERGE_FILM`,
   MERGE_PROMO_FILM: `MERGE_PROMO_FILM`,
+  SET_FILMS_LOADING: `SET_FILMS_LOADING`,
+  SET_PROMO_LOADING: `SET_PROMO_LOADING`,
 
 };
 
@@ -56,28 +60,54 @@ const ActionCreator = {
     payload: film,
   }),
 
+  setFilmsLoading: (isFilmsLoading) => {
+    return (
+      {
+        type: ActionType.SET_FILMS_LOADING,
+        payload: isFilmsLoading
+      }
+    );
+  },
+
+  setPromoLoading: (isPromoLoading) => {
+    return (
+      {
+        type: ActionType.SET_PROMO_LOADING,
+        payload: isPromoLoading
+      }
+    );
+  },
+
 };
 
 
 const Operation = {
   loadAllFilms: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setFilmsLoading(true));
+
     return api.get(`/films`)
       .then(({data}) => {
         const films = adaptFilms(data);
         dispatch(ActionCreator.loadAllFilms(films));
+        dispatch(ActionCreator.setFilmsLoading(false));
       })
       .catch((err) => {
+        dispatch(ActionCreator.setFilmsLoading(false));
         return errorPopup(err);
       });
   },
 
   loadPromoFilm: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setPromoLoading(true));
+
     return api.get(`/films/promo`)
       .then(({data}) => {
         const promoFilm = adaptFilm(data);
         dispatch(ActionCreator.loadPromoFilm(promoFilm));
+        dispatch(ActionCreator.setPromoLoading(false));
       })
       .catch((err) => {
+        dispatch(ActionCreator.setPromoLoading(false));
         return errorPopup(err);
       });
   },
@@ -163,6 +193,16 @@ const reducer = (state = initialState, action) => {
     case ActionType.MERGE_PROMO_FILM:
       return extend(state, {
         promoMovie: action.payload
+      });
+
+    case ActionType.SET_FILMS_LOADING:
+      return extend(state, {
+        isFilmsLoading: action.payload
+      });
+
+    case ActionType.SET_PROMO_LOADING:
+      return extend(state, {
+        isPromoLoading: action.payload
       });
 
   }

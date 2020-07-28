@@ -1,5 +1,8 @@
 import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getFilm} from "../../reducer/watch/selectors.js";
+import {filmType} from "../../types/types";
 
 const withVideo = (Component) => {
 
@@ -40,10 +43,12 @@ const withVideo = (Component) => {
     }
 
     componentDidMount() {
-      const {src} = this.props;
+      // const {src} = this.props;
+      const {film} = this.props;
+
       const video = this._videoRef.current;
 
-      video.src = src;
+      video.src = film.videoLink;
       video.autoplay = true;
 
       video.onplay = () => {
@@ -106,11 +111,19 @@ const withVideo = (Component) => {
 
 
   WithVideo.propTypes = {
-    src: PropTypes.string.isRequired,
+    // src: PropTypes.string.isRequired,
     onExitPlayButtonClick: PropTypes.func.isRequired,
+    film: PropTypes.oneOfType([
+      filmType.isRequired,
+      PropTypes.oneOf([null]).isRequired,
+    ]),
   };
 
-  return WithVideo;
+  const mapStateToProps = (state) => ({
+    film: getFilm(state),
+  });
+
+  return connect(mapStateToProps)(WithVideo);
 
 };
 
