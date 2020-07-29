@@ -31,7 +31,7 @@ const SmallMovieCard = (props) => {
       onClick={() => {
         clearTimer(film, onSmallMovieCardClick);
         // onSmallMovieCardClick(film);
-        history.push(`${AppRoute.PLAYER}/${id}`);
+        history.push(`${AppRoute.FILM}/${id}`);
       }}
     >
       <div className="small-movie-card__image">
@@ -42,7 +42,7 @@ const SmallMovieCard = (props) => {
         />
       </div>
       <h3 className="small-movie-card__title">
-        <Link to={`${AppRoute.PLAYER}/${id}`} className="small-movie-card__link">{title}</Link>
+        <Link to={`${AppRoute.FILM}/${id}`} className="small-movie-card__link">{title}</Link>
       </h3>
     </article>
   );
