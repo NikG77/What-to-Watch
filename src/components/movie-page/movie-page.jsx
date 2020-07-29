@@ -8,7 +8,7 @@ import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import {connect} from "react-redux";
-import {getFilm} from "../../reducer/watch/selectors.js";
+import {getFilmById} from "../../reducer/watch/selectors.js";
 
 
 const COUNT_LIKE_FILMS = 4;
@@ -17,7 +17,7 @@ const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
-  const {genreFilms, film} = props;
+  const {genreFilms, film, id} = props;
 
   const {title, genre, releaseDate, poster, pictureBackground, isFavorite} = film;
   const likeFilms = genreFilms.filter((movie) => {
@@ -46,7 +46,7 @@ const MoviePage = (props) => {
               </p>
 
               <MovieCardButtons
-                id={film.id}
+                id={id}
                 isMainPage={false}
                 isFavorite={isFavorite}
               />
@@ -93,10 +93,14 @@ MoviePage.propTypes = {
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
+  id: PropTypes.oneOfType([
+    () => null,
+    PropTypes.number.isRequired,
+  ]),
 };
 
-const mapStateToProps = (state) => ({
-  film: getFilm(state),
+const mapStateToProps = (state, props) => ({
+  film: getFilmById(state, props),
 });
 
 

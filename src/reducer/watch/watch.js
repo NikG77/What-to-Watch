@@ -8,7 +8,8 @@ const initialState = {
   genre: ALL_GENRES,
   movieCount: COUNT_FILM_SHOW,
   isFormDisabled: false,
-  id: null,
+  selectedMovie: {},
+  // id: null,
 
 };
 
@@ -18,7 +19,7 @@ const ActionType = {
   SET_FILMS_COUNT: `SET_FILMS_COUNT`,
   RESET_FILMS_COUNT: `RESET_FILMS_COUNT`,
   SET_FORM_DISABLED_STATUS: `SET_FORM_DISABLED_STATUS`,
-  SET_ID: `SET_ID`,
+  // SET_ID: `SET_ID`,
 };
 
 const ActionCreator = {
@@ -48,10 +49,10 @@ const ActionCreator = {
     payload: bool,
   }),
 
-  setId: (id) => ({
-    type: ActionType.SET_ID,
-    payload: id,
-  }),
+  // setId: (id) => ({
+  //   type: ActionType.SET_ID,
+  //   payload: id,
+  // }),
 
 
 };
@@ -79,9 +80,9 @@ const reducer = (state = initialState, action) => {
         isFormDisabled: action.payload,
       });
 
-    case ActionType.SET_ID:
+    case ActionType.SET_FILM:
       return extend(state, {
-        id: action.payload,
+        selectedMovie: action.payload,
       });
 
   }

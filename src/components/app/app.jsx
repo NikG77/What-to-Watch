@@ -11,7 +11,7 @@ import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import MyList from "../my-list/my-list.jsx";
 import {ActionCreator} from "../../reducer/watch/watch.js";
-import {getGenreMovies, getFilm, getFilmsLoadingStatus, getId} from "../../reducer/watch/selectors.js";
+import {getGenreMovies, getFilmsLoadingStatus} from "../../reducer/watch/selectors.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
@@ -25,34 +25,15 @@ const PlayerWrapped = withVideo(Player);
 
 const App = (props) => {
 
-  const {genreFilms, login, isAuthorization, id, isFilmsLoading, onFilmIdSet} = props;
+  const {genreFilms, login, isAuthorization, isFilmsLoading} = props;
   const {mainFilm, onGenreItemClick} = props;
 
-  const renderMain = () => {
-
-    if (id === null) {
-      return (
-        <Main
-          genreFilms={genreFilms}
-          mainFilm={mainFilm}
-          onGenreItemClick={onGenreItemClick}
-        />
-      );
-    }
-
-    if (id) {
-      return (
-        <MoviePage
-          genreFilms={genreFilms}
-        />
-      );
-    }
-
-    return null;
-  };
-
-  const renderApp = () => isFilmsLoading ? <Loader /> : renderMain();
-
+  const renderApp = () => isFilmsLoading ? <Loader />
+    : <Main
+      genreFilms={genreFilms}
+      mainFilm={mainFilm}
+      onGenreItemClick={onGenreItemClick}
+    />;
 
   return (
     <Router history={history}>
@@ -61,17 +42,15 @@ const App = (props) => {
           {renderApp()}
         </Route>
 
-        <Route path="/film/:id?" exact render={({match}) => {
-          onFilmIdSet(match.params.id);
+        <Route path={`${AppRoute.FILM}/:id`} exact render={({match}) => {
           return <MoviePage
             genreFilms={genreFilms}
-
+            id={+match.params.id}
           />;
         }}/>
 
-        <Route path={`${AppRoute.PLAYER}/:id?`} exact render={({match}) => {
-          onFilmIdSet(match.params.id);
-          return <PlayerWrapped id={+id} />;
+        <Route path={`${AppRoute.PLAYER}/:id`} exact render={({match}) => {
+          return <PlayerWrapped id={+match.params.id} />;
         }}/>
 
         <Route exact path={AppRoute.LOGIN} render={() => {
@@ -97,7 +76,7 @@ const App = (props) => {
                 <br />
                 <small>Page not found</small>
               </h1>
-              <Link to="/">Go to main page</Link>
+              <Link to={AppRoute.ROOT}>Go to main page</Link>
             </Fragment>
           )}
         />
@@ -117,25 +96,20 @@ App.propTypes = {
     filmType.isRequired,
   ]),
   onGenreItemClick: PropTypes.func.isRequired,
-  film: PropTypes.oneOfType([
-    filmType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-  id: PropTypes.oneOfType([
-    () => null,
-    PropTypes.number.isRequired,
-  ]),
+  // film: PropTypes.oneOfType([
+  //   filmType.isRequired,
+  //   PropTypes.oneOf([null]).isRequired,
+  // ]),
   isFilmsLoading: PropTypes.oneOfType([
     () => null,
     PropTypes.bool.isRequired,
   ]),
-  onFilmIdSet: PropTypes.func.isRequired,
+  // onFilmIdSet: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   genreFilms: getGenreMovies(state),
-  id: getId(state),
-  film: getFilm(state),
+  // film: getFilm(state),
   mainFilm: getPromoMovie(state),
   isAuthorization: getAuthorizationStatus(state),
   isFilmsLoading: getFilmsLoadingStatus(state),
@@ -148,9 +122,6 @@ const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
     dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetFilmsCount());
-  },
-  onFilmIdSet(id) {
-    dispatch(ActionCreator.setId(+id));
   },
 });
 

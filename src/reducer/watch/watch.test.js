@@ -159,24 +159,24 @@ it(`Action creator setPlayer true correct`, () => {
 });
 
 
-it(`Action creator reset Player correct`, () => {
-  expect(reducer({
-    genreMovies: films,
-    movie: null,
-    genre: `Drama`,
-    movieCount: 8,
-    isPlayerActive: true,
-  }, {
-    type: ActionType.RESET_PLAYER,
-    payload: false,
-  })).toEqual({
-    genreMovies: films,
-    movie: null,
-    genre: `Drama`,
-    movieCount: 8,
-    isPlayerActive: false,
-  });
-});
+// it(`Action creator reset Player correct`, () => {
+//   expect(reducer({
+//     genreMovies: films,
+//     movie: null,
+//     genre: `Drama`,
+//     movieCount: 8,
+//     isPlayerActive: true,
+//   }, {
+//     type: ActionType.RESET_PLAYER,
+//     payload: false,
+//   })).toEqual({
+//     genreMovies: films,
+//     movie: null,
+//     genre: `Drama`,
+//     movieCount: 8,
+//     isPlayerActive: false,
+//   });
+// });
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator set genre correctly`, () => {
@@ -233,20 +233,20 @@ describe(`Action creators work correctly`, () => {
       });
   });
 
-  it(`Action creator set player correctly`, () => {
-    expect(ActionCreator.setPlayer())
-      .toEqual({
-        type: ActionType.SET_PLAYER,
-        payload: true,
-      });
-  });
+  // it(`Action creator set player correctly`, () => {
+  //   expect(ActionCreator.setPlayer())
+  //     .toEqual({
+  //       type: ActionType.SET_PLAYER,
+  //       payload: true,
+  //     });
+  // });
 
-  it(`Action creator reset player correctly`, () => {
-    expect(ActionCreator.resetPlayer())
-      .toEqual({
-        type: ActionType.RESET_PLAYER,
-        payload: false,
-      });
-  });
+  // it(`Action creator reset player correctly`, () => {
+  //   expect(ActionCreator.resetPlayer())
+  //     .toEqual({
+  //       type: ActionType.RESET_PLAYER,
+  //       payload: false,
+  //     });
+  // });
 
 });

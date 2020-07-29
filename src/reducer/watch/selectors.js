@@ -43,19 +43,28 @@ export const getGenresList = createSelector(
 
 export const getId = (state) => state[NAME_SPACE].id;
 
-export const getFilm = createSelector(
-    getAllMovies,
-    getId,
-    (films, id) => films.find((film) => film.id === id)
-);
+// export const getFilm = createSelector(
+//     getAllMovies,
+//     getId,
+//     (films, id) => films.find((film) => film.id === id)
+// );
+
+export const getFilmById = (state, props) => {
+  const allMovie = getAllMovies(state);
+  const film = allMovie.find((movie) => movie.id === props.id);
+  return film;
+};
 
 export const getMovieCount = (state) => {
   return state[NAME_SPACE].movieCount;
 };
 
-export const getIsPlayerActive = (state) => {
-  return state[NAME_SPACE].isPlayerActive;
-};
+export const getFilm = (state) => state[NAME_SPACE].selectedMovie;
+
+
+// export const getIsPlayerActive = (state) => {
+//   return state[NAME_SPACE].isPlayerActive;
+// };
 
 export const getReviewFormStatus = (state) => {
   return state[NAME_SPACE].isFormDisabled;
