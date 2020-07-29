@@ -5,8 +5,10 @@ import Logo from "../logo/logo.jsx";
 import {getUserInfo} from "../../reducer/user/selectors.js";
 import {filmType} from "../../types/types";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
-
+import {getFilmById} from "../../reducer/watch/selectors.js";
 import {getReviewFormStatus} from "../../reducer/watch/selectors.js";
+import {AppRoute} from "../../const.js";
+import {Link} from "react-router-dom";
 
 
 const DEFAULT_CHECKED_NUMBER = 3;
@@ -45,7 +47,7 @@ class AddReview extends PureComponent {
     const {film, userInfo, isFormDisabled} = this.props;
 
     if (film) {
-      const {title, pictureBackground, poster} = film;
+      const {title, pictureBackground, poster, id} = film;
 
       return (
         <section className="movie-card movie-card--full">
@@ -62,7 +64,7 @@ class AddReview extends PureComponent {
               <nav className="breadcrumbs">
                 <ul className="breadcrumbs__list">
                   <li className="breadcrumbs__item">
-                    <a href="movie-page.html" className="breadcrumbs__link">{title}</a>
+                    <Link to={`${AppRoute.FILM}/${id}`} href="movie-page.html" className="breadcrumbs__link">{title}</Link>
                   </li>
                   <li className="breadcrumbs__item">
                     <a className="breadcrumbs__link">Add review</a>
@@ -163,13 +165,17 @@ AddReview.propTypes = {
     PropTypes.oneOf([null]).isRequired,
   ]),
   isFormDisabled: PropTypes.bool.isRequired,
+  id: PropTypes.oneOfType([
+    () => null,
+    PropTypes.number.isRequired,
+  ]),
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
   userInfo: getUserInfo(state),
   isFormDisabled: getReviewFormStatus(state),
+  film: getFilmById(state, props),
 });
-
 
 const mapDispatchToProps = (dispatch) => ({
   onReviewSubmit(id, comment) {

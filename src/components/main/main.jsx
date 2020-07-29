@@ -46,7 +46,7 @@ const Main = (props) => {
 
               <MovieCardButtons
                 id={id}
-                isMainPage={true}
+                // isMainPage={true}
                 isFavorite={isFavorite}
               />
 

@@ -1,17 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+// import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 import {Operation as OperationData} from "../../reducer/data/data.js";
 
 const MovieCardButtons = (props) => {
-  const {id, isMainPage, isFavorite, isAuthorization, onChangeStatusButtonClick} = props;
+  const {id, isFavorite, onChangeStatusButtonClick} = props;
 
   return (
     <div className="movie-card__buttons">
-      <Link to={`/player/${id}`} className="btn btn--play movie-card__button" type="button">
+      <Link to={`${AppRoute.PLAYER}/${id}`} className="btn btn--play movie-card__button" type="button">
         <svg viewBox="0 0 19 19" width="19" height="19">
           <use xlinkHref="#play-s"></use>
         </svg>
@@ -32,7 +32,7 @@ const MovieCardButtons = (props) => {
           </svg>}
         <span>My list</span>
       </button>
-      {isMainPage && isAuthorization ? `` : <Link to={AppRoute.ADD_REVIEW} className="btn movie-card__button">Add review</Link>}
+      <Link to={`${AppRoute.FILM}/${id}${AppRoute.ADD_REVIEW}`} className="btn movie-card__button">Add review</Link>
     </div>
 
 
@@ -40,12 +40,12 @@ const MovieCardButtons = (props) => {
 };
 
 MovieCardButtons.propTypes = {
-  isMainPage: PropTypes.bool.isRequired,
+  // isMainPage: PropTypes.bool.isRequired,
   isFavorite: PropTypes.oneOfType([
     () => null,
     PropTypes.bool.isRequired,
   ]),
-  isAuthorization: PropTypes.bool.isRequired,
+  // isAuthorization: PropTypes.bool.isRequired,
   onChangeStatusButtonClick: PropTypes.func.isRequired,
   id: PropTypes.oneOfType([
     PropTypes.number.isRequired,
@@ -53,9 +53,9 @@ MovieCardButtons.propTypes = {
   ]),
 };
 
-const mapStateToProps = (state) => ({
-  isAuthorization: getAuthorizationStatus(state),
-});
+// const mapStateToProps = (state) => ({
+//   isAuthorization: getAuthorizationStatus(state),
+// });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeStatusButtonClick(id, status) {
@@ -66,4 +66,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {MovieCardButtons};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieCardButtons);
+export default connect(null, mapDispatchToProps)(MovieCardButtons);
