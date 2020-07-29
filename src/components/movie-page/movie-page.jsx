@@ -9,6 +9,7 @@ import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import {connect} from "react-redux";
 import {getFilmById} from "../../reducer/watch/selectors.js";
+import Loader from "../loader/loader.jsx";
 
 
 const COUNT_LIKE_FILMS = 4;
@@ -18,6 +19,9 @@ const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
   const {genreFilms, film, id} = props;
+  if (!film) {
+    return <Loader />;
+  }
 
   const {title, genre, releaseDate, poster, pictureBackground, isFavorite} = film;
   const likeFilms = genreFilms.filter((movie) => {

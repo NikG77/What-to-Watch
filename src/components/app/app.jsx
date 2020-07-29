@@ -19,6 +19,7 @@ import history from "../../history.js";
 import {AppRoute} from "../../const.js";
 import {Link} from "react-router-dom";
 import Loader from "../loader/loader.jsx";
+import PrivateRoute from "../private-route/private-route.jsx";
 
 
 const PlayerWrapped = withVideo(Player);
@@ -42,31 +43,41 @@ const App = (props) => {
           {renderApp()}
         </Route>
 
-        <Route path={`${AppRoute.FILM}/:id`} exact render={({match}) => {
-          return <MoviePage
-            genreFilms={genreFilms}
-            id={+match.params.id}
-          />;
-        }}/>
+        <Route exact path={`${AppRoute.FILM}/:id`}
+          render={({match}) => {
+            return <MoviePage
+              genreFilms={genreFilms}
+              id={+match.params.id}
+            />;
+          }}/>
 
-        <Route path={`${AppRoute.PLAYER}/:id`} exact render={({match}) => {
-          return <PlayerWrapped id={+match.params.id} />;
-        }}/>
+        <Route exact path={`${AppRoute.PLAYER}/:id`}
+          render={({match}) => {
+            return <PlayerWrapped id={+match.params.id} />;
+          }}/>
 
-        <Route exact path={AppRoute.LOGIN} render={() => {
-          return (
-            isAuthorization ? renderApp() : <SignIn onSubmit={login} />
-          );
-        }} >
-        </Route>
+        <Route exact path={AppRoute.LOGIN}
+          render={() => {
+            return (
+              isAuthorization ? renderApp() : <SignIn onSubmit={login} />
+            );
+          }} />
 
         <Route exact path="/dev-review">
           <AddReview film={genreFilms[0]} />
         </Route>
 
-        <Route exact path={AppRoute.MY_LIST}>
-          <MyList />
-        </Route>
+        <PrivateRoute exact path={`${AppRoute.PLAYER}/:id${AppRoute.ADD_REVIEW}`}
+          render={() => {
+            return (
+              <AddReview film={genreFilms[0]} />
+            );
+          }}
+        />
+
+        <Route exact path={AppRoute.MY_LIST}
+          render={() => <MyList />}
+        />
 
         <Route
           render={() => (
@@ -96,15 +107,11 @@ App.propTypes = {
     filmType.isRequired,
   ]),
   onGenreItemClick: PropTypes.func.isRequired,
-  // film: PropTypes.oneOfType([
-  //   filmType.isRequired,
-  //   PropTypes.oneOf([null]).isRequired,
-  // ]),
   isFilmsLoading: PropTypes.oneOfType([
     () => null,
     PropTypes.bool.isRequired,
   ]),
-  // onFilmIdSet: PropTypes.func.isRequired,
+
 };
 
 const mapStateToProps = (state) => ({

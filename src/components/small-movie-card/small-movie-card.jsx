@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/watch/watch.js";
 import {Link} from "react-router-dom";
 import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 let timerId;
 
@@ -30,7 +31,7 @@ const SmallMovieCard = (props) => {
       onClick={() => {
         clearTimer(film, onSmallMovieCardClick);
         // onSmallMovieCardClick(film);
-        history.push(`/film/${id}`);
+        history.push(`${AppRoute.PLAYER}/${id}`);
       }}
     >
       <div className="small-movie-card__image">
@@ -41,7 +42,7 @@ const SmallMovieCard = (props) => {
         />
       </div>
       <h3 className="small-movie-card__title">
-        <Link to={`/film/${id}`} className="small-movie-card__link">{title}</Link>
+        <Link to={`${AppRoute.PLAYER}/${id}`} className="small-movie-card__link">{title}</Link>
       </h3>
     </article>
   );

@@ -30,10 +30,10 @@ export const Error = {
 
 export const AppRoute = {
   LOGIN: `/login`,
-  FILM: `/film`,
+  FILM: `/films`,
   ADD_REVIEW: `/review`,
   ROOT: `/`,
-  MY_LIST: `/myList`,
+  MY_LIST: `/mylist`,
   PLAYER: `/player`,
 };
 

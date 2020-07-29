@@ -1,7 +1,7 @@
 import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getFilm} from "../../reducer/watch/selectors.js";
+import {getFilmById} from "../../reducer/watch/selectors.js";
 import {filmType} from "../../types/types";
 
 const withVideo = (Component) => {
@@ -114,10 +114,14 @@ const withVideo = (Component) => {
       filmType.isRequired,
       PropTypes.oneOf([null]).isRequired,
     ]),
+    id: PropTypes.oneOfType([
+      () => null,
+      PropTypes.number.isRequired,
+    ]),
   };
 
-  const mapStateToProps = (state) => ({
-    film: getFilm(state),
+  const mapStateToProps = (state, props) => ({
+    film: getFilmById(state, props),
   });
 
   return connect(mapStateToProps)(WithVideo);
