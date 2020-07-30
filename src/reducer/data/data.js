@@ -1,8 +1,9 @@
 import {extend} from "../../utils/utils.js";
 import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
 import {errorPopup} from "../../utils/utils.js";
-import {ActionCreator as ActionCreatorWatch} from "../watch/watch.js";
 import NameSpace from "../name-space";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   favoriteMovies: [],
   isFilmsLoading: false,
   isPromoLoading: false,
+  isFormDisabled: false,
 };
 
 const ActionType = {
@@ -23,60 +25,54 @@ const ActionType = {
   MERGE_PROMO_FILM: `MERGE_PROMO_FILM`,
   SET_FILMS_LOADING: `SET_FILMS_LOADING`,
   SET_PROMO_LOADING: `SET_PROMO_LOADING`,
-
+  SET_FORM_DISABLED_STATUS: `SET_FORM_DISABLED_STATUS`,
 };
 
 const ActionCreator = {
-  loadAllFilms: (films) => {
-    return {
-      type: ActionType.LOAD_ALL_FILMS,
-      payload: films,
-    };
-  },
-  loadPromoFilm: (film) => {
-    return {
-      type: ActionType.LOAD_PROMO_FILM,
-      payload: film,
-    };
-  },
-  loadComments: (comments) => {
-    return {
-      type: ActionType.LOAD_COMMENTS,
-      payload: comments,
-    };
-  },
-  loadFavoriteFilms: (films) => {
-    return {
-      type: ActionType.LOAD_FAVORITE_MOVIES,
-      payload: films,
-    };
-  },
+  loadAllFilms: (films) => ({
+    type: ActionType.LOAD_ALL_FILMS,
+    payload: films,
+  }),
+
+  loadPromoFilm: (film) => ({
+    type: ActionType.LOAD_PROMO_FILM,
+    payload: film,
+  }),
+
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments,
+  }),
+
+  loadFavoriteFilms: (films) => ({
+    type: ActionType.LOAD_FAVORITE_MOVIES,
+    payload: films,
+  }),
+
   mergeFilm: (film) => ({
     type: ActionType.MERGE_FILM,
     payload: film,
   }),
+
   mergePromoFilm: (film) => ({
     type: ActionType.MERGE_PROMO_FILM,
     payload: film,
   }),
 
-  setFilmsLoading: (isFilmsLoading) => {
-    return (
-      {
-        type: ActionType.SET_FILMS_LOADING,
-        payload: isFilmsLoading
-      }
-    );
-  },
+  setFilmsLoading: (isFilmsLoading) => ({
+    type: ActionType.SET_FILMS_LOADING,
+    payload: isFilmsLoading
+  }),
 
-  setPromoLoading: (isPromoLoading) => {
-    return (
-      {
-        type: ActionType.SET_PROMO_LOADING,
-        payload: isPromoLoading
-      }
-    );
-  },
+  setPromoLoading: (isPromoLoading) => ({
+    type: ActionType.SET_PROMO_LOADING,
+    payload: isPromoLoading
+  }),
+
+  setFormDisabledStatus: (bool) => ({
+    type: ActionType.SET_FORM_DISABLED_STATUS,
+    payload: bool,
+  }),
 
 };
 
@@ -99,7 +95,6 @@ const Operation = {
 
   loadPromoFilm: () => (dispatch, getState, api) => {
     dispatch(ActionCreator.setPromoLoading(true));
-
     return api.get(`/films/promo`)
       .then(({data}) => {
         const promoFilm = adaptFilm(data);
@@ -119,12 +114,13 @@ const Operation = {
       comment: comment.comment,
     })
     .then(({data}) => {
-      dispatch(ActionCreatorWatch.setFormDisabledStatus(false));
+      dispatch(ActionCreator.setFormDisabledStatus(false));
       const comments = adaptComments(data);
       dispatch(ActionCreator.loadComments(comments));
+      history.push(`${AppRoute.FILM}/${id}`);
     })
     .catch((err) => {
-      dispatch(ActionCreatorWatch.setFormDisabledStatus(false));
+      dispatch(ActionCreator.setFormDisabledStatus(false));
       return errorPopup(err);
     });
   },
@@ -203,6 +199,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_PROMO_LOADING:
       return extend(state, {
         isPromoLoading: action.payload
+      });
+
+    case ActionType.SET_FORM_DISABLED_STATUS:
+      return extend(state, {
+        isFormDisabled: action.payload,
       });
 
   }

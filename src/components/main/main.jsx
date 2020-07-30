@@ -6,7 +6,8 @@ import GenresList from "../genres-list/genres-list.jsx";
 import {filmsType, filmType} from "../../types/types";
 import {connect} from "react-redux";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
-import {getGenre, getGenresList, getPromoFilmLoadingStatus} from "../../reducer/watch/selectors.js";
+import {getGenre, getGenresList} from "../../reducer/watch/selectors.js";
+import {getPromoFilmLoadingStatus} from "../../reducer/data/selectors.js";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import Loader from "../loader/loader.jsx";
@@ -18,10 +19,8 @@ const Main = (props) => {
   const {genreFilms, mainFilm, onGenreItemClick, activeGenre, genresList, isPromoLoading} = props;
   const {genre, title, releaseDate, poster, pictureBackground, isFavorite, id} = mainFilm;
 
-
-  return (!isPromoLoading ?
+  return (isPromoLoading ? <Loader /> :
     <React.Fragment>
-
       <section className="movie-card">
         <div className="movie-card__bg">
           <img src={pictureBackground} alt={title} />
@@ -46,7 +45,6 @@ const Main = (props) => {
 
               <MovieCardButtons
                 id={id}
-                // isMainPage={true}
                 isFavorite={isFavorite}
               />
 
@@ -75,7 +73,6 @@ const Main = (props) => {
 
       </div>
     </React.Fragment>
-    : <Loader />
   );
 };
 
@@ -108,5 +105,6 @@ const mapStateToProps = (state) => (
 
 
 export {Main};
+
 export default connect(mapStateToProps)(Main);
 

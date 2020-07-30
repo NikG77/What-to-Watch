@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-// import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 import {Operation as OperationData} from "../../reducer/data/data.js";
@@ -40,12 +39,10 @@ const MovieCardButtons = (props) => {
 };
 
 MovieCardButtons.propTypes = {
-  // isMainPage: PropTypes.bool.isRequired,
   isFavorite: PropTypes.oneOfType([
     () => null,
     PropTypes.bool.isRequired,
   ]),
-  // isAuthorization: PropTypes.bool.isRequired,
   onChangeStatusButtonClick: PropTypes.func.isRequired,
   id: PropTypes.oneOfType([
     PropTypes.number.isRequired,
@@ -53,14 +50,10 @@ MovieCardButtons.propTypes = {
   ]),
 };
 
-// const mapStateToProps = (state) => ({
-//   isAuthorization: getAuthorizationStatus(state),
-// });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeStatusButtonClick(id, status) {
     dispatch(OperationData.changeFavoriteFilmStatus(id, +status));
-
   }
 });
 

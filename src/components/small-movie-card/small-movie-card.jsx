@@ -30,7 +30,6 @@ const SmallMovieCard = (props) => {
       onMouseLeave={() => clearTimer(null, onSmallMovieCardHover)}
       onClick={() => {
         clearTimer(film, onSmallMovieCardClick);
-        // onSmallMovieCardClick(film);
         history.push(`${AppRoute.FILM}/${id}`);
       }}
     >
@@ -60,7 +59,6 @@ SmallMovieCard.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   onSmallMovieCardClick(film) {
     dispatch(ActionCreator.setFilm(film));
-    // dispatch(ActionCreator.setId(+film.id));
     dispatch(ActionCreator.setGenre(film.genre));
   }
 });

@@ -11,8 +11,8 @@ import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import MyList from "../my-list/my-list.jsx";
 import {ActionCreator} from "../../reducer/watch/watch.js";
-import {getGenreMovies, getFilmsLoadingStatus} from "../../reducer/watch/selectors.js";
-import {getPromoMovie} from "../../reducer/data/selectors.js";
+import {getGenreMovies} from "../../reducer/watch/selectors.js";
+import {getPromoMovie, getFilmsLoadingStatus} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import history from "../../history.js";
@@ -63,10 +63,6 @@ const App = (props) => {
             );
           }} />
 
-        <Route exact path="/dev-review">
-          <AddReview film={genreFilms[0]} />
-        </Route>
-
         <PrivateRoute exact path={`${AppRoute.FILM}/:id${AppRoute.ADD_REVIEW}`}
           render={({match}) => {
             return <AddReview id={+match.params.id} />;
@@ -114,7 +110,6 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   genreFilms: getGenreMovies(state),
-  // film: getFilm(state),
   mainFilm: getPromoMovie(state),
   isAuthorization: getAuthorizationStatus(state),
   isFilmsLoading: getFilmsLoadingStatus(state),
