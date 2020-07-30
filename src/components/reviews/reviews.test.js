@@ -16,6 +16,7 @@ it(`Should Reviews render correctly`, () => {
   const tree = renderer
     .create(<Reviews
       id={6}
+      onGetComments={() => {}}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();

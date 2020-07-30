@@ -3,55 +3,62 @@ import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withVideo from "./with-video.js";
 
+// import {Provider} from "react-redux";
+// import configureStore from "redux-mock-store";
+// import NameSpace from "../../reducer/name-space.js";
+// import {AuthorizationStatus} from "../../const.js";
+
+// const mockStore = configureStore([]);
+
 configure({adapter: new Adapter()});
 
 const Player = (props) => <div {...props} />;
 
 const PlayerWrapped = withVideo(Player);
 
-const films = [
-  {title: ``,
-    src: ``,
-    poster: ``,
-    ratingScore: 6.7,
-    ratingCount: 200,
-    director: ``,
-    starring: [],
-    genre: ``,
-    releaseDate: 2000,
-    pictureBackground: ``,
-    previewVideo: ``,
-    duration: 100,
-    backgroundColor: ``,
-    videoLink: ``,
-    description: ` `,
-    isFavorite: false,
-    id: 1,
-  },
-  {title: ``,
-    src: ``,
-    poster: ``,
-    ratingScore: 6.7,
-    ratingCount: 200,
-    director: ``,
-    starring: [],
-    genre: ``,
-    releaseDate: 2000,
-    pictureBackground: ``,
-    previewVideo: ``,
-    duration: 100,
-    backgroundColor: ``,
-    videoLink: ``,
-    description: ` `,
-    isFavorite: false,
-    id: 1,
-  }];
-
+// const films = [
+//   {title: ``,
+//     src: ``,
+//     poster: ``,
+//     ratingScore: 6.7,
+//     ratingCount: 200,
+//     director: ``,
+//     starring: [],
+//     genre: ``,
+//     releaseDate: 2000,
+//     pictureBackground: ``,
+//     previewVideo: ``,
+//     duration: 100,
+//     backgroundColor: ``,
+//     videoLink: ``,
+//     description: ` `,
+//     isFavorite: false,
+//     id: 1,
+//   },
+//   {title: ``,
+//     src: ``,
+//     poster: ``,
+//     ratingScore: 6.7,
+//     ratingCount: 200,
+//     director: ``,
+//     starring: [],
+//     genre: ``,
+//     releaseDate: 2000,
+//     pictureBackground: ``,
+//     previewVideo: ``,
+//     duration: 100,
+//     backgroundColor: ``,
+//     videoLink: ``,
+//     description: ` `,
+//     isFavorite: false,
+//     id: 1,
+//   }];
 
 it(`Checks that HOC's state.isPlay initialy true `, () => {
   const wrapper = shallow(<PlayerWrapped
-    src={films[0].previewVideo}
-    onExitPlayButtonClick={() => {}}
+    // src={films[0].previewVideo}
+    // onExitPlayButtonClick={() => {}}
+    id={1}
   />, {disableLifecycleMethods: true});
 
   wrapper.instance()._videoRef.current = {play() {}};
@@ -62,8 +69,9 @@ it(`Checks that HOC's state.isPlay initialy true `, () => {
 
 it(`Checks that HOC's state.isPlay changing to "false" on one time onPlayClick`, () => {
   const wrapper = shallow(<PlayerWrapped
-    src={films[0].previewVideo}
-    onExitPlayButtonClick={() => {}}
+    // src={films[0].previewVideo}
+    // onExitPlayButtonClick={() => {}}
+    id={1}
   />, {disableLifecycleMethods: true});
 
   wrapper.find(Player).dive().props().onPlayClick();
@@ -73,8 +81,9 @@ it(`Checks that HOC's state.isPlay changing to "false" on one time onPlayClick`,
 
 it(`Checks that HOC's state.isPlay changing to "true" on two onPlayClick`, () => {
   const wrapper = shallow(<PlayerWrapped
-    src={films[0].previewVideo}
-    onExitPlayButtonClick={() => {}}
+    // src={films[0].previewVideo}
+    // onExitPlayButtonClick={() => {}}
+    id={1}
   />, {disableLifecycleMethods: true});
 
   wrapper.find(Player).dive().props().onPlayClick();
@@ -85,8 +94,9 @@ it(`Checks that HOC's state.isPlay changing to "true" on two onPlayClick`, () =>
 
 it(`Checks that HOC's callback turn on video (pause)`, () => {
   const wrapper = shallow(<PlayerWrapped
-    src={films[0].previewVideo}
-    onExitPlayButtonClick={() => {}}
+    // src={films[0].previewVideo}
+    // onExitPlayButtonClick={() => {}}
+    id={1}
   />, {disableLifecycleMethods: true});
 
   wrapper.instance()._videoRef.current = {play() {}, pause() {}};
@@ -105,8 +115,9 @@ it(`Checks that HOC's callback turn on video (pause)`, () => {
 
 it(`Checks that HOC's callback turn on video (play)`, () => {
   const wrapper = shallow(<PlayerWrapped
-    src={films[0].previewVideo}
-    onExitPlayButtonClick={() => {}}
+    // src={films[0].previewVideo}
+    // onExitPlayButtonClick={() => {}}
+    id={1}
   />, {disableLifecycleMethods: true});
 
   wrapper.instance()._videoRef.current = {play() {}, pause() {}};
@@ -129,8 +140,9 @@ it(`Checks that HOC's callback turn on video (play)`, () => {
 
 it(`Checks that HOC's callback onFullScreenClick`, () => {
   const wrapper = shallow(<PlayerWrapped
-    src={films[0].previewVideo}
-    onExitPlayButtonClick={() => {}}
+    // src={films[0].previewVideo}
+    // onExitPlayButtonClick={() => {}}
+    id={1}
   />, {disableLifecycleMethods: true});
 
   wrapper.instance()._videoRef.current = {play() {}, pause() {},
@@ -151,10 +163,13 @@ it(`Checks that HOC's callback onFullScreenClick`, () => {
 
 
 it(`Checks that HOC's "video" reset after componentWillUnmount`, () => {
-  const wrapper = shallow(<PlayerWrapped
-    src={films[0].previewVideo}
-    onExitPlayButtonClick={() => {}}
-  />, {disableLifecycleMethods: true});
+  const wrapper = shallow(
+      <PlayerWrapped
+      // src={films[0].previewVideo}
+      // onExitPlayButtonClick={() => {}}
+        id={1}
+      />,
+      {disableLifecycleMethods: true});
 
   const {_videoRef} = wrapper.instance();
   wrapper.instance()._videoRef.current = {play() {}};
@@ -165,9 +180,22 @@ it(`Checks that HOC's "video" reset after componentWillUnmount`, () => {
 
 
 it(`Checks that HOC's state.duration change `, () => {
+
+
+  // const store = mockStore({
+  //   [NameSpace.WATCH]: {
+  //     genre: `All genres`,
+  //     movieCount: 4,
+  //   },
+  //   [NameSpace.USER]: {
+  //     authorizationStatus: AuthorizationStatus.NO_AUTH,
+  //   },
+  // });
+
   const wrapper = shallow(<PlayerWrapped
-    src={films[0].previewVideo}
-    onExitPlayButtonClick={() => {}}
+    // src={films[0].previewVideo}
+    // onExitPlayButtonClick={() => {}}
+    id={1}
   />, {disableLifecycleMethods: true});
 
   expect(wrapper.state().duration).toEqual(0);

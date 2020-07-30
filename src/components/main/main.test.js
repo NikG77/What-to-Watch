@@ -5,6 +5,8 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../const.js";
+import history from "../../history.js";
+import {Router} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -177,16 +179,10 @@ const mainFilm = {
 
 it(`Should Main render correctly`, () => {
 
-
   const store = mockStore({
     [NameSpace.WATCH]: {
-      movie: null,
       genre: `All genres`,
       movieCount: 4,
-      isPlayerActive: false,
-    },
-    [NameSpace.DATA]: {
-      allMovies: films,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -196,18 +192,18 @@ it(`Should Main render correctly`, () => {
 
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Main
-            genreFilms={films}
-            mainFilm={mainFilm}
-            onSmallMovieCardClick={() => {}}
-            onGenreItemClick={() => {}}
-            onPlayButtonClick={() => {}}
-            activeGenre={``}
-            allFilms={[]}
-          />
-        </Provider>,
-        {
+        <Router history={history}>
+          <Provider store={store}>
+            <Main
+              activeGenre={``}
+              genreFilms={films}
+              genresList={[]}
+              mainFilm={mainFilm}
+              onGenreItemClick={() => {}}
+              onPlayButtonClick={() => {}}
+            />
+          </Provider>
+        </Router>, {
           createNodeMock: () => {
             return {};
           }

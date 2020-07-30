@@ -69,14 +69,18 @@ const mainFilm = {
 it(`Render App`, () => {
   const store = mockStore({
     [NameSpace.WATCH]: {
-      movie: null,
       genre: `All genres`,
       movieCount: 8,
-      isPlayerActive: false,
+      selectedMovie: {},
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
+      isAuthorizationLoading: false,
     },
+    [NameSpace.DATA]: {
+      isFilmsLoading: false,
+    },
+
   });
 
   const tree = renderer
@@ -85,14 +89,16 @@ it(`Render App`, () => {
           <App
             isAuthorization={false}
             login={() => {}}
+            genreFilms={films}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
             onSmallMovieCardClick={() => {}}
-            genreFilms={films}
-            film={films[0]}
-            onPlayButtonClick={() => {}}
-            onExitPlayButtonClick={() => {}}
-            isPlayerActive={false}
+            isFilmsLoading={true}
+
+            // film={films[0]}
+            // onPlayButtonClick={() => {}}
+            // onExitPlayButtonClick={() => {}}
+            // isPlayerActive={false}
           />
         </Provider>,
         {
@@ -116,6 +122,9 @@ it(`Render MoviePage in App`, () => {
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+    [NameSpace.DATA]: {
+      allMovies: films,
     },
   });
 

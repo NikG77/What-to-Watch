@@ -1,6 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {MoviesList} from "./movies-list.jsx";
+import history from "../../history.js";
+import {Router} from "react-router-dom";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import {Provider} from "react-redux";
+import {AuthorizationStatus} from "../../const.js";
+
+const mockStore = configureStore([]);
 
 const films = [
   {title: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -41,20 +49,40 @@ const films = [
   }];
 
 it(`Should MoviesList render correctly`, () => {
+
+  const store = mockStore({
+    [NameSpace.WATCH]: {
+      genre: `All genres`,
+      movieCount: 4,
+    },
+    // [NameSpace.DATA]: {
+    //   allMovies: films,
+    // },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+  });
   const tree = renderer
-    .create(<MoviesList
-      genreFilms={films}
-      onSmallMovieCardClick={() => {}}
-      activeItem={films[0]}
-      onItemClick={() => {}}
-      filmCount={4}
-      onShowMoreButtonClick={() => {}}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Router
+          history={history}
+        >
+          <Provider store={store}>
+            <MoviesList
+              genreFilms={films}
+              // onSmallMovieCardClick={() => {}}
+              activeItem={films[0]}
+              onItemClick={() => {}}
+              filmCount={4}
+              onShowMoreButtonClick={() => {}}
+            />
+          </Provider>
+        </Router>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

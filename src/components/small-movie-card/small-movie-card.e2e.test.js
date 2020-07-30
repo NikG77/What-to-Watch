@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
+import {SmallMovieCard} from "../small-movie-card/small-movie-card.jsx";
 
 
 Enzyme.configure({
@@ -45,7 +45,7 @@ it(`Should small movie card be pressed to title`, () => {
       />
   );
 
-  const movieCardTitle = smallMovieCard.find(`.small-movie-card__title`);
+  const movieCardTitle = smallMovieCard.find(`.small-movie-card`);
 
   movieCardTitle.simulate(`click`, mockEvent);
 
@@ -66,7 +66,7 @@ it(`Should small movie card be pressed to image`, () => {
       />
   );
 
-  const movieCardImage = smallMovieCard.find(`.small-movie-card__image`);
+  const movieCardImage = smallMovieCard.find(`.small-movie-card`);
 
   movieCardImage.simulate(`click`);
 

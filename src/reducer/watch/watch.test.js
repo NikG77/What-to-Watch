@@ -56,127 +56,73 @@ const films = [{
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {
   })).toEqual({
-    movie: null,
     genre: `All genres`,
     movieCount: 8,
-    isPlayerActive: false,
-    isFormDisabled: false,
+    selectedMovie: {},
   });
 });
 
 it(`Action creator set genre correct`, () => {
   expect(reducer({
-    movie: null,
     genre: `All genres`,
     movieCount: 8,
-    isPlayerActive: false,
+    selectedMovie: {},
   }, {
     type: ActionType.SET_GENRE,
     payload: `Drama`,
   })).toEqual({
-    movie: null,
     genre: `Drama`,
     movieCount: 8,
-    isPlayerActive: false,
+    selectedMovie: {},
   });
 });
 
 it(`Action creator set film correct`, () => {
   expect(reducer({
-    genreMovies: films,
-    movie: null,
     genre: `Drama`,
     movieCount: 8,
-    isPlayerActive: false,
+    selectedMovie: {},
   }, {
     type: ActionType.SET_FILM,
     payload: films[0],
   })).toEqual({
-    genreMovies: films,
-    movie: films[0],
     genre: `Drama`,
     movieCount: 8,
-    isPlayerActive: false,
+    selectedMovie: films[0],
   });
 });
 
 
 it(`Action creator set filmsCount correct`, () => {
   expect(reducer({
-    genreMovies: films,
-    movie: null,
     genre: `All genres`,
     movieCount: 8,
-    isPlayerActive: false,
+    selectedMovie: {},
   }, {
     type: ActionType.SET_FILMS_COUNT,
     payload: 8,
   })).toEqual({
-    genreMovies: films,
-    movie: null,
     genre: `All genres`,
     movieCount: 16,
-    isPlayerActive: false,
+    selectedMovie: {},
   });
 });
 
 
 it(`Action creator reset filmsCount correct`, () => {
   expect(reducer({
-    genreMovies: films,
-    movie: null,
-    genre: `Drama`,
-    movieCount: 24,
-    isPlayerActive: false,
+    genre: `All genres`,
+    movieCount: 16,
+    selectedMovie: {},
   }, {
     type: ActionType.RESET_FILMS_COUNT,
   })).toEqual({
-    genreMovies: films,
-    movie: null,
-    genre: `Drama`,
+    genre: `All genres`,
     movieCount: 8,
-    isPlayerActive: false,
+    selectedMovie: {},
   });
 });
 
-it(`Action creator setPlayer true correct`, () => {
-  expect(reducer({
-    genreMovies: films,
-    movie: null,
-    genre: `Drama`,
-    movieCount: 24,
-    isPlayerActive: false,
-  }, {
-    type: ActionType.SET_PLAYER,
-    payload: true,
-  })).toEqual({
-    genreMovies: films,
-    movie: null,
-    genre: `Drama`,
-    movieCount: 24,
-    isPlayerActive: true,
-  });
-});
-
-
-// it(`Action creator reset Player correct`, () => {
-//   expect(reducer({
-//     genreMovies: films,
-//     movie: null,
-//     genre: `Drama`,
-//     movieCount: 8,
-//     isPlayerActive: true,
-//   }, {
-//     type: ActionType.RESET_PLAYER,
-//     payload: false,
-//   })).toEqual({
-//     genreMovies: films,
-//     movie: null,
-//     genre: `Drama`,
-//     movieCount: 8,
-//     isPlayerActive: false,
-//   });
-// });
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator set genre correctly`, () => {
@@ -232,21 +178,5 @@ describe(`Action creators work correctly`, () => {
         type: ActionType.RESET_FILMS_COUNT,
       });
   });
-
-  // it(`Action creator set player correctly`, () => {
-  //   expect(ActionCreator.setPlayer())
-  //     .toEqual({
-  //       type: ActionType.SET_PLAYER,
-  //       payload: true,
-  //     });
-  // });
-
-  // it(`Action creator reset player correctly`, () => {
-  //   expect(ActionCreator.resetPlayer())
-  //     .toEqual({
-  //       type: ActionType.RESET_PLAYER,
-  //       payload: false,
-  //     });
-  // });
 
 });

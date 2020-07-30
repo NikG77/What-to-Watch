@@ -16,7 +16,14 @@ const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
 
-  const {genreFilms, mainFilm, onGenreItemClick, activeGenre, genresList, isPromoLoading} = props;
+  const {
+    activeGenre,
+    genreFilms,
+    genresList,
+    isPromoLoading,
+    mainFilm,
+    onGenreItemClick} = props;
+
   const {genre, title, releaseDate, poster, pictureBackground, isFavorite, id} = mainFilm;
 
   return (isPromoLoading ? <Loader /> :

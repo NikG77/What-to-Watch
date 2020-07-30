@@ -63,8 +63,8 @@ const Operation = {
         dispatch(ActionCreator.setAuthorizationLoading(false));
       })
       .catch((err) => {
-        // dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
-        // dispatch(ActionCreator.setUserInfo({}));
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+        dispatch(ActionCreator.setUserInfo({}));
         dispatch(ActionCreator.setAuthorizationLoading(false));
         if (err.response.status !== Error.UNAUTHORIZED) {
           errorPopup(err);

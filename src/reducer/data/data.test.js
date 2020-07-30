@@ -87,6 +87,10 @@ it(`Reducer without additional parameters should return initial state`, () => {
     allMovies: [],
     promoMovie: {},
     comments: [],
+    favoriteMovies: [],
+    isFilmsLoading: false,
+    isPromoLoading: false,
+    isFormDisabled: false,
   });
 });
 
@@ -135,8 +139,8 @@ describe(`Operation work correctly`, () => {
       .reply(200, [{fake: true}]);
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_ALL_FILMS,
           payload: adaptFilms([{fake: true}]),
         });
@@ -153,30 +157,16 @@ describe(`Operation work correctly`, () => {
       .reply(200, [{fake: true}]);
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_PROMO_FILM,
           payload: adaptFilm([{fake: true}]),
         });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.SET_PROMO_LOADING,
+          payload: false,
+        });
       });
   });
-
-  // it(`Should make a correct API call to /comments/1`, function () {
-  //   const apiMock = new MockAdapter(api);
-  //   const dispatch = jest.fn();
-  //   const commentsLoader = Operation.loadComments();
-
-  //   apiMock
-  //     .onGet(`/comments/1`)
-  //     .reply(200, [{fake: true}]);
-  //   return commentsLoader(dispatch, () => {}, api)
-  //     .then(() => {
-  //       expect(dispatch).toHaveBeenCalledTimes(1);
-  //       expect(dispatch).toHaveBeenNthCalledWith(1, {
-  //         type: ActionType.LOAD_COMMENTS,
-  //         payload: adaptComments([{fake: true}]),
-  //       });
-  //     });
-  // });
 
 });
