@@ -1,14 +1,23 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
+import {configure, shallow, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withVideo from "./with-video.js";
 
-// import {Provider} from "react-redux";
-// import configureStore from "redux-mock-store";
-// import NameSpace from "../../reducer/name-space.js";
-// import {AuthorizationStatus} from "../../const.js";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import {AuthorizationStatus} from "../../const.js";
 
-// const mockStore = configureStore([]);
+const mockStore = configureStore([]);
+const store = mockStore({
+  [NameSpace.WATCH]: {
+    genre: `All genres`,
+    movieCount: 4,
+  },
+  [NameSpace.USER]: {
+    authorizationStatus: AuthorizationStatus.NO_AUTH,
+  },
+});
 
 configure({adapter: new Adapter()});
 
@@ -55,11 +64,13 @@ const PlayerWrapped = withVideo(Player);
 //   }];
 
 it(`Checks that HOC's state.isPlay initialy true `, () => {
-  const wrapper = shallow(<PlayerWrapped
-    // src={films[0].previewVideo}
-    // onExitPlayButtonClick={() => {}}
-    id={1}
-  />, {disableLifecycleMethods: true});
+  const wrapper = mount(
+      <Provider store={store}>
+        <PlayerWrapped
+          id={1}
+        />
+      </Provider>,
+      {disableLifecycleMethods: true});
 
   wrapper.instance()._videoRef.current = {play() {}};
 
