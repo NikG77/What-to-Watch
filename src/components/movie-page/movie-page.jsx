@@ -1,7 +1,7 @@
 import React from "react";
 import {filmType, filmsType} from "../../types/types";
 import PropTypes from "prop-types";
-import {Tabs} from "../tabs/tabs.jsx";
+import Tabs from "../tabs/tabs.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";

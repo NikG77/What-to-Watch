@@ -3,20 +3,24 @@ import PropTypes from "prop-types";
 import {Route, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {AppRoute} from "../../const.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getAuthorizationStatus, getIsAuthorizationLoading} from "../../reducer/user/selectors.js";
+import Loader from "../loader/loader.jsx";
 
 
 const PrivateRoute = (props) => {
-  const {render, path, exact, isAuthorizationStatus} = props;
+  const {render, path, exact, isAuthorizationStatus, isAuthorizationLoading} = props;
 
   return (
     <Route
       path={path}
       exact={exact}
       render={({match}) => {
-        return (
-          isAuthorizationStatus ? render({match}) : <Redirect to={AppRoute.LOGIN} />
-        );
+        if (isAuthorizationStatus && !isAuthorizationLoading) {
+          return render({match});
+        } else if (isAuthorizationLoading) {
+          return <Loader />;
+        }
+        return <Redirect to={AppRoute.LOGIN} />;
       }}
     />
   );
@@ -27,10 +31,12 @@ PrivateRoute.propTypes = {
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
+  isAuthorizationLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isAuthorizationStatus: getAuthorizationStatus(state),
+  isAuthorizationLoading: getIsAuthorizationLoading(state),
 });
 
 

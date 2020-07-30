@@ -8,8 +8,8 @@ export const getAuthorizationStatus = (state) => {
   return state[NAME_SPACE].authorizationStatus === AuthorizationStatus.AUTH;
 };
 
-export const getUserInfo = (state) => {
-  return state[NAME_SPACE].userInfo;
-};
+export const getUserInfo = (state) => state[NAME_SPACE].userInfo;
+
+export const getIsAuthorizationLoading = (state) => state[NAME_SPACE].isAuthorizationLoading;
 
 

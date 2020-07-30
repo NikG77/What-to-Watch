@@ -69,7 +69,7 @@ const App = (props) => {
           }}
         />
 
-        <Route exact path={AppRoute.MY_LIST}
+        <PrivateRoute exact path={AppRoute.MY_LIST}
           render={() => <MyList />}
         />
 
