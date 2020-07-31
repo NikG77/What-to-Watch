@@ -37,3 +37,8 @@ export const AppRoute = {
   PLAYER: `/player`,
 };
 
+export const Time = {
+  MINUTES_IN_HOUR: 60,
+  SECONDS_IN_MINUTE: 60,
+};
+
