@@ -20,6 +20,7 @@ import {AppRoute} from "../../const.js";
 import {Link} from "react-router-dom";
 import Loader from "../loader/loader.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
+import Error404 from "../error404/error404.jsx";
 
 
 const PlayerWrapped = withVideo(Player);
@@ -73,18 +74,9 @@ const App = (props) => {
           render={() => <MyList />}
         />
 
-        <Route
-          render={() => (
-            <Fragment>
-              <h1>
-                404.
-                <br />
-                <small>Page not found</small>
-              </h1>
-              <Link to={AppRoute.ROOT}>Go to main page</Link>
-            </Fragment>
-          )}
-        />
+        <Route>
+          <Error404 />
+        </Route>
 
       </Switch>
     </Router>
