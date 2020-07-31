@@ -1,4 +1,4 @@
-const BASE_URL = `https:4.react.pages.academy`;
+const BASE_URL = `https://4.react.pages.academy`;
 
 export const adaptFilm = (film) => {
   return {

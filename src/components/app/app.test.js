@@ -67,6 +67,7 @@ const mainFilm = {
 };
 
 it(`Render App`, () => {
+
   const store = mockStore({
     [NameSpace.WATCH]: {
       genre: `All genres`,
@@ -75,10 +76,17 @@ it(`Render App`, () => {
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
+      userInfo: {},
       isAuthorizationLoading: false,
     },
     [NameSpace.DATA]: {
+      allMovies: films,
+      promoMovie: mainFilm,
+      comments: [],
+      favoriteMovies: [],
       isFilmsLoading: false,
+      isPromoLoading: false,
+      isFormDisabled: false,
     },
 
   });
@@ -87,18 +95,12 @@ it(`Render App`, () => {
     .create(
         <Provider store={store}>
           <App
-            isAuthorization={false}
-            login={() => {}}
+            activeGenre={`All genres`}
             genreFilms={films}
+            genresList={[`All genres`]}
+            isPromoLoading={false}
             mainFilm={mainFilm}
             onGenreItemClick={() => {}}
-            onSmallMovieCardClick={() => {}}
-            isFilmsLoading={true}
-
-            // film={films[0]}
-            // onPlayButtonClick={() => {}}
-            // onExitPlayButtonClick={() => {}}
-            // isPlayerActive={false}
           />
         </Provider>,
         {
@@ -111,87 +113,95 @@ it(`Render App`, () => {
 });
 
 
-it(`Render MoviePage in App`, () => {
+// it(`Render Main in App`, () => {
 
-  const store = mockStore({
-    [NameSpace.WATCH]: {
-      movie: null,
-      genre: `All genres`,
-      movieCount: 8,
-      isPlayerActive: false,
-    },
-    [NameSpace.USER]: {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
-    },
-    [NameSpace.DATA]: {
-      allMovies: films,
-    },
-  });
+//   const store = mockStore({
+//     [NameSpace.WATCH]: {
+//       genre: `All genres`,
+//       movieCount: 8,
+//       selectedMovie: films[0],
+//     },
+//     [NameSpace.USER]: {
+//       authorizationStatus: AuthorizationStatus.NO_AUTH,
+//       userInfo: {},
+//       isAuthorizationLoading: false,
+//     },
+//     [NameSpace.DATA]: {
+//       allMovies: films,
+//       promoMovie: mainFilm,
+//       comments: [],
+//       favoriteMovies: [],
+//       isFilmsLoading: false,
+//       isPromoLoading: false,
+//       isFormDisabled: false,
+//     },
+//   });
+
+//   const tree = renderer
+//     .create(
+//         <Provider store={store}>
+//           <App
+//             activeGenre={`All genres`}
+//             genreFilms={films}
+//             genresList={[`All genres`]}
+//             isPromoLoading={false}
+//             mainFilm={mainFilm}
+//             onGenreItemClick={() => {}}
+
+//           />
+//         </Provider>,
+//         {
+//           createNodeMock: () => {
+//             return {};
+//           }
+//         }).toJSON();
+
+//   expect(tree).toMatchSnapshot();
+// });
 
 
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            isAuthorization={false}
-            login={() => {}}
-            mainFilm={mainFilm}
-            onGenreItemClick={() => {}}
-            onSmallMovieCardClick={() => {}}
-            genreFilms={[films[0]]}
-            film={films[0]}
-            onPlayButtonClick={() => {}}
-            onExitPlayButtonClick={() => {}}
-            isPlayerActive={false}
-          />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return {};
-          }
-        }).toJSON();
+// it(`Render MoviePage in App`, () => {
 
-  expect(tree).toMatchSnapshot();
-});
+//   const store = mockStore({
+//     [NameSpace.WATCH]: {
+//       genre: `All genres`,
+//       movieCount: 8,
+//       selectedMovie: films[0],
+//     },
+//     [NameSpace.USER]: {
+//       authorizationStatus: AuthorizationStatus.NO_AUTH,
+//       userInfo: {},
+//       isAuthorizationLoading: false,
+//     },
+//     [NameSpace.DATA]: {
+//       allMovies: films,
+//       promoMovie: mainFilm,
+//       comments: [],
+//       favoriteMovies: [],
+//       isFilmsLoading: false,
+//       isPromoLoading: false,
+//       isFormDisabled: false,
+//     },
+//   });
 
-it(`Render Main in App`, () => {
-  const store = mockStore({
-    [NameSpace.WATCH]: {
-      movie: null,
-      genre: `All genres`,
-      movieCount: 8,
-      isPlayerActive: false,
-    },
-    [NameSpace.DATA]: {
-      allMovies: films,
-    },
-    [NameSpace.USER]: {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
-    },
-  });
+//   const tree = renderer
+//     .create(
+//         <Provider store={store}>
+//           <App
+//             genreFilms={films}
+//             film={films[0]}
+//             id={0}
 
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            isAuthorization={false}
-            login={() => {}}
-            mainFilm={mainFilm}
-            onGenreItemClick={() => {}}
-            onSmallMovieCardClick={() => {}}
-            genreFilms={films}
-            film={null}
-            onPlayButtonClick={() => {}}
-            onExitPlayButtonClick={() => {}}
-            isPlayerActive={false}
-          />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return {};
-          }
-        }).toJSON();
+//             mainFilm={mainFilm}
+//           />
+//         </Provider>,
+//         {
+//           createNodeMock: () => {
+//             return {};
+//           }
+//         }).toJSON();
 
-  expect(tree).toMatchSnapshot();
-});
+//   expect(tree).toMatchSnapshot();
+// });
+
 

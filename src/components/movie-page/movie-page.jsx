@@ -104,7 +104,7 @@ MoviePage.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  film: getFilmById(state, props),
+  film: getFilmById(state, props.id),
 });
 
 

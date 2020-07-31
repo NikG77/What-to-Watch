@@ -2,8 +2,10 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import SignIn from "./sign-in.jsx";
-import history from "../../history.js";
-import {Router} from "react-router-dom";
+
+// import history from "../../history.js";
+// import {Router} from "react-router-dom";
+jest.mock(`../logo/logo.jsx`, () => `div`);
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -17,11 +19,12 @@ it(`Click by send form button calls callback`, () => {
   const onSubmit = jest.fn();
 
   const signIn = mount(
-      <Router history={history}>
-        <SignIn
-          onSubmit={onSubmit}
-        />
-      </Router>
+
+      <SignIn
+        onSubmit={onSubmit}
+
+      />
+
   );
 
   const {loginRef} = signIn.instance();

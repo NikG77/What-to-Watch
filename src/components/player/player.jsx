@@ -7,13 +7,14 @@ import {AppRoute} from "../../const.js";
 import {filmType} from "../../types/types";
 
 const Player = (props) => {
-  const {id, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;
+  const {id, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration, film} = props;
 
-  return (!id ? <Loader /> :
+  return (!film ? <Loader /> :
     <div className="player">
 
       <video
         ref={forwardedRef}
+        src={film.videoLink}
         onLoadedMetadata={setDuration}
         className="player__video" />
 

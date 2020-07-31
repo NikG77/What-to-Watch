@@ -177,7 +177,7 @@ AddReview.propTypes = {
 const mapStateToProps = (state, props) => ({
   userInfo: getUserInfo(state),
   isFormDisabled: getReviewFormStatus(state),
-  film: getFilmById(state, props),
+  film: getFilmById(state, props.id),
 });
 
 const mapDispatchToProps = (dispatch) => ({

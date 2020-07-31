@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, Router} from "react-router-dom";
 import {connect} from "react-redux";
@@ -17,7 +17,6 @@ import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
-import {Link} from "react-router-dom";
 import Loader from "../loader/loader.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 import Error404 from "../error404/error404.jsx";

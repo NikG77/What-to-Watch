@@ -121,7 +121,7 @@ const withVideo = (Component) => {
   };
 
   const mapStateToProps = (state, props) => ({
-    film: getFilmById(state, props),
+    film: getFilmById(state, props.id),
   });
 
   return connect(mapStateToProps)(WithVideo);

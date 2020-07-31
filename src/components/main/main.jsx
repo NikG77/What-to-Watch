@@ -22,7 +22,8 @@ const Main = (props) => {
     genresList,
     isPromoLoading,
     mainFilm,
-    onGenreItemClick} = props;
+    onGenreItemClick
+  } = props;
 
   const {genre, title, releaseDate, poster, pictureBackground, isFavorite, id} = mainFilm;
 
