@@ -10,6 +10,7 @@ import Footer from "../footer/footer.jsx";
 import {connect} from "react-redux";
 import {getFilmById} from "../../reducer/watch/selectors.js";
 import Loader from "../loader/loader.jsx";
+import {Operation as OperationData} from "../../reducer/data/data.js";
 
 
 const COUNT_LIKE_FILMS = 4;
@@ -18,11 +19,12 @@ const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
-  const {genreFilms, film, id} = props;
+  const {genreFilms, film, id, onGetComments} = props;
   if (!film) {
     return <Loader />;
   }
 
+  onGetComments(id);
   const {title, genre, releaseDate, poster, pictureBackground, isFavorite} = film;
   const likeFilms = genreFilms.filter((movie) => {
     return movie !== film;
@@ -101,6 +103,7 @@ MoviePage.propTypes = {
     () => null,
     PropTypes.number.isRequired,
   ]),
+  onGetComments: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -108,7 +111,14 @@ const mapStateToProps = (state, props) => ({
 });
 
 
+const mapDispatchToProps = (dispatch) => ({
+  onGetComments(id) {
+    dispatch(OperationData.loadComments(id));
+  },
+});
+
+
 export {MoviePage};
 
-export default connect(mapStateToProps)(MoviePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
 
