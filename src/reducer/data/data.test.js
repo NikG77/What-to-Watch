@@ -2,8 +2,12 @@ import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {reducer, ActionType, Operation} from "./data.js";
 import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+
 
 const api = createAPI(() => {});
+const mockStore = configureStore([]);
 
 const films = [{
   id: 0,
@@ -80,7 +84,16 @@ const films = [{
   isFavorite: false,
 }];
 
-const mockComments = [{fake: true}];
+const mockComments = [{
+  "id": 1,
+  "user": {
+    "id": 4,
+    "name": `Kate Muir`
+  },
+  "rating": 8.9,
+  "comment": `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+  "date": `2019-05-08T14:13:56.569Z`
+}];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
@@ -259,19 +272,19 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /comments/filmId`, () => {
+  it(`Should make a correct API call to /comments/filmId`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const commentsLoader = Operation.loadComments(1);
 
     apiMock
       .onGet(`/comments/1`)
-      .reply(200, [{fake: true}]);
+      .reply(200, mockComments);
     return commentsLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledWith({
           type: ActionType.LOAD_COMMENTS,
-          payload: adaptComments([{fake: true}]),
+          payload: adaptComments(mockComments),
         });
       });
   });
@@ -281,7 +294,7 @@ describe(`Operation work correctly`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const postComments = Operation.postComments(10, {
-      rating: `5`,
+      rating: 5,
       comment: `comments`,
     });
 
@@ -299,7 +312,7 @@ describe(`Operation work correctly`, () => {
   });
 
 
-  it(`Should make a correct API call to /favorite`, () => {
+  it(`Should make a correct API call to /favorite`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const favoriteFilmsLoader = Operation.loadFavoriteFilms();
@@ -320,11 +333,18 @@ describe(`Operation work correctly`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const mergeFilm = Operation.changeFavoriteFilmStatus(10, 1);
+    const store = mockStore({
+      [NameSpace.DATA]: {
+        allMovies: films,
+        promoMovie: films[0],
+        favoriteMovies: [],
+      },
+    });
 
     apiMock
       .onPost(`/favorite/10/1`)
       .reply(200, [{fake: true}]);
-    return mergeFilm(dispatch, () => {}, api)
+    return mergeFilm(dispatch, () => store.getState(), api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith({
@@ -333,6 +353,5 @@ describe(`Operation work correctly`, () => {
         });
       });
   });
-
 
 });
