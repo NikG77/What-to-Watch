@@ -8,7 +8,7 @@ const withAddReview = (Component) => {
       super(props);
 
       this.state = {
-        rating: 3,
+        rating: `3`,
         comment: null,
       };
 

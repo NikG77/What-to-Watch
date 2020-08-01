@@ -29,7 +29,7 @@ Reviews.propTypes = {
     PropTypes.number.isRequired,
   ]),
   reviews: PropTypes.oneOfType([
-    () => null,
+    PropTypes.oneOf([null]).isRequired,
     PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,

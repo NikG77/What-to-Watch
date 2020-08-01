@@ -51,9 +51,7 @@ it(`Should MoviePage render correctly`, () => {
               id={1}
               film={films[0]}
               genreFilms={films}
-            // onSmallMovieCardClick={() => {}}
-            // onPlayButtonClick={() => {}}
-            // isAuthorization={true}
+              onGetComments={() => {}}
             />
           </Provider>
         </Router>

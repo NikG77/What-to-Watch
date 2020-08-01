@@ -14,6 +14,7 @@ const initialState = {
   isFilmsLoading: false,
   isPromoLoading: false,
   isFormDisabled: false,
+  isSendingCommentSuccessfull: false,
 };
 
 const ActionType = {
@@ -26,6 +27,7 @@ const ActionType = {
   SET_FILMS_LOADING: `SET_FILMS_LOADING`,
   SET_PROMO_LOADING: `SET_PROMO_LOADING`,
   SET_FORM_DISABLED_STATUS: `SET_FORM_DISABLED_STATUS`,
+  CHECK_IS_SENDING_SUCCESSFULL: `CHECK_IS_SENDING_SUCCESSFULL`,
 };
 
 const ActionCreator = {
@@ -69,9 +71,14 @@ const ActionCreator = {
     payload: isPromoLoading
   }),
 
-  setFormDisabledStatus: (bool) => ({
+  setFormDisabledStatus: (isFormLoading) => ({
     type: ActionType.SET_FORM_DISABLED_STATUS,
-    payload: bool,
+    payload: isFormLoading,
+  }),
+
+  checkIsSendingSuccessfull: (isSendingSuccessfull) => ({
+    type: ActionType.CHECK_IS_SENDING_SUCCESSFULL,
+    payload: isSendingSuccessfull,
   }),
 
 };
@@ -80,7 +87,6 @@ const ActionCreator = {
 const Operation = {
   loadAllFilms: () => (dispatch, getState, api) => {
     dispatch(ActionCreator.setFilmsLoading(true));
-
     return api.get(`/films`)
       .then(({data}) => {
         const films = adaptFilms(data);
@@ -96,13 +102,24 @@ const Operation = {
   loadPromoFilm: () => (dispatch, getState, api) => {
     dispatch(ActionCreator.setPromoLoading(true));
     return api.get(`/films/promo`)
-      .then(({data}) => {
-        const promoFilm = adaptFilm(data);
+      .then((response) => {
+        const promoFilm = adaptFilm(response.data);
         dispatch(ActionCreator.loadPromoFilm(promoFilm));
         dispatch(ActionCreator.setPromoLoading(false));
       })
       .catch((err) => {
         dispatch(ActionCreator.setPromoLoading(false));
+        return errorPopup(err);
+      });
+  },
+
+  loadComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        const comments = adaptComments(response.data);
+        dispatch(ActionCreator.loadComments(comments));
+      })
+      .catch((err) => {
         return errorPopup(err);
       });
   },
@@ -113,27 +130,17 @@ const Operation = {
       rating: comment.rating,
       comment: comment.comment,
     })
-    .then(({data}) => {
+    .then(() => {
       dispatch(ActionCreator.setFormDisabledStatus(false));
-      const comments = adaptComments(data);
-      dispatch(ActionCreator.loadComments(comments));
+      dispatch(ActionCreator.checkIsSendingSuccessfull(true));
+      dispatch(Operation.loadComments(id));
       history.push(`${AppRoute.FILM}/${id}`);
     })
     .catch((err) => {
       dispatch(ActionCreator.setFormDisabledStatus(false));
+      dispatch(ActionCreator.checkIsSendingSuccessfull(false));
       return errorPopup(err);
     });
-  },
-
-  loadComments: (id) => (dispatch, getState, api) => {
-    return api.get(`/comments/${id}`)
-      .then(({data}) => {
-        const comments = adaptComments(data);
-        dispatch(ActionCreator.loadComments(comments));
-      })
-      .catch((err) => {
-        return errorPopup(err);
-      });
   },
 
   loadFavoriteFilms: () => (dispatch, getState, api) => {
@@ -204,6 +211,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FORM_DISABLED_STATUS:
       return extend(state, {
         isFormDisabled: action.payload,
+      });
+
+    case ActionType.CHECK_IS_SENDING_SUCCESSFULL:
+      return extend(state, {
+        isSendingCommentSuccessfull: action.payload,
       });
 
   }

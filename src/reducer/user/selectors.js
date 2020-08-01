@@ -10,6 +10,6 @@ export const getAuthorizationStatus = (state) => {
 
 export const getUserInfo = (state) => state[NAME_SPACE].userInfo;
 
-export const getIsAuthorizationLoading = (state) => state[NAME_SPACE].isAuthorizationLoading;
+export const getAuthorizationLoadingStatus = (state) => state[NAME_SPACE].isAuthorizationLoading;
 
 

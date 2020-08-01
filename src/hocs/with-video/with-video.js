@@ -18,16 +18,16 @@ const withVideo = (Component) => {
 
       this._videoRef = createRef();
 
-      this.handlerPlayClick = this.handlerPlayClick.bind(this);
-      this.handlerFullScreenClick = this.handlerFullScreenClick.bind(this);
+      this._handleFullScreenClick = this._handleFullScreenClick.bind(this);
+      this._handlePlayClick = this._handlePlayClick.bind(this);
       this.setDuration = this.setDuration.bind(this);
     }
 
-    handlerPlayClick() {
+    _handlePlayClick() {
       this.setState((prevState) => ({isPlay: !prevState.isPlay}));
     }
 
-    handlerFullScreenClick() {
+    _handleFullScreenClick() {
       const video = this._videoRef.current;
 
       if (video.requestFullscreen) {
@@ -47,18 +47,19 @@ const withVideo = (Component) => {
 
       const video = this._videoRef.current;
 
+      video.poster = film.poster;
       video.src = film.videoLink;
       video.autoplay = true;
+
+      video.onpause = () => this.setState({
+        isPlay: false,
+      });
 
       video.onplay = () => {
         this.setState({
           isPlay: true,
         });
       };
-
-      video.onpause = () => this.setState({
-        isPlay: false,
-      });
 
       video.ontimeupdate = () =>
         this.setState({
@@ -69,10 +70,11 @@ const withVideo = (Component) => {
     componentWillUnmount() {
       const video = this._videoRef.current;
 
+      video.poster = ``;
       video.src = ``;
-      video.ontimeupdate = null;
       video.onpause = null;
       video.onplay = null;
+      video.ontimeupdate = null;
     }
 
 
@@ -100,8 +102,8 @@ const withVideo = (Component) => {
           isPlay={isPlay}
           duration={duration}
           progress={progress}
-          onPlayClick={this.handlerPlayClick}
-          onFullScreenClick={this.handlerFullScreenClick}
+          onPlayClick={this._handlePlayClick}
+          onFullScreenClick={this._handleFullScreenClick}
           setDuration={this.setDuration}
         />
       );
