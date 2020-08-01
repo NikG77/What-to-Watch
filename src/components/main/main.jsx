@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {filmsType, filmType} from "../../types/types";
+import Footer from "../footer/footer.jsx";
+import GenresList from "../genres-list/genres-list.jsx";
+import Header from "../header/header.jsx";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
-import GenresList from "../genres-list/genres-list.jsx";
-import {filmsType, filmType} from "../../types/types";
-import {connect} from "react-redux";
-import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import {getGenre, getGenresList} from "../../reducer/watch/selectors.js";
-import {getPromoFilmLoadingStatus} from "../../reducer/data/selectors.js";
-import Header from "../header/header.jsx";
-import Footer from "../footer/footer.jsx";
-import Loader from "../loader/loader.jsx";
+import {getPromoMovie} from "../../reducer/data/selectors.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
@@ -20,14 +19,21 @@ const Main = (props) => {
     activeGenre,
     genreFilms,
     genresList,
-    isPromoLoading,
     mainFilm,
     onGenreItemClick
   } = props;
 
-  const {genre, title, releaseDate, poster, pictureBackground, isFavorite, id} = mainFilm;
+  const {
+    genre,
+    id,
+    isFavorite,
+    pictureBackground,
+    poster,
+    releaseDate,
+    title
+  } = mainFilm;
 
-  return (isPromoLoading ? <Loader /> :
+  return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
@@ -85,29 +91,24 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  activeGenre: PropTypes.string.isRequired,
+  genreFilms: filmsType.isRequired,
   genresList: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string).isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
     filmType.isRequired,
     () => null,
   ]),
-  activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
-  isPromoLoading: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-
 };
 
 const mapStateToProps = (state) => (
   {
     activeGenre: getGenre(state),
     genresList: getGenresList(state),
-    isPromoLoading: getPromoFilmLoadingStatus(state),
+    mainFilm: getPromoMovie(state),
   }
 );
 

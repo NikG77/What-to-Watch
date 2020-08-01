@@ -2,21 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import {formateDuration} from "../../utils/utils.js";
 import history from "../../history.js";
-import Loader from "../loader/loader.jsx";
+// import Loader from "../loader/loader.jsx";
 import {AppRoute} from "../../const.js";
 import {filmType} from "../../types/types";
 
 const Player = (props) => {
-  const {id, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration, film} = props;
+  const {id, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;
 
-  return (!film ? <Loader /> :
+  return (
     <div className="player">
 
       <video
         ref={forwardedRef}
-        src={film.videoLink}
         onLoadedMetadata={setDuration}
-        className="player__video" />
+        className="player__video"
+      />
 
       <button type="button" className="player__exit"
         onClick={() => history.push(`${AppRoute.FILM}/${id}`)}>Exit</button>
