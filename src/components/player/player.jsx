@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {formateDuration} from "../../utils/utils.js";
+import history from "../../history.js";
+// import Loader from "../loader/loader.jsx";
+import {AppRoute} from "../../const.js";
+import {filmType} from "../../types/types";
 
 const Player = (props) => {
-  const {onExitPlayButtonClick, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;
+  const {id, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;
 
   return (
     <div className="player">
@@ -11,9 +15,11 @@ const Player = (props) => {
       <video
         ref={forwardedRef}
         onLoadedMetadata={setDuration}
-        className="player__video" />
+        className="player__video"
+      />
 
-      <button onClick={onExitPlayButtonClick} type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit"
+        onClick={() => history.push(`${AppRoute.FILM}/${id}`)}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -21,7 +27,7 @@ const Player = (props) => {
             <progress className="player__progress" value={progress} max="100"></progress>
             <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">{formateDuration(duration)}</div>
+          <div className="player__time-value">{formateDuration(duration * (100 - progress) / 100)}</div>
         </div>
 
         <div className="player__controls-row">
@@ -58,7 +64,6 @@ const Player = (props) => {
 
 
 Player.propTypes = {
-  onExitPlayButtonClick: PropTypes.func.isRequired,
   isPlay: PropTypes.bool.isRequired,
   duration: PropTypes.number.isRequired,
   progress: PropTypes.number.isRequired,
@@ -68,6 +73,14 @@ Player.propTypes = {
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({current: PropTypes.any})
+  ]),
+  id: PropTypes.oneOfType([
+    () => null,
+    PropTypes.number.isRequired,
+  ]),
+  film: PropTypes.oneOfType([
+    filmType.isRequired,
+    PropTypes.oneOf([null]).isRequired,
   ]),
 };
 

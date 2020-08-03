@@ -6,12 +6,12 @@ exports[`Should MoviesList render correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
-      onClick={[Function]}
     >
       <video
         height="175"
@@ -20,11 +20,11 @@ exports[`Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/1"
+        onClick={[Function]}
       >
         Fantastic Beasts: The Crimes of Grindelwald
       </a>
@@ -32,12 +32,12 @@ exports[`Should MoviesList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
-      onClick={[Function]}
     >
       <video
         height="175"
@@ -46,11 +46,11 @@ exports[`Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/11"
+        onClick={[Function]}
       >
         Bohemian Rhapsody
       </a>

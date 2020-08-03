@@ -1,11 +1,17 @@
 import React from "react";
 import {filmType, filmsType} from "../../types/types";
 import PropTypes from "prop-types";
-import {Tabs} from "../tabs/tabs.jsx";
+import Tabs from "../tabs/tabs.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
+import {connect} from "react-redux";
+import {getFilmById} from "../../reducer/watch/selectors.js";
+import Loader from "../loader/loader.jsx";
+import {Operation as OperationData} from "../../reducer/data/data.js";
+
 
 const COUNT_LIKE_FILMS = 4;
 
@@ -13,8 +19,13 @@ const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const MoviePage = (props) => {
-  const {film, genreFilms, onSmallMovieCardClick, onPlayButtonClick, isAuthorization} = props;
-  const {title, genre, releaseDate, poster, pictureBackground} = film;
+  const {genreFilms, film, id, onGetComments} = props;
+  if (!film) {
+    return <Loader />;
+  }
+
+  onGetComments(id);
+  const {title, genre, releaseDate, poster, pictureBackground, isFavorite} = film;
   const likeFilms = genreFilms.filter((movie) => {
     return movie !== film;
   });
@@ -30,9 +41,7 @@ const MoviePage = (props) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header
-            isMain={false}
-          />
+          <Header />
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -42,10 +51,12 @@ const MoviePage = (props) => {
                 <span className="movie-card__year">{releaseDate}</span>
               </p>
 
-              <div className="movie-card__buttons">
-                <MovieCardButtons onPlayButtonClick={onPlayButtonClick} />
-                {isAuthorization ? <a href="add-review.html" className="btn movie-card__button">Add review</a> : ``}
-              </div>
+              <MovieCardButtons
+                id={id}
+                isMainPage={false}
+                isFavorite={isFavorite}
+              />
+
             </div>
           </div>
         </div>
@@ -71,22 +82,11 @@ const MoviePage = (props) => {
 
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          {likeFilms.length > 0 ? <MoviesListWrapped genreFilms={likeFilms} onSmallMovieCardClick={onSmallMovieCardClick} /> : ``}
+          {likeFilms.length > 0 ? <MoviesListWrapped genreFilms={likeFilms} /> : ``}
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <Footer/>
 
-          <div className="copyright">
-            <p>© 2020 What to watch Ltd.</p>
-          </div>
-        </footer>
       </div>
     </React.Fragment>
 
@@ -99,9 +99,26 @@ MoviePage.propTypes = {
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  onSmallMovieCardClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  isAuthorization: PropTypes.bool.isRequired,
+  id: PropTypes.oneOfType([
+    () => null,
+    PropTypes.number.isRequired,
+  ]),
+  onGetComments: PropTypes.func.isRequired,
 };
 
-export default MoviePage;
+const mapStateToProps = (state, props) => ({
+  film: getFilmById(state, props.id),
+});
+
+
+const mapDispatchToProps = (dispatch) => ({
+  onGetComments(id) {
+    dispatch(OperationData.loadComments(id));
+  },
+});
+
+
+export {MoviePage};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+

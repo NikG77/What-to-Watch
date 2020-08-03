@@ -43,7 +43,7 @@ exports[`Should Player render correctly 1`] = `
       <div
         className="player__time-value"
       >
-        0:0:30
+        00:00:27
       </div>
     </div>
     <div

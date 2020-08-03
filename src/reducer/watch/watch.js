@@ -5,12 +5,9 @@ const ALL_GENRES = `All genres`;
 const COUNT_FILM_SHOW = 8;
 
 const initialState = {
-  movie: null,
   genre: ALL_GENRES,
   movieCount: COUNT_FILM_SHOW,
-  isPlayerActive: false,
-  isFormDisabled: false,
-
+  selectedMovie: {},
 };
 
 const ActionType = {
@@ -18,9 +15,6 @@ const ActionType = {
   SET_FILM: `SET_FILM`,
   SET_FILMS_COUNT: `SET_FILMS_COUNT`,
   RESET_FILMS_COUNT: `RESET_FILMS_COUNT`,
-  SET_PLAYER: `SET_PLAYER`,
-  RESET_PLAYER: `RESET_PLAYER`,
-  SET_FORM_DISABLED_STATUS: `SET_FORM_DISABLED_STATUS`,
 };
 
 const ActionCreator = {
@@ -44,22 +38,9 @@ const ActionCreator = {
       type: ActionType.RESET_FILMS_COUNT,
     };
   },
-  setPlayer: () => ({
-    type: ActionType.SET_PLAYER,
-    payload: true,
-  }),
-
-  resetPlayer: () => ({
-    type: ActionType.RESET_PLAYER,
-    payload: false,
-  }),
-
-  setFormDisabledStatus: (bool) => ({
-    type: ActionType.SET_FORM_DISABLED_STATUS,
-    payload: bool,
-  }),
 
 };
+
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -67,11 +48,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_GENRE:
       return extend(state, {
         genre: action.payload,
-      });
-
-    case ActionType.SET_FILM:
-      return extend(state, {
-        movie: action.payload,
       });
 
     case ActionType.SET_FILMS_COUNT:
@@ -84,19 +60,9 @@ const reducer = (state = initialState, action) => {
         movieCount: COUNT_FILM_SHOW,
       });
 
-    case ActionType.SET_PLAYER:
+    case ActionType.SET_FILM:
       return extend(state, {
-        isPlayerActive: action.payload,
-      });
-
-    case ActionType.RESET_PLAYER:
-      return extend(state, {
-        isPlayerActive: action.payload,
-      });
-
-    case ActionType.SET_FORM_DISABLED_STATUS:
-      return extend(state, {
-        isFormDisabled: action.payload,
+        selectedMovie: action.payload,
       });
 
   }

@@ -1,20 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {filmsType, filmType} from "../../types/types";
+import Footer from "../footer/footer.jsx";
+import GenresList from "../genres-list/genres-list.jsx";
+import Header from "../header/header.jsx";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
-import GenresList from "../genres-list/genres-list.jsx";
-import {filmsType, filmType} from "../../types/types";
-import {connect} from "react-redux";
-import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import {getGenre, getGenresList} from "../../reducer/watch/selectors.js";
-import Header from "../header/header.jsx";
+import {getPromoMovie} from "../../reducer/data/selectors.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
 const Main = (props) => {
 
-  const {genreFilms, mainFilm, onSmallMovieCardClick, onGenreItemClick, activeGenre, onPlayButtonClick, genresList} = props;
-  const {genre, title, releaseDate, poster, pictureBackground} = mainFilm;
+  const {
+    activeGenre,
+    genreFilms,
+    genresList,
+    mainFilm,
+    onGenreItemClick
+  } = props;
+
+  const {
+    genre,
+    id,
+    isFavorite,
+    pictureBackground,
+    poster,
+    releaseDate,
+    title
+  } = mainFilm;
+
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -24,9 +42,7 @@ const Main = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header
-          isMain={true}
-        />
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -41,9 +57,11 @@ const Main = (props) => {
                 <span className="movie-card__year">{releaseDate}</span>
               </p>
 
-              <div className="movie-card__buttons">
-                <MovieCardButtons onPlayButtonClick={onPlayButtonClick} />
-              </div>
+              <MovieCardButtons
+                id={id}
+                isFavorite={isFavorite}
+              />
+
             </div>
           </div>
         </div>
@@ -61,53 +79,41 @@ const Main = (props) => {
 
           <MoviesListWrapped
             genreFilms={genreFilms}
-            onSmallMovieCardClick={onSmallMovieCardClick}
           />
 
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <Footer />
 
-          <div className="copyright">
-            <p>© 2020 What to watch Ltd.</p>
-          </div>
-        </footer>
       </div>
     </React.Fragment>
   );
 };
 
 Main.propTypes = {
+  activeGenre: PropTypes.string.isRequired,
+  genreFilms: filmsType.isRequired,
   genresList: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string).isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  genreFilms: filmsType.isRequired,
   mainFilm: PropTypes.oneOfType([
     filmType.isRequired,
     () => null,
   ]),
-  onSmallMovieCardClick: PropTypes.func.isRequired,
-  activeGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
-
-  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (
   {
     activeGenre: getGenre(state),
     genresList: getGenresList(state),
+    mainFilm: getPromoMovie(state),
   }
 );
 
+
 export {Main};
+
 export default connect(mapStateToProps)(Main);
 

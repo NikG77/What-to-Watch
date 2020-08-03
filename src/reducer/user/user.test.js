@@ -10,6 +10,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
     userInfo: {},
+    isAuthorizationLoading: false,
   });
 });
 
@@ -95,8 +96,8 @@ describe(`Operation work correctly`, () => {
       .reply(200, {fake: true});
     return loginLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(4);
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.SET_USER_INFO,
           payload: adaptAuthInfo({fake: true}),
         });
@@ -114,8 +115,8 @@ describe(`Operation work correctly`, () => {
       .reply(200, {fake: true});
     return loginLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(4);
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.SET_USER_INFO,
           payload: adaptAuthInfo({fake: true}),
         });

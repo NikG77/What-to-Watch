@@ -8,9 +8,11 @@ const MAX_GENRES = 9;
 
 const NAME_SPACE = NameSpace.WATCH;
 
-export const getGenre = (state) => {
-  return state[NAME_SPACE].genre;
-};
+export const getGenre = (state) => state[NAME_SPACE].genre;
+
+export const getMovieCount = (state) => state[NAME_SPACE].movieCount;
+
+export const getFilm = (state) => state[NAME_SPACE].selectedMovie;
 
 export const getGenreMovies = createSelector(
     getAllMovies,
@@ -41,19 +43,16 @@ export const getGenresList = createSelector(
     }
 );
 
-export const getMovie = (state) => {
-  return state[NAME_SPACE].movie;
-};
+// export const getFilmById = (state, id) => {
+//   const allMovie = getAllMovies(state);
+//   const film = allMovie.find((movie) => movie.id === id);
+//   return film;
+// };
 
-export const getMovieCount = (state) => {
-  return state[NAME_SPACE].movieCount;
-};
+const getIdByProps = (_, id) => id;
 
-export const getIsPlayerActive = (state) => {
-  return state[NAME_SPACE].isPlayerActive;
-};
-
-export const getReviewFormStatus = (state) => {
-  return state[NAME_SPACE].isFormDisabled;
-};
-
+export const getFilmById = createSelector(
+    [getAllMovies, getIdByProps],
+    (allMovies, id) => {
+      return allMovies.find((movie) => movie.id === id);
+    });

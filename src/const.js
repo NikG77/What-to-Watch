@@ -28,3 +28,17 @@ export const Error = {
   BAD_REQUEST: 400
 };
 
+export const AppRoute = {
+  LOGIN: `/login`,
+  FILM: `/films`,
+  ADD_REVIEW: `/review`,
+  ROOT: `/`,
+  MY_LIST: `/mylist`,
+  PLAYER: `/player`,
+};
+
+export const Time = {
+  MINUTES_IN_HOUR: 60,
+  SECONDS_IN_MINUTE: 60,
+};
+

@@ -7,24 +7,24 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Click by "Exit" button calls callback`, () => {
-  const onExitPlayButtonClick = jest.fn();
+// it(`Click by "Exit" button calls callback`, () => {
+//   const onExitPlayButtonClick = jest.fn();
 
-  const player = mount(
-      <Player
-        onExitPlayButtonClick={onExitPlayButtonClick}
-        isPlay={true}
-        duration={30}
-        progress={10}
-        onPlayClick={() => {}}
-        onFullScreenClick={() => {}}
-        setDuration={() => {}}
-      />
-  );
+//   const player = mount(
+//       <Player
+//         onExitPlayButtonClick={onExitPlayButtonClick}
+//         isPlay={true}
+//         duration={30}
+//         progress={10}
+//         onPlayClick={() => {}}
+//         onFullScreenClick={() => {}}
+//         setDuration={() => {}}
+//       />
+//   );
 
-  player.find(`button.player__exit`).simulate(`click`);
-  expect(onExitPlayButtonClick).toHaveBeenCalledTimes(1);
-});
+//   player.find(`button.player__exit`).simulate(`click`);
+//   expect(onExitPlayButtonClick).toHaveBeenCalledTimes(1);
+// });
 
 
 it(`Click by "player play" button calls callback`, () => {
@@ -32,7 +32,8 @@ it(`Click by "player play" button calls callback`, () => {
 
   const player = mount(
       <Player
-        onExitPlayButtonClick={() => {}}
+        id={2}
+        // onExitPlayButtonClick={() => {}}
         isPlay={true}
         duration={30}
         progress={10}
@@ -53,7 +54,8 @@ it(`Click by "full screen" button calls callback`, () => {
 
   const player = mount(
       <Player
-        onExitPlayButtonClick={() => {}}
+        id={2}
+        // onExitPlayButtonClick={() => {}}
         isPlay={true}
         duration={30}
         progress={10}

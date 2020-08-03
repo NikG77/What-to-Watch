@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import {filmType} from "../../types/types";
 import VideoPlayer from "../video-player/video-player.jsx";
 import {TIME_DELAY} from "../../const.js";
-
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer/watch/watch.js";
+import {Link} from "react-router-dom";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 let timerId;
 
@@ -18,32 +22,28 @@ const clearTimer = (film, cb) => {
 
 const SmallMovieCard = (props) => {
   const {film, onSmallMovieCardClick, onSmallMovieCardHover, isPlaying} = props;
-  const {title, previewVideo, src} = film;
+  const {title, previewVideo, src, id} = film;
 
   return (
-    <article
+    <article className="small-movie-card catalog__movies-card"
       onMouseEnter={() => setTimer(film, onSmallMovieCardHover)}
       onMouseLeave={() => clearTimer(null, onSmallMovieCardHover)}
-      className="small-movie-card catalog__movies-card">
-
-      <div onClick={() => clearTimer(film, onSmallMovieCardClick)} className="small-movie-card__image">
+      onClick={() => {
+        clearTimer(film, onSmallMovieCardClick);
+        history.push(`${AppRoute.FILM}/${id}`);
+      }}
+    >
+      <div className="small-movie-card__image">
         <VideoPlayer
           src={previewVideo}
           poster={src}
           isPlaying={isPlaying}
-
         />
       </div>
-      <h3 onClick={(evt) => {
-        evt.preventDefault();
-        onSmallMovieCardClick(film);
-      }}
-      className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+      <h3 className="small-movie-card__title">
+        <Link to={`${AppRoute.FILM}/${id}`} className="small-movie-card__link">{title}</Link>
       </h3>
-
     </article>
-
   );
 };
 
@@ -55,5 +55,14 @@ SmallMovieCard.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
 };
 
-export default SmallMovieCard;
 
+const mapDispatchToProps = (dispatch) => ({
+  onSmallMovieCardClick(film) {
+    dispatch(ActionCreator.setFilm(film));
+    dispatch(ActionCreator.setGenre(film.genre));
+  }
+});
+
+export {SmallMovieCard};
+
+export default connect(null, mapDispatchToProps)(SmallMovieCard);

@@ -1,23 +1,31 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import Logo from "../logo/logo.jsx";
 import {getUserInfo} from "../../reducer/user/selectors.js";
-// import {getMovie} from "../../reducer/watch/selectors.js";
 import {filmType} from "../../types/types";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
-
-import {getReviewFormStatus} from "../../reducer/watch/selectors.js";
+import {getFilmById} from "../../reducer/watch/selectors.js";
+import {getReviewFormStatus} from "../../reducer/data/selectors.js";
+import {AppRoute} from "../../const.js";
+import {Link} from "react-router-dom";
 
 
 const DEFAULT_CHECKED_NUMBER = 3;
 const NUMBER_STARS = 5;
+
+// заменить перед сдачей проекта на 50
+const ReviewLength = {
+  MIN: 5,
+  MAX: 400,
+};
 
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      rating: 3,
+      rating: DEFAULT_CHECKED_NUMBER,
       review: ``,
 
     };
@@ -45,7 +53,7 @@ class AddReview extends PureComponent {
     const {film, userInfo, isFormDisabled} = this.props;
 
     if (film) {
-      const {title, pictureBackground, poster} = film;
+      const {title, pictureBackground, poster, id} = film;
 
       return (
         <section className="movie-card movie-card--full">
@@ -57,25 +65,18 @@ class AddReview extends PureComponent {
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header">
-              <div className="logo">
-                <a href="main.html" className="logo__link">
-                  <span className="logo__letter logo__letter--1">W</span>
-                  <span className="logo__letter logo__letter--2">T</span>
-                  <span className="logo__letter logo__letter--3">W</span>
-                </a>
-              </div>
+              <Logo />
 
               <nav className="breadcrumbs">
                 <ul className="breadcrumbs__list">
                   <li className="breadcrumbs__item">
-                    <a href="movie-page.html" className="breadcrumbs__link">{title}</a>
+                    <Link to={`${AppRoute.FILM}/${id}`} className="breadcrumbs__link">{title}</Link>
                   </li>
                   <li className="breadcrumbs__item">
                     <a className="breadcrumbs__link">Add review</a>
                   </li>
                 </ul>
               </nav>
-
 
               <div className="user-block">
                 <div className="user-block__avatar">
@@ -124,17 +125,15 @@ class AddReview extends PureComponent {
                   name="review"
                   id="review-text"
                   placeholder="Review text"
-                  // заменить перед сдачей проекта на 50
-                  minLength={5}
-                  maxLength={400}
+                  minLength={ReviewLength.MIN}
+                  maxLength={ReviewLength.MAX}
                   disabled={isFormDisabled}
                   required
                 />
                 <div className="add-review__submit">
                   <button className="add-review__btn"
                     type="submit"
-                    // заменить перед сдачей проекта на 50
-                    disabled={isFormDisabled || this.state.review.length < 5}
+                    disabled={isFormDisabled || this.state.review.length < ReviewLength.MIN}
                   >Post</button>
                 </div>
 
@@ -169,13 +168,17 @@ AddReview.propTypes = {
     PropTypes.oneOf([null]).isRequired,
   ]),
   isFormDisabled: PropTypes.bool.isRequired,
+  id: PropTypes.oneOfType([
+    () => null,
+    PropTypes.number.isRequired,
+  ]),
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
   userInfo: getUserInfo(state),
   isFormDisabled: getReviewFormStatus(state),
+  film: getFilmById(state, props.id),
 });
-
 
 const mapDispatchToProps = (dispatch) => ({
   onReviewSubmit(id, comment) {

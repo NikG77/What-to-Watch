@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SmallMovieCard from "./small-movie-card.jsx";
+import {SmallMovieCard} from "./small-movie-card.jsx";
+import history from "../../history.js";
+import {Router} from "react-router-dom";
 
 const film = {
   title: `One Flew Over the Cuckoo's Nest`,
@@ -24,17 +26,22 @@ const film = {
 
 it(`Should SmallMovieCard render correctly`, () => {
   const tree = renderer
-    .create(<SmallMovieCard
-      film={film}
-      onSmallMovieCardClick={() => {}}
-      onSmallMovieCardHover={() => {}}
-      isPlaying={false}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    .create(
+        <Router
+          history={history}
+        >
+          <SmallMovieCard
+            film={film}
+            onSmallMovieCardClick={() => {}}
+            onSmallMovieCardHover={() => {}}
+            isPlaying={false}
+          />
+        </Router>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

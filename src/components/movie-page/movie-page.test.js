@@ -1,10 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MoviePage from "./movie-page.jsx";
+import {MoviePage} from "./movie-page.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../const.js";
+import history from "../../history.js";
+import {Router} from "react-router-dom";
 
 
 const mockStore = configureStore([]);
@@ -41,15 +43,18 @@ it(`Should MoviePage render correctly`, () => {
 
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <MoviePage
-            isAuthorization={true}
-            film={films[0]}
-            genreFilms={films}
-            onSmallMovieCardClick={() => {}}
-            onPlayButtonClick={() => {}}
-          />
-        </Provider>
+        <Router
+          history={history}
+        >
+          <Provider store={store}>
+            <MoviePage
+              id={1}
+              film={films[0]}
+              genreFilms={films}
+              onGetComments={() => {}}
+            />
+          </Provider>
+        </Router>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

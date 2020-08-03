@@ -26,7 +26,7 @@ const ReviewsColumn = (props) => {
 
 ReviewsColumn.propTypes = {
   reviewsColumns: PropTypes.oneOfType([
-    PropTypes.oneOf([null]).isRequired,
+    () => null,
     PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,

@@ -67,114 +67,42 @@ const mainFilm = {
 };
 
 it(`Render App`, () => {
+
   const store = mockStore({
     [NameSpace.WATCH]: {
-      movie: null,
       genre: `All genres`,
       movieCount: 8,
-      isPlayerActive: false,
+      selectedMovie: {},
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
-    },
-  });
-
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            isAuthorization={false}
-            login={() => {}}
-            mainFilm={mainFilm}
-            onGenreItemClick={() => {}}
-            onSmallMovieCardClick={() => {}}
-            genreFilms={films}
-            film={films[0]}
-            onPlayButtonClick={() => {}}
-            onExitPlayButtonClick={() => {}}
-            isPlayerActive={false}
-          />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return {};
-          }
-        }).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-
-it(`Render MoviePage in App`, () => {
-
-  const store = mockStore({
-    [NameSpace.WATCH]: {
-      movie: null,
-      genre: `All genres`,
-      movieCount: 8,
-      isPlayerActive: false,
-    },
-    [NameSpace.USER]: {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
-    },
-  });
-
-
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            isAuthorization={false}
-            login={() => {}}
-            mainFilm={mainFilm}
-            onGenreItemClick={() => {}}
-            onSmallMovieCardClick={() => {}}
-            genreFilms={[films[0]]}
-            film={films[0]}
-            onPlayButtonClick={() => {}}
-            onExitPlayButtonClick={() => {}}
-            isPlayerActive={false}
-          />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return {};
-          }
-        }).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it(`Render Main in App`, () => {
-  const store = mockStore({
-    [NameSpace.WATCH]: {
-      movie: null,
-      genre: `All genres`,
-      movieCount: 8,
-      isPlayerActive: false,
+      userInfo: {},
+      isAuthorizationLoading: false,
     },
     [NameSpace.DATA]: {
       allMovies: films,
+      promoMovie: mainFilm,
+      comments: [],
+      favoriteMovies: [],
+      isFilmsLoading: false,
+      isPromoLoading: false,
+      isFormDisabled: false,
     },
-    [NameSpace.USER]: {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
-    },
+
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <App
-            isAuthorization={false}
-            login={() => {}}
-            mainFilm={mainFilm}
-            onGenreItemClick={() => {}}
-            onSmallMovieCardClick={() => {}}
             genreFilms={films}
-            film={null}
-            onPlayButtonClick={() => {}}
-            onExitPlayButtonClick={() => {}}
-            isPlayerActive={false}
+            genresList={[`All genres`]}
+            isAuthorization={false}
+            isAuthorizationLoading={false}
+            isFilmsLoading={false}
+            isPromoLoading={false}
+            login={() => {}}
+            onGenreItemClick={() => {}}
           />
         </Provider>,
         {

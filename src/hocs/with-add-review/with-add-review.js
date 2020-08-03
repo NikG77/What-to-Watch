@@ -1,5 +1,4 @@
 import React, {PureComponent} from "react";
-// import PropTypes from "prop-types";
 
 
 const withAddReview = (Component) => {
@@ -9,7 +8,7 @@ const withAddReview = (Component) => {
       super(props);
 
       this.state = {
-        rating: 3,
+        rating: `3`,
         comment: null,
       };
 
@@ -40,12 +39,6 @@ const withAddReview = (Component) => {
 
     }
   }
-
-
-  // WithAddReview.propTypes = {
-  //   rating: PropTypes.number.isRequired,
-  //   comment: PropTypes.string.isRequired,
-  // };
 
   return WithAddReview;
 

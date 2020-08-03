@@ -1,9 +1,13 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {reducer, ActionType, Operation} from "./data.js";
-import {adaptFilms, adaptFilm} from "../../adapters/adapters.js";
+import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+
 
 const api = createAPI(() => {});
+const mockStore = configureStore([]);
 
 const films = [{
   id: 0,
@@ -80,13 +84,27 @@ const films = [{
   isFavorite: false,
 }];
 
-const mockComments = [{fake: true}];
+const mockComments = [{
+  "id": 1,
+  "user": {
+    "id": 4,
+    "name": `Kate Muir`
+  },
+  "rating": 8.9,
+  "comment": `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+  "date": `2019-05-08T14:13:56.569Z`
+}];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     allMovies: [],
     promoMovie: {},
     comments: [],
+    favoriteMovies: [],
+    isFilmsLoading: false,
+    isPromoLoading: false,
+    isFormDisabled: false,
+    isSendingCommentSuccessfull: false,
   });
 });
 
@@ -123,8 +141,97 @@ it(`Reducer should update comments by load `, () => {
   });
 });
 
+it(`Reducer should favorite movies by load`, () => {
+  expect(reducer({
+    favoriteMovies: [],
+  }, {
+    type: ActionType.LOAD_FAVORITE_MOVIES,
+    payload: [films[1]],
+  })).toEqual({
+    favoriteMovies: [films[1]],
+  });
+});
+
+it(`Reducer should merge movie`, () => {
+  expect(reducer({
+    allMovies: films,
+  }, {
+    type: ActionType.MERGE_FILM,
+    payload: films[1],
+  })).toEqual({
+    allMovies: films,
+  });
+});
+
+it(`Reducer should merge promo movie`, () => {
+  expect(reducer({
+    promoMovie: {},
+  }, {
+    type: ActionType.MERGE_PROMO_FILM,
+    payload: films[1],
+  })).toEqual({
+    promoMovie: films[1],
+  });
+});
+
+it(`Reducer should is films loading`, () => {
+  expect(reducer({
+    isFilmsLoading: false,
+  }, {
+    type: ActionType.SET_FILMS_LOADING,
+    payload: true,
+  })).toEqual({
+    isFilmsLoading: true,
+  });
+});
+
+it(`Reducer should is films no loading`, () => {
+  expect(reducer({
+    isFilmsLoading: true,
+  }, {
+    type: ActionType.SET_FILMS_LOADING,
+    payload: false,
+  })).toEqual({
+    isFilmsLoading: false,
+  });
+});
+
+it(`Reducer should is promo films loading`, () => {
+  expect(reducer({
+    isPromoLoading: false,
+  }, {
+    type: ActionType.SET_PROMO_LOADING,
+    payload: true,
+  })).toEqual({
+    isPromoLoading: true,
+  });
+});
+
+it(`Reducer should is form disabled`, () => {
+  expect(reducer({
+    isFormDisabled: false,
+  }, {
+    type: ActionType.SET_FORM_DISABLED_STATUS,
+    payload: true,
+  })).toEqual({
+    isFormDisabled: true,
+  });
+});
+
+it(`Reducer should is sending comment successfull`, () => {
+  expect(reducer({
+    isSendingCommentSuccessfull: false,
+  }, {
+    type: ActionType.CHECK_IS_SENDING_SUCCESSFULL,
+    payload: true,
+  })).toEqual({
+    isSendingCommentSuccessfull: true,
+  });
+});
+
 
 describe(`Operation work correctly`, () => {
+
   it(`Should make a correct API call to /films`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
@@ -135,8 +242,8 @@ describe(`Operation work correctly`, () => {
       .reply(200, [{fake: true}]);
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_ALL_FILMS,
           payload: adaptFilms([{fake: true}]),
         });
@@ -153,30 +260,98 @@ describe(`Operation work correctly`, () => {
       .reply(200, [{fake: true}]);
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_PROMO_FILM,
           payload: adaptFilm([{fake: true}]),
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.SET_PROMO_LOADING,
+          payload: false,
         });
       });
   });
 
-  // it(`Should make a correct API call to /comments/1`, function () {
-  //   const apiMock = new MockAdapter(api);
-  //   const dispatch = jest.fn();
-  //   const commentsLoader = Operation.loadComments();
+  it(`Should make a correct API call to /comments/filmId`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const commentsLoader = Operation.loadComments(1);
 
-  //   apiMock
-  //     .onGet(`/comments/1`)
-  //     .reply(200, [{fake: true}]);
-  //   return commentsLoader(dispatch, () => {}, api)
-  //     .then(() => {
-  //       expect(dispatch).toHaveBeenCalledTimes(1);
-  //       expect(dispatch).toHaveBeenNthCalledWith(1, {
-  //         type: ActionType.LOAD_COMMENTS,
-  //         payload: adaptComments([{fake: true}]),
-  //       });
-  //     });
-  // });
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, mockComments);
+    return commentsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ActionType.LOAD_COMMENTS,
+          payload: adaptComments(mockComments),
+        });
+      });
+  });
+
+
+  it(`Should make a correct API call to send /comments/filmId`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const postComments = Operation.postComments(10, {
+      rating: 5,
+      comment: `comments`,
+    });
+
+    apiMock
+      .onPost(`/comments/10`)
+      .reply(200, [{fake: true}]);
+    return postComments(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(4);
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.CHECK_IS_SENDING_SUCCESSFULL,
+          payload: true,
+        });
+      });
+  });
+
+
+  it(`Should make a correct API call to /favorite`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoriteFilmsLoader = Operation.loadFavoriteFilms();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [{fake: true}]);
+    return favoriteFilmsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ActionType.LOAD_FAVORITE_MOVIES,
+          payload: adaptFilms([{fake: true}]),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to send /favorite/filmId/status`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const mergeFilm = Operation.changeFavoriteFilmStatus(10, 1);
+    const store = mockStore({
+      [NameSpace.DATA]: {
+        allMovies: films,
+        promoMovie: films[0],
+        favoriteMovies: [],
+      },
+    });
+
+    apiMock
+      .onPost(`/favorite/10/1`)
+      .reply(200, [{fake: true}]);
+    return mergeFilm(dispatch, () => store.getState(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ActionType.MERGE_FILM,
+          payload: adaptFilm([{fake: true}]),
+        });
+      });
+  });
 
 });
