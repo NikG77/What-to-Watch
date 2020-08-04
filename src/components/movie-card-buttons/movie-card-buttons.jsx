@@ -2,8 +2,8 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {AppRoute} from "../../const.js";
-import {Operation as OperationData} from "../../reducer/data/data.js";
+import {AppRoute} from "../../const";
+import {Operation as OperationData} from "../../reducer/data/data";
 
 const MovieCardButtons = (props) => {
   const {id, isFavorite, onChangeStatusButtonClick} = props;

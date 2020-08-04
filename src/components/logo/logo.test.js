@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
-import Logo from "./logo.jsx";
-import history from "../../history.js";
+import Logo from "./logo";
+import history from "../../history";
 
 
 it(`Logo component render correctly`, () => {

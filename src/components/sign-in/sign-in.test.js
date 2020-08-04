@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SignIn from "./sign-in.jsx";
-import history from "../../history.js";
+import SignIn from "./sign-in";
+import history from "../../history";
 import {Router} from "react-router-dom";
 
 

@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {MoviesList} from "./movies-list.jsx";
-import history from "../../history.js";
+import {MoviesList} from "./movies-list";
+import history from "../../history";
 import {Router} from "react-router-dom";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 import {Provider} from "react-redux";
-import {AuthorizationStatus} from "../../const.js";
+import {AuthorizationStatus} from "../../const";
 
 const mockStore = configureStore([]);
 

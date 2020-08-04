@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Reviews} from "./reviews.jsx";
+import {Reviews} from "./reviews";
 
 
 it(`Should Reviews render correctly`, () => {

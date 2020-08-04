@@ -2,16 +2,16 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {getGenre, getGenresList} from "../../reducer/watch/selectors.js";
-import {getPromoMovie} from "../../reducer/data/selectors.js";
+import {getGenre, getGenresList} from "../../reducer/watch/selectors";
+import {getPromoMovie} from "../../reducer/data/selectors";
 import {filmsType, filmType} from "../../types/types";
 
-import Footer from "../footer/footer.jsx";
-import GenresList from "../genres-list/genres-list.jsx";
-import Header from "../header/header.jsx";
-import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
-import MoviesList from "../movies-list/movies-list.jsx";
-import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import Footer from "../footer/footer";
+import GenresList from "../genres-list/genres-list";
+import Header from "../header/header";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons";
+import MoviesList from "../movies-list/movies-list";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 

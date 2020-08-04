@@ -1,8 +1,8 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import ReviewsColumn from "../reviews-column/reviews-column.jsx";
-import {getComments} from "../../reducer/data/selectors.js";
+import ReviewsColumn from "../reviews-column/reviews-column";
+import {getComments} from "../../reducer/data/selectors";
 
 
 const Reviews = (props) => {

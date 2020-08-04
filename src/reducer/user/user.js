@@ -1,6 +1,6 @@
-import {AuthorizationStatus, Error} from "../../const.js";
-import {adaptAuthInfo} from "../../adapters/adapters.js";
-import {errorPopup} from "../../utils/utils.js";
+import {AuthorizationStatus, Error} from "../../const";
+import {adaptAuthInfo} from "../../adapters/adapters";
+import {errorPopup} from "../../utils/utils";
 
 
 const initialState = {

@@ -1,9 +1,9 @@
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
-import {reducer, ActionType, Operation} from "./data.js";
-import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
+import {createAPI} from "../../api";
+import {reducer, ActionType, Operation} from "./data";
+import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 
 
 const api = createAPI(() => {});

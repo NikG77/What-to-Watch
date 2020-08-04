@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {AppRoute} from "../../const.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {getUserInfo} from "../../reducer/user/selectors.js";
-import Logo from "../logo/logo.jsx";
+import {AppRoute} from "../../const";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {getUserInfo} from "../../reducer/user/selectors";
+import Logo from "../logo/logo";
 
 const Header = (props) => {
   const {isAuthorization, userInfo} = props;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getFilmById} from "../../reducer/watch/selectors.js";
+import {getFilmById} from "../../reducer/watch/selectors";
 import {filmType} from "../../types/types";
 
 const withVideo = (Component) => {

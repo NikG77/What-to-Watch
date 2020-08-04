@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {SmallMovieCard} from "./small-movie-card.jsx";
-import history from "../../history.js";
+import {SmallMovieCard} from "./small-movie-card";
+import history from "../../history";
 import {Router} from "react-router-dom";
 
 const film = {

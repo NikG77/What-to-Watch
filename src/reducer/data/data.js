@@ -1,9 +1,9 @@
-import {extend} from "../../utils/utils.js";
-import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
-import {errorPopup} from "../../utils/utils.js";
+import {extend} from "../../utils/utils";
+import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters";
+import {errorPopup} from "../../utils/utils";
 import NameSpace from "../name-space";
-import history from "../../history.js";
-import {AppRoute} from "../../const.js";
+import history from "../../history";
+import {AppRoute} from "../../const";
 
 
 const initialState = {

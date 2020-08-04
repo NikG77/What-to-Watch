@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import ReviewsColumn from "./reviews-column.jsx";
+import ReviewsColumn from "./reviews-column";
 
 const reviewsColumns = [
   {

@@ -1,5 +1,5 @@
-import NameSpace from "../name-space.js";
-import {AuthorizationStatus} from "../../const.js";
+import NameSpace from "../name-space";
+import {AuthorizationStatus} from "../../const";
 
 const NAME_SPACE = NameSpace.USER;
 

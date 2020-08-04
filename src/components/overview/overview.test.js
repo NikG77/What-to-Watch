@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Overview from "./overview.jsx";
+import Overview from "./overview";
 
 const film = {
   title: `One Flew Over the Cuckoo's Nest`,

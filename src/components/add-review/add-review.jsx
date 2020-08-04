@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {AppRoute, DEFAULT_CHECKED_STARS, NUMBER_STARS, ReviewLength} from "../../const.js";
+import {AppRoute, DEFAULT_CHECKED_STARS, NUMBER_STARS, ReviewLength} from "../../const";
 import {filmType} from "../../types/types";
-import {getUserInfo} from "../../reducer/user/selectors.js";
-import {getFilmById} from "../../reducer/watch/selectors.js";
-import {getReviewFormStatus} from "../../reducer/data/selectors.js";
+import {getUserInfo} from "../../reducer/user/selectors";
+import {getFilmById} from "../../reducer/watch/selectors";
+import {getReviewFormStatus} from "../../reducer/data/selectors";
 
-import Logo from "../logo/logo.jsx";
+import Logo from "../logo/logo";
 
 const AddReview = (props) => {
 

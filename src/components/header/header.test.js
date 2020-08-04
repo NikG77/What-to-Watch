@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Header} from "./header.jsx";
-import history from "../../history.js";
+import {Header} from "./header";
+import history from "../../history";
 import {Router} from "react-router-dom";
 
 

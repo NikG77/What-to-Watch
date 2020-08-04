@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {filmsType} from "../../types/types";
-import {getFavoriteFilms} from "../../reducer/data/selectors.js";
-import {getUserInfo} from "../../reducer/user/selectors.js";
-import {Operation as OperationData} from "../../reducer/data/data.js";
+import {getFavoriteFilms} from "../../reducer/data/selectors";
+import {getUserInfo} from "../../reducer/user/selectors";
+import {Operation as OperationData} from "../../reducer/data/data";
 
-import Footer from "../footer/footer.jsx";
-import Loader from "../loader/loader.jsx";
-import Logo from "../logo/logo.jsx";
-import MoviesList from "../movies-list/movies-list.jsx";
-import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import Footer from "../footer/footer";
+import Loader from "../loader/loader";
+import Logo from "../logo/logo";
+import MoviesList from "../movies-list/movies-list";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 

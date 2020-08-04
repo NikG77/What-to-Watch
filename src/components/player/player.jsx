@@ -1,10 +1,10 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-import {AppRoute} from "../../const.js";
+import {AppRoute} from "../../const";
 import {filmType} from "../../types/types";
-import {formateDuration} from "../../utils/utils.js";
-import history from "../../history.js";
+import {formateDuration} from "../../utils/utils";
+import history from "../../history";
 
 const Player = (props) => {
   const {id, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;

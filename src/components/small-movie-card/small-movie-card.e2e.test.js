@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {SmallMovieCard} from "../small-movie-card/small-movie-card.jsx";
+import {SmallMovieCard} from "../small-movie-card/small-movie-card";
 
 
 Enzyme.configure({

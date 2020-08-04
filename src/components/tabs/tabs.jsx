@@ -1,10 +1,10 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import Overview from "../overview/overview.jsx";
-import Details from "../details/details.jsx";
-import Reviews from "../reviews/reviews.jsx";
+import Overview from "../overview/overview";
+import Details from "../details/details";
+import Reviews from "../reviews/reviews";
 import {filmType} from "../../types/types";
-import {TabName} from "../../const.js";
+import {TabName} from "../../const";
 
 
 const Tabs = (props) => {

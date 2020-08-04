@@ -3,11 +3,11 @@ import React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import withAddReview from "./with-add-review.js";
+import withAddReview from "./with-add-review";
 import {configure, mount} from "enzyme";
 
-import NameSpace from "../../reducer/name-space.js";
-import {AuthorizationStatus} from "../../const.js";
+import NameSpace from "../../reducer/name-space";
+import {AuthorizationStatus} from "../../const";
 
 const mockStore = configureStore([]);
 

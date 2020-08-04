@@ -3,9 +3,9 @@ import renderer from "react-test-renderer";
 import {Main} from "./main";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
-import {AuthorizationStatus} from "../../const.js";
-import history from "../../history.js";
+import NameSpace from "../../reducer/name-space";
+import {AuthorizationStatus} from "../../const";
+import history from "../../history";
 import {Router} from "react-router-dom";
 
 const mockStore = configureStore([]);

@@ -1,10 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {App} from "./app.jsx";
+import {App} from "./app";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
-import {AuthorizationStatus} from "../../const.js";
+import NameSpace from "../../reducer/name-space";
+import {AuthorizationStatus} from "../../const";
 
 const mockStore = configureStore([]);
 

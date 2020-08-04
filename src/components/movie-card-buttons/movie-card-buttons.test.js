@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {MovieCardButtons} from "./movie-card-buttons.jsx";
-import history from "../../history.js";
+import {MovieCardButtons} from "./movie-card-buttons";
+import history from "../../history";
 import {Router} from "react-router-dom";
 
 

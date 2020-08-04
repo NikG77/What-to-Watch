@@ -1,16 +1,16 @@
 import * as React from "react";
 import {filmType, filmsType} from "../../types/types";
 import PropTypes from "prop-types";
-import Tabs from "../tabs/tabs.jsx";
-import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
-import MoviesList from "../movies-list/movies-list.jsx";
-import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
-import Header from "../header/header.jsx";
-import Footer from "../footer/footer.jsx";
+import Tabs from "../tabs/tabs";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import MoviesList from "../movies-list/movies-list";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons";
+import Header from "../header/header";
+import Footer from "../footer/footer";
 import {connect} from "react-redux";
-import {getFilmById} from "../../reducer/watch/selectors.js";
-import Loader from "../loader/loader.jsx";
-import {Operation as OperationData} from "../../reducer/data/data.js";
+import {getFilmById} from "../../reducer/watch/selectors";
+import Loader from "../loader/loader";
+import {Operation as OperationData} from "../../reducer/data/data";
 
 
 const COUNT_LIKE_FILMS = 4;

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Details from "./details.jsx";
+import Details from "./details";
 
 const film = {
   title: `One Flew Over the Cuckoo's Nest`,

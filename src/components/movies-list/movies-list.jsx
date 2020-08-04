@@ -2,11 +2,11 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer/watch/watch.js";
-import {getMovieCount} from "../../reducer/watch/selectors.js";
+import {ActionCreator} from "../../reducer/watch/watch";
+import {getMovieCount} from "../../reducer/watch/selectors";
 import {filmsType, filmType} from "../../types/types";
-import ShowMore from "../show-more/show-more.jsx";
-import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
+import ShowMore from "../show-more/show-more";
+import SmallMovieCard from "../small-movie-card/small-movie-card";
 
 
 const MoviesList = (props) => {

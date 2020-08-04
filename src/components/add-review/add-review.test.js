@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {AddReview} from "./add-review.jsx";
-import history from "../../history.js";
+import {AddReview} from "./add-review";
+import history from "../../history";
 import {Router} from "react-router-dom";
 
 

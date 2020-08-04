@@ -2,8 +2,8 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {DEFAULT_CHECKED_STARS} from "../../const.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {DEFAULT_CHECKED_STARS} from "../../const";
+import {Operation as DataOperation} from "../../reducer/data/data";
 
 
 const withAddReview = (Component) => {
