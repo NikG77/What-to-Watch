@@ -1,5 +1,5 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
@@ -10,6 +10,31 @@ import {getFilmById} from "../../reducer/watch/selectors";
 import {getReviewFormStatus} from "../../reducer/data/selectors";
 
 import Logo from "../logo/logo";
+
+
+// AddReview.propTypes = {
+//   userInfo: PropTypes.oneOfType([
+//     () => null,
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       email: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       avatarUrl: PropTypes.string.isRequired,
+//     }).isRequired,
+//   ]),
+//   film: PropTypes.oneOfType([
+//     filmType.isRequired,
+//     PropTypes.oneOf([null]).isRequired,
+//   ]),
+//   isFormDisabled: PropTypes.bool.isRequired,
+//   id: PropTypes.oneOfType([
+//     () => null,
+//     PropTypes.number.isRequired,
+//   ]),
+//   onSubmitForm: PropTypes.func.isRequired,
+//   onChangeInput: PropTypes.func.isRequired,
+//   review: PropTypes.string.isRequired,
+// };
 
 const AddReview = (props) => {
 
@@ -112,29 +137,7 @@ const AddReview = (props) => {
 };
 
 
-AddReview.propTypes = {
-  userInfo: PropTypes.oneOfType([
-    () => null,
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      email: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-  ]),
-  film: PropTypes.oneOfType([
-    filmType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-  isFormDisabled: PropTypes.bool.isRequired,
-  id: PropTypes.oneOfType([
-    () => null,
-    PropTypes.number.isRequired,
-  ]),
-  onSubmitForm: PropTypes.func.isRequired,
-  onChangeInput: PropTypes.func.isRequired,
-  review: PropTypes.string.isRequired,
-};
+
 
 const mapStateToProps = (state, props) => ({
   userInfo: getUserInfo(state),
