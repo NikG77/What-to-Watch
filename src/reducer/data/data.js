@@ -14,7 +14,6 @@ const initialState = {
   isFilmsLoading: false,
   isPromoLoading: false,
   isFormDisabled: false,
-  isSendingCommentSuccessfull: false,
 };
 
 const ActionType = {
@@ -76,11 +75,6 @@ const ActionCreator = {
     payload: isFormLoading,
   }),
 
-  checkIsSendingSuccessfull: (isSendingSuccessfull) => ({
-    type: ActionType.CHECK_IS_SENDING_SUCCESSFULL,
-    payload: isSendingSuccessfull,
-  }),
-
 };
 
 
@@ -130,15 +124,14 @@ const Operation = {
       rating: comment.rating,
       comment: comment.comment,
     })
-    .then(() => {
+    .then((response) => {
       dispatch(ActionCreator.setFormDisabledStatus(false));
-      dispatch(ActionCreator.checkIsSendingSuccessfull(true));
-      dispatch(Operation.loadComments(id));
+      const comments = adaptComments(response.data);
+      dispatch(ActionCreator.loadComments(comments));
       history.push(`${AppRoute.FILM}/${id}`);
     })
     .catch((err) => {
       dispatch(ActionCreator.setFormDisabledStatus(false));
-      dispatch(ActionCreator.checkIsSendingSuccessfull(false));
       return errorPopup(err);
     });
   },
@@ -211,11 +204,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FORM_DISABLED_STATUS:
       return extend(state, {
         isFormDisabled: action.payload,
-      });
-
-    case ActionType.CHECK_IS_SENDING_SUCCESSFULL:
-      return extend(state, {
-        isSendingCommentSuccessfull: action.payload,
       });
 
   }
