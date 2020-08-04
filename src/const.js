@@ -18,7 +18,6 @@ export const TabName = {
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
-  ERROR: `ERROR`,
   BAD_REQUEST: `BAD_REQUEST`,
 };
 
@@ -42,3 +41,10 @@ export const Time = {
   SECONDS_IN_MINUTE: 60,
 };
 
+export const DEFAULT_CHECKED_STARS = 3;
+export const NUMBER_STARS = 5;
+
+export const ReviewLength = {
+  MIN: 50,
+  MAX: 400,
+};

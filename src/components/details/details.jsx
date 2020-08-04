@@ -5,8 +5,7 @@ const getTime = (number) => `${Math.trunc(number / 60)}h ${number % 60}m`;
 
 const Details = (props) => {
   const {film} = props;
-  const {director, starring, genre, releaseDate, duration} = film;
-
+  const {director, duration, genre, releaseDate, starring} = film;
 
   return (
     <React.Fragment>

@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
-import {filmsType, filmType} from "../../types/types";
-import ShowMore from "../show-more/show-more.jsx";
 import {connect} from "react-redux";
+
 import {ActionCreator} from "../../reducer/watch/watch.js";
 import {getMovieCount} from "../../reducer/watch/selectors.js";
+import {filmsType, filmType} from "../../types/types";
+import ShowMore from "../show-more/show-more.jsx";
+import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
 
 const MoviesList = (props) => {

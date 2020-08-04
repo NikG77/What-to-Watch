@@ -2,9 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Redirect, Route, Router, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-import history from "../../history.js";
+
 import {AppRoute} from "../../const.js";
 import {filmsType} from "../../types/types";
+import history from "../../history.js";
+import {ActionCreator as ActionCreatorWatch} from "../../reducer/watch/watch.js";
+import {getGenreMovies} from "../../reducer/watch/selectors.js";
+import {getFilmsLoadingStatus, getPromoFilmLoadingStatus} from "../../reducer/data/selectors.js";
+import {getAuthorizationStatus, getAuthorizationLoadingStatus} from "../../reducer/user/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 
 import AddReview from "../add-review/add-review.jsx";
 import Error404 from "../error404/error404.jsx";
@@ -16,13 +22,6 @@ import Player from "../player/player.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
-
-import {Operation as UserOperation} from "../../reducer/user/user.js";
-import {ActionCreator as ActionCreatorWatch} from "../../reducer/watch/watch.js";
-import {getGenreMovies} from "../../reducer/watch/selectors.js";
-import {getFilmsLoadingStatus, getPromoFilmLoadingStatus} from "../../reducer/data/selectors.js";
-import {getAuthorizationStatus, getAuthorizationLoadingStatus} from "../../reducer/user/selectors.js";
-
 
 const PlayerWrapped = withVideo(Player);
 

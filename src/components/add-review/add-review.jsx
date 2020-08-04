@@ -1,33 +1,24 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import Logo from "../logo/logo.jsx";
-import {getUserInfo} from "../../reducer/user/selectors.js";
-import {filmType} from "../../types/types";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
-import {getFilmById} from "../../reducer/watch/selectors.js";
-import {getReviewFormStatus} from "../../reducer/data/selectors.js";
-import {AppRoute} from "../../const.js";
 import {Link} from "react-router-dom";
 
+import {AppRoute, DEFAULT_CHECKED_STARS, NUMBER_STARS, ReviewLength} from "../../const.js";
+import {filmType} from "../../types/types";
+import {getUserInfo} from "../../reducer/user/selectors.js";
+import {getFilmById} from "../../reducer/watch/selectors.js";
+import {getReviewFormStatus} from "../../reducer/data/selectors.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 
-const DEFAULT_CHECKED_NUMBER = 3;
-const NUMBER_STARS = 5;
-
-// заменить перед сдачей проекта на 50
-const ReviewLength = {
-  MIN: 5,
-  MAX: 400,
-};
+import Logo from "../logo/logo.jsx";
 
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      rating: DEFAULT_CHECKED_NUMBER,
+      rating: DEFAULT_CHECKED_STARS,
       review: ``,
-
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -99,7 +90,7 @@ class AddReview extends PureComponent {
                 <div className="rating__stars">
                   {new Array(NUMBER_STARS).fill(``).map((number, i) => {
                     const index = i + 1;
-                    const checkedNumber = index - DEFAULT_CHECKED_NUMBER;
+                    const checkedNumber = index - DEFAULT_CHECKED_STARS;
                     return (
                       <React.Fragment key={index}>
                         <input className="rating__input"
@@ -145,7 +136,6 @@ class AddReview extends PureComponent {
       );
     }
     return null;
-
   }
 
 }
