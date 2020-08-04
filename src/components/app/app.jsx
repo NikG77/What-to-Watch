@@ -22,8 +22,10 @@ import Player from "../player/player.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import withVideo from "../../hocs/with-video/with-video.js";
+import withAddReview from "../../hocs/with-add-review/with-add-review.js";
 
 const PlayerWrapped = withVideo(Player);
+const AddReviewWrapped = withAddReview(AddReview);
 
 const App = (props) => {
 
@@ -70,7 +72,7 @@ const App = (props) => {
 
         <PrivateRoute exact path={`${AppRoute.FILM}/:id${AppRoute.ADD_REVIEW}`}
           render={({match}) => {
-            return <AddReview id={+match.params.id} />;
+            return <AddReviewWrapped id={+match.params.id} />;
           }}
         />
 

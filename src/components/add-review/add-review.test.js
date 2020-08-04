@@ -18,6 +18,9 @@ it(`Should AddReview render correctly`, () => {
             id={7}
             userInfo={mockUserInfo}
             isFormDisabled={false}
+            review={``}
+            onSubmitForm={() => {}}
+            onChangeInput={() => {}}
           />
         </Router>
     ).toJSON();

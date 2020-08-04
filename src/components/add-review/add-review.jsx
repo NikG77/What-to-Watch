@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -8,137 +8,108 @@ import {filmType} from "../../types/types";
 import {getUserInfo} from "../../reducer/user/selectors.js";
 import {getFilmById} from "../../reducer/watch/selectors.js";
 import {getReviewFormStatus} from "../../reducer/data/selectors.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 import Logo from "../logo/logo.jsx";
 
-class AddReview extends PureComponent {
-  constructor(props) {
-    super(props);
+const AddReview = (props) => {
 
-    this.state = {
-      rating: DEFAULT_CHECKED_STARS,
-      review: ``,
-    };
+  const {id, film, userInfo, isFormDisabled, onSubmitForm, onChangeInput, review} = props;
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
+  if (film) {
+    const {title, pictureBackground, poster} = film;
 
-  handleInputChange(evt) {
-    const {name, value} = evt.target;
-    this.setState({[name]: value});
-  }
-
-  handleSubmit(evt) {
-    const {onReviewSubmit, film} = this.props;
-    evt.preventDefault();
-
-    onReviewSubmit(film.id, {
-      rating: this.state.rating,
-      comment: this.state.review,
-    });
-  }
-
-  render() {
-    const {film, userInfo, isFormDisabled} = this.props;
-
-    if (film) {
-      const {title, pictureBackground, poster, id} = film;
-
-      return (
-        <section className="movie-card movie-card--full">
-          <div className="movie-card__header">
-            <div className="movie-card__bg">
-              <img src={pictureBackground} alt={title} />
-            </div>
-
-            <h1 className="visually-hidden">WTW</h1>
-
-            <header className="page-header">
-              <Logo />
-
-              <nav className="breadcrumbs">
-                <ul className="breadcrumbs__list">
-                  <li className="breadcrumbs__item">
-                    <Link to={`${AppRoute.FILM}/${id}`} className="breadcrumbs__link">{title}</Link>
-                  </li>
-                  <li className="breadcrumbs__item">
-                    <a className="breadcrumbs__link">Add review</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="user-block">
-                <div className="user-block__avatar">
-                  <img src={userInfo.avatarUrl} alt="User avatar" width="63" height="63" />
-                </div>
-              </div>
-            </header>
-
-            <div className="movie-card__poster movie-card__poster--small">
-              <img src={poster} alt={`${title} poster`} width="218" height="327" />
-            </div>
+    return (
+      <section className="movie-card movie-card--full">
+        <div className="movie-card__header">
+          <div className="movie-card__bg">
+            <img src={pictureBackground} alt={title} />
           </div>
 
-          <div className="add-review">
-            <form action="#"
-              className="add-review__form"
-              onSubmit={this.handleSubmit}
-            >
-              <div className="rating">
-                <div className="rating__stars">
-                  {new Array(NUMBER_STARS).fill(``).map((number, i) => {
-                    const index = i + 1;
-                    const checkedNumber = index - DEFAULT_CHECKED_STARS;
-                    return (
-                      <React.Fragment key={index}>
-                        <input className="rating__input"
-                          onChange={this.handleInputChange}
-                          id={`star-${index}`}
-                          type="radio"
-                          name="rating"
-                          defaultValue={index}
-                          defaultChecked={!checkedNumber}
-                          disabled={isFormDisabled} />
-                        <label className="rating__label" htmlFor={`star-${index}`}>Rating {index}</label>
-                      </React.Fragment>
-                    );
-                  })}
+          <h1 className="visually-hidden">WTW</h1>
 
-                </div>
+          <header className="page-header">
+            <Logo />
+
+            <nav className="breadcrumbs">
+              <ul className="breadcrumbs__list">
+                <li className="breadcrumbs__item">
+                  <Link to={`${AppRoute.FILM}/${id}`} className="breadcrumbs__link">{title}</Link>
+                </li>
+                <li className="breadcrumbs__item">
+                  <a className="breadcrumbs__link">Add review</a>
+                </li>
+              </ul>
+            </nav>
+
+            <div className="user-block">
+              <div className="user-block__avatar">
+                <img src={userInfo.avatarUrl} alt="User avatar" width="63" height="63" />
               </div>
+            </div>
+          </header>
 
-              <div className="add-review__text">
-                <textarea className="add-review__textarea"
-                  onChange={this.handleInputChange}
-                  value={this.state.review.value}
-                  name="review"
-                  id="review-text"
-                  placeholder="Review text"
-                  minLength={ReviewLength.MIN}
-                  maxLength={ReviewLength.MAX}
-                  disabled={isFormDisabled}
-                  required
-                />
-                <div className="add-review__submit">
-                  <button className="add-review__btn"
-                    type="submit"
-                    disabled={isFormDisabled || this.state.review.length < ReviewLength.MIN}
-                  >Post</button>
-                </div>
-
-              </div>
-            </form>
+          <div className="movie-card__poster movie-card__poster--small">
+            <img src={poster} alt={`${title} poster`} width="218" height="327" />
           </div>
+        </div>
 
-        </section>
-      );
-    }
-    return null;
+        <div className="add-review">
+          <form action="#"
+            className="add-review__form"
+            onSubmit={onSubmitForm}
+          >
+            <div className="rating">
+              <div className="rating__stars">
+                {new Array(NUMBER_STARS).fill(``).map((number, i) => {
+                  const index = i + 1;
+                  const checkedNumber = index - DEFAULT_CHECKED_STARS;
+                  return (
+                    <React.Fragment key={index}>
+                      <input className="rating__input"
+                        onChange={onChangeInput}
+                        id={`star-${index}`}
+                        type="radio"
+                        name="rating"
+                        defaultValue={index}
+                        defaultChecked={!checkedNumber}
+                        disabled={isFormDisabled} />
+                      <label className="rating__label" htmlFor={`star-${index}`}>Rating {index}</label>
+                    </React.Fragment>
+                  );
+                })}
+
+              </div>
+            </div>
+
+            <div className="add-review__text">
+              <textarea className="add-review__textarea"
+                onChange={onChangeInput}
+                value={review}
+                name="review"
+                id="review-text"
+                placeholder="Review text"
+                minLength={ReviewLength.MIN}
+                maxLength={ReviewLength.MAX}
+                disabled={isFormDisabled}
+                required
+              />
+              <div className="add-review__submit">
+                <button className="add-review__btn"
+                  type="submit"
+                  disabled={isFormDisabled || review.length < ReviewLength.MIN}
+                >Post</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+      </section>
+    );
   }
+  return null;
 
-}
+};
 
 
 AddReview.propTypes = {
@@ -151,8 +122,6 @@ AddReview.propTypes = {
       avatarUrl: PropTypes.string.isRequired,
     }).isRequired,
   ]),
-
-  onReviewSubmit: PropTypes.func.isRequired,
   film: PropTypes.oneOfType([
     filmType.isRequired,
     PropTypes.oneOf([null]).isRequired,
@@ -162,6 +131,9 @@ AddReview.propTypes = {
     () => null,
     PropTypes.number.isRequired,
   ]),
+  onSubmitForm: PropTypes.func.isRequired,
+  onChangeInput: PropTypes.func.isRequired,
+  review: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -170,12 +142,7 @@ const mapStateToProps = (state, props) => ({
   film: getFilmById(state, props.id),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onReviewSubmit(id, comment) {
-    dispatch(DataOperation.postComments(id, comment));
-  }
-});
 
 export {AddReview};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
+export default connect(mapStateToProps)(AddReview);
