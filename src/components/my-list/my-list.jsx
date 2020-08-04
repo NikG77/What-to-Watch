@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
@@ -15,7 +15,7 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
-class MyList extends PureComponent {
+class MyList extends React.PureComponent {
   constructor(props) {
     super(props);
   }

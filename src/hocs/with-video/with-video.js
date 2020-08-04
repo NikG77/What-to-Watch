@@ -1,4 +1,4 @@
-import React, {PureComponent, createRef} from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getFilmById} from "../../reducer/watch/selectors.js";
@@ -6,7 +6,7 @@ import {filmType} from "../../types/types";
 
 const withVideo = (Component) => {
 
-  class WithVideo extends PureComponent {
+  class WithVideo extends React.PureComponent {
     constructor(props) {
       super(props);
 
@@ -16,7 +16,7 @@ const withVideo = (Component) => {
         progress: 0,
       };
 
-      this._videoRef = createRef();
+      this._videoRef = React.createRef();
 
       this._handleFullScreenClick = this._handleFullScreenClick.bind(this);
       this._handlePlayClick = this._handlePlayClick.bind(this);

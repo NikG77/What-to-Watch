@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {filmType, filmsType} from "../../types/types";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";

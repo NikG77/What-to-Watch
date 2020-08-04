@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Logo from "../logo/logo.jsx";
 
 const CLASS_NAME_LOGO_LIGHT = `logo__link--light`;

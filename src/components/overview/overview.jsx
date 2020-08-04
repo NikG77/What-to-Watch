@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {filmType} from "../../types/types";
 import {RatingLevel} from "../../const.js";
 

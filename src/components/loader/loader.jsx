@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 const Loader = () => <p style={{fontSize: `40px`, textAlign: `center`}}>Loading...</p>;
 

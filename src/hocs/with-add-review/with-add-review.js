@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
@@ -8,7 +8,7 @@ import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 const withAddReview = (Component) => {
 
-  class WithAddReview extends PureComponent {
+  class WithAddReview extends React.PureComponent {
     constructor(props) {
       super(props);
 
