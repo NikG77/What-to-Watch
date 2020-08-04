@@ -43,11 +43,6 @@ export const getGenresList = createSelector(
     }
 );
 
-// export const getFilmById = (state, id) => {
-//   const allMovie = getAllMovies(state);
-//   const film = allMovie.find((movie) => movie.id === id);
-//   return film;
-// };
 
 const getIdByProps = (_, id) => id;
 

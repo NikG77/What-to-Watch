@@ -3,8 +3,6 @@ import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import SignIn from "./sign-in.jsx";
 
-// import history from "../../history.js";
-// import {Router} from "react-router-dom";
 jest.mock(`../logo/logo.jsx`, () => `div`);
 
 Enzyme.configure({

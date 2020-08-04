@@ -5,8 +5,6 @@ import {Time} from "../const.js";
 export const formatForDateTime = (date) => moment(date).format(`YYYY-MM-DD`);
 
 export const reformatDate = (date) => moment(date).format(`LL`);
-// без использования moment
-// export const reformatDate = (date) => new Intl.DateTimeFormat(`en-EN`, {year: `numeric`, month: `long`, day: `numeric`}).format(new Date(date));
 
 export const formateDuration = (time) => {
   const seconds = Math.trunc(time % Time.SECONDS_IN_MINUTE);

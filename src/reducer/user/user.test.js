@@ -63,6 +63,17 @@ it(`Reducer should change userInfo by a given value`, () => {
   });
 });
 
+it(`Reducer should change authorization loading by a given value`, () => {
+  expect(reducer({
+    isAuthorizationLoading: false,
+  }, {
+    type: ActionType.SET_AUTHORIZATION_LOADING,
+    payload: true,
+  })).toEqual({
+    isAuthorizationLoading: true,
+  });
+});
+
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for require authorization returns correct action`, () => {
@@ -83,6 +94,14 @@ describe(`Action creators work correctly`, () => {
       payload: {},
     });
   });
+
+  it(`Action creator for authorization loading returns correct action`, () => {
+    expect(ActionCreator.setAuthorizationLoading(true)).toEqual({
+      type: ActionType.SET_AUTHORIZATION_LOADING,
+      payload: true,
+    });
+  });
+
 });
 
 describe(`Operation work correctly`, () => {

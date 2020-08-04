@@ -14,18 +14,8 @@ export const createAPI = (onUnauthorized) => {
   };
 
   const onFail = (err) => {
-    if (!err.response) {
-      err.response = {};
-      err.response.status = `Нет соединения`;
-      err.response.data = {};
-      err.response.data.error = `Проверьте соедение с интернетом`;
-    }
-
     if (err.response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
-
-      // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
-      // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.
     }
 
     throw err;

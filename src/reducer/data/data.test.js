@@ -104,7 +104,6 @@ it(`Reducer without additional parameters should return initial state`, () => {
     isFilmsLoading: false,
     isPromoLoading: false,
     isFormDisabled: false,
-    isSendingCommentSuccessfull: false,
   });
 });
 
@@ -218,17 +217,6 @@ it(`Reducer should is form disabled`, () => {
   });
 });
 
-it(`Reducer should is sending comment successfull`, () => {
-  expect(reducer({
-    isSendingCommentSuccessfull: false,
-  }, {
-    type: ActionType.CHECK_IS_SENDING_SUCCESSFULL,
-    payload: true,
-  })).toEqual({
-    isSendingCommentSuccessfull: true,
-  });
-});
-
 
 describe(`Operation work correctly`, () => {
 
@@ -300,13 +288,13 @@ describe(`Operation work correctly`, () => {
 
     apiMock
       .onPost(`/comments/10`)
-      .reply(200, [{fake: true}]);
+      .reply(200, mockComments);
     return postComments(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(4);
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: ActionType.CHECK_IS_SENDING_SUCCESSFULL,
-          payload: true,
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ActionType.LOAD_COMMENTS,
+          payload: adaptComments(mockComments),
         });
       });
   });

@@ -13,7 +13,6 @@ it(`Should Movie render correctly`, () => {
         ><MovieCardButtons
             id={1}
             isFavorite={true}
-            // onPlayButtonClick={() => {}}
             onChangeStatusButtonClick={() => {}}
           />
         </Router>

@@ -1,13 +1,15 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import Logo from "../logo/logo.jsx";
-import Footer from "../footer/footer.jsx";
-import {getUserInfo} from "../../reducer/user/selectors.js";
 import {connect} from "react-redux";
-import {Operation as OperationData} from "../../reducer/data/data.js";
-import {getFavoriteFilms} from "../../reducer/data/selectors.js";
+
 import {filmsType} from "../../types/types";
+import {getFavoriteFilms} from "../../reducer/data/selectors.js";
+import {getUserInfo} from "../../reducer/user/selectors.js";
+import {Operation as OperationData} from "../../reducer/data/data.js";
+
+import Footer from "../footer/footer.jsx";
 import Loader from "../loader/loader.jsx";
+import Logo from "../logo/logo.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 
@@ -25,7 +27,7 @@ class MyList extends PureComponent {
 
 
   render() {
-    const {userInfo, films} = this.props;
+    const {films, userInfo} = this.props;
 
     return (
       films ?
@@ -78,8 +80,8 @@ MyList.propTypes = {
 
 
 const mapStateToProps = (state) => ({
-  userInfo: getUserInfo(state),
   films: getFavoriteFilms(state),
+  userInfo: getUserInfo(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -90,5 +92,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {MyList};
+
 export default connect(mapStateToProps, mapDispatchToProps)(MyList);
 

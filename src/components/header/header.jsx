@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+
+import {AppRoute} from "../../const.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {getUserInfo} from "../../reducer/user/selectors.js";
-import {Link} from "react-router-dom";
-import {AppRoute} from "../../const.js";
 import Logo from "../logo/logo.jsx";
 
 const Header = (props) => {
@@ -26,6 +27,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
+  isAuthorization: PropTypes.bool.isRequired,
   userInfo: PropTypes.oneOfType([
     () => null,
     PropTypes.shape({
@@ -35,7 +37,6 @@ Header.propTypes = {
       avatarUrl: PropTypes.string.isRequired,
     }).isRequired,
   ]),
-  isAuthorization: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
