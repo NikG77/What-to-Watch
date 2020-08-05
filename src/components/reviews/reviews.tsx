@@ -1,11 +1,16 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
+
+import {Comment} from "../../types";
 import ReviewsColumn from "../reviews-column/reviews-column";
 import {getComments} from "../../reducer/data/selectors";
 
+interface Props {
+  id: number,
+  reviews: Array<Comment>;
+};
 
-const Reviews = (props) => {
+const Reviews: React.FunctionComponent<Props> = (props: Props) => {
 
   const {reviews} = props;
   if (reviews) {
@@ -22,23 +27,6 @@ const Reviews = (props) => {
   return null;
 };
 
-
-Reviews.propTypes = {
-  id: PropTypes.oneOfType([
-    PropTypes.oneOf([null]).isRequired,
-    PropTypes.number.isRequired,
-  ]),
-  reviews: PropTypes.oneOfType([
-    () => null,
-    PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      date: PropTypes.date,
-      rating: PropTypes.number.isRequired,
-      id: PropTypes.string.isRequired,
-    })).isRequired,
-  ]),
-};
 
 const mapStateToProps = (state) => ({
   reviews: getComments(state),

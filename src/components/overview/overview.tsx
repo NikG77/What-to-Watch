@@ -1,5 +1,6 @@
 import * as React from "react";
-import {filmType} from "../../types/types";
+
+import {FilmType} from "../../types";
 import {RatingLevel} from "../../const";
 
 const getRatingLevel = (score) => {
@@ -25,9 +26,13 @@ const getRatingLevel = (score) => {
   return ratingLevel;
 };
 
-const Overview = (props) => {
+interface Props {
+  film: FilmType;
+}
+
+const Overview: React.FunctionComponent<Props> = (props: Props) => {
   const {film} = props;
-  const {ratingScore, ratingCount, director, starring, description} = film;
+  const {description, director, ratingCount, ratingScore, starring, } = film;
   const starringDetails = starring.join(`, `);
 
   const ratingLevel = getRatingLevel(ratingScore);
@@ -58,10 +63,6 @@ const Overview = (props) => {
     </React.Fragment>
   );
 
-};
-
-Overview.propTypes = {
-  film: filmType.isRequired,
 };
 
 export default Overview;

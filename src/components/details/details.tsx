@@ -1,9 +1,13 @@
 import * as React from "react";
-import {filmType} from "../../types/types";
+ import {FilmType} from "../../types";
 
 const getTime = (number) => `${Math.trunc(number / 60)}h ${number % 60}m`;
 
-const Details = (props) => {
+interface Props {
+  film: FilmType;
+};
+
+const Details: React.FunctionComponent<Props> = (props: Props) => {
   const {film} = props;
   const {director, duration, genre, releaseDate, starring} = film;
 
@@ -46,10 +50,6 @@ const Details = (props) => {
       </div>
     </React.Fragment>
   );
-};
-
-Details.propTypes = {
-  film: filmType.isRequired,
 };
 
 export default Details;

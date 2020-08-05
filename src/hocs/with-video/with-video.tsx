@@ -1,12 +1,24 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
 import {connect} from "react-redux";
 import {getFilmById} from "../../reducer/watch/selectors";
-import {filmType} from "../../types/types";
+ import {FilmType} from "../../types";
+
+ interface State {
+  isPlay: boolean,
+  duration: number;
+  progress: number;
+}
+interface Props {
+  film: FilmType;
+  id: number;
+};
 
 const withVideo = (Component) => {
 
-  class WithVideo extends React.PureComponent {
+  class WithVideo extends React.PureComponent<Props, State> {
+    private videoRef: React.RefObject<HTMLVideoElement>;
+
     constructor(props) {
       super(props);
 
@@ -16,7 +28,7 @@ const withVideo = (Component) => {
         progress: 0,
       };
 
-      this._videoRef = React.createRef();
+      this.videoRef = React.createRef();
 
       this._handleFullScreenClick = this._handleFullScreenClick.bind(this);
       this._handlePlayClick = this._handlePlayClick.bind(this);
@@ -28,7 +40,7 @@ const withVideo = (Component) => {
     }
 
     _handleFullScreenClick() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       if (video.requestFullscreen) {
         video.requestFullscreen();
@@ -36,7 +48,7 @@ const withVideo = (Component) => {
     }
 
     setDuration() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       this.setState({
         duration: video.duration,
       });
@@ -45,7 +57,7 @@ const withVideo = (Component) => {
     componentDidMount() {
       const {film} = this.props;
 
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.poster = film.poster;
       video.src = film.videoLink;
@@ -68,7 +80,7 @@ const withVideo = (Component) => {
     }
 
     componentWillUnmount() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.poster = ``;
       video.src = ``;
@@ -79,7 +91,7 @@ const withVideo = (Component) => {
 
 
     componentDidUpdate(prevProps, prevState) {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       const {isPlay} = this.state;
 
       if (this.state.isPlay !== prevState.isPlay) {
@@ -98,7 +110,7 @@ const withVideo = (Component) => {
       return (
         <Component
           {...this.props}
-          ref={this._videoRef}
+          ref={this.videoRef}
           isPlay={isPlay}
           duration={duration}
           progress={progress}
@@ -110,17 +122,6 @@ const withVideo = (Component) => {
     }
   }
 
-
-  WithVideo.propTypes = {
-    film: PropTypes.oneOfType([
-      filmType.isRequired,
-      PropTypes.oneOf([null]).isRequired,
-    ]),
-    id: PropTypes.oneOfType([
-      () => null,
-      PropTypes.number.isRequired,
-    ]),
-  };
 
   const mapStateToProps = (state, props) => ({
     film: getFilmById(state, props.id),

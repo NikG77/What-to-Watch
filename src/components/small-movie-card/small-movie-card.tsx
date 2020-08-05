@@ -1,13 +1,14 @@
 import * as React from "react";
-import PropTypes from "prop-types";
-import {filmType} from "../../types/types";
-import VideoPlayer from "../video-player/video-player";
-import {TIME_DELAY} from "../../const";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/watch/watch";
 import {Link} from "react-router-dom";
+
+import {ActionCreator} from "../../reducer/watch/watch";
+import {AppRoute, TIME_DELAY} from "../../const";
+import {FilmType} from "../../types";
 import history from "../../history";
-import {AppRoute} from "../../const";
+
+import VideoPlayer from "../video-player/video-player";
+
 
 let timerId;
 
@@ -20,9 +21,27 @@ const clearTimer = (film, cb) => {
   cb(film);
 };
 
-const SmallMovieCard = (props) => {
-  const {film, onSmallMovieCardClick, onSmallMovieCardHover, isPlaying} = props;
-  const {title, previewVideo, src, id} = film;
+interface Props {
+  film: FilmType;
+  onSmallMovieCardClick: () => void;
+  onSmallMovieCardHover: () => void;
+  isPlaying: boolean;
+};
+
+const SmallMovieCard: React.FunctionComponent<Props> = (props: Props) => {
+  const {
+    film,
+    onSmallMovieCardClick,
+    onSmallMovieCardHover,
+    isPlaying
+  } = props;
+
+  const {
+    id,
+    previewVideo,
+    title,
+    src
+  } = film;
 
   return (
     <article className="small-movie-card catalog__movies-card"
@@ -45,14 +64,6 @@ const SmallMovieCard = (props) => {
       </h3>
     </article>
   );
-};
-
-
-SmallMovieCard.propTypes = {
-  film: filmType.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired,
-  onSmallMovieCardHover: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
 };
 
 

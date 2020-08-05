@@ -1,11 +1,16 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 import {Operation as OperationData} from "../../reducer/data/data";
 
-const MovieCardButtons = (props) => {
+interface Props {
+  id: number;
+  isFavorite: boolean;
+  onChangeStatusButtonClick: (id: number, status: number) => void;
+}
+
+const MovieCardButtons: React.FunctionComponent<Props> = (props: Props) => {
   const {id, isFavorite, onChangeStatusButtonClick} = props;
 
   return (
@@ -37,19 +42,6 @@ const MovieCardButtons = (props) => {
 
   );
 };
-
-MovieCardButtons.propTypes = {
-  isFavorite: PropTypes.oneOfType([
-    () => null,
-    PropTypes.bool.isRequired,
-  ]),
-  onChangeStatusButtonClick: PropTypes.func.isRequired,
-  id: PropTypes.oneOfType([
-    PropTypes.number.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-};
-
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeStatusButtonClick(id, status) {

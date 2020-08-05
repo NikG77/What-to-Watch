@@ -1,8 +1,14 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
+import {Comment} from "../../types";
 import {formatForDateTime, reformatDate} from "../../utils/utils";
 
-const ReviewsColumn = (props) => {
+interface Props {
+  reviewsColumns: Array<Comment>;
+};
+
+
+const ReviewsColumn: React.FunctionComponent<Props> = (props: Props) => {
   const {reviewsColumns} = props;
 
   return (
@@ -21,20 +27,6 @@ const ReviewsColumn = (props) => {
       ))}
     </div>
   );
-};
-
-
-ReviewsColumn.propTypes = {
-  reviewsColumns: PropTypes.oneOfType([
-    () => null,
-    PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      date: PropTypes.date,
-      rating: PropTypes.number.isRequired,
-      id: PropTypes.string.isRequired,
-    })).isRequired,
-  ]),
 };
 
 export default ReviewsColumn;

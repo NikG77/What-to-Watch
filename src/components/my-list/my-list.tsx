@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+
 import {connect} from "react-redux";
 
-import {filmsType} from "../../types/types";
+import {FilmType, UserInfoInterface} from "../../types";
 import {getFavoriteFilms} from "../../reducer/data/selectors";
 import {getUserInfo} from "../../reducer/user/selectors";
 import {Operation as OperationData} from "../../reducer/data/data";
@@ -15,7 +15,13 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
-class MyList extends React.PureComponent {
+
+interface Props {
+  films: Array<FilmType>;
+  onLoadFavoriteFilms: () => void;
+  userInfo: UserInfoInterface;
+}
+class MyList extends React.PureComponent<Props, {}> {
   constructor(props) {
     super(props);
   }
@@ -60,23 +66,6 @@ class MyList extends React.PureComponent {
   }
 
 }
-
-MyList.propTypes = {
-  userInfo: PropTypes.oneOfType([
-    () => null,
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      email: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-  ]),
-  onLoadFavoriteFilms: PropTypes.func.isRequired,
-  films: PropTypes.oneOfType([
-    filmsType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-};
 
 
 const mapStateToProps = (state) => ({

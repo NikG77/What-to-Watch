@@ -1,9 +1,11 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
-import PropTypes from "prop-types";
+interface Props {
+  className?: string;
+}
 
-const Logo = (props) => {
+const Logo: React.FunctionComponent<Props> = (props: Props) => {
   const {className} = props;
 
   return (
@@ -19,9 +21,6 @@ const Logo = (props) => {
   );
 };
 
-Logo.propTypes = {
-  className: PropTypes.string,
-};
 
 export default Logo;
 

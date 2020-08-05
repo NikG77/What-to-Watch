@@ -1,17 +1,32 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
 import {connect} from "react-redux";
 
 import {ActionCreator} from "../../reducer/watch/watch";
 import {getMovieCount} from "../../reducer/watch/selectors";
-import {filmsType, filmType} from "../../types/types";
+import {FilmType} from "../../types";
 import ShowMore from "../show-more/show-more";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 
 
-const MoviesList = (props) => {
 
-  const {genreFilms, activeItem, onItemClick, filmCount, onShowMoreButtonClick} = props;
+interface Props {
+  activeItem: FilmType;
+  filmCount: number;
+  genreFilms: Array<FilmType>;
+  onItemClick: () => void;
+  onShowMoreButtonClick: () => void;
+}
+
+const MoviesList: React.FunctionComponent<Props> = (props: Props) => {
+
+  const {
+    activeItem,
+    filmCount,
+    genreFilms,
+    onItemClick,
+    onShowMoreButtonClick
+  } = props;
 
   return (
     <React.Fragment>
@@ -33,16 +48,6 @@ const MoviesList = (props) => {
 
 };
 
-MoviesList.propTypes = {
-  genreFilms: filmsType.isRequired,
-  onItemClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.oneOfType([
-    filmType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-  filmCount: PropTypes.number.isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   filmCount: getMovieCount(state),

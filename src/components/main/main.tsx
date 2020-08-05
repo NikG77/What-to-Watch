@@ -1,10 +1,10 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
 import {connect} from "react-redux";
 
 import {getGenre, getGenresList} from "../../reducer/watch/selectors";
 import {getPromoMovie} from "../../reducer/data/selectors";
-import {filmsType, filmType} from "../../types/types";
+import {FilmType} from "../../types";
 
 import Footer from "../footer/footer";
 import GenresList from "../genres-list/genres-list";
@@ -15,14 +15,22 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 const MoviesListWrapped = withActiveItem(MoviesList);
 
-const Main = (props) => {
+interface Props {
+  activeGenre: string;
+  genreFilms: Array<FilmType>;
+  genresList:Array<string>;
+  mainFilm: FilmType;
+  onGenreItemClick: (genre: string) => void;
+}
+
+const Main: React.FunctionComponent<Props> = (props: Props) => {
 
   const {
     activeGenre,
     genreFilms,
     genresList,
     mainFilm,
-    onGenreItemClick
+    onGenreItemClick,
   } = props;
 
   const {
@@ -92,19 +100,6 @@ const Main = (props) => {
   );
 };
 
-Main.propTypes = {
-  activeGenre: PropTypes.string.isRequired,
-  genreFilms: filmsType.isRequired,
-  genresList: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string).isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-  mainFilm: PropTypes.oneOfType([
-    filmType.isRequired,
-    () => null,
-  ]),
-  onGenreItemClick: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => (
   {

@@ -1,13 +1,31 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 
 import {AppRoute} from "../../const";
-import {filmType} from "../../types/types";
 import {formateDuration} from "../../utils/utils";
 import history from "../../history";
 
-const Player = (props) => {
-  const {id, isPlay, duration, progress, onPlayClick, onFullScreenClick, forwardedRef, setDuration} = props;
+interface Props {
+  duration: number;
+  id: number;
+  isPlay: boolean;
+  forwardedRef: any;
+  onFullScreenClick: () => void;
+  onPlayClick: () => void;
+  progress: number;
+  setDuration: () => void;
+}
+
+const Player: React.FunctionComponent<Props> = (props: Props) => {
+  const {
+    duration,
+    id,
+    isPlay,
+    forwardedRef,
+    onFullScreenClick,
+    onPlayClick,
+    progress,
+    setDuration
+  } = props;
 
   return (
     <div className="player">
@@ -63,26 +81,6 @@ const Player = (props) => {
 };
 
 
-Player.propTypes = {
-  isPlay: PropTypes.bool.isRequired,
-  duration: PropTypes.number.isRequired,
-  progress: PropTypes.number.isRequired,
-  onPlayClick: PropTypes.func.isRequired,
-  onFullScreenClick: PropTypes.func.isRequired,
-  setDuration: PropTypes.func.isRequired,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({current: PropTypes.any})
-  ]),
-  id: PropTypes.oneOfType([
-    () => null,
-    PropTypes.number.isRequired,
-  ]),
-  film: PropTypes.oneOfType([
-    filmType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-};
 
 const PlayerWrap = React.forwardRef((props, ref) => <Player {...props} forwardedRef={ref} />);
 

@@ -1,14 +1,21 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {DEFAULT_CHECKED_STARS} from "../../const";
 import {Operation as DataOperation} from "../../reducer/data/data";
 
+interface State {
+  rating: number;
+  review: string;
+}
+interface Props {
+  onReviewSubmit: (id: number, comment: {rating: number, comment: string}) => void;
+  id: number;
+}
 
 const withAddReview = (Component) => {
 
-  class WithAddReview extends React.PureComponent {
+  class WithAddReview extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
 
@@ -19,11 +26,15 @@ const withAddReview = (Component) => {
 
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleInputChange = this.handleInputChange.bind(this);
+      this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
     }
 
     handleInputChange(evt) {
-      const {name, value} = evt.target;
-      this.setState({[name]: value});
+      this.setState({rating: evt.target.value});
+    }
+
+    handleTextAreaChange(evt) {
+      this.setState({review: evt.target.value});
     }
 
     handleSubmit(evt) {
@@ -42,19 +53,12 @@ const withAddReview = (Component) => {
           {...this.props}
           onSubmitForm={this.handleSubmit}
           onChangeInput={this.handleInputChange}
+          onChangeTextarea={this.handleTextAreaChange}
           review={this.state.review}
         />
       );
     }
   }
-
-  WithAddReview.propTypes = {
-    onReviewSubmit: PropTypes.func.isRequired,
-    id: PropTypes.oneOfType([
-      () => null,
-      PropTypes.number.isRequired,
-    ]),
-  };
 
   const mapDispatchToProps = (dispatch) => ({
     onReviewSubmit(id, comment) {

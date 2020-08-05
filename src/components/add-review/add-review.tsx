@@ -1,44 +1,30 @@
 import * as React from "react";
-// import PropTypes from "prop-types";
+
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 import {AppRoute, DEFAULT_CHECKED_STARS, NUMBER_STARS, ReviewLength} from "../../const";
-import {filmType} from "../../types/types";
+import {FilmType, UserInfoInterface} from "../../types";
 import {getUserInfo} from "../../reducer/user/selectors";
 import {getFilmById} from "../../reducer/watch/selectors";
 import {getReviewFormStatus} from "../../reducer/data/selectors";
 
 import Logo from "../logo/logo";
 
+interface Props {
+  film: FilmType;
+  id: number;
+  isFormDisabled: boolean;
+  onSubmitForm: () => void;
+  onChangeInput: () => void;
+  onChangeTextarea: () => void;
+  review: string;
+  userInfo: UserInfoInterface;
+}
 
-// AddReview.propTypes = {
-//   userInfo: PropTypes.oneOfType([
-//     () => null,
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       email: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       avatarUrl: PropTypes.string.isRequired,
-//     }).isRequired,
-//   ]),
-//   film: PropTypes.oneOfType([
-//     filmType.isRequired,
-//     PropTypes.oneOf([null]).isRequired,
-//   ]),
-//   isFormDisabled: PropTypes.bool.isRequired,
-//   id: PropTypes.oneOfType([
-//     () => null,
-//     PropTypes.number.isRequired,
-//   ]),
-//   onSubmitForm: PropTypes.func.isRequired,
-//   onChangeInput: PropTypes.func.isRequired,
-//   review: PropTypes.string.isRequired,
-// };
+const AddReview: React.FunctionComponent<Props> = (props: Props) => {
 
-const AddReview = (props) => {
-
-  const {id, film, userInfo, isFormDisabled, onSubmitForm, onChangeInput, review} = props;
+  const {film, id, isFormDisabled, onSubmitForm, onChangeInput, onChangeTextarea, review, userInfo,} = props;
 
   if (film) {
     const {title, pictureBackground, poster} = film;
@@ -108,7 +94,7 @@ const AddReview = (props) => {
 
             <div className="add-review__text">
               <textarea className="add-review__textarea"
-                onChange={onChangeInput}
+                onChange={onChangeTextarea}
                 value={review}
                 name="review"
                 id="review-text"

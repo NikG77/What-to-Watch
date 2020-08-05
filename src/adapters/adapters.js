@@ -12,7 +12,7 @@ export const adaptFilm = (film) => {
     ratingCount: film.scores_count,
     ratingScore: film.rating,
     releaseDate: film.released,
-    src: film.background_image,
+    src: film.preview_image,
     starring: film.starring,
     title: film.name,
 

@@ -1,16 +1,23 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 
-export default class VideoPlayer extends React.PureComponent {
+
+interface Props {
+  isPlaying: boolean;
+  poster: string;
+  src: string;
+}
+export default class VideoPlayer extends React.PureComponent<Props, {}> {
+  private videoRef: React.RefObject<HTMLVideoElement>;
+
   constructor(props) {
     super(props);
 
-    this._videoRef = React.createRef();
+    this.videoRef = React.createRef();
   }
 
   componentDidMount() {
     const {poster, src} = this.props;
-    const video = this._videoRef.current;
+    const video = this.videoRef.current;
 
     video.src = src;
     video.poster = poster;
@@ -18,14 +25,14 @@ export default class VideoPlayer extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    const video = this._videoRef.current;
+    const video = this.videoRef.current;
 
     video.src = ``;
     video.poster = ``;
   }
 
   componentDidUpdate() {
-    const video = this._videoRef.current;
+    const video = this.videoRef.current;
     const {isPlaying} = this.props;
 
     if (isPlaying) {
@@ -37,15 +44,8 @@ export default class VideoPlayer extends React.PureComponent {
 
   render() {
     return (
-      <video ref={this._videoRef} width="280" height="175" />
+      <video ref={this.videoRef} width="280" height="175" />
     );
   }
 }
-
-
-VideoPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  poster: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-};
 

@@ -1,14 +1,20 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 import {AppRoute} from "../../const";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {getUserInfo} from "../../reducer/user/selectors";
+import {UserInfoInterface} from "../../types";
 import Logo from "../logo/logo";
 
-const Header = (props) => {
+
+interface Props {
+  isAuthorization: boolean;
+  userInfo: UserInfoInterface;
+}
+
+const Header: React.FunctionComponent<Props> = (props: Props) => {
   const {isAuthorization, userInfo} = props;
   return (
     <header className="page-header movie-card__head">
@@ -24,19 +30,6 @@ const Header = (props) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  isAuthorization: PropTypes.bool.isRequired,
-  userInfo: PropTypes.oneOfType([
-    () => null,
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      email: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-  ]),
 };
 
 const mapStateToProps = (state) => ({

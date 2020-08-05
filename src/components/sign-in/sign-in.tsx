@@ -1,9 +1,15 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
 import Logo from "../logo/logo";
 import Footer from "../footer/footer";
 
-class SignIn extends React.PureComponent {
+interface Props {
+  onSubmit: ({login, password}: {login: string; password: string}) => void;
+}
+class SignIn extends React.PureComponent<Props, {}> {
+  private loginRef: React.RefObject<HTMLInputElement>;
+  private passwordRef: React.RefObject<HTMLInputElement>;
+  
   constructor(props) {
     super(props);
 
@@ -66,9 +72,6 @@ class SignIn extends React.PureComponent {
   }
 }
 
-SignIn.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
 
 export default SignIn;
 

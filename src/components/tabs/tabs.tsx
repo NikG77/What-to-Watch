@@ -1,22 +1,31 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
 import Overview from "../overview/overview";
 import Details from "../details/details";
 import Reviews from "../reviews/reviews";
-import {filmType} from "../../types/types";
+import {FilmType} from "../../types";
 import {TabName} from "../../const";
 
 
-const Tabs = (props) => {
-  const {film, activeItem, onItemClick: onTabClick} = props;
+interface Props {
+  activeItem: string,
+  film: FilmType;
+  onItemClick: (tab: {}) => void;
+}
+
+
+const Tabs: React.FunctionComponent<Props> = (props: Props) => {
+  const {activeItem, film, onItemClick: onTabClick} = props;
   const activeTab = activeItem || TabName.OVERVIEW;
+  
+  const tabItems: string[] = Object.values(TabName);
 
   return (
     <React.Fragment>
 
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
-          {Object.values(TabName).map((tab) => (
+          {tabItems.map((tab) => (
             <li
               key={tab}
               onClick={(evt) => {
@@ -36,19 +45,6 @@ const Tabs = (props) => {
 
     </React.Fragment>
   );
-};
-
-
-Tabs.propTypes = {
-  onItemClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-  film: PropTypes.oneOfType([
-    filmType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
 };
 
 

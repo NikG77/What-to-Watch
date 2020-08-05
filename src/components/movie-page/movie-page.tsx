@@ -1,16 +1,17 @@
 import * as React from "react";
-import {filmType, filmsType} from "../../types/types";
-import PropTypes from "prop-types";
-import Tabs from "../tabs/tabs";
-import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import {connect} from "react-redux";
+
+import {FilmType} from "../../types";
+import {getFilmById} from "../../reducer/watch/selectors";
+import {Operation as OperationData} from "../../reducer/data/data";
+
+import Footer from "../footer/footer";
+import Header from "../header/header";
+import Loader from "../loader/loader";
 import MoviesList from "../movies-list/movies-list";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons";
-import Header from "../header/header";
-import Footer from "../footer/footer";
-import {connect} from "react-redux";
-import {getFilmById} from "../../reducer/watch/selectors";
-import Loader from "../loader/loader";
-import {Operation as OperationData} from "../../reducer/data/data";
+import Tabs from "../tabs/tabs";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 
 const COUNT_LIKE_FILMS = 4;
@@ -18,8 +19,16 @@ const COUNT_LIKE_FILMS = 4;
 const TabsWrapped = withActiveItem(Tabs);
 const MoviesListWrapped = withActiveItem(MoviesList);
 
-const MoviePage = (props) => {
-  const {genreFilms, film, id, onGetComments} = props;
+
+interface Props {
+  id: number;
+  film: FilmType;
+  genreFilms: Array<FilmType>;
+  onGetComments: (id: number) => void;
+}
+
+const MoviePage: React.FunctionComponent<Props> = (props: Props) => {
+  const {id, film, genreFilms, onGetComments} = props;
   if (!film) {
     return <Loader />;
   }
@@ -93,18 +102,6 @@ const MoviePage = (props) => {
   );
 };
 
-MoviePage.propTypes = {
-  genreFilms: filmsType.isRequired,
-  film: PropTypes.oneOfType([
-    filmType.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
-  id: PropTypes.oneOfType([
-    () => null,
-    PropTypes.number.isRequired,
-  ]),
-  onGetComments: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state, props) => ({
   film: getFilmById(state, props.id),

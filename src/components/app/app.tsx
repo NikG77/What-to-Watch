@@ -1,10 +1,10 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
 import {Redirect, Route, Router, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {AppRoute} from "../../const";
-import {filmsType} from "../../types/types";
+import {FilmType} from "../../types";
 import history from "../../history";
 import {ActionCreator as ActionCreatorWatch} from "../../reducer/watch/watch";
 import {getGenreMovies} from "../../reducer/watch/selectors";
@@ -24,10 +24,20 @@ import SignIn from "../sign-in/sign-in";
 import withVideo from "../../hocs/with-video/with-video";
 import withAddReview from "../../hocs/with-add-review/with-add-review";
 
+interface Props {
+  genreFilms: Array<FilmType>;
+  isAuthorization: boolean;
+  isAuthorizationLoading: boolean;
+  isFilmsLoading: boolean;
+  isPromoLoading: boolean;
+  login: () => void;
+  onGenreItemClick: () => void;
+};
+
 const PlayerWrapped = withVideo(Player);
 const AddReviewWrapped = withAddReview(AddReview);
 
-const App = (props) => {
+const App: React.FunctionComponent<Props>  = (props: Props) => {
 
   const {
     genreFilms,
@@ -36,7 +46,7 @@ const App = (props) => {
     isFilmsLoading,
     isPromoLoading,
     login,
-    onGenreItemClick
+    onGenreItemClick,
   } = props;
 
   return (isAuthorizationLoading || isFilmsLoading || isPromoLoading ? <Loader /> :
@@ -51,16 +61,16 @@ const App = (props) => {
           }}/>
 
         <Route exact path={`${AppRoute.FILM}/:id`}
-          render={({match}) => {
+          render={(routeProps) => {
             return <MoviePage
               genreFilms={genreFilms}
-              id={+match.params.id}
+              id={+routeProps.match.params.id}
             />;
           }}/>
 
         <Route exact path={`${AppRoute.PLAYER}/:id`}
-          render={({match}) => {
-            return <PlayerWrapped id={+match.params.id} />;
+          render={(routeProps) => {
+            return <PlayerWrapped id={+routeProps.match.params.id} />;
           }}/>
 
         <Route exact path={AppRoute.LOGIN}
@@ -71,8 +81,8 @@ const App = (props) => {
           }} />
 
         <PrivateRoute exact path={`${AppRoute.FILM}/:id${AppRoute.ADD_REVIEW}`}
-          render={({match}) => {
-            return <AddReviewWrapped id={+match.params.id} />;
+          render={(routeProps) => {
+            return <AddReviewWrapped id={+routeProps.match.params.id} />;
           }}
         />
 
@@ -89,16 +99,6 @@ const App = (props) => {
   );
 };
 
-
-App.propTypes = {
-  genreFilms: filmsType.isRequired,
-  isAuthorization: PropTypes.bool.isRequired,
-  isAuthorizationLoading: PropTypes.bool.isRequired,
-  isFilmsLoading: PropTypes.bool.isRequired,
-  isPromoLoading: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
-  onGenreItemClick: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   genreFilms: getGenreMovies(state),
