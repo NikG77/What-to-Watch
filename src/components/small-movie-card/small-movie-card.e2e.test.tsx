@@ -1,10 +1,11 @@
 import * as React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as Adapter from "enzyme-adapter-react-16";
+import {configure, shallow} from "enzyme";
+
 import {SmallMovieCard} from "../small-movie-card/small-movie-card";
 import {FilmType} from "../../types";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter(),
 });
 

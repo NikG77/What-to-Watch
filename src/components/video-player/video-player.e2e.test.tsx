@@ -1,12 +1,13 @@
 import * as React from "react";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import VideoPlayer from "../video-player/video-player";
+import * as Adapter from "enzyme-adapter-react-16";
+import {configure, mount} from "enzyme";
 
-import {noon} from "../../utils/utils";
 import {FilmType} from "../../types";
 
-Enzyme.configure({
+import VideoPlayer from "../video-player/video-player";
+
+
+configure({
   adapter: new Adapter(),
 });
 

@@ -53,7 +53,7 @@ it(`Should MoviePage render correctly`, () => {
               id={1}
               film={films[0]}
               genreFilms={films}
-              onGetComments={noon}
+              onGetComments={(1) => void}
             />
           </Provider>
         </Router>
