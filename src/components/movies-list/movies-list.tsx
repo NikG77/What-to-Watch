@@ -41,7 +41,7 @@ const MoviesList: React.FunctionComponent<Props> = (props: Props) => {
         )}
       </div>
 
-      {genreFilms.length > filmCount ? <ShowMore onShowMoreButtonClick={onShowMoreButtonClick} /> : null}
+      {genreFilms.length > filmCount && <ShowMore onShowMoreButtonClick={onShowMoreButtonClick} />}
 
     </React.Fragment>
   );

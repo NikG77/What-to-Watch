@@ -19,8 +19,8 @@ const Reviews: React.FunctionComponent<Props> = (props: Props) => {
 
     return (
       <div className="movie-card__reviews movie-card__row">
-        {reviewsColumns1.length > 0 ? <ReviewsColumn reviewsColumns={reviewsColumns1} /> : ``}
-        {reviewsColumns2.length > 0 ? <ReviewsColumn reviewsColumns={reviewsColumns2} /> : ``}
+        {reviewsColumns1.length > 0 && <ReviewsColumn reviewsColumns={reviewsColumns1} />}
+        {reviewsColumns2.length > 0 && <ReviewsColumn reviewsColumns={reviewsColumns2} />}
       </div>
     );
   }

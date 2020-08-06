@@ -15,7 +15,7 @@ const GenresList: React.FunctionComponent<Props> = (props: Props) => {
 
   return (
     <ul className="catalog__genres-list">
-      {genresList ? genresList.map((genre) => (
+      {genresList && genresList.map((genre) => (
         <li key={genre}
           onClick={(evt) => {
             evt.preventDefault();
@@ -24,7 +24,7 @@ const GenresList: React.FunctionComponent<Props> = (props: Props) => {
           className={`catalog__genres-item ${genre === activeGenre ? `catalog__genres-item--active` : ``}`}>
           <a href="#" className="catalog__genres-link">{genre}</a>
         </li>
-      )) : ``}
+      ))}
     </ul>
   );
 };

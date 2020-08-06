@@ -22,13 +22,7 @@ const Details: React.FunctionComponent<Props> = (props: Props) => {
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Starring</strong>
             <span className="movie-card__details-value">
-              {starring.map((actor, i, actors) => (
-                <React.Fragment key={actor + i}>
-                  {i < actors.length - 1 ? actor + `, ` : actor}
-                  {i < actors.length - 1 ? <br/> : ``}
-                </ React.Fragment>
-              ))}
-
+              {starring.join(`, \n`)}
             </span>
           </p>
         </div>
