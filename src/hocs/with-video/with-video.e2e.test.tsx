@@ -13,7 +13,18 @@ const mockStore = configureStore([]);
 
 configure({adapter: new Adapter()});
 
-const Player = React.forwardRef(function Video(props, ref) {
+interface PlayerProps {
+  duration: number;
+  id: number;
+  isPlay: boolean;
+  forwardedRef: any;
+  onFullScreenClick: () => void;
+  onPlayClick: () => void;
+  progress: number;
+  setDuration: () => void;
+}
+
+const Player = React.forwardRef((props: PlayerProps, ref: React.Ref<HTMLVideoElement>) => {
   return <video ref={ref} />;
 });
 

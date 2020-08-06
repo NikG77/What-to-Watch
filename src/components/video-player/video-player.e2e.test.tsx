@@ -41,7 +41,7 @@ it(`Check video play`, () => {
       />
   );
 
-  window.HTMLMediaElement.prototype.play = () => {};
+  window.HTMLMediaElement.prototype.play = () => Promise.resolve();
   const {_videoRef} = videoPlayer.instance();
   jest.spyOn(_videoRef.current, `play`);
   videoPlayer.instance().componentDidUpdate();
@@ -58,7 +58,7 @@ it(`Check video load`, () => {
       />
   );
 
-  window.HTMLMediaElement.prototype.load = () => {};
+  window.HTMLMediaElement.prototype.load = () => Promise.resolve();
   const {_videoRef} = videoPlayer.instance();
   jest.spyOn(_videoRef.current, `load`);
   videoPlayer.instance().componentDidUpdate();
