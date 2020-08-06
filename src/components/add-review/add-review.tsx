@@ -24,7 +24,16 @@ interface Props {
 
 const AddReview: React.FunctionComponent<Props> = (props: Props) => {
 
-  const {film, id, isFormDisabled, onSubmitForm, onChangeInput, onChangeTextarea, review, userInfo,} = props;
+  const {
+    film,
+    id,
+    isFormDisabled,
+    onSubmitForm,
+    onChangeInput,
+    onChangeTextarea,
+    review,
+    userInfo
+  } = props;
 
   if (film) {
     const {title, pictureBackground, poster} = film;

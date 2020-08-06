@@ -32,3 +32,7 @@ export const errorPopup = (err) => {
     text: err.response.data.error,
   });
 };
+
+export const noop = () => {
+
+};

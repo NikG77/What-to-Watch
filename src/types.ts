@@ -40,13 +40,12 @@ export interface ReviewInterface {
 }
 
 export interface Comment {
-    text: string;
-    date: number;
-    rating: number;
-    id: string;
     author: string;
+    date: number;
+    id: string;
     idUser: number;
-
+    rating: number;
+    text: string;
 };
 
 

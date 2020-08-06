@@ -1,6 +1,5 @@
-import {extend} from "../../utils/utils";
 import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters";
-import {errorPopup} from "../../utils/utils";
+import {errorPopup, extend} from "../../utils/utils";
 import NameSpace from "../name-space";
 import history from "../../history";
 import {AppRoute} from "../../const";
