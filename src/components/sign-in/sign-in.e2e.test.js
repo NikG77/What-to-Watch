@@ -3,7 +3,7 @@ import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import SignIn from "./sign-in";
 
-jest.mock(`../logo/logo.jsx`, () => `div`);
+jest.mock(`../logo/logo.tsx`, () => `div`);
 
 Enzyme.configure({
   adapter: new Adapter(),

@@ -33,9 +33,7 @@ exports[`Should Details render correctly 1`] = `
         className="movie-card__details-value"
       >
         , 
-        <br />
-        
-        
+
       </span>
     </p>
   </div>

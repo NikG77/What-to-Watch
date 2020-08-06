@@ -54,15 +54,14 @@ Array [
         >
           <div
             className="user-block__avatar"
+          />
+          <a
+            className="user-block__link"
+            href="/login"
+            onClick={[Function]}
           >
-            <a
-              className="user-block__link"
-              href="/login"
-              onClick={[Function]}
-            >
-              Sign in
-            </a>
-          </div>
+            Sign in
+          </a>
         </div>
       </header>
       <div
@@ -264,7 +263,6 @@ Array [
       >
         More like this
       </h2>
-      
     </section>
     <footer
       className="page-footer"
