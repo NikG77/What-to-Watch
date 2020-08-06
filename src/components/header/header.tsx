@@ -25,8 +25,8 @@ const Header: React.FunctionComponent<Props> = (props: Props) => {
           {isAuthorization && <Link to={AppRoute.MY_LIST} className="user-block__link">
             <img src={userInfo.avatarUrl} alt="User avatar" width="63" height="63" />
           </Link>}
-          {isAuthorization || <Link to={AppRoute.LOGIN} className="user-block__link" >Sign in</Link>}
         </div>
+        {isAuthorization || <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>}
       </div>
     </header>
   );
