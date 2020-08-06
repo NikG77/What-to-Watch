@@ -82,7 +82,7 @@ const Player: React.FunctionComponent<Props> = (props: Props) => {
 
 
 
-const PlayerWrap = React.forwardRef((props, ref) => <Player {...props} forwardedRef={ref} />);
+const PlayerWrap = React.forwardRef<React.FunctionComponent, Props>((props, ref) => <Player {...props} forwardedRef={ref} />);
 
 export {Player};
 export default PlayerWrap;
