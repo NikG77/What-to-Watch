@@ -1,26 +1,27 @@
 import * as React from "react";
 
 import {FilmType} from "../../types";
-import {RatingLevel} from "../../const";
+import {Rating, RatingLevel} from "../../const";
+
 
 const getRatingLevel = (score) => {
   let ratingLevel = ``;
 
   switch (true) {
     case score < RatingLevel.NORMAL_MIN && score >= RatingLevel.BAD_MIN:
-      ratingLevel = `Bad`;
+      ratingLevel = Rating.BAD;
       break;
     case score < RatingLevel.GOOD_MIN && score >= RatingLevel.NORMAL_MIN:
-      ratingLevel = `Normal`;
+      ratingLevel = Rating.NORMAL;
       break;
     case score < RatingLevel.VERY_GOOD_MIN && score >= RatingLevel.GOOD_MIN:
-      ratingLevel = `Good`;
+      ratingLevel = Rating.GOOD;
       break;
     case score < RatingLevel.AWESOME && score >= RatingLevel.VERY_GOOD_MIN:
-      ratingLevel = `Very good`;
+      ratingLevel = Rating.VERY_GOOD;
       break;
     case score === RatingLevel.AWESOME:
-      ratingLevel = `Awesome`;
+      ratingLevel = Rating.AWESOME;
       break;
   }
   return ratingLevel;
