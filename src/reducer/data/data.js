@@ -21,8 +21,6 @@ const ActionType = {
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
-  MERGE_FILM: `MERGE_FILM`,
-  MERGE_PROMO_FILM: `MERGE_PROMO_FILM`,
   SET_FILMS_LOADING: `SET_FILMS_LOADING`,
   SET_PROMO_LOADING: `SET_PROMO_LOADING`,
   SET_FORM_DISABLED_STATUS: `SET_FORM_DISABLED_STATUS`,
@@ -48,16 +46,6 @@ const ActionCreator = {
   loadFavoriteFilms: (films) => ({
     type: ActionType.LOAD_FAVORITE_MOVIES,
     payload: films,
-  }),
-
-  mergeFilm: (film) => ({
-    type: ActionType.MERGE_FILM,
-    payload: film,
-  }),
-
-  mergePromoFilm: (film) => ({
-    type: ActionType.MERGE_PROMO_FILM,
-    payload: film,
   }),
 
   setFilmsLoading: (isFilmsLoading) => ({
@@ -153,9 +141,10 @@ const Operation = {
         const film = adaptFilm(data);
         const store = getState();
         if (store[NameSpace.DATA].promoMovie.id === id) {
-          dispatch(ActionCreator.mergePromoFilm(film));
+          dispatch(ActionCreator.loadPromoFilm(film));
         }
-        dispatch(ActionCreator.mergeFilm(film));
+        const films = store[NameSpace.DATA].allMovies.map((movie) => film.id === movie.id ? film : movie);
+        dispatch(ActionCreator.loadAllFilms(films));
       })
       .catch((err) => {
         return errorPopup(err);
@@ -181,14 +170,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FAVORITE_MOVIES:
       return extend(state, {
         favoriteMovies: action.payload,
-      });
-    case ActionType.MERGE_FILM:
-      return extend(state, {
-        allMovies: state.allMovies.map((film) => film.id === action.payload.id ? action.payload : film)
-      });
-    case ActionType.MERGE_PROMO_FILM:
-      return extend(state, {
-        promoMovie: action.payload
       });
 
     case ActionType.SET_FILMS_LOADING:
