@@ -1,5 +1,3 @@
-
-
 export interface FilmType {
   backgroundColor: string,
   director: string,
@@ -28,16 +26,6 @@ export interface UserInfoInterface {
   avatarUrl: string;
 }
 
-export interface ReviewInterface {
-  id: number;
-  user: {
-    id: number;
-    name: string;
-  };
-  rating: number;
-  comment: string;
-  date: string;
-}
 
 export interface Comment {
     author: string;
