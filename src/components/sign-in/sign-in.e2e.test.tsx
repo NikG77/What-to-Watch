@@ -3,8 +3,11 @@ import {configure, mount} from "enzyme";
 import * as Adapter from "enzyme-adapter-react-16";
 import SignIn from "./sign-in";
 
-// jest.mock(`../logo/logo.tsx`, () => `div`);
-
+jest.mock(`../logo/logo.tsx`, () => {
+  return {
+    'default': 'div'
+  }
+});
 
 configure({
   adapter: new Adapter(),
