@@ -20,7 +20,7 @@ it(`Click by "player play" button calls callback`, () => {
       isPlay={true}
       forwardedRef={videoRef}
       onFullScreenClick={noon}
-      onPlayClick={noon}
+      onPlayClick={onPlayClick}
       progress={10}
       setDuration={noon}
       />
@@ -42,7 +42,7 @@ it(`Click by "full screen" button calls callback`, () => {
       id={1}
       isPlay={true}
       forwardedRef={videoRef}
-      onFullScreenClick={noon}
+      onFullScreenClick={onFullScreenClick}
       onPlayClick={noon}
       progress={10}
       setDuration={noon}

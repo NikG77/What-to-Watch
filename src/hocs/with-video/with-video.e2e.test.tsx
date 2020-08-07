@@ -214,8 +214,8 @@ it(`Checks that HOC's callback turn on video (pause)`, () => {
   );
 
   window.HTMLMediaElement.prototype.pause = () => Promise.resolve();
-  const {_videoRef} = wrapper.find(`WithVideo`).instance();
-  const spy = jest.spyOn(_videoRef.current, `pause`);
+  const {videoRef} = wrapper.find(`WithVideo`).instance();
+  const spy = jest.spyOn(videoRef.current, `pause`);
   wrapper.find(`WithVideo`).children().props().onPlayClick();
 
   expect(wrapper.find(`WithVideo`).state().isPlay).toBeFalsy();
@@ -247,8 +247,8 @@ it(`Checks that HOC's callback turn on video (play)`, () => {
   );
 
   window.HTMLMediaElement.prototype.play = () => Promise.resolve();
-  const {_videoRef} = wrapper.find(`WithVideo`).instance();
-  const spy = jest.spyOn(_videoRef.current, `play`);
+  const {videoRef} = wrapper.find(`WithVideo`).instance();
+  const spy = jest.spyOn(videoRef.current, `play`);
   wrapper.find(`WithVideo`).children().props().onPlayClick();
   wrapper.find(`WithVideo`).children().props().onPlayClick();
 
@@ -280,9 +280,9 @@ it(`Checks that HOC's callback onFullScreenClick`, () => {
       </Provider>
   );
 
-  const {_videoRef} = wrapper.find(`WithVideo`).instance();
-  wrapper.find(`WithVideo`).instance()._videoRef.current = {requestFullscreen() {}};
-  const spy = jest.spyOn(_videoRef.current, `requestFullscreen`);
+  const {videoRef} = wrapper.find(`WithVideo`).instance();
+  wrapper.find(`WithVideo`).instance().videoRef.current = {requestFullscreen() {}};
+  const spy = jest.spyOn(videoRef.current, `requestFullscreen`);
   wrapper.find(`WithVideo`).children().props().onFullScreenClick();
 
   expect(spy).toHaveBeenCalledTimes(1);
@@ -313,7 +313,7 @@ it(`Checks that HOC's state.duration change `, () => {
   );
 
   expect(wrapper.find(`WithVideo`).state().duration).toEqual(0);
-  wrapper.find(`WithVideo`).instance()._videoRef.current = {duration: 11};
+  wrapper.find(`WithVideo`).instance().videoRef.current = {duration: 11};
   wrapper.find(`WithVideo`).children().props().setDuration();
 
   expect(wrapper.find(`WithVideo`).state().duration).toEqual(11);

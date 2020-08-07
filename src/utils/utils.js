@@ -33,6 +33,6 @@ export const errorPopup = (err) => {
   });
 };
 
-export const noop = () => {
+export const noon = () => {
 
 };

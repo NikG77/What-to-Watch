@@ -42,11 +42,11 @@ it(`Check video play`, () => {
   );
 
   window.HTMLMediaElement.prototype.play = () => Promise.resolve();
-  const {_videoRef} = videoPlayer.instance();
-  jest.spyOn(_videoRef.current, `play`);
+  const {videoRef} = videoPlayer.instance();
+  jest.spyOn(videoRef.current, `play`);
   videoPlayer.instance().componentDidUpdate();
 
-  expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
+  expect(videoRef.current.play).toHaveBeenCalledTimes(1);
 });
 
 it(`Check video load`, () => {
@@ -59,10 +59,10 @@ it(`Check video load`, () => {
   );
 
   window.HTMLMediaElement.prototype.load = () => Promise.resolve();
-  const {_videoRef} = videoPlayer.instance();
-  jest.spyOn(_videoRef.current, `load`);
+  const {videoRef} = videoPlayer.instance();
+  jest.spyOn(videoRef.current, `load`);
   videoPlayer.instance().componentDidUpdate();
 
-  expect(_videoRef.current.load).toHaveBeenCalledTimes(1);
+  expect(videoRef.current.load).toHaveBeenCalledTimes(1);
 });
 
