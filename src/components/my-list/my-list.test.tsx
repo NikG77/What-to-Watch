@@ -64,7 +64,7 @@ it(`MyList component render correctly`, () => {
         <Router history={history}>
           <Provider store={store}>
             <MyList
-              onLoadFavoriteFilms={() => {}}
+              onLoadFavoriteFilms={noon}
               userInfo={mockUserInfo}
               films={films}
             />

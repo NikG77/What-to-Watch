@@ -8,7 +8,6 @@ import {configure, mount} from "enzyme";
 
 import NameSpace from "../../reducer/name-space";
 import {AuthorizationStatus} from "../../const";
-import {noon} from "../../utils/utils";
 import {FilmType} from "../../types";
 
 const mockStore = configureStore([]);

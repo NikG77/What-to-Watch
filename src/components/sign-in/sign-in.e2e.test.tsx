@@ -1,12 +1,13 @@
 import * as React from "react";
-import {configure, mount} from "enzyme";
 import * as Adapter from "enzyme-adapter-react-16";
+import {configure, mount} from "enzyme";
+import {noon} from "../../utils/utils";
 import SignIn from "./sign-in";
 
 jest.mock(`../logo/logo.tsx`, () => {
   return {
-    'default': 'div'
-  }
+    'default': `div`
+  };
 });
 
 configure({
@@ -14,7 +15,7 @@ configure({
 });
 
 const mockEvent = {
-  preventDefault() {}
+  preventDefault: noon,
 };
 
 it(`Click by send form button calls callback`, () => {

@@ -1,32 +1,35 @@
 import * as React from "react";
-import {Provider} from "react-redux";
+import * as Adapter from "enzyme-adapter-react-16";
 import configureStore from "redux-mock-store";
 import {configure, mount} from "enzyme";
-import * as Adapter from "enzyme-adapter-react-16";
-import withVideo from "./with-video";
-import NameSpace from "../../reducer/name-space";
+import {Provider} from "react-redux";
 import {AuthorizationStatus} from "../../const";
-import {noon} from "../../utils/utils";
 import {FilmType} from "../../types";
+import NameSpace from "../../reducer/name-space";
+import {noon} from "../../utils/utils";
+import withVideo from "./with-video";
+
 
 const mockStore = configureStore([]);
 
 configure({adapter: new Adapter()});
 
-interface PlayerProps {
+interface Props {
   duration: number;
   id: number;
   isPlay: boolean;
-  forwardedRef: any;
   onFullScreenClick: () => void;
   onPlayClick: () => void;
   progress: number;
   setDuration: () => void;
 }
 
-const Player = React.forwardRef((props: PlayerProps, ref: React.Ref<HTMLVideoElement>) => {
+const Player = React.forwardRef((props: Props, ref: React.Ref<HTMLVideoElement>) => {
+  props = Object.assign({}, props);
+
   return <video ref={ref} />;
 });
+
 
 const PlayerWrapped = withVideo(Player);
 
@@ -281,7 +284,7 @@ it(`Checks that HOC's callback onFullScreenClick`, () => {
   );
 
   const {videoRef} = wrapper.find(`WithVideo`).instance();
-  wrapper.find(`WithVideo`).instance().videoRef.current = {requestFullscreen() {}};
+  wrapper.find(`WithVideo`).instance().videoRef.current = {requestFullscreen: noon};
   const spy = jest.spyOn(videoRef.current, `requestFullscreen`);
   wrapper.find(`WithVideo`).children().props().onFullScreenClick();
 

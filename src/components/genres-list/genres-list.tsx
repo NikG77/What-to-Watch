@@ -10,7 +10,7 @@ const GenresList: React.FunctionComponent<Props> = (props: Props) => {
   const {
     activeGenre,
     genresList,
-    onGenreItemClick
+    onGenreItemClick,
   } = props;
 
   return (

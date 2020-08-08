@@ -1,11 +1,11 @@
 import * as React from "react";
- import {FilmType} from "../../types";
+import {FilmType} from "../../types";
 
 const getTime = (number) => `${Math.trunc(number / 60)}h ${number % 60}m`;
 
 interface Props {
   film: FilmType;
-};
+}
 
 const Details: React.FunctionComponent<Props> = (props: Props) => {
   const {film} = props;

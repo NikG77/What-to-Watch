@@ -15,14 +15,14 @@ it(`Click by "player play" button calls callback`, () => {
 
   const player = mount(
       <Player
-      duration={30}
-      id={1}
-      isPlay={true}
-      forwardedRef={videoRef}
-      onFullScreenClick={noon}
-      onPlayClick={onPlayClick}
-      progress={10}
-      setDuration={noon}
+        duration={30}
+        id={1}
+        isPlay={true}
+        forwardedRef={videoRef}
+        onFullScreenClick={noon}
+        onPlayClick={onPlayClick}
+        progress={10}
+        setDuration={noon}
       />
   );
 
@@ -38,14 +38,14 @@ it(`Click by "full screen" button calls callback`, () => {
 
   const player = mount(
       <Player
-      duration={30}
-      id={1}
-      isPlay={true}
-      forwardedRef={videoRef}
-      onFullScreenClick={onFullScreenClick}
-      onPlayClick={noon}
-      progress={10}
-      setDuration={noon}
+        duration={30}
+        id={1}
+        isPlay={true}
+        forwardedRef={videoRef}
+        onFullScreenClick={onFullScreenClick}
+        onPlayClick={noon}
+        progress={10}
+        setDuration={noon}
       />
   );
 

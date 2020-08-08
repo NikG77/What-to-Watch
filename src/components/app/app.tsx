@@ -32,12 +32,12 @@ interface Props {
   isPromoLoading: boolean;
   login: () => void;
   onGenreItemClick: () => void;
-};
+}
 
 const PlayerWrapped = withVideo(Player);
 const AddReviewWrapped = withAddReview(AddReview);
 
-const App: React.FunctionComponent<Props>  = (props: Props) => {
+const App: React.FunctionComponent<Props> = (props: Props) => {
 
   const {
     genreFilms,

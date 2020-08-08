@@ -34,7 +34,7 @@ export interface Comment {
     idUser: number;
     rating: number;
     text: string;
-};
+}
 
 
 

@@ -6,10 +6,11 @@ import Footer from "../footer/footer";
 interface Props {
   onSubmit: ({login, password}: {login: string; password: string}) => void;
 }
+
 class SignIn extends React.PureComponent<Props, {}> {
   private loginRef: React.RefObject<HTMLInputElement>;
   private passwordRef: React.RefObject<HTMLInputElement>;
-  
+
   constructor(props) {
     super(props);
 

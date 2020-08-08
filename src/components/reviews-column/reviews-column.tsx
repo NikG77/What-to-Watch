@@ -5,8 +5,7 @@ import {formatForDateTime, reformatDate} from "../../utils/utils";
 
 interface Props {
   reviewsColumns: Array<Comment>;
-};
-
+}
 
 const ReviewsColumn: React.FunctionComponent<Props> = (props: Props) => {
   const {reviewsColumns} = props;

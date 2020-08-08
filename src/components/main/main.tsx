@@ -18,7 +18,7 @@ const MoviesListWrapped = withActiveItem(MoviesList);
 interface Props {
   activeGenre: string;
   genreFilms: Array<FilmType>;
-  genresList:Array<string>;
+  genresList: Array<string>;
   mainFilm: FilmType;
   onGenreItemClick: (genre: string) => void;
 }

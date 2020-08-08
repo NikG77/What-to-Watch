@@ -1,9 +1,11 @@
 import * as React from "react";
 import * as Adapter from "enzyme-adapter-react-16";
 import {configure, shallow} from "enzyme";
+import {FilmType} from "../../types";
+import {noon} from "../../utils/utils";
 
 import {SmallMovieCard} from "../small-movie-card/small-movie-card";
-import {FilmType} from "../../types";
+
 
 configure({
   adapter: new Adapter(),
@@ -30,7 +32,7 @@ const film: FilmType = {
 };
 
 const mockEvent = {
-  preventDefault() {}
+  preventDefault: noon,
 };
 
 it(`Should small movie card be pressed to title`, () => {

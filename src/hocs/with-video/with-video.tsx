@@ -2,17 +2,18 @@ import * as React from "react";
 
 import {connect} from "react-redux";
 import {getFilmById} from "../../reducer/watch/selectors";
- import {FilmType} from "../../types";
+import {FilmType} from "../../types";
 
  interface State {
-  isPlay: boolean,
+  isPlay: boolean;
   duration: number;
   progress: number;
 }
+
 interface Props {
   film: FilmType;
   id: number;
-};
+}
 
 const withVideo = (Component) => {
 

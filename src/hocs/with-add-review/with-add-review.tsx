@@ -8,8 +8,9 @@ interface State {
   rating: number;
   review: string;
 }
+
 interface Props {
-  onReviewSubmit: (id: number, comment: {rating: number, comment: string}) => void;
+  onReviewSubmit: (id: number, comment: {rating: number; comment: string}) => void;
   id: number;
 }
 

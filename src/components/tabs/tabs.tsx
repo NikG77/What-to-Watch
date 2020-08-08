@@ -8,16 +8,15 @@ import {TabName} from "../../const";
 
 
 interface Props {
-  activeItem: string,
+  activeItem: string;
   film: FilmType;
   onItemClick: (tab: {}) => void;
 }
 
-
 const Tabs: React.FunctionComponent<Props> = (props: Props) => {
   const {activeItem, film, onItemClick: onTabClick} = props;
   const activeTab = activeItem || TabName.OVERVIEW;
-  
+
   const tabItems: string[] = Object.values(TabName);
 
   return (

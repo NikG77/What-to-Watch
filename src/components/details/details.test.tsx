@@ -2,9 +2,7 @@ import * as React from "react";
 import * as renderer from "react-test-renderer";
 import Details from "./details";
 
-import {FilmType} from "../../types";
-
-const film: FilmType = {
+const film = {
   title: `One Flew Over the Cuckoo's Nest`,
   src: ``,
   poster: ``,

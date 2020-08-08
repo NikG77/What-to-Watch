@@ -33,7 +33,7 @@ interface Props {
 
 const Overview: React.FunctionComponent<Props> = (props: Props) => {
   const {film} = props;
-  const {description, director, ratingCount, ratingScore, starring, } = film;
+  const {description, director, ratingCount, ratingScore, starring} = film;
   const starringDetails = starring.join(`, `);
 
   const ratingLevel = getRatingLevel(ratingScore);

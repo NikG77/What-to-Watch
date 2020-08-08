@@ -1,8 +1,9 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import {MovieCardButtons} from "./movie-card-buttons";
-import history from "../../history";
 import {Router} from "react-router-dom";
+import history from "../../history";
+import {noon} from "../../utils/utils";
+import {MovieCardButtons} from "./movie-card-buttons";
 
 
 it(`Should Movie render correctly`, () => {
@@ -13,7 +14,7 @@ it(`Should Movie render correctly`, () => {
         ><MovieCardButtons
             id={1}
             isFavorite={true}
-            onChangeStatusButtonClick={() => {}}
+            onChangeStatusButtonClick={noon}
           />
         </Router>
     ).toJSON();

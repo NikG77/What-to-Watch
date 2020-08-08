@@ -9,7 +9,6 @@ import ShowMore from "../show-more/show-more";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 
 
-
 interface Props {
   activeItem: FilmType;
   filmCount: number;

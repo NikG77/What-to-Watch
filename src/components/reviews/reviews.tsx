@@ -6,9 +6,9 @@ import ReviewsColumn from "../reviews-column/reviews-column";
 import {getComments} from "../../reducer/data/selectors";
 
 interface Props {
-  id: number,
+  id: number;
   reviews: Array<Comment>;
-};
+}
 
 const Reviews: React.FunctionComponent<Props> = (props: Props) => {
 

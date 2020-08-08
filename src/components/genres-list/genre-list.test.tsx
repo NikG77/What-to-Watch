@@ -4,7 +4,7 @@ import GenresList from "./genres-list";
 import {noon} from "../../utils/utils";
 
 
-const activeGenre: string = `All genre`;
+const activeGenre = `All genre`;
 
 it(`Should GenresList render correctly`, () => {
   const tree = renderer

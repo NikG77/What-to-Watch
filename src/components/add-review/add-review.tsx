@@ -132,8 +132,6 @@ const AddReview: React.FunctionComponent<Props> = (props: Props) => {
 };
 
 
-
-
 const mapStateToProps = (state, props) => ({
   userInfo: getUserInfo(state),
   isFormDisabled: getReviewFormStatus(state),

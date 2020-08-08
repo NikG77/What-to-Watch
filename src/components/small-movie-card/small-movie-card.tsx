@@ -26,7 +26,7 @@ interface Props {
   onSmallMovieCardClick: () => void;
   onSmallMovieCardHover: () => void;
   isPlaying: boolean;
-};
+}
 
 const SmallMovieCard: React.FunctionComponent<Props> = (props: Props) => {
   const {
