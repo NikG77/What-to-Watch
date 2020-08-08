@@ -1,6 +1,6 @@
 import moment from "moment";
 import Swal from "sweetalert2";
-import {Time} from "../const.js";
+import {Time} from "../const";
 
 export const formatForDateTime = (date) => moment(date).format(`YYYY-MM-DD`);
 
@@ -31,4 +31,8 @@ export const errorPopup = (err) => {
     title: `Oops... ${err.response.status}`,
     text: err.response.data.error,
   });
+};
+
+export const noon = () => {
+  // do nothing.
 };

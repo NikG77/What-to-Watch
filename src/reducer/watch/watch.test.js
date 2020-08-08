@@ -1,4 +1,4 @@
-import {reducer, ActionCreator, ActionType} from "./watch.js";
+import {reducer, ActionCreator, ActionType} from "./watch";
 
 const films = [{
   id: 0,

@@ -6,6 +6,14 @@ export const RatingLevel = {
   AWESOME: 10,
 };
 
+export const Rating = {
+  BAD: `Bad`,
+  NORMAL: `Normal`,
+  GOOD: `Good`,
+  VERY_GOOD: `Very good`,
+  AWESOME: `Awesome`,
+};
+
 export const TIME_DELAY = 1000;
 
 export const TabName = {

@@ -1,6 +1,6 @@
 
-import NameSpace from "../name-space.js";
-import {getAllMovies} from "../../reducer/data/selectors.js";
+import NameSpace from "../name-space";
+import {getAllMovies} from "../../reducer/data/selectors";
 import {createSelector} from "reselect";
 
 const ALL_GENRES = `All genres`;

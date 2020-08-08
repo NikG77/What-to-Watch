@@ -1,13 +1,14 @@
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
-import {reducer, ActionType, Operation} from "./data.js";
-import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters.js";
+import {createAPI} from "../../api";
+import {reducer, ActionType, Operation} from "./data";
+import {adaptFilms, adaptFilm, adaptComments} from "../../adapters/adapters";
 import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import NameSpace from "../../reducer/name-space";
 
 
 const api = createAPI(() => {});
 const mockStore = configureStore([]);
+
 
 const films = [{
   id: 0,
@@ -95,6 +96,27 @@ const mockComments = [{
   "date": `2019-05-08T14:13:56.569Z`
 }];
 
+
+const mockFilms = [{
+  "id": 1,
+  "name": `The Grand Budapest Hotel`,
+  "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
+  "preview_image": `img/the-grand-budapest-hotel.jpg`,
+  "background_image": `img/the-grand-budapest-hotel-bg.jpg`,
+  "background_color": `#ffffff`,
+  "video_link": `https://some-link`,
+  "preview_video_link": `https://some-link`,
+  "description": `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+  "rating": 8.9,
+  "scores_count": 240,
+  "director": `Wes Andreson`,
+  "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+  "run_time": 99,
+  "genre": `Comedy`,
+  "released": 2014,
+  "is_favorite": true
+}];
+
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     allMovies: [],
@@ -151,27 +173,6 @@ it(`Reducer should favorite movies by load`, () => {
   });
 });
 
-it(`Reducer should merge movie`, () => {
-  expect(reducer({
-    allMovies: films,
-  }, {
-    type: ActionType.MERGE_FILM,
-    payload: films[1],
-  })).toEqual({
-    allMovies: films,
-  });
-});
-
-it(`Reducer should merge promo movie`, () => {
-  expect(reducer({
-    promoMovie: {},
-  }, {
-    type: ActionType.MERGE_PROMO_FILM,
-    payload: films[1],
-  })).toEqual({
-    promoMovie: films[1],
-  });
-});
 
 it(`Reducer should is films loading`, () => {
   expect(reducer({
@@ -320,24 +321,29 @@ describe(`Operation work correctly`, () => {
   it(`Should make a correct API call to send /favorite/filmId/status`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const mergeFilm = Operation.changeFavoriteFilmStatus(10, 1);
+    const mergeFilm = Operation.changeFavoriteFilmStatus(1, 1);
     const store = mockStore({
       [NameSpace.DATA]: {
-        allMovies: films,
-        promoMovie: films[0],
+        allMovies: adaptFilms(mockFilms),
+        promoMovie: adaptFilm(mockFilms[0]),
         favoriteMovies: [],
       },
     });
+    const movies = mockFilms.map((movie) => mockFilms[0].id === movie.id ? mockFilms[0] : movie);
 
     apiMock
-      .onPost(`/favorite/10/1`)
-      .reply(200, [{fake: true}]);
+      .onPost(`/favorite/1/1`)
+      .reply(200, mockFilms[0]);
     return mergeFilm(dispatch, () => store.getState(), api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenCalledWith({
-          type: ActionType.MERGE_FILM,
-          payload: adaptFilm([{fake: true}]),
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROMO_FILM,
+          payload: adaptFilm(mockFilms[0]),
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_ALL_FILMS,
+          payload: adaptFilms(movies),
         });
       });
   });
