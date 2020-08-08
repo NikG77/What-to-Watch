@@ -8,7 +8,7 @@ interface Props {
   duration: number;
   id: number;
   isPlay: boolean;
-  forwardedRef: any;
+  forwardedRef: React.Ref<HTMLVideoElement>;
   onFullScreenClick: () => void;
   onPlayClick: () => void;
   progress: number;
@@ -79,8 +79,7 @@ const Player: React.FunctionComponent<Props> = (props: Props) => {
 
 };
 
-
-const PlayerWrap = React.forwardRef<React.FunctionComponent, Props>((props, ref) => <Player {...props} forwardedRef={ref} />);
+const PlayerWrap = React.forwardRef<HTMLVideoElement, Props>((props, ref) => <Player {...props} forwardedRef={ref} />);
 
 export {Player};
 export default PlayerWrap;
