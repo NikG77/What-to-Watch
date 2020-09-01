@@ -1,6 +1,18 @@
-# Проект «Что посмотреть» [![Build status][travis-image]][travis-url]
+# Проект «Что посмотреть» 
+Стек: React, Redux, Thunk, TypeScript, Router, Axios, Jest, Webpack
 
+## Пояснения
 
+Установка и запуск
+Скачать
+git clone git@github.com:NikG77/what-to-watch.git
 
-[travis-image]: https://travis-ci.com/htmlacademy-react/1118677-what-to-watch-4.svg?branch=master
-[travis-url]: https://travis-ci.com/htmlacademy-react/1118677-what-to-watch-4
+Установить
+### `npm install`
+
+Запустить в директории проекта
+npm start
+### `npm start`
+
+Добавить приложение для production в папку `build`
+### `npm run build`
