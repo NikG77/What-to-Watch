@@ -1,6 +1,8 @@
 # Проект «Что посмотреть» 
 Стек: React, Redux, Thunk, TypeScript, Router, Axios, Jest, Webpack
 
+
+
 ## Пояснения
 
 Установка и запуск
